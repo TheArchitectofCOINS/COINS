@@ -2,102 +2,248 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>C.O.I.N.S, LLC — Official Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C.O.I.N.S, LLC — Official Site</title>
+  <meta name="description" content="C.O.I.N.S, LLC — home of CoinToss and the SCOIN token. Free Play now, presale coming soon. Official links and security info." />
+  <meta name="theme-color" content="#00B5E2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #0a0a0a;
-      color: #f1f1f1;
-      line-height: 1.6;
+    :root{
+      --brand:#00B5E2;--brand-2:#0ff;--night:#070a14;--ink:#E8F1FF;--muted:#9FB0C7;--gold:#FFD700;--accent:#39FF14;--danger:#FF4500;
     }
-    header {
-      background: #00B5E2;
-      padding: 1.2rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    nav {
-      margin-top: 0.5rem;
-    }
-    nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    h2 {
-      color: #00B5E2;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #111;
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #999;
-    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;background:var(--night);color:var(--ink);line-height:1.6}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1200px;margin:0 auto;padding:0 22px}
+
+    /* Top bar */
+    .bar{background:#000000b0;color:#fff;border-bottom:1px solid #ffffff22;font-size:.9rem}
+
+    /* Navigation */
+    header{position:sticky;top:0;z-index:50;background:#0b0f19d8;backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid #ffffff1a}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+    .logo{display:flex;gap:12px;align-items:center}
+    .badge{width:40px;height:40px;border-radius:14px;background:radial-gradient(120% 120% at 30% 20%, var(--brand) 0%, #004d62 45%, #000 70%);display:grid;place-items:center;box-shadow:0 0 30px rgba(0,181,226,.35)}
+    .nav a{color:#cfe8ff}
+    .nav-links{display:flex;gap:20px;align-items:center}
+
+    /* Buttons */
+    .btn{display:inline-block;padding:12px 18px;border-radius:14px;background:var(--brand);color:#000;font-weight:800;letter-spacing:.2px;box-shadow:0 0 24px rgba(0,181,226,.35);transition:.2s transform, .2s filter}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+    .btn.outline{background:transparent;color:#E8F1FF;border:1px solid #6aa6be}
+
+    /* Hero with animated orbs */
+    .hero{position:relative;overflow:hidden}
+    .hero-inner{padding:70px 0 40px;display:grid;gap:24px}
+    @media(min-width:960px){.hero-inner{grid-template-columns:1.2fr 1fr;align-items:center}}
+    .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;animation:float 18s ease-in-out infinite alternate}
+    .orb--a{width:520px;height:520px;left:-120px;top:-120px;background:radial-gradient(circle at 30% 30%, var(--brand), transparent 60%)}
+    .orb--b{width:420px;height:420px;right:-120px;top:-160px;background:radial-gradient(circle at 70% 30%, var(--gold), transparent 60%);animation-duration:22s}
+    .orb--c{width:420px;height:420px;left:40%;bottom:-180px;background:radial-gradient(circle at 30% 70%, var(--accent), transparent 60%);animation-duration:26s}
+    @keyframes float{to{transform:translateY(-30px)}}
+
+    h1{font-size:48px;line-height:1.1;margin:0 0 10px;font-weight:900;letter-spacing:.3px}
+    h2{font-size:30px;margin:0 0 12px;font-weight:900}
+    h3{font-size:18px;margin:14px 0 8px;font-weight:800}
+
+    .lead{color:#cfe3ff}
+
+    /* Cards / glass */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid #ffffff1a;border-radius:18px;padding:18px;box-shadow:inset 0 1px 0 #ffffff22}
+    .grid{display:grid;gap:22px}
+    .two{grid-template-columns:1fr}
+    @media(min-width:980px){.two{grid-template-columns:1.2fr 1fr}}
+
+    /* Sections */
+    section{padding:36px 0}
+    .muted{color:var(--muted)}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff33;border-radius:999px;padding:6px 10px;color:#d1eeff;background:rgba(255,255,255,.04)}
+    .list{margin:8px 0 0 18px}
+
+    footer{border-top:1px solid #ffffff1a;margin-top:36px}
+    .small{font-size:.86rem}
   </style>
 </head>
 <body>
+  <!-- Top Announcement / Anti‑scam -->
+  <div class="bar">
+    <div class="container" style="display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 0">
+      <div>🔒 Presale <strong>Coming Soon</strong> — CoinToss is Free Play only. Official updates are posted on this site.</div>
+      <div class="small"><a href="#security">Security</a> • <a href="#links">Official Links</a></div>
+    </div>
+  </div>
+
+  <!-- NAV -->
   <header>
-    <h1>C.O.I.N.S, LLC</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#cointoss">CoinToss</a>
-      <a href="#scoin">SCOIN</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="container nav">
+      <div class="logo">
+        <div class="badge">🏆</div>
+        <div>
+          <div style="font-weight:900;letter-spacing:.3px">C.O.I.N.S, LLC</div>
+          <div class="small muted">Official Website</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#cointoss">CoinToss</a>
+        <a href="#scoin">SCOIN</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="https://app.coin-toss.org" target="_blank" rel="noopener">Open Free Play</a>
+      </div>
+    </div>
   </header>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb--a"></div>
+    <div class="orb orb--b"></div>
+    <div class="orb orb--c"></div>
+    <div class="container hero-inner">
+      <div>
+        <span class="pill">🚀 Live Now: Free Play</span>
+        <h1>Your Picks. Your Glory. <span style="color:var(--brand)">Your SCOIN.</span></h1>
+        <p class="lead">C.O.I.N.S builds products that make game day electric. Our flagship app <strong>CoinToss</strong> lets you make weekly picks with <strong>SCOIN‑FP</strong>. <em>No real money in Free Play.</em> SCOIN (the real token) will launch after presale and audits.</p>
+        <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
+          <a class="btn" href="https://app.coin-toss.org" target="_blank" rel="noopener">Play CoinToss</a>
+          <a class="btn outline" href="#scoin">SCOIN — Coming Soon</a>
+        </div>
+        <div class="small muted" style="margin-top:10px">We will <strong>never DM you first</strong> or ask you to send crypto.</div>
+      </div>
+      <div class="card">
+        <h3>At a glance</h3>
+        <ul class="muted list">
+          <li>Weekly picks & leaderboards</li>
+          <li>FP pool with transparent burn mechanics</li>
+          <li>VIP Leagues & perks (post‑presale)</li>
+          <li>Liquidity to be locked at launch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT COINS -->
   <section id="about">
-    <h2>About C.O.I.N.S</h2>
-    <p>
-      C.O.I.N.S, LLC is building a decentralized future through innovation in digital 
-      currency and sports engagement. Our mission is to create powerful tools and experiences that connect communities
-      and unlock new value in the Web3 ecosystem.
-    </p>
+    <div class="container">
+      <h2>About C.O.I.N.S</h2>
+      <p class="muted">We design Web3 experiences that are simple, safe, and fun. Everything ships with clear security notes, locked‑liquidity plans, and no‑nonsense communication.</p>
+    </div>
   </section>
 
+  <!-- COINTOSS PROJECT -->
   <section id="cointoss">
-    <h2>CoinToss</h2>
-    <p>
-      <strong>CoinToss</strong> is the flagship app of C.O.I.N.S, LLC —
-      a sports prediction platform where bragging rights meet blockchain.
-      Users make weekly picks, compete with friends, and earn rewards in SCOIN.
-      Starting with college football, CoinToss is expanding to all major sports.
-    </p>
+    <div class="container grid two">
+      <div>
+        <h2>CoinToss</h2>
+        <p class="muted">A sports prediction app built for real bragging rights. Make picks using <strong>SCOIN‑FP</strong> and climb the leaderboard. VIP features unlock after the SCOIN presale.</p>
+        <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn" href="https://app.coin-toss.org" target="_blank" rel="noopener">Open Free Play App</a>
+          <a class="btn outline" href="#security">Read Security Notes</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Highlights</h3>
+        <ul class="muted list">
+          <li>Fast picks, clean UI, no crypto required to play</li>
+          <li>Anti‑bot protections & device limits in Free Play</li>
+          <li>Seasonal pools & transparent burn stats</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
+  <!-- SCOIN TOKEN -->
   <section id="scoin">
-    <h2>Standard Coin (SCOIN)</h2>
-    <p>
-      <strong>SCOIN</strong> is the utility token powering CoinToss and future C.O.I.N.S projects.
-      With a controlled release supply and community-driven features, SCOIN is built to reward
-      participation and expand utility over time.
-    </p>
+    <div class="container grid two">
+      <div>
+        <h2>SCOIN — Standard Coin <span class="small" style="color:var(--gold)">(Coming Soon)</span></h2>
+        <p class="muted">SCOIN will power perks, VIP arenas, collectibles, and community votes across CoinToss. Presale details and the liquidity‑lock plan will be posted here first. Until then, gameplay uses SCOIN‑FP only.</p>
+      </div>
+      <div class="card">
+        <h3>Planned Perks</h3>
+        <ul class="muted list">
+          <li>Animated flairs & profile frames</li>
+          <li>Holder‑only chats & early access</li>
+          <li>Seasonal collectibles & rare drops</li>
+          <li>Community voting on new features</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      For inquiries, partnerships, or media requests, please reach us at:<br/>
-      <a href="mailto:C.O.I.N.S@outlook.com">C.O.I.N.S@outlook.com</a>
-    </p>
+  <!-- SECURITY -->
+  <section id="security">
+    <div class="container">
+      <h2>Security & Anti‑Scam</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>What We’re Doing</h3>
+          <ul class="muted list">
+            <li>SPL token standard for SCOIN</li>
+            <li>Liquidity to be locked at launch</li>
+            <li>Official wallet adapters only (Phantom/Backpack)</li>
+            <li>Independent reviews & audits planned</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Protect Yourself</h3>
+          <ul class="muted list">
+            <li>Only trust links on this domain</li>
+            <li>We will <strong>never DM you first</strong> or ask you to send crypto</li>
+            <li>No presale yet — anyone selling SCOIN now is a scam</li>
+            <li>Bookmark this site for official updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="grid two">
+        <div class="card"><h3>Is SCOIN live?</h3><p class="muted">Not yet. CoinToss is Free Play only for now. We’ll announce the presale date here.</p></div>
+        <div class="card"><h3>What is SCOIN‑FP?</h3><p class="muted">Our free‑play token used only for gameplay and leaderboards. It has no monetary value.</p></div>
+        <div class="card"><h3>Will liquidity be locked?</h3><p class="muted">Yes. The lock plan and address will be published with presale details.</p></div>
+        <div class="card"><h3>When are VIP Leagues?</h3><p class="muted">After presale. Timelines and details will be posted on this page.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINKS & CONTACT -->
+  <section id="links">
+    <div class="container grid two">
+      <div class="card">
+        <h3>Official Links</h3>
+        <ul class="muted list">
+          <li><a href="https://app.coin-toss.org" target="_blank" rel="noopener">🎮 Free Play App</a></li>
+          <li><a href="#" aria-disabled="true">🪙 SCOIN Presale (Coming Soon)</a></li>
+          <li><a href="https://x.com/" target="_blank" rel="noopener">𝕏 / Twitter</a></li>
+          <li><a href="https://discord.com/" target="_blank" rel="noopener">Discord</a></li>
+        </ul>
+      </div>
+      <div class="card" id="contact">
+        <h3>Contact</h3>
+        <p class="muted">Business / legal inquiries: <a href="mailto:contact@coin-toss.org">contact@coin-toss.org</a></p>
+        <p class="small muted">Legal: CoinToss is a Free Play entertainment app. SCOIN‑FP has no monetary value. Nothing here is financial, investment, or gambling advice.</p>
+      </div>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 C.O.I.N.S, LLC — All Rights Reserved.
+    <div class="container" style="display:flex;gap:12px;justify-content:space-between;align-items:center;padding:18px 0;color:#93a0b6" class="small">
+      <div>© <span id="y"></span> C.O.I.N.S, LLC</div>
+      <div>“We will never DM you first.” Only trust links on this domain.</div>
+    </div>
   </footer>
+
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
