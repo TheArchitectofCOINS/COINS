@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SCOIN — C.O.I.N.S, LLC</title>
+  <meta name="description" content="SCOIN — the token that will power perks, VIP arenas, and community features across CoinToss (coming soon)." />
+  <meta name="theme-color" content="#00B5E2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--brand:#00B5E2;--night:#070a14;--ink:#E8F1FF;--muted:#9FB0C7;--gold:#FFD700;--accent:#39FF14;--danger:#FF4500}
+    *{box-sizing:border-box}html,body{margin:0;padding:0}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;background:var(--night);color:var(--ink);line-height:1.6}
+    a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+    .container{max-width:1200px;margin:0 auto;padding:0 22px}
+    header{position:sticky;top:0;z-index:50;background:#0b0f19d8;backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid #ffffff1a}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+    .logo{display:flex;gap:12px;align-items:center}
+    .badge{width:40px;height:40px;border-radius:14px;background:radial-gradient(120% 120% at 30% 20%, var(--brand) 0%, #004d62 45%, #000 70%);display:grid;place-items:center;box-shadow:0 0 30px rgba(0,181,226,.35)}
+    .nav-links{display:flex;gap:20px;align-items:center}
+    .btn{display:inline-block;padding:12px 18px;border-radius:14px;background:var(--brand);color:#000;font-weight:800;box-shadow:0 0 24px rgba(0,181,226,.35)}
+    .btn.outline{background:transparent;color:#E8F1FF;border:1px solid #6aa6be}
+    .hero{position:relative;overflow:hidden}
+    .hero-inner{padding:70px 0 40px;display:grid;gap:24px}
+    h1{font-size:46px;line-height:1.1;margin:0 0 10px;font-weight:900}
+    h2{font-size:30px;margin:0 0 12px;font-weight:900}
+    h3{font-size:18px;margin:14px 0 8px;font-weight:800}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));border:1px solid #ffffff1a;border-radius:18px;padding:18px;box-shadow:inset 0 1px 0 #ffffff22}
+    .grid{display:grid;gap:22px}
+    .two{grid-template-columns:1fr}
+    @media(min-width:980px){.two{grid-template-columns:1.2fr 1fr}}
+    section{padding:36px 0}
+    .muted{color:var(--muted)}
+    .list{margin:8px 0 0 18px}
+    footer{border-top:1px solid #ffffff1a;margin-top:36px}
+    .small{font-size:.86rem}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="badge">🪙</div>
+        <div>
+          <div style="font-weight:900;letter-spacing:.3px">C.O.I.N.S, LLC</div>
+          <div class="small muted">SCOIN</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="cointoss.html">CoinToss</a>
+        <a href="scoin.html">SCOIN</a>
+        <a href="index.html#security">Security</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="btn" href="#presale">Presale: Coming Soon</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <h1>SCOIN</h1>
+        <p class="muted">The token that will power perks, VIP arenas, collectibles, and community features across CoinToss. Until presale, gameplay uses SCOIN‑FP only (no monetary value).</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+          <a class="btn outline" href="index.html#links">Follow Official Updates</a>
+          <a class="btn" href="#perks">Planned Perks</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <ul class="muted list">
+          <li>Presale date: <strong>TBA</strong> (announced on our site)</li>
+          <li>Token standard: <strong>SPL</strong></li>
+          <li>Liquidity: <strong>to be locked at launch</strong></li>
+          <li>Audits/reviews: <strong>planned</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="perks">
+    <div class="container grid two">
+      <div class="card">
+        <h3>Perks (post‑presale)</h3>
+        <ul class="muted list">
+          <li>Animated flairs & profile frames</li>
+          <li>Holder‑only chats & early access to new sports</li>
+          <li>Seasonal collectibles & rare drops</li>
+          <li>Community voting: leagues, features, drops</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Free‑Play Economy</h3>
+        <ul class="muted list">
+          <li>SCOIN‑FP used for gameplay only</li>
+          <li>FP “burn” % from losing pools for anti‑inflation optics</li>
+          <li>Seasonal FP pool for community rewards</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="presale">
+    <div class="container grid two">
+      <div class="card">
+        <h3>Presale & Transparency</h3>
+        <ul class="muted list">
+          <li>Whitepaper + tokenomics will be posted here first</li>
+          <li>Presale smart contract address published on this site only</li>
+          <li>Liquidity lock details + links included with launch</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Stay Safe</h3>
+        <ul class="muted list">
+          <li>We will <strong>never DM first</strong> or ask you to send crypto</li>
+          <li>Only trust links listed on this site</li>
+          <li>No presale yet — anyone selling SCOIN now is a scam</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;gap:12px;justify-content:space-between;align-items:center;padding:18px 0;color:#93a0b6" class="small">
+      <div>© <span id="y"></span> C.O.I.N.S, LLC</div>
+      <div>We never DM first. Only trust links on this domain.</div>
+    </div>
+  </footer>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
