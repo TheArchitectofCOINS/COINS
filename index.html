@@ -6,16 +6,29 @@
   <title>C.O.I.N.S, LLC — Official Site</title>
   <meta name="description" content="C.O.I.N.S, LLC — home of S-COIN Sports Predictions and the S-Coin token. Free Play now, presale coming soon. Official links and security info." />
   <meta name="theme-color" content="#00B5E2" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --brand:#00B5E2;--brand-2:#0ff;--night:#070a14;--ink:#E8F1FF;--muted:#9FB0C7;--gold:#FFD700;--accent:#39FF14;--danger:#FF4500;
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;background:var(--night);color:var(--ink);line-height:1.6}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      background-color:#000814; /* deep navy base */
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(0,181,226,.15), transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(0,181,226,.10), transparent 70%);
+      background-attachment: fixed;
+      background-size: cover;
+      color:#ffffff;
+      line-height:1.6
+    }
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1200px;margin:0 auto;padding:0 22px}
@@ -29,57 +42,27 @@
     .logo{display:flex;gap:12px;align-items:center}
     .badge{width:40px;height:40px;border-radius:14px;background:radial-gradient(120% 120% at 30% 20%, var(--brand) 0%, #004d62 45%, #000 70%);display:grid;place-items:center;box-shadow:0 0 30px rgba(0,181,226,.35)}
     .nav a{color:#cfe8ff}
-    .nav-links{display:flex;gap:20px;align-items:center}
-    <a href="https://scoinsports.replit.app/" target="_blank" class="download-btn">
-  📲 Download App
-</a>
-<div class="install-guide">
-  <h3>How to Add S-COIN Sports to Your Phone</h3>
-  <ul>
-    <li><strong>iPhone (Safari):</strong> 
-      Open the app → Tap <em>Share</em> → Select <em>Add to Home Screen</em>.
-    </li>
-    <li><strong>Android (Chrome):</strong> 
-      Open the app → Tap the 3-dot menu → Select <em>Install App</em>.
-    </li>
-  </ul>
-</div>
+    .nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
 
-<style>
-.install-guide {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f0f8fa;
-  border-radius: 8px;
-  font-size: 16px;
-}
-.install-guide h3 {
-  margin-bottom: 10px;
-  color: #00B5E2;
-}
-</style>
+    /* CTA button (used in nav + hero + download section) */
+    .download-btn{
+      display:inline-block;
+      padding:12px 24px;
+      margin:10px 0;
+      font-size:18px;
+      font-weight:800;
+      color:#fff;
+      background:#00B5E2;
+      border-radius:10px;
+      text-decoration:none;
+      box-shadow:0 4px 8px rgba(0,0,0,0.2);
+      transition:background .2s, transform .2s, filter .2s;
+      text-align:center;
+      max-width:260px;
+    }
+    .download-btn:hover{background:#007ea3;transform:translateY(-1px);filter:brightness(1.05)}
 
-<style>
-.download-btn {
-  display: inline-block;
-  padding: 12px 24px;
-  margin: 10px 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #fff;
-  background: #00B5E2; /* Ocean Blue */
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: background 0.3s;
-}
-.download-btn:hover {
-  background: #007ea3; /* darker blue hover */
-}
-</style>
-
-
-    /* Buttons */
+    /* Secondary buttons */
     .btn{display:inline-block;padding:12px 18px;border-radius:14px;background:var(--brand);color:#000;font-weight:800;letter-spacing:.2px;box-shadow:0 0 24px rgba(0,181,226,.35);transition:.2s transform, .2s filter}
     .btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
     .btn.outline{background:transparent;color:#E8F1FF;border:1px solid #6aa6be}
@@ -97,7 +80,6 @@
     h1{font-size:48px;line-height:1.1;margin:0 0 10px;font-weight:900;letter-spacing:.3px}
     h2{font-size:30px;margin:0 0 12px;font-weight:900}
     h3{font-size:18px;margin:14px 0 8px;font-weight:800}
-
     .lead{color:#cfe3ff}
 
     /* Cards / glass */
@@ -114,20 +96,21 @@
 
     footer{border-top:1px solid #ffffff1a;margin-top:36px}
     .small{font-size:.86rem}
-    /* Abstract Sports Glow Background (overrides earlier body background) */
-body{
-  background-color:#000814; /* deep navy base */
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(0,181,226,.15), transparent 60%),
-    radial-gradient(circle at 80% 70%, rgba(0,181,226,.10), transparent 70%);
-  background-attachment: fixed;
-  background-size: cover;
-  color:#ffffff;
-}
+
+    /* Install guide panel */
+    .install-guide{
+      margin-top:16px;
+      padding:15px;
+      background:#f0f8fa;
+      color:#042a34;
+      border-radius:10px;
+      font-size:16px;
+    }
+    .install-guide h3{margin:0 0 10px;color:#00B5E2}
   </style>
 </head>
 <body>
-  <!-- Top Announcement / Anti‑scam -->
+  <!-- Top Announcement / Anti-scam -->
   <div class="bar">
     <div class="container" style="display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 0">
       <div>🔒 Presale <strong>Coming Soon</strong> — S-COIN Sports Predictions is Free Play only. Official updates are posted on this site.</div>
@@ -147,11 +130,12 @@ body{
       </div>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#S-COIN Sports Predictions">S-COIN Sports Predictions</a>
-        <a href="#S-Coin">S-Coin</a>
+        <a href="#scoin-sports">S-COIN Sports</a>
+        <a href="#scoin">S-Coin</a>
         <a href="#security">Security</a>
         <a href="#faq">FAQ</a>
         <a href="#disclaimer">Disclaimer</a>
+        <a href="#download" class="download-btn" style="padding:10px 16px;font-size:16px;box-shadow:none;">📲 Download</a>
       </div>
     </div>
   </header>
@@ -165,10 +149,10 @@ body{
       <div>
         <span class="pill">🚀 Live Now: Free Play</span>
         <h1>Your Picks. Your Glory. <span style="color:var(--brand)">Your S-Coin.</span></h1>
-        <p class="lead">C.O.I.N.S builds products that make game day electric. Our flagship app <strong>S-COIN Sports Predictions</strong> lets you make weekly picks with <strong>S-Coin‑FP</strong>. <em>No real money in Free Play.</em> S-Coin (the real token) will launch after presale and audits.</p>
+        <p class="lead">C.O.I.N.S builds products that make game day electric. Our flagship app <strong>S-COIN Sports Predictions</strong> lets you make weekly picks with <strong>S-Coin-FP</strong>. <em>No real money in Free Play.</em> S-Coin (the real token) will launch after presale and audits.</p>
         <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
-          <a class="btn" href="https://app.coin-toss.org" target="_blank" rel="noopener">Play S-COIN Sports Predictions</a>
-          <a class="btn outline" href="#S-Coin">S-Coin — Coming Soon</a>
+          <a class="download-btn" href="https://scoinsports.replit.app/" target="_blank" rel="noopener">📲 Download App</a>
+          <a class="btn outline" href="#download">How to Install</a>
         </div>
         <div class="small muted" style="margin-top:10px">We will <strong>never DM you first</strong> or ask you to send crypto.</div>
       </div>
@@ -177,7 +161,7 @@ body{
         <ul class="muted list">
           <li>Weekly picks & leaderboards</li>
           <li>FP pool with transparent burn mechanics</li>
-          <li>VIP Leagues & perks (post‑presale)</li>
+          <li>VIP Leagues & perks (post-presale)</li>
           <li>Liquidity to be locked at launch</li>
         </ul>
       </div>
@@ -188,18 +172,18 @@ body{
   <section id="about">
     <div class="container">
       <h2>About C.O.I.N.S</h2>
-      <p class="muted">We design Web3 experiences that are simple, safe, and fun. Everything ships with clear security notes, locked‑liquidity plans, and no‑nonsense communication.</p>
+      <p class="muted">We design Web3 experiences that are simple, safe, and fun. Everything ships with clear security notes, locked-liquidity plans, and no-nonsense communication.</p>
     </div>
   </section>
 
   <!-- S-COIN Sports Predictions PROJECT -->
-  <section id="S-COIN Sports Predictions">
+  <section id="scoin-sports">
     <div class="container grid two">
       <div>
         <h2>S-COIN Sports Predictions</h2>
-        <p class="muted">A sports prediction app built for real bragging rights. Make picks using <strong>S-Coin‑FP</strong> and climb the leaderboard. VIP features unlock after the S-Coin presale.</p>
+        <p class="muted">A sports prediction app built for real bragging rights. Make picks using <strong>S-Coin-FP</strong> and climb the leaderboard. VIP features unlock after the S-Coin presale.</p>
         <div style="margin-top:10px;display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn" href="https://app.coin-toss.org" target="_blank" rel="noopener">Open Free Play App</a>
+          <a class="download-btn" href="https://scoinsports.replit.app/" target="_blank" rel="noopener">📲 Download App</a>
           <a class="btn outline" href="#security">Read Security Notes</a>
         </div>
       </div>
@@ -207,7 +191,7 @@ body{
         <h3>Highlights</h3>
         <ul class="muted list">
           <li>Fast picks, clean UI, no crypto required to play</li>
-          <li>Anti‑bot protections & device limits in Free Play</li>
+          <li>Anti-bot protections & device limits in Free Play</li>
           <li>Seasonal pools & transparent burn stats</li>
         </ul>
       </div>
@@ -215,17 +199,17 @@ body{
   </section>
 
   <!-- S-Coin TOKEN -->
-  <section id="S-Coin">
+  <section id="scoin">
     <div class="container grid two">
       <div>
         <h2>S-Coin — Standard Coin <span class="small" style="color:var(--gold)">(Coming Soon)</span></h2>
-        <p class="muted">S-Coin will power perks, VIP arenas, collectibles, and community votes across S-COIN Sports Predictions. Presale details and the liquidity‑lock plan will be posted here first. Until then, gameplay uses S-Coin‑FP only.</p>
+        <p class="muted">S-Coin will power perks, VIP arenas, collectibles, and community votes across S-COIN Sports Predictions. Presale details and the liquidity-lock plan will be posted here first. Until then, gameplay uses S-Coin-FP only.</p>
       </div>
       <div class="card">
         <h3>Planned Perks</h3>
         <ul class="muted list">
           <li>Animated flairs & profile frames</li>
-          <li>Holder‑only chats & early access</li>
+          <li>Holder-only chats & early access</li>
           <li>Seasonal collectibles & rare drops</li>
           <li>Community voting on new features</li>
         </ul>
@@ -236,7 +220,7 @@ body{
   <!-- SECURITY -->
   <section id="security">
     <div class="container">
-      <h2>Security & Anti‑Scam</h2>
+      <h2>Security & Anti-Scam</h2>
       <div class="grid two">
         <div class="card">
           <h3>What We’re Doing</h3>
@@ -266,9 +250,25 @@ body{
       <h2>FAQ</h2>
       <div class="grid two">
         <div class="card"><h3>Is S-Coin live?</h3><p class="muted">Not yet. S-COIN Sports Predictions is Free Play only for now. We’ll announce the presale date here.</p></div>
-        <div class="card"><h3>What is S-Coin‑FP?</h3><p class="muted">Our free‑play token used only for gameplay and leaderboards. It has no monetary value.</p></div>
+        <div class="card"><h3>What is S-Coin-FP?</h3><p class="muted">Our free-play token used only for gameplay and leaderboards. It has no monetary value.</p></div>
         <div class="card"><h3>Will liquidity be locked?</h3><p class="muted">Yes. The lock plan and address will be published with presale details.</p></div>
         <div class="card"><h3>When are VIP Leagues?</h3><p class="muted">After presale. Timelines and details will be posted on this page.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD + INSTALL GUIDE -->
+  <section id="download">
+    <div class="container">
+      <h2>Download the App</h2>
+      <a class="download-btn" href="https://scoinsports.replit.app/" target="_blank" rel="noopener">📲 Open / Download App</a>
+
+      <div class="install-guide">
+        <h3>How to Add S-COIN Sports to Your Phone</h3>
+        <ul>
+          <li><strong>iPhone (Safari):</strong> Open the app → Tap <em>Share</em> → Select <em>Add to Home Screen</em>.</li>
+          <li><strong>Android (Chrome):</strong> Open the app → Tap the 3-dot menu → Select <em>Install App</em>.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -285,7 +285,7 @@ body{
       </div>
       <div class="card" id="disclaimer">
         <h3>Disclaimer</h3>
-        <p class="small muted">Legal: S-COIN Sports Predictions is a Free Play entertainment app. S-Coin‑FP has no monetary value. Nothing here is financial, investment, or gambling advice.</p>
+        <p class="small muted">Legal: S-COIN Sports Predictions is a Free Play entertainment app. S-Coin-FP has no monetary value. Nothing here is financial, investment, or gambling advice.</p>
       </div>
     </div>
   </section>
@@ -300,4 +300,3 @@ body{
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
