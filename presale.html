@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>S‑COIN Presale — Open Until Sold Out</title>
-  <meta name="description" content="Official S‑COIN presale. Single round at $0.07. Open until sold out. Addresses are only posted on this page." />
+  <meta name="description" content="Official S‑COIN presale. Single round at $0.07. 5,000,000 tokens. Open until sold out. Addresses are only posted on this page." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     :root{ --bg:#070b11; --surface:#0f1622; --ink:#eaf2fb; --muted:#a6b2c2; --brand:#00b5e2; --brand-2:#1a5fff; --accent:#19c37d; --gold:#ffd166; --line:rgba(255,255,255,.1); --radius:20px; --shadow:0 14px 50px rgba(0,0,0,.55), 0 4px 14px rgba(0,0,0,.35); }
     *{box-sizing:border-box}
@@ -21,14 +21,20 @@
     header{position:sticky; top:0; z-index:40; background:linear-gradient(180deg, rgba(7,11,17,.85), rgba(7,11,17,.55)); border-bottom:1px solid var(--line); backdrop-filter:saturate(120%) blur(10px)}
     .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
     .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:40px; width:40px; filter:drop-shadow(0 6px 18px rgba(0,181,226,.35))}
+    .brand img{height:40px; width:40px; border-radius:10px; background:#000; padding:2px; filter:drop-shadow(0 6px 18px rgba(0,181,226,.35))}
     nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
     nav a{color:var(--ink); opacity:.9; font-weight:800}
     .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
 
-    .hero{position:relative; padding:80px 0 28px}
-    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); font-weight:900; color:var(--gold)}
-    h1{font-size:clamp(36px,6vw,64px); line-height:1.03; margin:10px 0 8px}
+    .hero{position:relative; padding:88px 0 32px; overflow:hidden}
+    .lights, .lights:after{position:absolute; content:""; inset:auto auto -140px 50%; width:2000px; height:900px; transform:translateX(-50%);
+      background:
+        radial-gradient(closest-side, rgba(255,255,255,.22), rgba(255,255,255,0) 70%) 0 0/140px 140px,
+        radial-gradient(closest-side, rgba(255,255,255,.16), rgba(255,255,255,0) 70%) 70px 70px/140px 140px;
+      opacity:.14; filter:blur(1px) drop-shadow(0 80px 70px rgba(0,0,0,.72)); pointer-events:none;
+      mask:linear-gradient(#000, transparent 72%)}
+    .kicker{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04); font-weight:900; color:var(--gold)}
+    h1{font-family:"Bebas Neue", system-ui, sans-serif; font-size:clamp(42px,7vw,78px); letter-spacing:.8px; line-height:1; margin:12px 0 10px}
 
     section{padding:36px 0}
     .grid{display:grid; gap:22px}
@@ -51,7 +57,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="index.html"><img src="assets/s-coin-logo.png" alt="S‑COIN"><b>C.O.I.N.S, LLC</b></a>
+      <a class="brand" href="index.html"><img src="assets/blue background logo.png" alt="S‑COIN"><b>C.O.I.N.S, LLC</b></a>
       <nav>
         <ul>
           <li><a href="index.html#about">About</a></li>
@@ -65,6 +71,7 @@
 
   <main>
     <section class="hero wrap">
+      <div class="lights"></div>
       <span class="kicker">Presale • $0.07 • Open until sold out</span>
       <h1>S‑COIN Presale</h1>
       <p>One price. One round. <b>$0.07 per S‑COIN</b>. The presale stays open until all allocated tokens are sold. We will never DM you first or ask you to send funds anywhere except the address on this page.</p>
@@ -75,7 +82,7 @@
       <div class="wrap grid two">
         <!-- Left -->
         <div class="card">
-          <h2>How to Participate</h2>
+          <h2 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">How to Participate</h2>
           <ol>
             <li>Prepare <b>USDC</b> on <b>Solana</b> (update if your chain differs).</li>
             <li>When status is <b>Live</b>, copy the official presale address below.</li>
@@ -124,7 +131,7 @@
     <section>
       <div class="wrap">
         <div class="card">
-          <h2>Live Ledger (Public)</h2>
+          <h2 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">Live Ledger (Public)</h2>
           <p class="note">Wire these to your contract or a small JSON file later. Placeholders for now.</p>
           <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
             <div class="card" style="padding:12px"><div class="pill">Latest Tx</div><div id="lastTx" style="overflow-wrap:anywhere">—</div></div>
