@@ -9,9 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0f14; --card:#111823; --text:#e6f0fa; --muted:#a9b4c0; --brand:#00B5E2; --brand-2:#1a5fff; --accent:#19c37d; --warning:#ffb020; --danger:#ff5d5d; --radius:18px; --shadow:0 8px 28px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.25);
-    }
+    :root{ --bg:#0b0f14; --card:#111823; --text:#e6f0fa; --muted:#a9b4c0; --brand:#00B5E2; --brand-2:#1a5fff; --accent:#19c37d; --warning:#ffb020; --danger:#ff5d5d; --radius:18px; --shadow:0 8px 28px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.25); }
     *{box-sizing:border-box}
     body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--text); background:radial-gradient(1200px 600px at 10% -10%, #11334a 0%, rgba(17,51,74,0) 60%),radial-gradient(1200px 700px at 110% -20%, #0a2a4a 0%, rgba(10,42,74,0) 70%),radial-gradient(800px 500px at 50% 20%, rgba(0,181,226,.25) 0%, rgba(0,181,226,0) 60%),#0b0f14; background-attachment:fixed; line-height:1.6}
     a{color:var(--brand); text-decoration:none}
@@ -24,7 +22,7 @@
     nav a{color:var(--text); opacity:.86; font-weight:600}
     .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:800; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.35)}
 
-    .hero{padding:64px 0 24px; position:relative}
+    .hero{padding:64px 0 24px}
     .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03)}
     .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:rgba(0,181,226,.12); border:1px solid rgba(0,181,226,.25); border-radius:999px; font-weight:700; color:var(--brand)}
     h1{font-size:clamp(32px, 6vw, 58px); line-height:1.05; margin:10px 0 8px}
@@ -51,7 +49,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="index.html"><img src="assets/s-coin-logo.svg" alt="S‑COIN" onerror="this.style.display='none'"><b>C.O.I.N.S, LLC</b></a>
+      <a class="brand" href="index.html"><img src="assets/s-coin-logo.png" alt="S‑COIN" onerror="this.style.display='none'"><b>C.O.I.N.S, LLC</b></a>
       <nav>
         <ul>
           <li><a href="index.html#about">About</a></li>
@@ -67,8 +65,8 @@
     <section class="hero wrap">
       <span class="kicker"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#19c37d"/></svg> Presale • $0.07 • Open until sold out</span>
       <h1>S‑COIN Presale</h1>
-      <p>One price. One round. <b>$0.07 per S‑COIN</b>. The presale remains open until all allocated tokens are sold. We will never DM you first or ask you to send funds anywhere except the address posted on this page.</p>
-      <div class="badge">🔒 Security-first • Multisig treasury • Public reconciliation before TGE</div>
+      <p>One price. One round. <b>$0.07 per S‑COIN</b>. The presale stays open until all allocated tokens are sold. We will never DM you first or ask you to send funds anywhere except the address on this page.</p>
+      <div class="badge">🔒 Safety first • Public tally before Token Generation Event (TGE)</div>
     </section>
 
     <section>
@@ -77,12 +75,12 @@
         <div class="card">
           <h2>How to Participate</h2>
           <ol>
-            <li>Prepare <b>USDC</b> on <b>Solana</b> (or your final chain, update below).</li>
-            <li>When status is <b>Live</b>, copy the official presale address from this page.</li>
-            <li>Send USDC to the address. The sale contract/ledger will record your allocation.</li>
-            <li>After the presale closes and audits complete, you’ll <b>claim S‑COIN at TGE</b>.</li>
+            <li>Prepare <b>USDC</b> on <b>Solana</b> (update if your final chain differs).</li>
+            <li>When status is <b>Live</b>, copy the official presale address shown below.</li>
+            <li>Send USDC to that address. Our sale ledger records your allocation.</li>
+            <li>After sell‑out, you’ll <b>claim S‑COIN at the Token Generation Event (TGE)</b>.</li>
           </ol>
-          <p class="note">Never trust addresses sent over DM. Always verify here.</p>
+          <p class="note">Never trust addresses sent over DM. Verify here on this page.</p>
 
           <h3 style="margin-top:24px">Status</h3>
           <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
@@ -115,9 +113,9 @@
           <div class="stat"><span>Chain</span><b id="dChain">Solana</b></div>
           <div class="stat"><span>Currency</span><b id="dCurrency">USDC</b></div>
           <div class="stat"><span>Per‑wallet limit</span><b id="dLimit">TBD</b></div>
-          <div class="stat"><span>Distribution</span><b>Claim at TGE</b></div>
+          <div class="stat"><span>Distribution</span><b>Claim at Token Generation Event (TGE)</b></div>
           <div class="stat"><span>Treasury</span><b>Multisig</b></div>
-          <p class="note" style="margin-top:12px">Final terms, KYC/region rules (if any), and audit links will be published here before the address is enabled.</p>
+          <p class="note" style="margin-top:12px">Questions about compliance or launch partners? Check <a href="https://smithii.com" target="_blank" rel="noopener">Smithii</a>.</p>
         </aside>
       </div>
     </section>
@@ -126,7 +124,7 @@
       <div class="wrap">
         <div class="card">
           <h2>Live Ledger (Public)</h2>
-          <p class="note">Hook this table up to your contract or an API when ready. For now, it’s a placeholder showing the latest tx hash and cumulative tallies.</p>
+          <p class="note">Hook these numbers to your on‑chain program or a simple JSON endpoint when you’re ready. They’re placeholders for now.</p>
           <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
             <div class="card" style="padding:12px"><div class="pill">Latest Tx</div><div id="lastTx" style="overflow-wrap:anywhere">—</div></div>
             <div class="card" style="padding:12px"><div class="pill">Cumulative USDC</div><div id="cumUsdc">—</div></div>
@@ -143,14 +141,14 @@
         <h3>Official Links</h3>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="#" id="secNotes">Security Notes</a></li>
-          <li><a href="#" id="twitter">Twitter / X</a></li>
+          <li><a href="https://twitter.com/SCOINSPORTS" target="_blank" rel="noopener">X / Twitter: @SCOINSPORTS</a></li>
+          <li><a href="https://smithii.com" target="_blank" rel="noopener">Smithii</a></li>
         </ul>
       </div>
       <div>
-        <h3>Legal</h3>
+        <h3>Notes</h3>
         <p class="small">© <span id="year"></span> C.O.I.N.S, LLC • All rights reserved.</p>
-        <p class="small">Nothing here is financial advice. Tokens will be claimable at TGE after audits. Availability may depend on jurisdiction.</p>
+        <p class="small">This page provides presale logistics only. No guarantees, no ROI promises. Availability may depend on jurisdiction.</p>
       </div>
     </div>
   </footer>
@@ -167,8 +165,8 @@
       address: 'YOUR_PRESALE_ADDRESS_HERE',
       explorer: 'https://solscan.io/account/YOUR_PRESALE_ADDRESS_HERE',
 
-      // Optional demo numbers (replace by contract/API later)
-      sold: 0,                          // increment via contract reports
+      // Optional placeholders (replace with program/API later)
+      sold: 0,
       lastTx: '',
       cumulativeUsdc: 0,
       buyers: 0
@@ -187,7 +185,6 @@
     $('#dLimit').textContent = CONFIG.perWalletLimit;
     $('#year').textContent = new Date().getFullYear();
 
-    // Counters
     function refreshCounters(){
       $('#sold').textContent = fmt(CONFIG.sold);
       const remaining = Math.max(CONFIG.cap - CONFIG.sold, 0);
@@ -198,12 +195,10 @@
     }
     refreshCounters();
 
-    // Address panel
-    const addrBox = $('#addrBox');
-    const mask = $('#addrMask');
-    const copyBtn = $('#copyBtn');
-    const explorerBtn = $('#explorerBtn');
-    const liveStatus = $('#liveStatus');
+    const copyBtn = document.getElementById('copyBtn');
+    const explorerBtn = document.getElementById('explorerBtn');
+    const liveStatus = document.getElementById('liveStatus');
+    const mask = document.getElementById('addrMask');
 
     function setLive(live){
       if(live){
@@ -212,7 +207,7 @@
         liveStatus.textContent = 'Live';
         copyBtn.onclick = ()=>{ navigator.clipboard.writeText(CONFIG.address); copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy',1200); };
         explorerBtn.onclick = ()=>{ window.open(CONFIG.explorer, '_blank'); };
-        addrBox.style.border = '1px solid rgba(0,181,226,.45)';
+        document.getElementById('addrBox').style.border = '1px solid rgba(0,181,226,.45)';
       } else {
         mask.textContent = 'Address locked until go‑time';
         copyBtn.disabled = true; explorerBtn.disabled = true;
@@ -221,7 +216,7 @@
     }
     setLive(CONFIG.live);
 
-    // OPTIONAL: simple demo to simulate updates using localStorage (remove later)
+    // Optional: preserve demo values locally while you test
     try{
       const saved = JSON.parse(localStorage.getItem('scoin_presale_demo')||'null');
       if(saved){ Object.assign(CONFIG, saved); }
