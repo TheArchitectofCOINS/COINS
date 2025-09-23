@@ -4,45 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>S‑COIN • Your Picks. Your Glory.</title>
-  <meta name="description" content="Official website for C.O.I.N.S, LLC — home of S‑COIN Sports Predictions and the S‑COIN token." />
+  <meta name="description" content="Official website for C.O.I.N.S, LLC — home of S‑COIN Sports and the S‑COIN token." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0b0f14; --card:#111823; --muted:#a9b4c0; --text:#e6f0fa; --brand:#00B5E2; --brand-2:#1a5fff; --accent:#19c37d; --radius:18px; --shadow:0 8px 28px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.25);
+      --bg:#070b11; --surface:#0f1622; --ink:#eaf2fb; --muted:#a6b2c2; --brand:#00b5e2; --brand-2:#1a5fff; --accent:#19c37d; --gold:#ffd166; --line:rgba(255,255,255,.1); --radius:20px; --shadow:0 14px 50px rgba(0,0,0,.55), 0 4px 14px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; color:var(--text); background:#0b0f14; line-height:1.6}
-    a{color:var(--brand); text-decoration:none}
-    .wrap{max-width:1200px; margin:auto; padding:0 20px}
-    header{position:sticky; top:0; background:#111823; border-bottom:1px solid rgba(255,255,255,.06); z-index:10}
-    .nav{display:flex; justify-content:space-between; align-items:center; padding:14px 0}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:
+      radial-gradient(1100px 520px at 10% -10%, #0f2f49 0%, rgba(15,47,73,0) 60%),
+      radial-gradient(1200px 600px at 110% -20%, #0a2a4a 0%, rgba(10,42,74,0) 70%),
+      linear-gradient(180deg, #070b11, #090e15);
+      background-attachment:fixed; line-height:1.6}
+    a{color:var(--brand)}
+    .wrap{max-width:1200px; margin:0 auto; padding:0 20px}
+    header{position:sticky; top:0; z-index:40; background:linear-gradient(180deg, rgba(7,11,17,.85), rgba(7,11,17,.55)); border-bottom:1px solid var(--line); backdrop-filter:saturate(120%) blur(10px)}
+    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
     .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:36px}
+    .brand img{height:40px; width:40px; filter:drop-shadow(0 6px 18px rgba(0,181,226,.35))}
     nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
-    nav a{color:var(--text); font-weight:600}
-    .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:800; border-radius:12px}
-    .hero{padding:80px 0; text-align:center}
-    .hero h1{font-size:clamp(32px,5vw,64px); margin:0 0 16px}
-    .hero p{max-width:760px; margin:0 auto 20px; font-size:18px; opacity:.9}
-    section{padding:64px 0}
-    .grid{display:grid; gap:20px}
-    .two{grid-template-columns:repeat(2,1fr)}
-    .three{grid-template-columns:repeat(3,1fr)}
-    @media(max-width:900px){.two,.three{grid-template-columns:1fr}}
-    .card{background:#111823; border:1px solid rgba(255,255,255,.07); border-radius:18px; padding:20px; box-shadow:0 6px 20px rgba(0,0,0,.35)}
-    .checklist{list-style:none; padding:0}
-    .checklist li{padding-left:24px; position:relative; margin:8px 0}
-    .checklist li::before{content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:bold}
-    footer{padding:40px 0; border-top:1px solid rgba(255,255,255,.08); background:#111823; text-align:center}
-    .small{font-size:13px; opacity:.7}
+    nav a{color:var(--ink); opacity:.9; font-weight:800}
+    .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
+
+    .hero{position:relative; padding:96px 0 56px; overflow:hidden}
+    .hero::before, .hero::after{
+      content:""; position:absolute; inset:auto auto -120px 50%; width:1600px; height:700px; transform:translateX(-50%);
+      background:
+        radial-gradient(closest-side, rgba(255,255,255,.18), rgba(255,255,255,0) 72%) 0 0/130px 130px,
+        radial-gradient(closest-side, rgba(255,255,255,.16), rgba(255,255,255,0) 72%) 65px 65px/130px 130px;
+      opacity:.14; filter:blur(1px) drop-shadow(0 70px 60px rgba(0,0,0,.7)); pointer-events:none;
+      mask:linear-gradient(#000, transparent 70%);
+    }
+    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); font-weight:900; color:var(--gold)}
+    h1{font-size:clamp(36px,6vw,72px); line-height:1.03; margin:10px 0 8px}
+    .hero p{font-size:clamp(16px,2.2vw,20px); max-width:820px; opacity:.92}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background:rgba(255,255,255,.04)}
+
+    section{padding:68px 0}
+    .grid{display:grid; gap:22px}
+    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media(max-width:980px){.two,.three{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:12px; letter-spacing:.3px}
+    .checklist{list-style:none; padding:0; margin:12px 0 0}
+    .checklist li{padding-left:26px; position:relative; margin:10px 0}
+    .checklist li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--accent); font-weight:900}
+
+    footer{padding:56px 0 80px; border-top:1px solid var(--line)}
+    .small{font-size:13px; opacity:.74}
   </style>
 </head>
 <body>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="#"><img src="assets/s-coin-logo.png" alt="S‑COIN"><b>C.O.I.N.S, LLC</b></a>
+      <a class="brand" href="#top"><img src="assets/s-coin-logo.png" alt="S‑COIN logo"><b>C.O.I.N.S, LLC</b></a>
       <nav>
         <ul>
           <li><a href="#about">About</a></li>
@@ -57,98 +76,165 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="wrap">
-        <h1>Your Picks. Your Glory. <span style="color:var(--brand)">Your S‑COIN.</span></h1>
-        <p>S‑COIN Sports is under active development. The app and Free Play are currently offline while we line up partners and engineering. The token launches after presale completion.</p>
+        <span class="kicker">S‑COIN Sports • Building Now</span>
+        <h1>Your Picks. Your Glory.<br><span style="color:var(--brand)">Your S‑COIN.</span></h1>
+        <p><b>S‑COIN Sports</b> is under active development. The app and Free Play are currently offline while we line up partners and engineering. Our token <b>S‑COIN</b> will launch after the presale completes. Follow updates here and on X.</p>
+        <div class="hero-actions">
+          <span class="badge">🔒 We will <b>never</b> DM you first or ask you to send crypto.</span>
+          <a class="cta" href="presale.html">Presale is Live</a>
+        </div>
       </div>
     </section>
 
-    <section id="about" class="wrap grid two">
-      <div class="card">
-        <h2>About</h2>
-        <p>We build simple, safe, fun Web3 sports prediction tools. Clear tokenomics, transparent burns, no nonsense.</p>
-        <ul class="checklist">
-          <li>Free Play returns after rebuild</li>
-          <li>VIP leagues & leaderboards coming</li>
-          <li>Liquidity lock at token launch</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Highlights</h2>
-        <ul class="checklist">
-          <li>Weekly picks post‑relaunch</li>
-          <li>Anti‑bot protections</li>
-          <li>Community‑driven features</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="coins" class="wrap">
-      <h2>The S‑COIN Family</h2>
-      <div class="grid three">
-        <div class="card"><h3>S‑COIN</h3><p>Main token powering perks, VIP arenas, and votes. Launches after presale.</p></div>
-        <div class="card"><h3>S‑COIN‑FP</h3><p>Free Play token for practice. Currently offline until app relaunch.</p></div>
-        <div class="card"><h3>S‑COIN‑S</h3><p>Stable unit for internal treasury and payouts. Details before activation.</p></div>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap grid two">
+        <div class="card">
+          <h2>About C.O.I.N.S</h2>
+          <p>We build a sports‑first Web3 experience: simple UI, fair play, and clear communication. No fluff, just clean mechanics and transparency.</p>
+          <ul class="checklist">
+            <li>Fast picks and fair rules</li>
+            <li>Free Play returns post‑rebuild</li>
+            <li>VIP leagues & seasonal ladders planned</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>At a Glance</h3>
+          <ul class="checklist">
+            <li>Leaderboard‑driven gameplay</li>
+            <li>Anti‑bot protections & device limits</li>
+            <li>Transparent burns & stats</li>
+            <li>Liquidity lock at token launch</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="tokenomics" class="wrap grid two">
-      <div>
-        <h2>Tokenomics</h2>
-        <ul class="checklist">
-          <li>Presale: 30%</li>
-          <li>Treasury: 25%</li>
-          <li>Rewards: 25%</li>
-          <li>Team: 10%</li>
-          <li>Partnerships: 5%</li>
-          <li>Reserve: 5%</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Controls</h3>
-        <ul class="checklist">
-          <li>Mint authority kept for yearly releases</li>
-          <li>Liquidity lock at launch</li>
-          <li>Multisig treasury</li>
-        </ul>
+    <!-- THE THREE S‑COINS -->
+    <section id="coins">
+      <div class="wrap">
+        <h2>The S‑COIN Family</h2>
+        <div class="grid three" style="margin-top:16px">
+          <article class="card">
+            <span class="pill">S‑COIN (Main)</span>
+            <h3>The core token</h3>
+            <p><b>S‑COIN</b> powers perks, VIP arenas, and community votes across the ecosystem. Launches after the presale is complete.</p>
+            <ul class="checklist">
+              <li>Utility across products</li>
+              <li>Planned liquidity lock at launch</li>
+              <li>Deflation via transparent burns</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="pill">S‑COIN‑FP (Free Play)</span>
+            <h3>Practice & compete</h3>
+            <p>No‑wallet practice token. <b>Temporarily offline</b> while we rebuild — returns with the app relaunch.</p>
+            <ul class="checklist">
+              <li>Device‑limited anti‑abuse controls</li>
+              <li>Seasonal resets & ladders</li>
+              <li>Bridges awareness to the main token</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="pill">S‑COIN‑S (Stable)</span>
+            <h3>Stable accounting</h3>
+            <p>A stability‑oriented unit for <b>internal treasury accounting</b> and potential <b>payout rails</b>. We’ll share plain‑English details before activation.</p>
+            <ul class="checklist">
+              <li>Clear reporting before it goes live</li>
+              <li>Designed for predictable values</li>
+              <li>Compliance‑aware approach</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="presale" class="wrap grid two">
-      <div>
-        <h2>Presale — <span style="color:var(--brand)">Live</span></h2>
-        <p>One price: $0.07 per S‑COIN. Open until sold out. Official address is posted on the Presale page.</p>
-        <a class="cta" href="presale.html">Go to Presale Page</a>
-      </div>
-      <div class="card">
-        <h3>Safety</h3>
-        <ul class="checklist">
-          <li>We never DM first</li>
-          <li>Verify only on this site</li>
-        </ul>
+    <!-- TOKENOMICS -->
+    <section id="tokenomics">
+      <div class="wrap grid two">
+        <div>
+          <h2>Tokenomics (Draft)</h2>
+          <p>High‑level plan for <b>S‑COIN</b> distribution. Numbers may adjust during implementation.</p>
+          <div class="card">
+            <ul class="checklist" style="margin-top:0">
+              <li><b>Presale</b>: 30% — initial distribution & liquidity</li>
+              <li><b>Treasury</b>: 25% — operations & runway (multisig)</li>
+              <li><b>Rewards</b>: 25% — season rewards + VIP perks</li>
+              <li><b>Team</b>: 10% — long‑term</li>
+              <li><b>Partnerships</b>: 5% — ecosystem growth</li>
+              <li><b>Reserve</b>: 5% — strategic needs</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Security & Controls</h3>
+          <ul class="checklist">
+            <li>Mint authority retained for controlled releases</li>
+            <li>Liquidity lock and public addresses at launch</li>
+            <li>Multisig treasury with public reporting</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="faq" class="wrap">
-      <h2>FAQ</h2>
-      <div class="grid two">
-        <div class="card"><h3>App status?</h3><p>Not live yet. Free Play will return with the relaunch.</p></div>
-        <div class="card"><h3>Chain?</h3><p>Targeting Solana‑class L1. Final details at launch.</p></div>
-        <div class="card"><h3>What is TGE?</h3><p><b>Token Generation Event</b> — when tokens are claimable/transferable.</p></div>
-        <div class="card"><h3>Smithii?</h3><p><a href="https://smithii.io/en" target="_blank">Visit Smithii (official)</a></p></div>
+    <!-- PRESALE TEASER -->
+    <section id="presale">
+      <div class="wrap grid two">
+        <div>
+          <h2>Presale — <span style="color:var(--brand)">Live</span></h2>
+          <p>One round. One price: <b>$0.07</b>. 5,000,000 tokens. Open until sold out. The official address and live counters are on the Presale page.</p>
+          <div class="hero-actions">
+            <a class="cta" href="presale.html">Open Presale Page</a>
+            <span class="badge">⏱️ Real‑time status there</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Play it safe</h3>
+          <ul class="checklist">
+            <li>Only trust links on this site or our verified X account</li>
+            <li>We will never DM you first</li>
+            <li>Always verify the address on the Presale page</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <h2>FAQ</h2>
+        <div class="grid two" style="margin-top:12px">
+          <div class="card"><h3>Is there a downloadable app yet?</h3><p><b>Not yet.</b> Development is in progress and Free Play is offline for now.</p></div>
+          <div class="card"><h3>Which chain?</h3><p>We’re targeting a high‑performance L1 with low fees (e.g., Solana‑class). Final chain + contract links will be posted at launch.</p></div>
+          <div class="card"><h3>What does “TGE” mean?</h3><p><b>Token Generation Event</b> — the moment tokens become claimable/transferable.</p></div>
+          <div class="card"><h3>Smithii link?</h3><p><a href="https://smithii.io/en" target="_blank" rel="noopener">Visit Smithii (official)</a>.</p></div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer id="links">
-    <div class="wrap">
-      <p><a href="https://twitter.com/SCOINSPORTS" target="_blank">Follow us on X / Twitter: @SCOINSPORTS</a></p>
-      <p class="small">© <span id="year"></span> C.O.I.N.S, LLC • All rights reserved.</p>
-      <p class="small">Nothing here is financial advice. Availability may depend on jurisdiction.</p>
+    <div class="wrap grid two">
+      <div>
+        <h3>Official Links</h3>
+        <p class="small">We only post links here. Bookmark this page.</p>
+        <ul>
+          <li><a href="https://twitter.com/SCOINSPORTS" rel="noopener" target="_blank">X / Twitter: @SCOINSPORTS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p class="small">© <span id="y"></span> C.O.I.N.S, LLC • All rights reserved.</p>
+        <p class="small">Nothing on this site is financial advice. This site does not solicit investment. Availability may depend on jurisdiction.</p>
+      </div>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
