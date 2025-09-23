@@ -7,42 +7,45 @@
   <meta name="description" content="Official S‑COIN presale. Single round at $0.07. Open until sold out. Addresses are only posted on this page." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#0b0f14; --card:#111823; --text:#e6f0fa; --muted:#a9b4c0; --brand:#00B5E2; --brand-2:#1a5fff; --accent:#19c37d; --radius:18px; --shadow:0 8px 28px rgba(0,0,0,.45), 0 2px 8px rgba(0,0,0,.25); }
+    :root{ --bg:#070b11; --surface:#0f1622; --ink:#eaf2fb; --muted:#a6b2c2; --brand:#00b5e2; --brand-2:#1a5fff; --accent:#19c37d; --gold:#ffd166; --line:rgba(255,255,255,.1); --radius:20px; --shadow:0 14px 50px rgba(0,0,0,.55), 0 4px 14px rgba(0,0,0,.35); }
     *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--text); background:#0b0f14; line-height:1.6}
-    a{color:var(--brand); text-decoration:none}
+    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:
+      radial-gradient(1100px 520px at 10% -10%, #0f2f49 0%, rgba(15,47,73,0) 60%),
+      radial-gradient(1200px 600px at 110% -20%, #0a2a4a 0%, rgba(10,42,74,0) 70%),
+      linear-gradient(180deg, #070b11, #090e15);
+      background-attachment:fixed; line-height:1.6}
+    a{color:var(--brand)}
     .wrap{max-width:1100px; margin:0 auto; padding:0 20px}
-    header{position:sticky; top:0; z-index:10; background:#111823; border-bottom:1px solid rgba(255,255,255,.06)}
+    header{position:sticky; top:0; z-index:40; background:linear-gradient(180deg, rgba(7,11,17,.85), rgba(7,11,17,.55)); border-bottom:1px solid var(--line); backdrop-filter:saturate(120%) blur(10px)}
     .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
     .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:36px}
+    .brand img{height:40px; width:40px; filter:drop-shadow(0 6px 18px rgba(0,181,226,.35))}
     nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
-    nav a{color:var(--text); font-weight:600}
-    .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:800; border-radius:12px}
+    nav a{color:var(--ink); opacity:.9; font-weight:800}
+    .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
 
-    .hero{padding:64px 0 24px}
-    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:rgba(0,181,226,.12); border:1px solid rgba(0,181,226,.25); border-radius:999px; font-weight:700; color:var(--brand)}
-    h1{font-size:clamp(32px,6vw,58px); line-height:1.05; margin:10px 0 8px}
+    .hero{position:relative; padding:80px 0 28px}
+    .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); font-weight:900; color:var(--gold)}
+    h1{font-size:clamp(36px,6vw,64px); line-height:1.03; margin:10px 0 8px}
 
     section{padding:36px 0}
-    .grid{display:grid; gap:20px}
+    .grid{display:grid; gap:22px}
     .two{grid-template-columns:2fr 1.1fr}
-    @media (max-width:900px){.two{grid-template-columns:1fr}}
-
-    .card{background:#111823; border:1px solid rgba(255,255,255,.07); border-radius:18px; padding:20px; box-shadow:var(--shadow)}
+    @media(max-width:980px){.two{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
     .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:12px; letter-spacing:.3px}
     .stat{display:grid; grid-template-columns:1fr auto; gap:12px; padding:12px 0; border-bottom:1px dashed rgba(255,255,255,.1)}
     .stat:last-child{border-bottom:none}
-    .note{font-size:13px; opacity:.72}
+    .note{font-size:13px; opacity:.75}
 
-    .addr{display:flex; gap:10px; align-items:center; padding:12px; border-radius:12px; background:rgba(0,0,0,.35); border:1px dashed rgba(255,255,255,.18); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
-    .addr button{padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); color:var(--text); cursor:pointer}
+    .addr{display:flex; gap:10px; align-items:center; padding:12px; border-radius:12px; background:rgba(0,0,0,.35); border:1px dashed rgba(255,255,255,.2); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    .addr button{padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.06); color:var(--ink); cursor:pointer}
     .addr .masked{letter-spacing:1px; opacity:.7}
 
-    footer{padding:48px 0 64px; border-top:1px solid rgba(255,255,255,.08); background:#111823}
-    .small{font-size:13px; opacity:.75}
+    footer{padding:52px 0 72px; border-top:1px solid var(--line)}
+    .small{font-size:13px; opacity:.74}
   </style>
 </head>
 <body>
@@ -83,9 +86,9 @@
 
           <h3 style="margin-top:24px">Status</h3>
           <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
-            <div class="card" style="padding:12px"><div class="pill">Price</div><div style="font-size:22px; font-weight:800" id="priceTag">$0.07</div></div>
-            <div class="card" style="padding:12px"><div class="pill">Sold</div><div style="font-size:22px; font-weight:800"><span id="sold">0</span></div></div>
-            <div class="card" style="padding:12px"><div class="pill">Remaining</div><div style="font-size:22px; font-weight:800"><span id="remaining">—</span></div></div>
+            <div class="card" style="padding:12px"><div class="pill">Price</div><div style="font-size:22px; font-weight:900" id="priceTag">$0.07</div></div>
+            <div class="card" style="padding:12px"><div class="pill">Sold</div><div style="font-size:22px; font-weight:900"><span id="sold">0</span></div></div>
+            <div class="card" style="padding:12px"><div class="pill">Remaining</div><div style="font-size:22px; font-weight:900"><span id="remaining">—</span></div></div>
           </div>
 
           <h3 style="margin-top:24px">Official Presale Address</h3>
@@ -108,12 +111,12 @@
         <aside class="card">
           <h3>Presale Details</h3>
           <div class="stat"><span>Price</span><b id="dPrice">$0.07</b></div>
-          <div class="stat"><span>Allocation</span><b><span id="dCap">15,000,000</span> S‑COIN</b></div>
+          <div class="stat"><span>Allocation</span><b><span id="dCap">5,000,000</span> S‑COIN</b></div>
           <div class="stat"><span>Chain</span><b id="dChain">Solana</b></div>
           <div class="stat"><span>Currency</span><b id="dCurrency">USDC</b></div>
           <div class="stat"><span>Per‑wallet limit</span><b id="dLimit">TBD</b></div>
           <div class="stat"><span>Distribution</span><b>Claim at Token Generation Event (TGE)</b></div>
-          <p class="note" style="margin-top:12px">Questions about partners/compliance? See <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a>.</p>
+          <p class="note" style="margin-top:12px">Partners/compliance: <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a>.</p>
         </aside>
       </div>
     </section>
@@ -146,7 +149,7 @@
     const CONFIG = {
       live: false,                       // flip to true when presale goes live
       priceUsd: 0.07,
-      cap: 15_000_000,                  // total S-COIN available in presale
+      cap: 5_000_000,                   // total S-COIN available in presale
       chain: 'Solana',
       currency: 'USDC',
       perWalletLimit: 'TBD',            // e.g., '10,000 S-COIN max'
