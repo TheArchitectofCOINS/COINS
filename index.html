@@ -46,7 +46,6 @@
     nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
     nav a{color:var(--text); opacity:.86; font-weight:600}
     .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:800; border-radius:12px; box-shadow: var(--shadow-soft)}
-    .cta[aria-disabled="true"]{opacity:.6; cursor:not-allowed}
 
     /* hero */
     .hero{position:relative; padding:88px 0 40px}
@@ -58,7 +57,6 @@
       mask:linear-gradient(#000, transparent);
     }
     .hero h1{font-size:clamp(32px, 5.6vw, 64px); line-height:1.05; margin:0 0 16px}
-    .hero .kicker{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:rgba(0,181,226,.12); border:1px solid rgba(0,181,226,.25); border-radius:999px; font-weight:700; color:var(--brand)}
     .hero p{font-size:clamp(16px, 2.2vw, 20px); opacity:.9; max-width:780px}
     .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
     .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03)}
@@ -119,14 +117,11 @@
     <!-- HERO -->
     <section class="hero stadium-lights">
       <div class="wrap">
-        <span class="kicker" aria-label="Status"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#19c37d"/></svg> Free Play • Live Now</span>
         <h1>Your Picks. Your Glory.<br><span style="color:var(--brand)">Your S‑COIN.</span></h1>
-        <p>We’re building <b>S‑COIN Sports</b> for real bragging rights. Make weekly picks in Free Play with <b>S‑COIN‑FP</b>. The real token <b>S‑COIN</b> launches post‑presale and audits. VIP perks and liquidity locks are planned at launch.</p>
+        <p><b>S‑COIN Sports</b> is under active development. The app and Free Play are currently offline while we line up partners and engineering. Our token <b>S‑COIN</b> will launch after the presale completes. Until then, follow updates here and on X.</p>
         <div class="hero-actions">
           <span class="badge">🔒 We will <b>never</b> DM you first or ask you to send crypto.</span>
-          <span class="badge">🛡️ Security notes & audits will be public.</span>
         </div>
-        <p class="note">No app download links appear until we ship. This page updates as we go.</p>
       </div>
     </section>
 
@@ -135,20 +130,20 @@
       <div class="wrap grid two">
         <div class="card">
           <h2>About C.O.I.N.S</h2>
-          <p>We design Web3 experiences that are simple, safe, and fun. We ship with clear security notes, locked‑liquidity plans, transparent burn mechanics, and no‑nonsense communication.</p>
+          <p>We design Web3 experiences that are simple, safe, and fun. We ship with clear plans for liquidity locks, transparent burn mechanics, and no‑nonsense communication.</p>
           <ul class="checklist">
             <li>Clean UI with fast picks and fair rules</li>
-            <li>Free Play today, token utility tomorrow</li>
+            <li>Free Play returns after core rebuild</li>
             <li>Builds toward VIP leagues & season ladders</li>
           </ul>
         </div>
         <div class="card">
           <h3>At a glance</h3>
           <ul class="checklist">
-            <li>Weekly picks & leaderboards</li>
+            <li>Weekly picks & leaderboards (post‑relaunch)</li>
             <li>Anti‑bot protections & device limits in Free Play</li>
             <li>Transparent burns and seasonal stats</li>
-            <li>Liquidity to be locked post‑launch</li>
+            <li>Liquidity to be locked at token launch</li>
           </ul>
         </div>
       </div>
@@ -162,17 +157,17 @@
           <article class="card">
             <span class="pill">S‑COIN (Main)</span>
             <h3>The core token</h3>
-            <p><b>S‑COIN</b> powers perks, VIP arenas, and community votes across the S‑COIN Sports ecosystem. Launches after presale + audits.</p>
+            <p><b>S‑COIN</b> powers perks, VIP arenas, and community votes across the S‑COIN Sports ecosystem. Launches after the presale is complete.</p>
             <ul class="checklist">
               <li>Utility across products</li>
-              <li>Planned liquidity lock at TGE</li>
+              <li>Planned liquidity lock at launch</li>
               <li>Deflation via transparent burns</li>
             </ul>
           </article>
           <article class="card">
             <span class="pill">S‑COIN‑FP (Free Play)</span>
             <h3>Practice & compete</h3>
-            <p><b>S‑COIN‑FP</b> lets everyone play today. Earn bragging rights and climb leaderboards — no crypto wallet required.</p>
+            <p><b>S‑COIN‑FP</b> powers our no‑wallet practice mode. <b>Temporarily offline</b> while we rebuild — returns after app relaunch.</p>
             <ul class="checklist">
               <li>Device‑limited anti‑abuse controls</li>
               <li>Seasonal resets & ladders</li>
@@ -181,12 +176,12 @@
           </article>
           <article class="card">
             <span class="pill">S‑COIN‑S (Stable)</span>
-            <h3>Treasury & payouts</h3>
-            <p><b>S‑COIN‑S</b> is our stability‑oriented counterpart for treasury accounting and potential payout rails. Details publish before activation.</p>
+            <h3>Simple: stable accounting</h3>
+            <p><b>S‑COIN‑S</b> is a stability‑oriented unit we plan to use for <b>internal treasury accounting</b> and <b>future payout rails</b>. We’ll share plain‑English details before activating it.</p>
             <ul class="checklist">
-              <li>Backed and reported transparently</li>
-              <li>Risk‑managed treasury design</li>
-              <li>Compliance‑first approach</li>
+              <li>Clear reporting before it goes live</li>
+              <li>Designed for predictable values</li>
+              <li>Compliance‑aware approach</li>
             </ul>
           </article>
         </div>
@@ -198,26 +193,24 @@
       <div class="wrap grid two">
         <div>
           <h2>Tokenomics (Draft)</h2>
-          <p>Final numbers ship with the presale smart contracts and audits. Below is the planned high‑level split for <b>S‑COIN</b> (subject to change):</p>
+          <p>High‑level plan for <b>S‑COIN</b> distribution. Numbers may adjust during implementation.</p>
           <div class="card">
             <ul class="checklist" style="margin-top:0">
               <li><b>Presale</b>: 30% — initial distribution & liquidity</li>
               <li><b>Treasury</b>: 25% — operations & runway (multisig)</li>
               <li><b>Rewards</b>: 25% — season rewards + VIP perks</li>
-              <li><b>Team</b>: 10% — long‑term, time‑locked</li>
+              <li><b>Team</b>: 10% — long‑term</li>
               <li><b>Partnerships</b>: 5% — ecosystem growth</li>
               <li><b>Reserve</b>: 5% — strategic needs</li>
             </ul>
           </div>
-          <p class="note">We’ll publish vesting, lockups, and burn schedules before the presale opens.</p>
         </div>
         <div class="card">
           <h3>Security & Controls</h3>
           <ul class="checklist">
-            <li>Contract audits and public reports</li>
-            <li>Mint authority staged: Free Play now, main token after presale</li>
-            <li>Liquidity lock and public addresses at TGE</li>
-            <li>Multisig treasury with on‑chain reporting</li>
+            <li>Mint authority retained for controlled releases</li>
+            <li>Liquidity lock and public addresses at launch</li>
+            <li>Multisig treasury with public reporting</li>
           </ul>
         </div>
       </div>
@@ -227,20 +220,19 @@
     <section id="presale">
       <div class="wrap grid two">
         <div>
-          <h2>Presale (Coming Soon)</h2>
-          <p>The presale will open once audits and legal checks are complete. Until then, explore Free Play and follow our official channels for updates.</p>
+          <h2>Presale — <span style="color:var(--brand)">Live</span></h2>
+          <p>The presale runs at a single price until sold out. Details and the official address are posted on the Presale page.</p>
           <div class="hero-actions">
-            <a class="cta" href="presale.html" aria-disabled="true" onclick="return false">Presale Portal • Locked</a>
-            <span class="badge">⏳ Status: preparing docs & audits</span>
+            <a class="cta" href="presale.html">Open Presale Page</a>
+            <span class="badge">⏳ Status updates appear there in real time</span>
           </div>
-          <p class="note">When live, the Presale Portal will appear here with tiers, caps, KYC/region rules (if required), and on‑chain addresses.</p>
         </div>
         <div class="card">
-          <h3>How to stay safe</h3>
+          <h3>Stay Safe</h3>
           <ul class="checklist">
-            <li>Only use links on this page or our verified socials</li>
-            <li>We will never ask you to send funds over DM</li>
-            <li>Double‑check contract addresses before any transfer</li>
+            <li>Only use links on this site or our verified X account</li>
+            <li>We will never DM you first</li>
+            <li>Always verify the address on the Presale page</li>
           </ul>
         </div>
       </div>
@@ -251,10 +243,10 @@
       <div class="wrap">
         <h2>FAQ</h2>
         <div class="grid two" style="margin-top:12px">
-          <div class="card"><h3>Is there a downloadable app yet?</h3><p>No. We’ll add links only when apps are live in official stores. Until then, Free Play is web‑based.</p></div>
-          <div class="card"><h3>Which chain?</h3><p>We’re targeting a high‑performance L1 with low fees (e.g., Solana‑class). Final chain + contract links will publish with audits.</p></div>
-          <div class="card"><h3>Who can join Free Play?</h3><p>Everyone. It’s free, device‑limited to keep things fair, and a great way to learn the flow before tokens launch.</p></div>
-          <div class="card"><h3>How do burns work?</h3><p>We’ll publish a transparent, rules‑based burn schedule tied to seasonal activity. All burn txns will be visible on‑chain.</p></div>
+          <div class="card"><h3>Is there a downloadable app yet?</h3><p><b>Not yet.</b> Development is in progress and Free Play is offline for now.</p></div>
+          <div class="card"><h3>Which chain?</h3><p>We’re targeting a high‑performance L1 with low fees (e.g., Solana‑class). Final chain + contract links will be posted at launch.</p></div>
+          <div class="card"><h3>What does “TGE” mean?</h3><p><b>Token Generation Event</b> — the moment tokens become claimable/transferable.</p></div>
+          <div class="card"><h3>Smithii link?</h3><p><a href="https://smithii.com" target="_blank" rel="noopener">Visit Smithii (official)</a>.</p></div>
         </div>
       </div>
     </section>
@@ -266,15 +258,13 @@
         <h3>Official Links</h3>
         <p class="small">We only post links here. Bookmark this page.</p>
         <ul>
-          <li><a href="#" rel="noopener">Twitter / X (official)</a></li>
-          <li><a href="#" rel="noopener">GitHub (site source)</a></li>
-          <li><a href="#" rel="noopener">Security Notes</a></li>
+          <li><a href="https://twitter.com/SCOINSPORTS" rel="noopener" target="_blank">X / Twitter: @SCOINSPORTS</a></li>
         </ul>
       </div>
       <div>
         <h3>Legal</h3>
         <p class="small">© <span id="y"></span> C.O.I.N.S, LLC • All rights reserved.</p>
-        <p class="small">Nothing on this site is financial advice. Free Play involves no real money. Token details publish with audits.</p>
+        <p class="small">Nothing on this site is financial advice. This site does not solicit investment. Availability may depend on jurisdiction.</p>
       </div>
     </div>
   </footer>
