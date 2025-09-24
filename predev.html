@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>S-COIN Sports — Pre-Development Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Pre-development screenshots and work-in-progress for the S-COIN Sports app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-specific utilities */
+    .subnav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:12px}
+    .pill{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:#0B1526; cursor:pointer; font-size:14px}
+    .pill.active{outline:2px solid rgba(0,181,226,.6); background:rgba(0,181,226,.08)}
+    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .shot{position:relative; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:#0B1526}
+    .shot img{width:100%; height:auto; display:block; transition:transform .25s ease}
+    .shot:hover img{transform:scale(1.02)}
+    .shot .cap{position:absolute; left:10px; bottom:10px; padding:4px 8px; font-size:12px; color:var(--muted); background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); border-radius:8px; backdrop-filter:blur(6px)}
+    @media (max-width:980px){ .gallery{grid-template-columns:1fr 1fr} }
+    @media (max-width:560px){ .gallery{grid-template-columns:1fr} }
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.75); backdrop-filter: blur(6px); z-index:50}
+    .lightbox.open{display:grid}
+    .lightbox img{max-width:92vw; max-height:86vh; border-radius:14px; border:1px solid rgba(255,255,255,.15); box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .lb-meta{margin-top:10px; color:var(--muted); text-align:center; font-size:13px}
+    .lb-close{position:absolute; top:16px; right:16px; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.15); color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/s-coin-logo.png" alt="S-COIN logo">
+      <span>S-COIN Sports</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#predev" class="chip">Pre-Development</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="presale.html" class="chip chip-warn">Presale</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="min-height:46vh">
+    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
+    <div class="hero-content container" style="padding:56px 0">
+      <h1>Pre-Development</h1>
+      <p class="lead">A look at what we’re building — early flows, screens, and WIP designs.</p>
+
+      <!-- Optional quick filters -->
+      <div class="subnav" id="filters" role="tablist" aria-label="Filter screenshots">
+        <button class="pill active" data-tag="all">All</button>
+        <button class="pill" data-tag="homepage">Homepage</button>
+        <button class="pill" data-tag="picks">Make Picks</button>
+        <button class="pill" data-tag="auth">Auth/Onboarding</button>
+        <button class="pill" data-tag="presale">Presale</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <main class="section container">
+    <div class="gallery" id="gallery">
+      <!-- Replace src/href + data-tag values with your real images and categories -->
+      <a class="shot" href="assets/predev/screen-1.jpg" data-tag="homepage">
+        <img src="assets/predev/screen-1.jpg" alt="Homepage mock 1" loading="lazy">
+        <span class="cap">Homepage — hero layout</span>
+      </a>
+      <a class="shot" href="assets/predev/screen-2.jpg" data-tag="picks">
+        <img src="assets/predev/screen-2.jpg" alt="Make Picks card grid" loading="lazy">
+        <span class="cap">Make Picks — game cards</span>
+      </a>
+      <a class="shot" href="assets/predev/screen-3.jpg" data-tag="auth">
+        <img src="assets/predev/screen-3.jpg" alt="Auth flow UI" loading="lazy">
+        <span class="cap">Auth — sign in/up</span>
+      </a>
+      <a class="shot" href="assets/predev/screen-4.jpg" data-tag="presale">
+        <img src="assets/predev/screen-4.jpg" alt="Presale checkout mock" loading="lazy">
+        <span class="cap">Presale — checkout</span>
+      </a>
+      <a class="shot" href="assets/predev/screen-5.jpg" data-tag="picks">
+        <img src="assets/predev/screen-5.jpg" alt="Picks slip and lines" loading="lazy">
+        <span class="cap">Make Picks — slip</span>
+      </a>
+      <a class="shot" href="assets/predev/screen-6.jpg" data-tag="homepage">
+        <img src="assets/predev/screen-6.jpg" alt="Homepage sections" loading="lazy">
+        <span class="cap">Homepage — sections</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lb-close" id="lbClose" aria-label="Close preview">Close ✕</button>
+    <div class="lb-body" style="text-align:center">
+      <img id="lbImg" src="" alt="">
+      <div class="lb-meta" id="lbMeta"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-min">
+          <img src="assets/s-coin-logo.png" alt="">
+          <span>S-COIN Sports</span>
+        </div>
+        <p class="muted">
+          <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">In Utility We Trust → @SCOINSPORTS on X</a>
+        </p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
+        <a href="scoin.html">About</a>
+      </nav>
+    </div>
+    <div class="sub">© <span id="y"></span> S-COIN Sports</div>
+  </footer>
+
+  <script>
+    // Footer year + mobile nav
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const toggle = document.querySelector('.nav-toggle');
+    const links  = document.querySelector('.nav-links');
+    toggle?.addEventListener('click', () => {
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Filter logic
+    const pills = document.querySelectorAll('.pill');
+    const shots = document.querySelectorAll('.shot');
+    pills.forEach(p=>{
+      p.addEventListener('click', ()=>{
+        pills.forEach(x=>x.classList.remove('active'));
+        p.classList.add('active');
+        const tag = p.dataset.tag;
+        shots.forEach(s=>{
+          const show = (tag === 'all') || s.dataset.tag === tag;
+          s.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Lightbox logic
+    const lb   = document.getElementById('lightbox');
+    const lbImg= document.getElementById('lbImg');
+    const lbMeta= document.getElementById('lbMeta');
+    const lbClose= document.getElementById('lbClose');
+
+    document.getElementById('gallery').addEventListener('click', (e)=>{
+      const a = e.target.closest('a.shot');
+      if(!a) return;
+      e.preventDefault();
+      lbImg.src = a.getAttribute('href');
+      lbImg.alt = a.querySelector('img')?.alt || '';
+      lbMeta.textContent = a.querySelector('.cap')?.textContent || '';
+      lb.classList.add('open');
+      lb.setAttribute('aria-hidden', 'false');
+    });
+
+    function closeLB(){
+      lb.classList.remove('open');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+    }
+    lbClose.addEventListener('click', closeLB);
+    lb.addEventListener('click', (e)=> {
+      if(e.target === lb) closeLB();
+    });
+    document.addEventListener('keydown', (e)=> {
+      if(e.key === 'Escape' && lb.classList.contains('open')) closeLB();
+    });
+  </script>
+</body>
+</html>
