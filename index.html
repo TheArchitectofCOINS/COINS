@@ -1,340 +1,113 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="blue">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>S-COIN Sports — Make Your Picks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>S‑COIN • Your Picks. Your Glory.</title>
-  <meta name="description" content="C.O.I.N.S, LLC — S‑COIN Sports and the S‑COIN token. Presale live at $0.07 until sold out." />
-  <!-- OG / Twitter for slick shares -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="S‑COIN • Your Picks. Your Glory.">
-  <meta property="og:description" content="S‑COIN Sports — presale live at $0.07 until sold out.">
-  <meta property="og:image" content="assets/blue background logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="S‑COIN • Your Picks. Your Glory.">
-  <meta name="twitter:description" content="S‑COIN Sports — presale live at $0.07 until sold out.">
-  <meta name="twitter:image" content="assets/blue background logo.png">
-  <link rel="icon" href="assets/blue background logo.png">
-
+  <meta name="description" content="S-COIN Sports: weekly picks, rewards, and bragging rights." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#07080e; --ink:#ebf3ff; --muted:#a7b3c4; --surface:#0d1320; --line:rgba(255,255,255,.10);
-      --brand:#00b5e2; --brand-2:#1a5fff; --accent:#19c37d; --gold:#ffd166; --danger:#ff5d5d;
-      --radius:22px; --shadow:0 16px 55px rgba(0,0,0,.55), 0 6px 18px rgba(0,0,0,.35);
-    }
-    /* Theme variants */
-    html[data-theme="gold"]{ --brand:#f7b500; --brand-2:#ff7a00; }
-    html[data-theme="neon"]{ --brand:#00ffd1; --brand-2:#00a3ff; }
-
-    *{box-sizing:border-box}
-    body{margin:0; color:var(--ink); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:
-      radial-gradient(1200px 520px at 12% -8%, #0e314f 0%, rgba(14,49,79,0) 60%),
-      radial-gradient(1200px 600px at 110% -20%, #0a2a4a 0%, rgba(10,42,74,0) 70%),
-      linear-gradient(180deg, #060811 0%, #090e17 40%, #0a0f1a 100%);
-      background-attachment:fixed; line-height:1.6}
-    a{color:var(--brand); text-decoration:none}
-    a:hover{opacity:.92}
-
-    .wrap{max-width:1240px; margin-inline:auto; padding-inline:20px}
-
-    /* ===== Header ===== */
-    header{position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(6,8,17,.85), rgba(6,8,17,.55)); backdrop-filter:saturate(130%) blur(10px)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .brand{display:flex; gap:14px; align-items:center}
-    .brand img{height:44px; width:44px; border-radius:12px; background:#000; padding:2px; box-shadow:0 12px 26px rgba(0,181,226,.28); transition:transform .25s ease}
-    .brand img:hover{transform:perspective(400px) rotateX(4deg) rotateY(-6deg) scale(1.02)}
-    .brand .lockup{display:flex; flex-direction:column; line-height:1}
-    .brand .title{font-family:"Bebas Neue", system-ui, sans-serif; letter-spacing:.6px; font-size:26px; margin-top:2px}
-    nav ul{display:flex; gap:20px; list-style:none; margin:0; padding:0}
-    nav a{color:var(--ink); opacity:.9; font-weight:700; position:relative}
-    nav a::after{content:""; position:absolute; left:0; right:100%; bottom:-6px; height:2px; background:linear-gradient(90deg, var(--brand), var(--brand-2)); transition:all .25s ease}
-    nav a:hover::after{right:0}
-    .cta{position:relative; overflow:hidden; padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .cta::after{content:""; position:absolute; top:-150%; left:-50%; width:40%; height:400%; transform:rotate(25deg); background:linear-gradient(transparent, rgba(255,255,255,.6), transparent); animation:shine 3.2s linear infinite}
-    .menu-btn{display:none}
-    .theme-toggle{padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink); font-weight:700; margin-left:10px}
-    @media (max-width: 860px){ nav ul{display:none} .menu-btn{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.02); color:var(--ink)} .open nav ul{display:flex; flex-direction:column; position:absolute; left:0; right:0; top:62px; background:rgba(7,8,14,.98); border-bottom:1px solid var(--line); padding:16px 20px; gap:14px} }
-
-    /* ===== Sports ticker ===== */
-    .ticker{border-bottom:1px solid var(--line); background:rgba(255,255,255,.03)}
-    .ticker .track{display:flex; gap:48px; white-space:nowrap; animation:ticker 28s linear infinite}
-    .ticker .item{display:flex; align-items:center; gap:8px; padding:10px 0; opacity:.9}
-
-    /* ===== Hero w/ Stadium Lights + watermark logo ===== */
-    .hero{position:relative; padding:100px 0 54px; overflow:hidden}
-    .hero::before{content:""; position:absolute; inset:10% -10% auto -10%; height:60vw; max-height:520px; background:url('assets/blue background logo.png') no-repeat center/contain; opacity:.05; filter:drop-shadow(0 6px 18px rgba(0,0,0,.6)); pointer-events:none}
-    .lights, .lights:after{position:absolute; content:""; inset:auto auto -140px 50%; width:2000px; height:900px; transform:translateX(-50%);
-      background:
-        radial-gradient(closest-side, rgba(255,255,255,.22), rgba(255,255,255,0) 70%) 0 0/140px 140px,
-        radial-gradient(closest-side, rgba(255,255,255,.16), rgba(255,255,255,0) 70%) 70px 70px/140px 140px;
-      opacity:.14; filter:blur(1px) drop-shadow(0 80px 70px rgba(0,0,0,.72)); pointer-events:none; mask:linear-gradient(#000, transparent 72%)}
-    .kicker{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04); font-weight:900; color:var(--gold)}
-    h1{font-family:"Bebas Neue", system-ui, sans-serif; font-size:clamp(42px,7vw,88px); letter-spacing:.8px; line-height:1; margin:12px 0 10px}
-    .sub{font-size:clamp(16px,2.2vw,20px); max-width:860px; opacity:.92}
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
-    .badge{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.04)}
-
-    /* ===== Sections ===== */
-    section{padding:72px 0}
-    .grid{display:grid; gap:22px}
-    .two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    @media(max-width:980px){.two,.three{grid-template-columns:1fr}}
-
-    /* Card base + shimmer border */
-    .card{position:relative; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); overflow:hidden}
-    .card::before{content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; background:linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,0) 40%, rgba(255,255,255,.12)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; animation:borderShift 6s linear infinite; pointer-events:none}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:12px; letter-spacing:.3px}
-    .checklist{list-style:none; padding:0; margin:12px 0 0}
-    .checklist li{padding-left:26px; position:relative; margin:10px 0}
-    .checklist li::before{content:"✓"; position:absolute; left:0; top:0; color:var(--accent); font-weight:900}
-
-    /* Footer */
-    footer{padding:60px 0 84px; border-top:1px solid var(--line)}
-    .small{font-size:13px; opacity:.76}
-
-    /* Reveal animations (respect reduced motion) */
-    .reveal{opacity:0; transform:translateY(16px); transition:.6s ease}
-    .reveal.show{opacity:1; transform:none}
-
-    /* Animations */
-    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    @keyframes shine{0%{transform:translate(-50%, -50%) rotate(25deg)}100%{transform:translate(220%, -50%) rotate(25deg)}}
-    @keyframes borderShift{0%{background-position:0 0}100%{background-position:300% 0}}
-    @media (prefers-reduced-motion: reduce){ .ticker .track, .cta::after{animation:none} .reveal{opacity:1; transform:none} }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
-  <header id="top">
-    <div class="wrap nav">
-      <a class="brand" href="#top" aria-label="S‑COIN home">
-        <img src="assets/blue background logo.png" alt="S‑COIN logo">
-        <span class="lockup">
-          <span class="title">C.O.I.N.S, LLC</span>
-          <small style="opacity:.7">Sports • Web3 • S‑COIN</small>
-        </span>
-      </a>
-      <div>
-        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navList">☰ Menu</button>
-        <button class="theme-toggle" id="themeBtn" title="Switch theme">🎨 Theme</button>
-      </div>
-      <nav>
-        <ul id="navList" aria-label="Primary">
-          <li><a href="#about">About</a></li>
-          <li><a href="#coins">S‑COINs</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#presale">Presale</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a class="cta" href="#links">Official Links</a></li>
-        </ul>
-      </nav>
-    </div>
+  <!-- Header / Nav -->
+  <header class="nav">
+    <a class="brand" href="#">
+      <img src="assets/images/logo.png" alt="S-COIN logo" />
+      <span>S-COIN Sports</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#presale" class="chip chip-warn">Presale</a>
+      <a href="#cta" class="btn btn-primary">Get Started</a>
+    </nav>
   </header>
 
-  <!-- Sports ticker -->
-  <div class="ticker">
-    <div class="wrap">
-      <div class="track" aria-hidden="true">
-        <div class="item">🏟️ <b>Presale</b> — $0.07 • 5,000,000 S‑COIN • Open until sold out</div>
-        <div class="item">🔒 We will <b>never</b> DM you first or ask you to send crypto</div>
-        <div class="item">📣 Follow updates on X — <a href="https://twitter.com/SCOINSPORTS" target="_blank" rel="noopener">@SCOINSPORTS</a></div>
-        <div class="item">🤝 Partners: <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a></div>
-        <div class="item">🏟️ <b>Presale</b> — $0.07 • 5,000,000 S‑COIN • Open until sold out</div>
-        <div class="item">🔒 We will <b>never</b> DM you first or ask you to send crypto</div>
-        <div class="item">📣 Follow updates on X — <a href="https://twitter.com/SCOINSPORTS" target="_blank" rel="noopener">@SCOINSPORTS</a></div>
-        <div class="item">🤝 Partners: <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a></div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
+    <div class="hero-content container">
+      <h1>Bragging Rights Just Got Tokenized.</h1>
+      <p class="lead">Make weekly picks. Climb the leaderboard. Earn S-COIN.</p>
+      <div class="cta-row" id="cta">
+        <a class="btn btn-primary" href="#features">Make Picks</a>
+        <a class="btn btn-ghost" href="#presale">View Presale</a>
+      </div>
+      <div class="trust">
+        <span class="dot"></span> Secure wallets • <span class="dot"></span> Transparent pools • <span class="dot"></span> Fair play
       </div>
     </div>
-  </div>
+  </section>
 
-  <main>
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="lights"></div>
-      <div class="wrap">
-        <span class="kicker reveal">S‑COIN Sports • Building Now</span>
-        <h1 class="reveal">Your Picks. Your Glory.</h1>
-        <p class="sub reveal">The app and Free Play are currently offline while we line up partners and engineering. <b>S‑COIN</b> launches after the presale completes. Follow updates here and on X.</p>
-        <div class="hero-actions reveal">
-          <span class="badge">🔒 We will <b>never</b> DM you first or ask you to send crypto.</span>
-          <a class="cta" href="presale.html">Presale is Live</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== ABOUT ===== -->
-    <section id="about">
-      <div class="wrap grid two">
-        <div class="card reveal">
-          <h2 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">About C.O.I.N.S</h2>
-          <p>We build a sports‑first Web3 experience: simple UI, fair play, and clean mechanics. No fluff — just clarity and momentum.</p>
-          <ul class="checklist">
-            <li>Fast picks and fair rules</li>
-            <li>Free Play returns post‑rebuild</li>
-            <li>VIP leagues & seasonal ladders planned</li>
-          </ul>
-        </div>
-        <div class="card reveal">
-          <h3 style="margin:0">At a Glance</h3>
-          <ul class="checklist">
-            <li>Leaderboard‑driven gameplay</li>
-            <li>Anti‑bot protections & device limits</li>
-            <li>Transparent burns & stats</li>
-            <li>Liquidity lock at token launch</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== THREE TOKENS ===== -->
-    <section id="coins">
-      <div class="wrap">
-        <h2 class="reveal" style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">The S‑COIN Family</h2>
-        <div class="grid three" style="margin-top:16px">
-          <article class="card reveal">
-            <span class="pill">S‑COIN (Main)</span>
-            <h3>The core token</h3>
-            <p><b>S‑COIN</b> powers perks, VIP arenas, and community votes across the ecosystem. Launches after the presale is complete.</p>
-          </article>
-          <article class="card reveal">
-            <span class="pill">S‑COIN‑FP (Free Play)</span>
-            <h3>Practice & compete</h3>
-            <p>No‑wallet practice token. <b>Temporarily offline</b> while we rebuild — returns with the app relaunch.</p>
-          </article>
-          <article class="card reveal">
-            <span class="pill">S‑COIN‑S (Stable)</span>
-            <h3>Stable accounting</h3>
-            <p>A stability‑oriented unit for <b>internal treasury accounting</b> and potential <b>payout rails</b>. We’ll share plain‑English details before activation.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== TOKENOMICS ===== -->
-    <section id="tokenomics">
-      <div class="wrap grid two">
-        <div>
-          <h2 class="reveal" style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">Tokenomics (Draft)</h2>
-          <p class="reveal">High‑level plan for <b>S‑COIN</b> distribution. Numbers may adjust during implementation.</p>
-          <div class="card reveal">
-            <ul class="checklist" style="margin-top:0">
-              <li><b>Presale</b>: 30% — initial distribution & liquidity</li>
-              <li><b>Treasury</b>: 25% — operations & runway (multisig)</li>
-              <li><b>Rewards</b>: 25% — season rewards + VIP perks</li>
-              <li><b>Team</b>: 10% — long‑term</li>
-              <li><b>Partnerships</b>: 5% — ecosystem growth</li>
-              <li><b>Reserve</b>: 5% — strategic needs</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card reveal">
-          <h3>Security & Controls</h3>
-          <ul class="checklist">
-            <li>Mint authority retained for controlled releases</li>
-            <li>Liquidity lock and public addresses at launch</li>
-            <li>Multisig treasury with public reporting</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PRESALE TEASER ===== -->
-    <section id="presale">
-      <div class="wrap grid two">
-        <div>
-          <h2 class="reveal" style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">Presale — <span style="color:var(--brand)">Live</span></h2>
-          <p class="reveal">One round. One price: <b>$0.07</b>. <b>5,000,000 tokens</b>. Open until sold out. The official address and live counters are on the Presale page.</p>
-          <div class="hero-actions reveal">
-            <a class="cta" href="presale.html">Open Presale Page</a>
-            <span class="badge">⏱️ Real‑time status there</span>
-          </div>
-        </div>
-        <div class="card reveal">
-          <h3>Play it safe</h3>
-          <ul class="checklist">
-            <li>Only trust links on this site or our verified X account</li>
-            <li>We will never DM you first</li>
-            <li>Always verify the address on the Presale page</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section id="faq">
-      <div class="wrap">
-        <h2 class="reveal" style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">FAQ</h2>
-        <div class="grid two" style="margin-top:12px">
-          <div class="card reveal"><h3>Is there a downloadable app yet?</h3><p><b>Not yet.</b> Development is in progress and Free Play is offline for now.</p></div>
-          <div class="card reveal"><h3>Which chain?</h3><p>We’re targeting a high‑performance L1 with low fees (e.g., Solana‑class). Final chain + contract links will be posted at launch.</p></div>
-          <div class="card reveal"><h3>What does “TGE” mean?</h3><p><b>Token Generation Event</b> — the moment tokens become claimable/transferable.</p></div>
-          <div class="card reveal"><h3>Smithii link?</h3><p><a href="https://smithii.io/en" target="_blank" rel="noopener">Visit Smithii (official)</a>.</p></div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="links">
-    <div class="wrap grid two">
-      <div>
-        <h3 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:32px; margin:0 0 6px">Official Links</h3>
-        <p class="small">We only post links here. Bookmark this page.</p>
-        <ul>
-          <li><a href="https://twitter.com/SCOINSPORTS" rel="noopener" target="_blank">X / Twitter: @SCOINSPORTS</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:32px; margin:0 0 6px">Legal</h3>
-        <p class="small">© <span id="y"></span> C.O.I.N.S, LLC • All rights reserved.</p>
-        <p class="small">Nothing on this site is financial advice. This site does not solicit investment. Availability may depend on jurisdiction.</p>
-      </div>
+  <!-- Feature grid -->
+  <section class="section container" id="features">
+    <h2 class="section-title">Why You’ll Love It</h2>
+    <div class="grid-3">
+      <article class="card">
+        <h3>Weekly Picks</h3>
+        <p>Moneyline, spreads, and totals with clean, mobile-first UI.</p>
+      </article>
+      <article class="card">
+        <h3>Token Rewards</h3>
+        <p>Earn S-COIN for correct picks and streaks. Redeem for perks.</p>
+      </article>
+      <article class="card">
+        <h3>Leaderboards</h3>
+        <p>Show off your record. Win badges. Flex on your rivals.</p>
+      </article>
     </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section section-alt" id="how">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <ol class="steps">
+        <li><strong>Create an account</strong> and verify your wallet.</li>
+        <li><strong>Make your picks</strong> each week before kickoff.</li>
+        <li><strong>Track results</strong> live and watch your rank climb.</li>
+        <li><strong>Claim rewards</strong> in S-COIN and keep the streak alive.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Presale / KPI strip -->
+  <section class="section container" id="presale">
+    <h2 class="section-title">Presale</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="kpi-top">1,000,000</div><div class="kpi-sub">Total Presale</div></div>
+      <div class="kpi"><div class="kpi-top">245,300</div><div class="kpi-sub">Sold</div></div>
+      <div class="kpi"><div class="kpi-top">754,700</div><div class="kpi-sub">Remaining</div></div>
+      <div class="kpi"><div class="kpi-top">$0.10</div><div class="kpi-sub">Per S-COIN</div></div>
+    </div>
+    <div class="presale-card">
+      <p>Secure your spot early. Funds help bootstrap liquidity and rewards.</p>
+      <a class="btn btn-primary" href="presale.html">Buy Presale</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-min">
+          <img src="assets/images/logo.png" alt="" />
+          <span>S-COIN Sports</span>
+        </div>
+        <p class="muted">In Utility We Trust.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <div class="sub">© <span id="y"></span> S-COIN Sports</div>
   </footer>
 
-  <script>
-    // Mobile menu
-    const menuBtn = document.getElementById('menuBtn');
-    menuBtn?.addEventListener('click', ()=>{
-      const open = document.body.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    // Theme cycler: blue → gold → neon
-    const themeBtn = document.getElementById('themeBtn');
-    const themes = ['blue','gold','neon'];
-    const htmlEl = document.documentElement;
-    const saved = localStorage.getItem('scoin-theme');
-    if(saved){ htmlEl.setAttribute('data-theme', saved); }
-    themeBtn.addEventListener('click', ()=>{
-      const cur = htmlEl.getAttribute('data-theme') || 'blue';
-      const idx = themes.indexOf(cur);
-      const next = themes[(idx+1)%themes.length];
-      htmlEl.setAttribute('data-theme', next);
-      localStorage.setItem('scoin-theme', next);
-      themeBtn.textContent = next === 'blue' ? '🎨 Theme' : `🎨 ${next}`;
-    });
-
-    // Parallax glow for stadium lights
-    const lights = document.querySelector('.lights');
-    if(lights){
-      window.addEventListener('scroll', ()=>{
-        const y = window.scrollY * 0.08; // slow parallax
-        lights.style.transform = `translate(-50%, ${y}px)`;
-      }, {passive:true});
-    }
-
-    // IntersectionObserver reveal
-    const io = 'IntersectionObserver' in window ? new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
-    }, {threshold: 0.12}) : null;
-    document.querySelectorAll('.reveal').forEach(el=> io?.observe(el));
-
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
