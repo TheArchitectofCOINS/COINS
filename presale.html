@@ -1,332 +1,256 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="blue">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
+  <title>S-COIN Sports — Presale</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>S‑COIN Presale — Open Until Sold Out</title>
-  <meta name="description" content="Official S‑COIN presale. Single round at $0.07. 5,000,000 tokens. Open until sold out. Addresses are only posted on this page." />
-  <!-- Social share -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="S‑COIN Presale — $0.07 • Open until sold out">
-  <meta property="og:description" content="Official S‑COIN presale. 5,000,000 tokens at $0.07.">
-  <meta property="og:image" content="assets/blue background logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="S‑COIN Presale — $0.07 • Open until sold out">
-  <meta name="twitter:description" content="Official S‑COIN presale. 5,000,000 tokens at $0.07.">
-  <meta name="twitter:image" content="assets/blue background logo.png">
-  <link rel="icon" href="assets/blue background logo.png">
-
+  <meta name="description" content="Join the S-COIN presale. Choose a tier and secure your spot." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    :root{ --bg:#070b11; --surface:#0f1622; --ink:#eaf2fb; --muted:#a6b2c2; --brand:#00b5e2; --brand-2:#1a5fff; --accent:#19c37d; --gold:#ffd166; --line:rgba(255,255,255,.1); --radius:20px; --shadow:0 14px 50px rgba(0,0,0,.55), 0 4px 14px rgba(0,0,0,.35); }
-    html[data-theme="gold"]{ --brand:#f7b500; --brand-2:#ff7a00; }
-    html[data-theme="neon"]{ --brand:#00ffd1; --brand-2:#00a3ff; }
-
-    *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:
-      radial-gradient(1100px 520px at 10% -10%, #0f2f49 0%, rgba(15,47,73,0) 60%),
-      radial-gradient(1200px 600px at 110% -20%, #0a2a4a 0%, rgba(10,42,74,0) 70%),
-      linear-gradient(180deg, #070b11, #090e15);
-      background-attachment:fixed; line-height:1.6}
-    a{color:var(--brand)}
-    .wrap{max-width:1100px; margin:0 auto; padding:0 20px}
-
-    header{position:sticky; top:0; z-index:40; background:linear-gradient(180deg, rgba(7,11,17,.85), rgba(7,11,17,.55)); border-bottom:1px solid var(--line); backdrop-filter:saturate(120%) blur(10px)}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
-    .brand{display:flex; align-items:center; gap:12px}
-    .brand img{height:40px; width:40px; border-radius:10px; background:#000; padding:2px; filter:drop-shadow(0 6px 18px rgba(0,181,226,.35))}
-    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
-    nav a{color:var(--ink); opacity:.9; font-weight:800}
-    .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .theme-toggle{padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink); font-weight:700; margin-left:10px}
-    <div class="kpis">
-  <!-- your existing KPIs -->
-  <div class="kpi-progress">
-    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
-      <span class="muted">Presale Progress</span>
-      <span id="progressLabel" class="muted">0%</span>
-    </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-  </div>
-</div>
-
-
-    /* Stadium hero */
-    .hero{position:relative; padding:88px 0 32px; overflow:hidden}
-    .hero::before{content:""; position:absolute; inset:12% -10% auto -10%; height:60vw; max-height:520px; background:url('assets/blue background logo.png') no-repeat center/contain; opacity:.05; filter:drop-shadow(0 6px 18px rgba(0,0,0,.6)); pointer-events:none}
-    .lights, .lights:after{position:absolute; content:""; inset:auto auto -140px 50%; width:2000px; height:900px; transform:translateX(-50%);
-      background:
-        radial-gradient(closest-side, rgba(255,255,255,.22), rgba(255,255,255,0) 70%) 0 0/140px 140px,
-        radial-gradient(closest-side, rgba(255,255,255,.16), rgba(255,255,255,0) 70%) 70px 70px/140px 140px;
-      opacity:.14; filter:blur(1px) drop-shadow(0 80px 70px rgba(0,0,0,.72)); pointer-events:none; mask:linear-gradient(#000, transparent 72%)}
-    .kicker{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.04); font-weight:900; color:var(--gold)}
-    h1{font-family:"Bebas Neue", system-ui, sans-serif; font-size:clamp(42px,7vw,78px); letter-spacing:.8px; line-height:1; margin:12px 0 10px}
-
-    section{padding:36px 0}
-    .grid{display:grid; gap:22px}
-    .two{grid-template-columns:2fr 1.1fr}
-    @media(max-width:980px){.two{grid-template-columns:1fr}}
-
-    /* Card + shimmer border */
-    .card{position:relative; background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); overflow:hidden}
-    .card::before{content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px; background:linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,0) 40%, rgba(255,255,255,.12)); -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude; animation:borderShift 6s linear infinite; pointer-events:none}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); font-size:12px; letter-spacing:.3px}
-    .stat{display:grid; grid-template-columns:1fr auto; gap:12px; padding:12px 0; border-bottom:1px dashed rgba(255,255,255,.1)}
-    .stat:last-child{border-bottom:none}
-    .note{font-size:13px; opacity:.75}
-
-    /* Odometer numbers */
-    .odometer{font-variant-numeric: tabular-nums; display:inline-block; perspective:400px}
-    .odometer span{display:inline-block; transform:translateZ(0); transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-
-    /* Confetti canvas */
-    #confetti{position:fixed; inset:0; pointer-events:none; z-index:9999}
-
-    footer{padding:52px 0 72px; border-top:1px solid var(--line)}
-    .small{font-size:13px; opacity:.74}
-
-    @keyframes borderShift{0%{background-position:0 0}100%{background-position:300% 0}}
-    @media (prefers-reduced-motion: reduce){ .odometer span{transition:none} }
+    /* Page-specific light utilities */
+    .split{display:grid; grid-template-columns:2fr 1.3fr; gap:18px}
+    .field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
+    .label{font-size:14px; color:var(--muted)}
+    .input, .select{
+      padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+      background:#0B1526; color:var(--text);
+    }
+    .tiers{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:10px}
+    .tier{padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0B1526; cursor:pointer; text-align:center}
+    .tier.active{outline:2px solid rgba(0,181,226,.7); background:rgba(0,181,226,.08)}
+    .summary{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .row{display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.08)}
+    .muted-small{color:var(--muted); font-size:12px}
+    .progress-card{padding:18px; background:linear-gradient(180deg,#101B2F,#0C1525); border:1px solid rgba(255,255,255,.08); border-radius:12px}
+    .progress-track{height:10px; background:rgba(255,255,255,.06); border-radius:10px; overflow:hidden}
+    .progress-fill{height:100%; background:linear-gradient(90deg,#12C6EC,#17E2A5); box-shadow:0 6px 20px rgba(0,181,226,.35); width:0%}
+    .help{font-size:13px; color:var(--muted)}
+    @media (max-width:980px){ .split{grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
-  <canvas id="confetti"></canvas>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="index.html"><img src="assets/blue background logo.png" alt="S‑COIN"><b>C.O.I.N.S, LLC</b></a>
-      <nav>
-        <ul>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#coins">S‑COINs</a></li>
-          <li><a href="index.html#tokenomics">Tokenomics</a></li>
-          <li><a class="cta" href="#">Presale</a></li>
-        </ul>
-      </nav>
-      <button class="theme-toggle" id="themeBtn">🎨 Theme</button>
-    </div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/s-coin-logo.png" alt="S-COIN logo">
+      <span>S-COIN Sports</span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#how">How It Works</a>
+      <a class="chip chip-warn" href="presale.html">Presale</a>
+      <a href="index.html#cta" class="btn btn-primary">Get Started</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="hero wrap">
-      <div class="lights"></div>
-      <span class="kicker">Presale • $0.07 • Open until sold out</span>
-      <h1>S‑COIN Presale</h1>
-      <p>One price. One round. <b>$0.07 per S‑COIN</b>. The presale stays open until all allocated tokens are sold. We will never DM you first or ask you to send funds anywhere except the address on this page.</p>
-      <div class="note">Safety first • Public tally before Token Generation Event (TGE)</div>
-    </section>
+  <!-- HERO (reuse stadium lights background from styles.css) -->
+  <section class="hero" style="min-height:46vh">
+    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
+    <div class="hero-content container" style="padding:56px 0">
+      <h1>Presale</h1>
+      <p class="lead">Join early. Support liquidity and rewards. Fixed price: <strong>$0.10</strong> per S-COIN.</p>
+    </div>
+  </section>
 
-    <section>
-      <div class="wrap grid two">
-        <!-- Left -->
-        <div class="card">
-          <h2 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">How to Participate</h2>
-          <ol>
-            <li>Prepare <b>USDC</b> on <b>Solana</b> (update if your chain differs).</li>
-            <li>When status is <b>Live</b>, copy the official presale address below.</li>
-            <li>Send USDC to that address. Our ledger records your allocation.</li>
-            <li>After sell‑out, you’ll <b>claim S‑COIN at the Token Generation Event (TGE)</b>.</li>
-          </ol>
-          <p class="note">Never trust addresses sent over DM. Verify here on this page.</p>
+  <!-- CONTENT -->
+  <main class="section container">
+    <div class="split">
+      <!-- LEFT: Purchase card -->
+      <article class="card" aria-labelledby="buyTitle">
+        <h2 id="buyTitle" style="margin-top:0">Buy S-COIN</h2>
 
-          <h3 style="margin-top:24px">Status</h3>
-          <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
-            <div class="card" style="padding:12px"><div class="pill">Price</div><div style="font-size:22px; font-weight:900" id="priceTag">$0.07</div></div>
-            <div class="card" style="padding:12px"><div class="pill">Sold</div><div style="font-size:28px; font-weight:900"><span class="odometer" id="sold"></span></div></div>
-            <div class="card" style="padding:12px"><div class="pill">Remaining</div><div style="font-size:28px; font-weight:900"><span class="odometer" id="remaining"></span></div></div>
+        <div class="field">
+          <div class="label">Choose a tier</div>
+          <div class="tiers" id="tiers">
+            <button class="tier" data-coins="50">50</button>
+            <button class="tier" data-coins="100">100</button>
+            <button class="tier" data-coins="250">250</button>
+            <button class="tier" data-coins="500">500</button>
+            <button class="tier" data-coins="1000">1,000</button>
+          </div>
+          <div class="help">Price is fixed at $0.10 per S-COIN during presale.</div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="customCoins">Or enter a custom amount (S-COIN)</label>
+          <input id="customCoins" class="input" type="number" min="1" step="1" placeholder="e.g., 150" />
+        </div>
+
+        <div class="summary">
+          <div class="row"><span>S-COIN</span><strong id="sumCoins">0</strong></div>
+          <div class="row"><span>Price</span><strong>$0.10</strong></div>
+          <div class="row"><span>Subtotal</span><strong id="sumUSD">$0.00</strong></div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="network">Network</label>
+          <select id="network" class="select">
+            <option value="solana" selected>Solana (recommended)</option>
+            <option value="base">Base</option>
+            <option value="avalanche">Avalanche</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Send to this address</div>
+          <!-- Replace with your presale receive wallet -->
+          <div class="presale-card" style="gap:10px; justify-content:space-between; align-items:center">
+            <code id="addr" style="font-size:14px; word-break:break-all">YourPublicPresaleAddressGoesHere</code>
+            <button id="copyAddr" class="btn">Copy</button>
+          </div>
+          <div class="help">After you send funds, submit your TX ID below to claim your allocation.</div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="txid">Transaction ID (TX Hash)</label>
+          <input id="txid" class="input" placeholder="Paste your TX ID to verify allocation" />
+        </div>
+
+        <div class="field">
+          <button id="placeOrder" class="btn btn-primary" style="width:100%">Reserve Allocation</button>
+          <div class="help">You’ll receive a confirmation on-chain after verification.</div>
+        </div>
+      </article>
+
+      <!-- RIGHT: Progress + KPIs -->
+      <aside>
+        <div class="progress-card" aria-labelledby="progTitle">
+          <h3 id="progTitle" style="margin-top:0">Presale Progress</h3>
+
+          <div class="kpis" style="margin-top:8px">
+            <div class="kpi"><div class="kpi-top" id="kTotal">1,000,000</div><div class="kpi-sub">Total Presale</div></div>
+            <div class="kpi"><div class="kpi-top" id="kSold">245,300</div><div class="kpi-sub">Sold</div></div>
+            <div class="kpi"><div class="kpi-top" id="kRemain">754,700</div><div class="kpi-sub">Remaining</div></div>
+            <div class="kpi"><div class="kpi-top">$0.10</div><div class="kpi-sub">Per S-COIN</div></div>
           </div>
 
-          <h3 style="margin-top:24px">Official Presale Address</h3>
-          <div id="addrBox" class="addr" style="display:flex; gap:10px; align-items:center; padding:12px; border-radius:12px; background:rgba(0,0,0,.35); border:1px dashed rgba(255,255,255,.2); font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
-            <span id="addrMask" class="masked" style="letter-spacing:1px; opacity:.8">Address locked until go‑time</span>
-            <button id="copyBtn" disabled>Copy</button>
-            <button id="explorerBtn" disabled>Open in Explorer</button>
+          <div class="row" style="border-bottom:0; padding-top:8px">
+            <span class="muted">Progress</span>
+            <strong id="pctLabel">0%</strong>
           </div>
-          <p class="note" id="addrNote">Status: <b id="liveStatus">Coming Soon</b>. We’ll enable the address and buttons when the presale goes live.</p>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="pctFill"></div>
+          </div>
+          <p class="help" style="margin-top:10px">Allocations are confirmed after on-chain verification.</p>
+        </div>
 
-          <h3 style="margin-top:24px">Safety</h3>
+        <div class="card" style="margin-top:18px">
+          <h3 style="margin-top:0">Notes</h3>
           <ul>
-            <li>Only use the address shown on this page. Bookmark it.</li>
-            <li>We will never DM you first or offer discounts.</li>
-            <li>Double‑check you are sending <b>USDC</b> on the correct chain.</li>
+            <li>Fixed price during presale: <strong>$0.10</strong> per S-COIN.</li>
+            <li>Funds help bootstrap liquidity and the rewards pool.</li>
+            <li>Please double-check the receive address before sending.</li>
           </ul>
         </div>
-
-        <!-- Right -->
-        <aside class="card">
-          <h3>Presale Details</h3>
-          <div class="stat"><span>Price</span><b id="dPrice">$0.07</b></div>
-          <div class="stat"><span>Allocation</span><b><span id="dCap">5,000,000</span> S‑COIN</b></div>
-          <div class="stat"><span>Chain</span><b id="dChain">Solana</b></div>
-          <div class="stat"><span>Currency</span><b id="dCurrency">USDC</b></div>
-          <div class="stat"><span>Per‑wallet limit</span><b id="dLimit">TBD</b></div>
-          <div class="stat"><span>Distribution</span><b>Claim at Token Generation Event (TGE)</b></div>
-          <p class="note" style="margin-top:12px">Partners/compliance: <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a>.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="card">
-          <h2 style="font-family:'Bebas Neue'; letter-spacing:.4px; font-size:40px; margin:0 0 6px">Live Ledger (Public)</h2>
-          <p class="note">Wire these to your contract or a small JSON file later. Placeholders for now.</p>
-          <div class="grid" style="grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px">
-            <div class="card" style="padding:12px"><div class="pill">Latest Tx</div><div id="lastTx" style="overflow-wrap:anywhere">—</div></div>
-            <div class="card" style="padding:12px"><div class="pill">Cumulative USDC</div><div style="font-size:28px; font-weight:900"><span class="odometer" id="cumUsdc"></span></div></div>
-            <div class="card" style="padding:12px"><div class="pill">Buyers</div><div style="font-size:28px; font-weight:900"><span class="odometer" id="buyers"></span></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </aside>
+    </div>
   </main>
 
-  <footer>
-    <div class="wrap" style="text-align:center">
-      <p><a href="index.html">Home</a> • <a href="https://twitter.com/SCOINSPORTS" target="_blank" rel="noopener">@SCOINSPORTS</a> • <a href="https://smithii.io/en" target="_blank" rel="noopener">Smithii</a></p>
-      <p class="small">© <span id="year"></span> C.O.I.N.S, LLC • All rights reserved.</p>
-      <p class="small">No guarantees or ROI promises. Availability may depend on jurisdiction.</p>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-min">
+          <img src="assets/s-coin-logo.png" alt="">
+          <span>S-COIN Sports</span>
+        </div>
+        <p class="muted">In Utility We Trust.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="S-COIN.html">Whitepaper</a>
+        <a href="scoin.html">About</a>
+        <a href="#">Contact</a>
+      </nav>
     </div>
+    <div class="sub">© <span id="y"></span> S-COIN Sports</div>
   </footer>
 
   <script>
-    // ======= CONFIG — EDIT THESE =======
-    const CONFIG = {
-      live: false,                       // flip to true when presale goes live
-      priceUsd: 0.07,
-      cap: 5_000_000,                   // total S-COIN available in presale
-      chain: 'Solana',
-      currency: 'USDC',
-      perWalletLimit: 'TBD',            // e.g., '10,000 S-COIN max'
-      address: 'YOUR_PRESALE_ADDRESS_HERE',
-      explorer: 'https://solscan.io/account/YOUR_PRESALE_ADDRESS_HERE',
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-      // placeholders — replace via program/API/json later
-      sold: 0,
-      lastTx: '',
-      cumulativeUsdc: 0,
-      buyers: 0
-    };
-    // ===== END CONFIG =====
-
-    const $ = (s)=>document.querySelector(s);
-    const fmt = (n)=> n.toLocaleString(undefined);
-
-    // Static fields
-    $('#dPrice').textContent = `$${CONFIG.priceUsd.toFixed(2)}`;
-    $('#priceTag').textContent = `$${CONFIG.priceUsd.toFixed(2)}`;
-    $('#dCap').textContent = fmt(CONFIG.cap);
-    $('#dChain').textContent = CONFIG.chain;
-    $('#dCurrency').textContent = CONFIG.currency;
-    $('#dLimit').textContent = CONFIG.perWalletLimit;
-    $('#year').textContent = new Date().getFullYear();
-
-    // Odometer helper: smooth digit updates
-    function setOdometer(el, value){
-      const str = (value ?? 0).toLocaleString();
-      // build spans per char for animation
-      el.innerHTML = '';
-      for(const ch of str){
-        const span = document.createElement('span');
-        span.textContent = ch;
-        el.appendChild(span);
-      }
-      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        [...el.children].forEach((sp,i)=>{
-          sp.style.transform = 'translateY(20px)';
-          sp.style.opacity = '0.001';
-          requestAnimationFrame(()=>{
-            setTimeout(()=>{ sp.style.transform='translateY(0)'; sp.style.opacity='1'; }, i*20);
-          });
-        });
-      }
-    }
-
-    function refresh(){
-      setOdometer($('#sold'), CONFIG.sold);
-      const remaining = Math.max(CONFIG.cap - CONFIG.sold, 0);
-      setOdometer($('#remaining'), remaining);
-      $('#lastTx').textContent = CONFIG.lastTx || '—';
-      setOdometer($('#cumUsdc'), CONFIG.cumulativeUsdc ? `$${fmt(CONFIG.cumulativeUsdc)}` : '—');
-      setOdometer($('#buyers'), CONFIG.buyers || 0);
-    }
-    refresh();
-
-    const copyBtn = $('#copyBtn');
-    const explorerBtn = $('#explorerBtn');
-    const liveStatus = $('#liveStatus');
-    const mask = $('#addrMask');
-
-    function setLive(live){
-      if(live){
-        mask.textContent = CONFIG.address;
-        copyBtn.disabled = false; explorerBtn.disabled = false;
-        liveStatus.textContent = 'Live';
-        copyBtn.onclick = ()=>{ navigator.clipboard.writeText(CONFIG.address); copyBtn.textContent='Copied!'; burstConfetti(); setTimeout(()=>copyBtn.textContent='Copy', 1200); };
-        explorerBtn.onclick = ()=>{ window.open(CONFIG.explorer, '_blank'); };
-        document.getElementById('addrBox').style.border = '1px solid rgba(0,181,226,.45)';
-      } else {
-        mask.textContent = 'Address locked until go‑time';
-        copyBtn.disabled = true; explorerBtn.disabled = true;
-        liveStatus.textContent = 'Coming Soon';
-      }
-    }
-    setLive(CONFIG.live);
-
-    // Theme cycler to match index
-    const themes = ['blue','gold','neon'];
-    const htmlEl = document.documentElement;
-    const saved = localStorage.getItem('scoin-theme');
-    if(saved){ htmlEl.setAttribute('data-theme', saved); document.getElementById('themeBtn').textContent = saved==='blue'?'🎨 Theme':`🎨 ${saved}`; }
-    document.getElementById('themeBtn').addEventListener('click', ()=>{
-      const cur = htmlEl.getAttribute('data-theme') || 'blue';
-      const idx = themes.indexOf(cur);
-      const next = themes[(idx+1)%themes.length];
-      htmlEl.setAttribute('data-theme', next);
-      localStorage.setItem('scoin-theme', next);
-      document.getElementById('themeBtn').textContent = next==='blue'?'🎨 Theme':`🎨 ${next}`;
+    // Mobile nav
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle?.addEventListener('click', () => {
+      links.style.display = (links.style.display === 'flex') ? 'none' : 'flex';
     });
 
-    // Parallax glow for stadium lights
-    const lights = document.querySelector('.lights');
-    if(lights){
-      window.addEventListener('scroll', ()=>{
-        const y = window.scrollY * 0.08; // slow parallax
-        lights.style.transform = `translate(-50%, ${y}px)`;
-      }, {passive:true});
-    }
+    // -------- Presale logic (front-end only) --------
+    const PRICE = 0.10;         // $ per S-COIN
+    const TOTAL = 1000000;      // total presale supply (update if you change it)
+    const SOLD  = 245300;       // update from your backend when wired
 
-    // Simple confetti burst (emoji) for copy success
-    function burstConfetti(){
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const cvs = document.getElementById('confetti');
-      const ctx = cvs.getContext('2d');
-      const W = cvs.width = window.innerWidth; const H = cvs.height = window.innerHeight;
-      const pieces = Array.from({length: 80}, ()=>({
-        x: Math.random()*W,
-        y: -20 - Math.random()*40,
-        r: 6+Math.random()*10,
-        vx: -1+Math.random()*2,
-        vy: 2+Math.random()*3,
-        a: Math.random()*Math.PI*2,
-        color: ['#fff','#eee','#ddd'][Math.floor(Math.random()*3)]
-      }));
-      let t = 0; const maxT = 900; // ~0.9s
-      function step(){
-        ctx.clearRect(0,0,W,H);
-        for(const p of pieces){
-          p.x += p.vx; p.y += p.vy; p.a += 0.1;
-          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.a);
-          ctx.fillStyle = p.color; ctx.fillRect(-p.r*0.6,-p.r*0.2,p.r, p.r*0.4);
-          ctx.restore();
-        }
-        if((t+=16) < maxT) requestAnimationFrame(step); else ctx.clearRect(0,0,W,H);
-      }
-      step();
+    // Progress UI
+    const kTotal = document.getElementById('kTotal');
+    const kSold  = document.getElementById('kSold');
+    const kRemain= document.getElementById('kRemain');
+    const pctLabel = document.getElementById('pctLabel');
+    const pctFill  = document.getElementById('pctFill');
+
+    function format(n){ return Number(n).toLocaleString(); }
+    function updateProgress(){
+      const remaining = Math.max(0, TOTAL - SOLD);
+      kTotal.textContent = format(TOTAL);
+      kSold.textContent  = format(SOLD);
+      kRemain.textContent= format(remaining);
+      const pct = Math.min(100, Math.round((SOLD / TOTAL) * 100));
+      pctLabel.textContent = pct + '%';
+      pctFill.style.width = pct + '%';
     }
+    updateProgress();
+
+    // Tier + custom calculator
+    const tiersEl = document.getElementById('tiers');
+    const custom  = document.getElementById('customCoins');
+    const sumCoins= document.getElementById('sumCoins');
+    const sumUSD  = document.getElementById('sumUSD');
+    let selectedCoins = 0;
+
+    function setCoins(n){
+      selectedCoins = Math.max(0, Math.floor(n || 0));
+      sumCoins.textContent = format(selectedCoins);
+      sumUSD.textContent   = '$' + (selectedCoins * PRICE).toFixed(2);
+    }
+    setCoins(0);
+
+    tiersEl.querySelectorAll('.tier').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        tiersEl.querySelectorAll('.tier').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        custom.value = '';
+        setCoins(Number(btn.dataset.coins));
+      });
+    });
+
+    custom.addEventListener('input', ()=>{
+      tiersEl.querySelectorAll('.tier').forEach(b=>b.classList.remove('active'));
+      setCoins(custom.value);
+    });
+
+    // Copy address
+    document.getElementById('copyAddr').addEventListener('click', async ()=>{
+      const addr = document.getElementById('addr').textContent.trim();
+      try { await navigator.clipboard.writeText(addr); alert('Address copied'); }
+      catch(e){ alert('Copy failed—select and copy manually.'); }
+    });
+
+    // Reserve (placeholder)
+    document.getElementById('placeOrder').addEventListener('click', ()=>{
+      const coins = selectedCoins;
+      const usd = (coins * PRICE).toFixed(2);
+      const net = document.getElementById('network').value;
+      const tx  = document.getElementById('txid').value.trim();
+      if(!coins){ alert('Pick a tier or enter a custom amount.'); return; }
+      if(!tx){ alert('Paste your transaction ID after sending funds.'); return; }
+      alert(`Submitted:\n${format(coins)} S-COIN ($${usd}) on ${net}\nTX: ${tx}\nWe’ll verify and confirm your allocation shortly.`);
+      // TODO: replace with your backend endpoint for verification & email/discord webhook
+    });
   </script>
 </body>
 </html>
