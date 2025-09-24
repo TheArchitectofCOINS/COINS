@@ -41,6 +41,19 @@
     nav a{color:var(--ink); opacity:.9; font-weight:800}
     .cta{padding:10px 16px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:#001019; font-weight:900; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.4)}
     .theme-toggle{padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.04); color:var(--ink); font-weight:700; margin-left:10px}
+    <div class="kpis">
+  <!-- your existing KPIs -->
+  <div class="kpi-progress">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+      <span class="muted">Presale Progress</span>
+      <span id="progressLabel" class="muted">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+
 
     /* Stadium hero */
     .hero{position:relative; padding:88px 0 32px; overflow:hidden}
