@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>S-COIN Sports — Make Your Picks</title>
+  <title>S-COIN Sports — Bragging Rights Just Got Tokenized</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="S-COIN Sports: weekly picks, rewards, and bragging rights." />
+  <meta name="description" content="Make weekly picks, climb the leaderboard, and earn S-COIN." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Header / Nav -->
+
+  <!-- NAV -->
   <header class="nav">
-    <a class="brand" href="#">
-      <img src="assets/images/logo.png" alt="S-COIN logo" />
+    <a class="brand" href="/">
+      <img src="assets/s-coin-logo.png" alt="S-COIN logo">
       <span>S-COIN Sports</span>
     </a>
+
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="#features">Features</a>
       <a href="#how">How It Works</a>
       <a href="#presale" class="chip chip-warn">Presale</a>
@@ -26,29 +28,31 @@
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero" id="home">
     <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
     <div class="hero-content container">
       <h1>Bragging Rights Just Got Tokenized.</h1>
       <p class="lead">Make weekly picks. Climb the leaderboard. Earn S-COIN.</p>
+
       <div class="cta-row" id="cta">
         <a class="btn btn-primary" href="#features">Make Picks</a>
-        <a class="btn btn-ghost" href="#presale">View Presale</a>
+        <a class="btn btn-ghost" href="presale.html">View Presale</a>
       </div>
-      <div class="trust">
+
+      <div class="trust" aria-label="Trust badges">
         <span class="dot"></span> Secure wallets • <span class="dot"></span> Transparent pools • <span class="dot"></span> Fair play
       </div>
     </div>
   </section>
 
-  <!-- Feature grid -->
+  <!-- FEATURES -->
   <section class="section container" id="features">
     <h2 class="section-title">Why You’ll Love It</h2>
     <div class="grid-3">
       <article class="card">
         <h3>Weekly Picks</h3>
-        <p>Moneyline, spreads, and totals with clean, mobile-first UI.</p>
+        <p>Moneyline, spreads, and totals with a clean, mobile-first UI.</p>
       </article>
       <article class="card">
         <h3>Token Rewards</h3>
@@ -61,7 +65,7 @@
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- HOW IT WORKS -->
   <section class="section section-alt" id="how">
     <div class="container">
       <h2 class="section-title">How It Works</h2>
@@ -74,40 +78,76 @@
     </div>
   </section>
 
-  <!-- Presale / KPI strip -->
+  <!-- PRESALE -->
   <section class="section container" id="presale">
     <h2 class="section-title">Presale</h2>
+
     <div class="kpis">
-      <div class="kpi"><div class="kpi-top">1,000,000</div><div class="kpi-sub">Total Presale</div></div>
-      <div class="kpi"><div class="kpi-top">245,300</div><div class="kpi-sub">Sold</div></div>
-      <div class="kpi"><div class="kpi-top">754,700</div><div class="kpi-sub">Remaining</div></div>
-      <div class="kpi"><div class="kpi-top">$0.10</div><div class="kpi-sub">Per S-COIN</div></div>
+      <div class="kpi">
+        <div class="kpi-top" id="kpi-total">1,000,000</div>
+        <div class="kpi-sub">Total Presale</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top" id="kpi-sold">245,300</div>
+        <div class="kpi-sub">Sold</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top" id="kpi-remaining">754,700</div>
+        <div class="kpi-sub">Remaining</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top">$0.10</div>
+        <div class="kpi-sub">Per S-COIN</div>
+      </div>
     </div>
+
     <div class="presale-card">
       <p>Secure your spot early. Funds help bootstrap liquidity and rewards.</p>
       <a class="btn btn-primary" href="presale.html">Buy Presale</a>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
         <div class="brand-min">
-          <img src="assets/images/logo.png" alt="" />
+          <img src="assets/s-coin-logo.png" alt="">
           <span>S-COIN Sports</span>
         </div>
         <p class="muted">In Utility We Trust.</p>
       </div>
-      <nav class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="S-COIN.html">Whitepaper</a>
+        <a href="scoin.html">About</a>
         <a href="#">Contact</a>
       </nav>
     </div>
     <div class="sub">© <span id="y"></span> S-COIN Sports</div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Minimal JS (no framework) -->
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Mobile nav
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+    toggle?.addEventListener('click', () => {
+      const open = links.style.display === 'flex';
+      links.style.display = open ? 'none' : 'flex';
+    });
+
+    // (Optional) Update Remaining automatically from Total/Sold numbers in DOM
+    const parseNum = (el) => Number(String(el.textContent).replace(/[^0-9.]/g,''));
+    const total = parseNum(document.getElementById('kpi-total'));
+    const sold  = parseNum(document.getElementById('kpi-sold'));
+    const remEl = document.getElementById('kpi-remaining');
+    if (!isNaN(total) && !isNaN(sold) && remEl) {
+      const remaining = Math.max(0, total - sold);
+      remEl.textContent = remaining.toLocaleString();
+    }
+  </script>
 </body>
 </html>
