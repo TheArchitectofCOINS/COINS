@@ -10,10 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Page-specific utilities */
-    .subnav{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:12px}
-    .pill{padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:#0B1526; cursor:pointer; font-size:14px}
-    .pill.active{outline:2px solid rgba(0,181,226,.6); background:rgba(0,181,226,.08)}
     .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
     .shot{position:relative; overflow:hidden; border-radius:14px; border:1px solid rgba(255,255,255,.08); background:#0B1526}
     .shot img{width:100%; height:auto; display:block; transition:transform .25s ease}
@@ -21,8 +17,6 @@
     .shot .cap{position:absolute; left:10px; bottom:10px; padding:4px 8px; font-size:12px; color:var(--muted); background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.1); border-radius:8px; backdrop-filter:blur(6px)}
     @media (max-width:980px){ .gallery{grid-template-columns:1fr 1fr} }
     @media (max-width:560px){ .gallery{grid-template-columns:1fr} }
-
-    /* Lightbox */
     .lightbox{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.75); backdrop-filter: blur(6px); z-index:50}
     .lightbox.open{display:grid}
     .lightbox img{max-width:92vw; max-height:86vh; border-radius:14px; border:1px solid rgba(255,255,255,.15); box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -38,10 +32,9 @@
       <img src="assets/s-coin-logo.png" alt="S-COIN logo">
       <span>S-COIN Sports</span>
     </a>
-
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <nav class="nav-links" aria-label="Primary">
-      <a href="index.html#predev" class="chip">Pre-Development</a>
+      <a href="predev.html" class="chip">Pre-Development</a>
       <a href="index.html#how">How It Works</a>
       <a href="presale.html" class="chip chip-warn">Presale</a>
     </nav>
@@ -53,46 +46,19 @@
     <div class="hero-content container" style="padding:56px 0">
       <h1>Pre-Development</h1>
       <p class="lead">A look at what we’re building — early flows, screens, and WIP designs.</p>
-
-      <!-- Optional quick filters -->
-      <div class="subnav" id="filters" role="tablist" aria-label="Filter screenshots">
-        <button class="pill active" data-tag="all">All</button>
-        <button class="pill" data-tag="homepage">Homepage</button>
-        <button class="pill" data-tag="picks">Make Picks</button>
-        <button class="pill" data-tag="auth">Auth/Onboarding</button>
-        <button class="pill" data-tag="presale">Presale</button>
-      </div>
     </div>
   </section>
 
   <!-- GALLERY -->
   <main class="section container">
     <div class="gallery" id="gallery">
-      <!-- Replace src/href + data-tag values with your real images and categories -->
-      <a class="shot" href="assets/predev/screen-1.jpg" data-tag="homepage">
-        <img src="assets/predev/screen-1.jpg" alt="Homepage mock 1" loading="lazy">
-        <span class="cap">Homepage — hero layout</span>
-      </a>
-      <a class="shot" href="assets/predev/screen-2.jpg" data-tag="picks">
-        <img src="assets/predev/screen-2.jpg" alt="Make Picks card grid" loading="lazy">
-        <span class="cap">Make Picks — game cards</span>
-      </a>
-      <a class="shot" href="assets/predev/screen-3.jpg" data-tag="auth">
-        <img src="assets/predev/screen-3.jpg" alt="Auth flow UI" loading="lazy">
-        <span class="cap">Auth — sign in/up</span>
-      </a>
-      <a class="shot" href="assets/predev/screen-4.jpg" data-tag="presale">
-        <img src="assets/predev/screen-4.jpg" alt="Presale checkout mock" loading="lazy">
-        <span class="cap">Presale — checkout</span>
-      </a>
-      <a class="shot" href="assets/predev/screen-5.jpg" data-tag="picks">
-        <img src="assets/predev/screen-5.jpg" alt="Picks slip and lines" loading="lazy">
-        <span class="cap">Make Picks — slip</span>
-      </a>
-      <a class="shot" href="assets/predev/screen-6.jpg" data-tag="homepage">
-        <img src="assets/predev/screen-6.jpg" alt="Homepage sections" loading="lazy">
-        <span class="cap">Homepage — sections</span>
-      </a>
+      <a class="shot" href="assets/1.PNG"><img src="assets/1.PNG" alt="Screenshot 1"><span class="cap">Screenshot 1</span></a>
+      <a class="shot" href="assets/2.PNG"><img src="assets/2.PNG" alt="Screenshot 2"><span class="cap">Screenshot 2</span></a>
+      <a class="shot" href="assets/3.PNG"><img src="assets/3.PNG" alt="Screenshot 3"><span class="cap">Screenshot 3</span></a>
+      <a class="shot" href="assets/4.PNG"><img src="assets/4.PNG" alt="Screenshot 4"><span class="cap">Screenshot 4</span></a>
+      <a class="shot" href="assets/5.PNG"><img src="assets/5.PNG" alt="Screenshot 5"><span class="cap">Screenshot 5</span></a>
+      <a class="shot" href="assets/6.PNG"><img src="assets/6.PNG" alt="Screenshot 6"><span class="cap">Screenshot 6</span></a>
+      <a class="shot" href="assets/7.PNG"><img src="assets/7.PNG" alt="Screenshot 7"><span class="cap">Screenshot 7</span></a>
     </div>
   </main>
 
@@ -134,50 +100,29 @@
       links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
     });
 
-    // Filter logic
-    const pills = document.querySelectorAll('.pill');
-    const shots = document.querySelectorAll('.shot');
-    pills.forEach(p=>{
-      p.addEventListener('click', ()=>{
-        pills.forEach(x=>x.classList.remove('active'));
-        p.classList.add('active');
-        const tag = p.dataset.tag;
-        shots.forEach(s=>{
-          const show = (tag === 'all') || s.dataset.tag === tag;
-          s.style.display = show ? '' : 'none';
-        });
-      });
-    });
-
-    // Lightbox logic
-    const lb   = document.getElementById('lightbox');
-    const lbImg= document.getElementById('lbImg');
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
     const lbMeta= document.getElementById('lbMeta');
     const lbClose= document.getElementById('lbClose');
-
     document.getElementById('gallery').addEventListener('click', (e)=>{
       const a = e.target.closest('a.shot');
       if(!a) return;
       e.preventDefault();
       lbImg.src = a.getAttribute('href');
-      lbImg.alt = a.querySelector('img')?.alt || '';
-      lbMeta.textContent = a.querySelector('.cap')?.textContent || '';
+      lbImg.alt = a.querySelector('img').alt;
+      lbMeta.textContent = a.querySelector('.cap').textContent;
       lb.classList.add('open');
-      lb.setAttribute('aria-hidden', 'false');
+      lb.setAttribute('aria-hidden','false');
     });
-
     function closeLB(){
       lb.classList.remove('open');
-      lb.setAttribute('aria-hidden', 'true');
-      lbImg.src = '';
+      lb.setAttribute('aria-hidden','true');
+      lbImg.src='';
     }
     lbClose.addEventListener('click', closeLB);
-    lb.addEventListener('click', (e)=> {
-      if(e.target === lb) closeLB();
-    });
-    document.addEventListener('keydown', (e)=> {
-      if(e.key === 'Escape' && lb.classList.contains('open')) closeLB();
-    });
+    lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLB(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && lb.classList.contains('open')) closeLB(); });
   </script>
 </body>
 </html>
