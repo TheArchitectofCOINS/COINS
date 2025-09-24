@@ -1,50 +1,170 @@
-.hero{
-  position:relative; min-height:72vh; display:grid; place-items:center; text-align:center; overflow:hidden;
+:root {
+  --primary:#00B5E2;
+  --ink:#0B1220;
+  --surface:#0F1A2B;
+  --text:#F5F7FB;
+  --muted:#A9B1C6;
+  --ok:#17E2A5;
+  --warn:#FFCC00;
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --container:1120px;
 }
 
-/* Stadium lights background with responsive sources + cinematic layers */
-.hero-bg{
+* { box-sizing:border-box; }
+html, body { height:100%; }
+body {
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:#070B12;
+}
+a { color:inherit; text-decoration:none; }
+img { max-width:100%; height:auto; display:block; }
+.container { max-width:var(--container); margin:0 auto; padding:0 20px; }
+
+/* ---------------- NAV ---------------- */
+.nav {
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px;
+  background:rgba(7,11,18,.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.brand { display:flex; align-items:center; gap:10px; font-weight:800; }
+.brand img { width:32px; height:32px; border-radius:8px; }
+.nav-links { display:flex; gap:16px; align-items:center; }
+.nav-toggle { display:none; font-size:22px; background:none; border:0; color:var(--text); }
+.chip { padding:6px 10px; border-radius:20px; background:#131C2B; border:1px solid rgba(255,255,255,.08); }
+.chip-warn { border-color:rgba(255,204,0,.35); }
+
+/* ---------------- BUTTONS ---------------- */
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px; padding:12px 18px;
+  border-radius:10px; border:1px solid rgba(255,255,255,.1);
+  transition:.2s; font-weight:600;
+}
+.btn-primary {
+  background:linear-gradient(180deg, var(--primary), #0aa0c2);
+  box-shadow:var(--shadow);
+  color:#08121A;
+}
+.btn-ghost { background:transparent; }
+.btn:hover { transform:translateY(-1px); opacity:.95; }
+
+/* ---------------- HERO ---------------- */
+.hero {
+  position:relative;
+  min-height:72vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+}
+.hero-bg {
   position:absolute; inset:0;
-  /* Fallback */
   background:
     radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%),
     linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%),
-    url('assets/images/stadium-lights-1280.webp') center/cover no-repeat;
+    url('assets/stadium-lights.png') center/cover no-repeat;
   filter:saturate(1.1) contrast(1.05);
 }
-
-/* Use higher-res images on wider screens */
-@media (min-width: 800px){
-  .hero-bg{ background-image:
-    radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%),
-    linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%),
-    url('assets/images/stadium-lights-1920.webp');
-  }
-}
-@media (min-width: 1200px){
-  .hero-bg{ background-image:
-    radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%),
-    linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%),
-    url('assets/images/stadium-lights-2560.webp');
-  }
-}
-
-/* Subtle animated glow sweep (looks premium) */
 @keyframes sweep {
-  0% { transform:translateX(-30%) translateY(-10%) rotate(8deg) }
-  50%{ transform:translateX(30%) translateY(5%) rotate(-4deg) }
-  100%{ transform:translateX(-30%) translateY(-10%) rotate(8deg) }
+  0%   { transform:translateX(-30%) translateY(-10%) rotate(8deg) }
+  50%  { transform:translateX(30%) translateY(5%) rotate(-4deg) }
+  100% { transform:translateX(-30%) translateY(-10%) rotate(8deg) }
 }
-.hero-bg::after{
+.hero-bg::after {
   content:""; position:absolute; inset:-12%;
   background: radial-gradient(30% 60% at 50% 10%, rgba(255,255,255,.12), transparent 60%);
-  mix-blend-mode: screen; filter: blur(30px);
+  mix-blend-mode: screen;
+  filter: blur(30px);
   animation: sweep 18s ease-in-out infinite;
   pointer-events:none;
 }
-
-/* Keep your existing hero text styling; this just makes type pop on dark bg */
-.hero h1{
+.hero-content { position:relative; padding:80px 0; }
+.hero h1 {
+  font-size:clamp(32px,5vw,56px);
+  line-height:1.05;
+  margin:0 0 12px;
   letter-spacing:-0.02em;
-  text-shadow: 0 10px 30px rgba(0,181,226,.25), 0 2px 8px rgba(0,0,0,.6);
+  text-shadow:0 10px 30px rgba(0,181,226,.25), 0 2px 8px rgba(0,0,0,.6);
+}
+.lead {
+  font-size:clamp(16px,2.2vw,20px);
+  color:var(--muted);
+  margin:0 0 22px;
+}
+.cta-row { display:flex; gap:12px; justify-content:center; }
+.trust { margin-top:20px; color:var(--muted); font-size:14px; }
+.dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--ok); margin:0 8px; }
+
+/* ---------------- SECTIONS ---------------- */
+.section { padding:64px 0; }
+.section-alt { background:linear-gradient(180deg, #0A1424, #0B1220); }
+.section-title { text-align:center; font-size:28px; margin:0 0 28px; }
+
+/* ---------------- CARDS ---------------- */
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.card {
+  background:linear-gradient(180deg, #101B2F, #0C1525);
+  border:1px solid rgba(255,255,255,.06);
+  padding:20px; border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.card h3 { margin:0 0 6px; }
+
+/* ---------------- STEPS ---------------- */
+.steps { max-width:720px; margin:0 auto; padding:0 20px; counter-reset:step; }
+.steps li {
+  list-style:none; margin:14px 0; padding:14px 14px 14px 44px;
+  position:relative; background:#0B1526;
+  border:1px solid rgba(255,255,255,.06); border-radius:12px;
+}
+.steps li::before {
+  counter-increment:step; content:counter(step);
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:24px; height:24px; border-radius:50%;
+  display:grid; place-items:center;
+  background:var(--primary); color:#08212B; font-weight:800;
+}
+
+/* ---------------- KPIs ---------------- */
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:16px; }
+.kpi {
+  background:#0B1526;
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  padding:16px; text-align:center;
+}
+.kpi-top { font-size:22px; font-weight:800; }
+.kpi-sub { font-size:12px; color:var(--muted); }
+.presale-card {
+  display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center;
+  padding:18px;
+  background:linear-gradient(180deg,#101B2F,#0C1525);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer { margin-top:64px; background:#0A1424; border-top:1px solid rgba(255,255,255,.06); }
+.footer-grid { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; padding:24px 0; }
+.brand-min { display:flex; align-items:center; gap:10px; font-weight:800; }
+.brand-min img { width:28px; height:28px; border-radius:8px; }
+.footer-links { display:flex; gap:16px; }
+.sub { padding:14px 0 26px; text-align:center; color:var(--muted); font-size:13px; }
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:900px){
+  .grid-3 { grid-template-columns:1fr 1fr; }
+  .kpis { grid-template-columns:1fr 1fr; }
+  .nav-links { display:none; }
+  .nav-toggle { display:block; }
+}
+@media (max-width:560px){
+  .grid-3 { grid-template-columns:1fr; }
+  .cta-row { flex-direction:column; }
 }
