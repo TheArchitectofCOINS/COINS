@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Page-specific utilities */
     .stages{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
     .stage{background:linear-gradient(180deg,#101B2F,#0C1525); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:16px}
     .stage h3{margin:2px 0 6px}
@@ -49,17 +48,15 @@
       <p class="lead">Three rounds. Fixed supply caps. Price steps up each stage. Buy safely on Smithii.</p>
       <div class="cta-row">
         <a id="buyBtnTop" class="btn btn-primary" href="#" target="_blank" rel="noopener">Buy on Smithii</a>
-        <a class="btn btn-ghost" href="#details">See Details</a>
       </div>
     </div>
   </section>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="section container" id="details">
     <div class="grid-2">
-      <!-- Left: Stages + Progress -->
+      <!-- Left: Status + Stages -->
       <div>
-        <!-- Current status -->
         <div class="progress-card" style="margin-bottom:16px">
           <h2 style="margin:0 0 8px">Current Status</h2>
           <div class="kpis" style="margin:8px 0 12px">
@@ -102,13 +99,13 @@
           </article>
           <article class="stage" id="s2">
             <h3>Stage 2</h3>
-            <div class="price">$0.08</div>
+            <div class="price">TBD</div>
             <div class="cap">Cap: 2,000,000 S-COIN (cumulative 3,000,000)</div>
-            <p class="note" style="margin-top:8px">Continues momentum with a fair step-up.</p>
+            <p class="note" style="margin-top:8px">Opens after Stage 1 sells out.</p>
           </article>
           <article class="stage" id="s3">
             <h3>Stage 3</h3>
-            <div class="price">$0.10</div>
+            <div class="price">TBD</div>
             <div class="cap">Cap: 2,000,000 S-COIN (cumulative 5,000,000)</div>
             <p class="note" style="margin-top:8px">Final round before listing/liquidity.</p>
           </article>
@@ -120,7 +117,7 @@
         </div>
       </div>
 
-      <!-- Right: Notes / FAQ -->
+      <!-- Right: FAQ -->
       <aside>
         <div class="card">
           <h3 style="margin-top:0">How to Buy</h3>
@@ -130,39 +127,28 @@
             <li>We sync Smithii orders to our database for live totals.</li>
             <li>After presale, you receive your S-COIN airdrop to the wallet you used to buy.</li>
           </ol>
-          <p class="note">Already purchased? You’re all set—no form needed here. We pull Smithii sales into our totals.</p>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <h3 style="margin-top:0">Stage Logic</h3>
-          <ul>
-            <li>Stage 1: 0 → 1,000,000 sold @ $0.07</li>
-            <li>Stage 2: 1,000,000 → 3,000,000 sold @ $0.08</li>
-            <li>Stage 3: 3,000,000 → 5,000,000 sold @ $0.10</li>
-          </ul>
-          <p class="note">The site chooses the stage by total sold (website + Smithii). Smithii runs one live presale at a time.</p>
+          <p class="note">Already purchased? You’re good—no extra form here. We pull Smithii sales into totals.</p>
         </div>
       </aside>
     </div>
   </main>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand-min">
-        <img src="assets/s-coin-logo.png" alt="">
-        <span>S-COIN Sports</span>
+  <!-- FOOTER (no slogan) -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-min">
+          <img src="assets/s-coin-logo.png" alt="">
+          <span>S-COIN Sports</span>
+        </div>
       </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
+        <a href="scoin.html">About</a>
+      </nav>
     </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
-      <a href="scoin.html">About</a>
-    </nav>
-  </div>
-  <div class="sub">© <span id="y"></span> S-COIN Sports</div>
-</footer>
-
+    <div class="sub">© <span id="y"></span> S-COIN Sports</div>
+  </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -174,14 +160,12 @@
     const SMITHII_STAGE_URL_2 = 'https://smithii.example/your-stage-2';
     const SMITHII_STAGE_URL_3 = 'https://smithii.example/your-stage-3';
 
-    const TOTAL_CAP = 5000000; // total presale tokens
-    const STAGE1_CUTOFF = 1000000; // 0   -> 1,000,000
-    const STAGE2_CUTOFF = 3000000; // 1M -> 3,000,000
-    // Stage 3 = 3,000,000 -> 5,000,000
+    const TOTAL_CAP = 5000000;
+    const STAGE1_CUTOFF = 1000000; // 0 -> 1M
+    const STAGE2_CUTOFF = 3000000; // 1M -> 3M
 
-    const PRICE_STAGE_1 = 0.07;
-    const PRICE_STAGE_2 = 0.08;
-    const PRICE_STAGE_3 = 0.10;
+    const PRICE_STAGE_1 = 0.07; // Only Stage 1 is shown
+    // Stage 2 & 3 intentionally not shown (TBD)
 
     // ====== INIT ======
     document.getElementById('y').textContent = new Date().getFullYear();
@@ -192,14 +176,13 @@
     });
 
     const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-
     function fmt(n){ return Number(n || 0).toLocaleString(); }
 
     function computeStage(sold) {
-      if (sold < STAGE1_CUTOFF) return { num: 1, price: PRICE_STAGE_1, url: SMITHII_STAGE_URL_1 };
-      if (sold < STAGE2_CUTOFF) return { num: 2, price: PRICE_STAGE_2, url: SMITHII_STAGE_URL_2 };
-      if (sold < TOTAL_CAP)     return { num: 3, price: PRICE_STAGE_3, url: SMITHII_STAGE_URL_3 };
-      return { num: 3, price: PRICE_STAGE_3, url: SMITHII_STAGE_URL_3 }; // sold out case (could disable)
+      if (sold < STAGE1_CUTOFF) return { num: 1, url: SMITHII_STAGE_URL_1 };
+      if (sold < STAGE2_CUTOFF) return { num: 2, url: SMITHII_STAGE_URL_2 };
+      if (sold < TOTAL_CAP)     return { num: 3, url: SMITHII_STAGE_URL_3 };
+      return { num: 3, url: SMITHII_STAGE_URL_3 };
     }
 
     async function refreshProgress() {
@@ -215,10 +198,10 @@
         document.getElementById('pctLabel').textContent    = pct + '%';
         document.getElementById('pctFill').style.width     = pct + '%';
 
-        // Stage selection + UI highlighting
         const st = computeStage(sold);
         document.getElementById('stageLabel').textContent = `Stage ${st.num}`;
-        document.getElementById('priceLabel').textContent = `$${st.price.toFixed(2)}`;
+        // Show price only for Stage 1; Stage 2/3 => TBD
+        document.getElementById('priceLabel').textContent = (st.num === 1) ? `$${PRICE_STAGE_1.toFixed(2)}` : 'TBD';
 
         document.getElementById('s1').classList.toggle('active', st.num === 1);
         document.getElementById('s2').classList.toggle('active', st.num === 2);
@@ -229,7 +212,6 @@
         const buyBot = document.getElementById('buyBtnBottom');
         buyTop.href = buyBot.href = st.url;
 
-        // If fully sold, you could disable buttons:
         if (sold >= TOTAL_CAP) {
           buyTop.textContent = buyBot.textContent = 'Sold Out';
           buyTop.classList.remove('btn-primary');
@@ -244,8 +226,7 @@
     }
 
     refreshProgress();
-    // Optional: refresh every 60s
-    setInterval(refreshProgress, 60000);
+    setInterval(refreshProgress, 60000); // optional
   </script>
 </body>
 </html>
