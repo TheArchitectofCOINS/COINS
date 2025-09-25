@@ -110,11 +110,6 @@
             <p class="note" style="margin-top:8px">Final round before listing/liquidity.</p>
           </article>
         </div>
-
-        <div class="cta-row" style="margin-top:16px">
-          <a id="buyBtnBottom" class="btn btn-primary" href="#" target="_blank" rel="noopener">Buy on Smithii</a>
-          <a class="btn btn-ghost" href="index.html#how">How It Works</a>
-        </div>
       </div>
 
       <!-- Right: FAQ -->
@@ -133,7 +128,7 @@
     </div>
   </main>
 
-  <!-- FOOTER (no slogan) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-grid">
       <div>
@@ -161,14 +156,12 @@
     const SMITHII_STAGE_URL_3 = 'https://smithii.example/your-stage-3';
 
     const TOTAL_CAP = 5000000;
-    const STAGE1_CUTOFF = 1000000; // 0 -> 1M
-    const STAGE2_CUTOFF = 3000000; // 1M -> 3M
+    const STAGE1_CUTOFF = 1000000;
+    const STAGE2_CUTOFF = 3000000;
+    const PRICE_STAGE_1 = 0.07;
 
-    const PRICE_STAGE_1 = 0.07; // Only Stage 1 is shown
-    // Stage 2 & 3 intentionally not shown (TBD)
-
-    // ====== INIT ======
     document.getElementById('y').textContent = new Date().getFullYear();
+
     const toggle = document.querySelector('.nav-toggle');
     const links  = document.querySelector('.nav-links');
     toggle?.addEventListener('click', () => {
@@ -189,7 +182,7 @@
       try {
         const { data, error } = await _sb.from('presale_progress').select('*').single();
         if (error) { console.warn(error); }
-        const sold = data?.coins_sold_including_pending || 0; // or use verified only
+        const sold = data?.coins_sold_including_pending || 0;
         const remaining = Math.max(0, TOTAL_CAP - sold);
         const pct = Math.min(100, Math.round((sold / TOTAL_CAP) * 100));
 
@@ -200,25 +193,20 @@
 
         const st = computeStage(sold);
         document.getElementById('stageLabel').textContent = `Stage ${st.num}`;
-        // Show price only for Stage 1; Stage 2/3 => TBD
         document.getElementById('priceLabel').textContent = (st.num === 1) ? `$${PRICE_STAGE_1.toFixed(2)}` : 'TBD';
 
         document.getElementById('s1').classList.toggle('active', st.num === 1);
         document.getElementById('s2').classList.toggle('active', st.num === 2);
         document.getElementById('s3').classList.toggle('active', st.num === 3);
 
-        // Update Buy buttons
         const buyTop = document.getElementById('buyBtnTop');
-        const buyBot = document.getElementById('buyBtnBottom');
-        buyTop.href = buyBot.href = st.url;
+        buyTop.href = st.url;
 
         if (sold >= TOTAL_CAP) {
-          buyTop.textContent = buyBot.textContent = 'Sold Out';
+          buyTop.textContent = 'Sold Out';
           buyTop.classList.remove('btn-primary');
-          buyBot.classList.remove('btn-primary');
           buyTop.classList.add('btn');
-          buyBot.classList.add('btn');
-          buyTop.href = buyBot.href = '#';
+          buyTop.href = '#';
         }
       } catch (e) {
         console.error(e);
@@ -226,7 +214,7 @@
     }
 
     refreshProgress();
-    setInterval(refreshProgress, 60000); // optional
+    setInterval(refreshProgress, 60000);
   </script>
 </body>
 </html>
