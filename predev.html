@@ -22,7 +22,7 @@
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <nav class="nav-links" aria-label="Primary">
       <a href="predev.html" class="chip chip-warn">Pre-Development</a>
-      <a href="index.html#how">How It Works</a>
+      <a href="index.html">Homepage</a>
       <a href="presale.html">Presale</a>
     </nav>
   </header>
@@ -75,7 +75,7 @@
     // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Mobile nav
+    // Mobile nav toggle
     const toggle = document.querySelector('.nav-toggle');
     const links = document.querySelector('.nav-links');
     toggle?.addEventListener('click', () => {
