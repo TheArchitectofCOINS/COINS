@@ -5,11 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>S-COIN Sports — Everyone Can Play</title>
   <meta name="description" content="S-COIN Sports: Web3 sports predictions. Everyone can play with FP-Chips. Betting with S-Chips where legal. S-COIN powers the ecosystem." />
-  <!-- Fonts & CSS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    :root { --blue:#00B5E2; --dark:#0b1020; --mid:#0f1730; --text:#eaf6ff; --gold:#F5C15C; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--dark),#081020 60%,#040812);color:var(--text)}
+    a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+    .blue{color:var(--blue)}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .nav{position:sticky;top:0;z-index:10;background:rgba(5,10,24,.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .nav a{color:#d6f3ff}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
+    .brand img{height:34px;width:auto}
+    .links{display:flex;gap:18px;font-weight:600}
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--blue);color:#012332;font-weight:800;letter-spacing:.2px}
+    .btn-outline{background:transparent;border:1px solid var(--blue);color:var(--text)}
+    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08)}
+    .hero::before{content:"";position:absolute;inset:-20%;background:radial-gradient(1200px 500px at 50% -20%, rgba(0,181,226,.35), transparent 60%), url('assets/stadium-lights.jpg') center/cover no-repeat;opacity:.45;filter:contrast(115%)}
+    .wrap{position:relative;padding:80px 0 64px}
+    h1{font-size:48px;line-height:1.05;margin:0 0 10px}
+    .kicker{color:#a7e9ff;text-transform:uppercase;letter-spacing:.28em;font-size:12px}
+    .sub{max-width:760px;font-size:18px;color:#cfefff}
+    .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .ribbon{margin-top:18px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(4,16,40,.6);font-size:13px;color:#cfe9ff}
+    .section{padding:44px 0}
+    .grid{display:grid;gap:16px;margin:36px 0}
+    .g3{grid-template-columns:repeat(3,1fr)}
+    .g4{grid-template-columns:repeat(4,1fr)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px}
+    .card h3{margin:0 0 8px}
+    .badge{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:#bfeaff}
+    .token{display:flex;align-items:flex-start;gap:14px}
+    .icon{width:38px;height:38px;border-radius:12px;background:rgba(0,181,226,.18);display:grid;place-items:center;font-weight:800;color:#9fe6ff}
+    .footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0;color:#9dcbe4;font-size:14px}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media (max-width:960px){ .g3{grid-template-columns:1fr} .g4{grid-template-columns:1fr 1fr} h1{font-size:36px} }
+    @media (max-width:600px){ .g4{grid-template-columns:1fr} }
+  </style>
 </head>
 <body>
   <!-- Top Nav -->
