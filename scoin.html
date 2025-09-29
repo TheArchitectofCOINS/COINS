@@ -1,180 +1,182 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>S-COIN Sports — About</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="About S-COIN Sports: what we're building, token details, presale info, and roadmap." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About S-COIN</title>
+<meta name="description" content="About S-COIN Sports — what we’re building, the two-token model, token utility, and presale details." />
+<link rel="icon" href="assets/s-coin-logo.png" />
+<style>
+:root{
+  --primary:#00B5E2; --dark:#062534; --ink:#0b1520;
+  --muted:#cfe9f1; --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* layout */
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+.section{padding:48px 0}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
+.nav .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand img{width:34px;height:34px;border-radius:10px}
+.menu{margin-left:auto;display:flex;gap:14px}
+.menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
+.menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
+
+/* hero */
+.hero{position:relative;min-height:36vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.1) contrast(1.02)}
+.hero .content{position:relative;padding:64px 18px;max-width:860px}
+h1.title{font-size:clamp(30px,6vw,48px);margin:0 0 8px}
+.subtitle{color:#d2e9f1;opacity:.95}
+
+/* lists */
+ul.clean,ol.clean{margin:8px 0 0 18px}
+.badge{display:inline-block;font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04)}
+.note{color:#bfe2ed;opacity:.9;font-size:14px}
+
+/* footer */
+footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
+.foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.links{display:flex;gap:14px}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="nav">
-  <a class="brand" href="index.html">
-    <img src="assets/s-coin-logo.png" alt="S-COIN logo">
-    <span>S-COIN Sports</span>
-  </a>
-  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="index.html">Homepage</a>
-    <a href="predev.html">Pre-Development</a>
-    <a href="presale.html" class="chip chip-warn">Presale</a>
-  </nav>
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN"/><span>S-COIN Sports</span></div>
+    <div class="menu">
+      <a href="index.html">Homepage</a>
+      <a href="predev.html">Pre-Development</a>
+      <a href="presale.html">Presale</a>
+      <a class="active" href="scoin.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="content">
+    <h1 class="title">About S-COIN</h1>
+    <p class="subtitle">What we’re building, how the <strong>two-token model</strong> works, and how the presale fits in.</p>
+    <p style="margin-top:14px"><a class="badge" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read the Whitepaper (PDF)</a></p>
+  </div>
 </header>
 
-
-  <!-- HERO -->
-  <section class="hero" style="min-height:42vh">
-    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
-    <div class="hero-content container" style="padding:46px 0">
-      <h1>About S-COIN Sports</h1>
-      <p class="lead">We’re building a picks-first sports platform where your game sense converts to tokenized bragging rights.</p>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <main class="section container">
-    <h2 class="section-title">What We’re Building</h2>
-    <div class="grid-2" style="gap:18px">
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 12px">What We’re Building</h2>
+    <div class="grid g2">
       <article class="card">
-        <h3>Core Idea</h3>
-        <p>
-          S-COIN Sports lets fans make weekly picks, climb a transparent leaderboard, and earn in-ecosystem rewards.
-          The mobile app is in development; you can preview work-in-progress on the <a href="predev.html">Pre-Development</a> page.
-        </p>
-        <p><strong>App status:</strong> <em>Coming soon</em>. Follow updates on X: <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">@SCOINSPORTS</a>.</p>
+        <h3 style="margin:6px 0">Core Idea</h3>
+        <p>S-COIN Sports lets fans make weekly picks, climb transparent leaderboards, and earn in-ecosystem rewards. The mobile app is in development; you can preview work-in-progress on the Pre-Development page.</p>
+        <p class="note">App status: in development. Follow updates on X.</p>
       </article>
       <article class="card">
-        <h3>Why Tokens?</h3>
-        <p>
-          Tokens align incentives: consistent, skillful picks should be visible and rewarded inside the ecosystem.
-          The token family below separates <em>free-play</em>, <em>utility</em>, and <em>stability</em> roles so we can evolve features without mixing purposes.
-        </p>
+        <h3 style="margin:6px 0">Why Tokens?</h3>
+        <p>Tokens align incentives: consistent, skillful picks should be visible and rewarded. A dual-token design keeps things clean — <em>free play</em> and <em>on-chain utility</em> stay separate.</p>
       </article>
     </div>
-
-    <!-- TOKENS -->
-    <section class="section" id="tokens" style="padding-top:30px">
-      <h2 class="section-title">The COINS Family</h2>
-      <div class="grid-3" style="gap:18px">
-        <article class="card">
-          <h3>S-COIN-FP (Free-Play)</h3>
-          <p>For demos, community games, and onboarding without paid balances. Great for testing new flows and formats.</p>
-        </article>
-        <article class="card">
-          <h3>S-COIN (Core Token)</h3>
-          <p>The main utility token that powers features across the platform: entries, boosts, access, and ecosystem rewards.</p>
-        </article>
-        <article class="card">
-          <h3>S-COIN-S (Stable)</h3>
-          <p>Stability-oriented counterpart used for treasuries, denominating rewards, and smooth settlement.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- PRESALE -->
-    <section class="section" id="presale-overview" style="padding-top:30px">
-      <h2 class="section-title">Presale Overview</h2>
-      <div class="grid-2" style="gap:18px">
-        <article class="card">
-          <h3>Structure</h3>
-          <ul>
-            <li><strong>Total Presale:</strong> 5,000,000 S-COIN</li>
-            <li><strong>Stage 1 Price:</strong> $0.07</li>
-            <li><strong>Stage 2 & 3:</strong> TBD</li>
-            <li><strong>Checkout:</strong> Smithii (one live stage at a time)</li>
-          </ul>
-          <p>
-            We track totals in Supabase and show live progress on the <a href="presale.html">Presale</a> page.
-            When a stage cap is reached, the next stage goes live on Smithii with updated pricing.
-          </p>
-        </article>
-        <article class="card">
-          <h3>How Distribution Works</h3>
-          <ol class="steps" style="counter-reset:step">
-            <li>Buy on Smithii during the active stage.</li>
-            <li>We sync orders to our database to update totals.</li>
-            <li>After presale ends, verified buyers are airdropped S-COIN to their wallet.</li>
-          </ol>
-          <p class="muted">Full admin playbook is available on request; airdrop happens after the presale closes.</p>
-        </article>
-      </div>
-      <p style="text-align:center; margin-top:10px">
-        <a class="btn btn-primary" href="presale.html">Go to Presale</a>
-      </p>
-    </section>
-
-
-
-    <!-- FAQ -->
-    <section class="section" id="faq" style="padding-top:30px">
-      <h2 class="section-title">FAQ</h2>
-      <div class="grid-2" style="gap:18px">
-        <article class="card">
-          <h3>When is the app launching?</h3>
-          <p>“App coming soon.” Watch <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">@SCOINSPORTS</a> for updates and new screenshots on the <a href="predev.html">Pre-Development</a> page.</p>
-        </article>
-        <article class="card">
-          <h3>How do the stages work?</h3>
-          <p>Stage 1 is live at $0.07; later stages are TBD and open as caps are reached. Only one Smithii presale runs at a time.</p>
-        </article>
-        <article class="card">
-          <h3>How will tokens be delivered?</h3>
-          <p>After presale ends, verified wallets receive an airdrop of S-COIN matching their allocation. We’ll announce the snapshot and distribution window ahead of time.</p>
-        </article>
-        <article class="card">
-          <h3>Where can I read more?</h3>
-          <p>Check the <a href="whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a> and follow updates on <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">X</a>.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- NOTE / DISCLAIMER -->
-    <section class="section" id="note" style="padding-top:30px">
-      <div class="card">
-        <h3 style="margin-top:0">Note</h3>
-        <p class="muted">
-          This page is informational and not financial advice. Availability, timelines, and features may change during development.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
- <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand-min">
-        <img src="assets/s-coin-logo.png" alt="">
-        <span>S-COIN Sports</span>
-      </div>
-    </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="assets/whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
-      <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">X (Twitter)</a>
-      <a href="scoin.html">About</a>
-    </nav>
   </div>
-  <div class="sub">© <span id="y"></span> S-COIN Sports</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 12px">Two-Token Model</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3>S-COIN <span class="badge">On-chain</span></h3>
+        <p>The flagship token for governance, staking, rewards, perks, and future expansion. <strong>Only S-COIN is sold in the presale.</strong></p>
+        <ul class="clean">
+          <li>Utility: access, boosts, governance votes</li>
+          <li>Incentives: referrals, promotions, partnerships</li>
+          <li>On-chain, tradable</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>S-COIN-FP <span class="badge">Free Play</span></h3>
+        <p>Free-play credits used for leaderboards, streaks, and bragging rights. Not on-chain, no KYC, and <strong>not sold</strong>.</p>
+        <ul class="clean">
+          <li>Earned through gameplay</li>
+          <li>Used for cosmetics and scorekeeping</li>
+          <li>Keeps worldwide access open</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 12px">Presale Overview</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin:6px 0">Structure</h3>
+        <ul class="clean">
+          <li><strong>Total Presale:</strong> 100,000,000 S-COIN (1% of supply)</li>
+          <li><strong>Tiers:</strong> 30M @ $0.05 • 30M @ $0.07 • 40M @ $0.10</li>
+          <li><strong>Vesting:</strong> 25% at launch, then 25% each quarter (12 months total)</li>
+        </ul>
+        <p class="note">Reminder: S-COIN-FP is free-play only and is not part of the sale.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:6px 0">Use of Funds</h3>
+        <ul class="clean">
+          <li>Treasury & liquidity</li>
+          <li>Rewards & incentives for growth</li>
+          <li>Development, audits, and ecosystem expansion</li>
+        </ul>
+        <p style="margin-top:10px"><a class="badge" href="presale.html">Go to Presale Page</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 12px">FAQ (Short)</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Is S-COIN the only token I can buy?</h3>
+        <p>Yes. The presale sells S-COIN only. S-COIN-FP is free-play credit and isn’t sold.</p>
+        <h3>What wallets are supported?</h3>
+        <p>Solana wallets (e.g., Phantom). More details will be added before launch.</p>
+      </div>
+      <div class="card">
+        <h3>How are allocations handled?</h3>
+        <p>Presale is capped by tier. Tokens vest 25% at launch, then 25% per quarter.</p>
+        <h3>Where can I read more?</h3>
+        <p>See the <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">whitepaper</a> for tokenomics, roadmap, and legal notes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="links">
+      <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
+      <a href="https://x.com/" target="_blank" rel="noreferrer">X / Twitter</a>
+      <a href="presale.html">Presale</a>
+    </div>
+  </div>
 </footer>
 
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 
-  <!-- Minimal JS -->
-  <script>
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Mobile nav
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    toggle?.addEventListener('click', () => {
-      const open = links.style.display === 'flex';
-      links.style.display = open ? 'none' : 'flex';
-    });
-  </script>
 </body>
 </html>
