@@ -7,174 +7,192 @@
 <meta name="description" content="S-COIN Sports is a Web3 sports prediction app where every pick counts. Everyone can play via free mode. Presale for S-COIN now." />
 <link rel="icon" href="assets/s-coin-logo.png" />
 <style>
-:root {
---primary: #00B5E2; /* Ocean Blue */
---dark: #062534; /* Deep Navy */
---ink: #0b1520; /* Body text */
---card: #0e2430;
---muted: #cfe9f1;
---ring: rgba(0,181,226,0.35);
---radius: 16px;
+:root{
+  --primary:#00B5E2;/* Ocean Blue */
+  --dark:#062534;   /* Deep Navy */
+  --ink:#0b1520;    /* Body text */
+  --card:#0e2430;
+  --muted:#cfe9f1;
+  --ring:rgba(0,181,226,0.35);
+  --radius:16px;
 }
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background:#041520; color:#e7f4f9; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-a { color: var(--primary); text-decoration: none; }
-a:hover { text-decoration: underline; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
 
+/* Layout helpers */
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+.section{padding:48px 0}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:18px}
 
 /* Top nav */
-.nav { position: sticky; top:0; z-index:50; background: rgba(4,21,32,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.06); }
-.nav > .wrap { max-width: 1100px; margin: 0 auto; padding: 14px 18px; display:flex; align-items:center; gap:18px; }
-.nav .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.2px; }
-.brand img { width:34px; height:34px; border-radius:10px; }
-.menu { margin-left:auto; display:flex; gap:14px; }
-.menu a { padding:10px 12px; border-radius:12px; color:#e7f4f9; border:1px solid transparent; }
-.menu a.active, .menu a:hover { border-color: rgba(255,255,255,0.08); background: rgba(0,181,226,0.08); }
-
+.nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,0.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
+.nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+.brand img{width:34px;height:34px;border-radius:10px}
+.menu{margin-left:auto;display:flex;gap:14px}
+.menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
+.menu a.active,.menu a:hover{border-color:rgba(255,255,255,0.08);background:rgba(0,181,226,0.08)}
 
 /* Hero */
-.hero { position: relative; min-height: 62vh; display:grid; place-items:center; text-align:center; overflow:hidden; }
-.hero::before { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.3), rgba(4,21,32,0.85)), url('assets/stadium-lights.png') center/cover fixed; filter: saturate(1.15) contrast(1.02); }
-.hero .content { position:relative; padding: 80px 18px; max-width: 980px; }
-.badge { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); padding:6px 10px; border-radius:999px; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
-.title { margin: 16px 0 10px; font-size: clamp(34px, 6vw, 56px); line-height:1.05; font-weight: 850; text-shadow: 0 10px 28px rgba(0,0,0,0.45); }
-.subtitle { font-size: clamp(16px, 2.4vw, 20px); color:#d2e9f1; opacity:0.95; }
-.cta { margin-top: 22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-.btn { padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); background: linear-gradient(180deg, rgba(0,181,226,0.2), rgba(0,181,226,0.08)); color:white; font-weight:650; box-shadow: 0 6px 20px rgba(0,181,226,0.18); }
-.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,181,226,0.25); }
-.btn.outline { background: transparent; }
-
-
-/* Sections */
-section { max-width: 1100px; margin: 0 auto; padding: 48px 18px; }
-.grid { display:grid; gap:18px; }
-@media (min-width: 900px){ .grid.cols-2 { grid-template-columns: 1.2fr 1fr; } }
-
-
-.card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 18px; }
-.card h3 { margin: 0 0 10px; font-size: 20px; }
-
-
-.kpis { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
-@media (min-width: 760px){ .kpis { grid-template-columns: repeat(4, minmax(0,1fr)); } }
-.kpi { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:16px; border-radius:14px; text-align:center; }
-.kpi .n { font-size: 22px; font-weight:800; }
-.muted { color: #bfe2ed; opacity:0.85; font-size: 14px; }
-
+.hero{position:relative;min-height:62vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(4,21,32,0.85)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.15) contrast(1.02)}
+.hero .content{position:relative;padding:80px 18px;max-width:980px}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850;text-shadow:0 10px 28px rgba(0,0,0,0.45)}
+.subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
+.kicker{font-size:12px;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
+.blue{color:var(--primary)}
+.sub{color:#d2e9f1}
+.cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(180deg,rgba(0,181,226,0.2),rgba(0,181,226,0.08));color:#fff;font-weight:650;box-shadow:0 6px 20px rgba(0,181,226,0.18)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,181,226,0.25)}
+.btn.btn-outline{background:transparent}
+.ribbon{margin-top:14px;font-size:12px;opacity:.85}
 
 /* Tokenomics */
-.tok-wrap { display:grid; gap:18px; align-items:center; }
-@media (min-width: 900px){ .tok-wrap { grid-template-columns: 1fr 1.1fr; } }
-.legend { display:grid; gap:10px; }
-.legend .row { display:flex; align-items:center; gap:10px; }
-.dot { width:12px; height:12px; border-radius:999px; display:inline-block; }
-
+.tok-wrap{display:grid;gap:18px;align-items:center}
+@media(min-width:900px){.tok-wrap{grid-template-columns:1fr 1.1fr}}
+.legend{display:grid;gap:10px}
+.legend .row{display:flex;align-items:center;gap:10px}
+.dot{width:12px;height:12px;border-radius:999px;display:inline-block}
 
 /* Footer */
-footer { border-top:1px solid rgba(255,255,255,0.06); background:#061721; }
-.foot { max-width:1100px; margin:0 auto; padding:24px 18px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; justify-content:space-between; }
-.foot small { color:#bfe2ed; opacity:0.8; }
-.links { display:flex; gap:14px; }
+footer{border-top:1px solid rgba(255,255,255,0.06);background:#061721;margin-top:36px}
+.foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.links{display:flex;gap:14px}
 </style>
 </head>
 <body>
+
 <nav class="nav">
-<div class="wrap">
-<div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN" /><span>S-COIN Sports</span></div>
-<div class="menu">
-<a class="active" href="/">Homepage</a>
-<a href="predev.html">Pre-Development</a>
-<a href="presale.html">Presale</a>
-</div>
-</div>
+  <div class="wrap">
+    <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN" /><span>S-COIN Sports</span></div>
+    <div class="menu">
+      <a class="active" href="/">Homepage</a>
+      <a href="predev.html">Pre-Development</a>
+      <a href="presale.html">Presale</a>
+    </div>
+  </div>
 </nav>
-</html>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container wrap">
-      <div class="kicker">Web3 Sports Predictions • Built on Solana</div>
-      <h1>Everyone Can Play. <span class="blue">Win S-COIN.</span></h1>
-      <p class="sub">
-        Make picks, climb leaderboards, and unlock perks.
-        <strong>FP-Chips</strong> let anyone play nationwide.
-        <strong>S-Chips</strong> power regulated betting where legal.
-        <strong>S-COIN</strong> is the on-chain token that fuels the ecosystem.
-      </p>
-      <div class="cta">
-        <a class="btn" href="/presale.html">Join S-COIN Presale</a>
-        <a class="btn btn-outline" href="assets/whitepaper.pdf" target="_blank" rel="noopener">Read Whitepaper</a>
-      </div>
-      <div class="ribbon">S-COIN is the only blockchain token. S-Chips & FP-Chips are in-app credits.</div>
+<header class="hero">
+  <div class="content">
+    <span class="badge">Everyone Can Play • Built on Solana</span>
+    <h1 class="title">Bragging Rights Just Got Tokenized.</h1>
+    <p class="subtitle">S-COIN Sports is a Web3 sports prediction app powered by the S-COIN ecosystem. Free play worldwide using <strong>S-COIN-FP</strong>. Presale for <strong>S-COIN</strong>.</p>
+    <div class="cta">
+      <a class="btn" href="presale.html">View Presale</a>
+      <a class="btn btn-outline" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- Three-Token Ecosystem -->
-  <section class="section">
-    <div class="container">
-      <h2>Three-Token Ecosystem</h2>
-      <div class="grid g3">
-        <div class="card token">
-          <div class="icon">S</div>
-          <div>
-            <h3>S-COIN <span class="badge">On-chain</span></h3>
-            <p>The flagship Web3 token. Presale-eligible. Utility, governance, staking, perks, NFTs & merch.</p>
-          </div>
-        </div>
-        <div class="card token">
-          <div class="icon">SC</div>
-          <div>
-            <h3>S-Chips <span class="badge">Betting Credits</span></h3>
-            <p>In-app credits for wagering in approved states. Example rate: 1,000 S-Chips = $1. Requires KYC & geolocation.</p>
-          </div>
-        </div>
-        <div class="card token">
-          <div class="icon">FP</div>
-          <div>
-            <h3>FP-Chips <span class="badge">Free Play</span></h3>
-            <p>Nationwide, no-money gameplay. Daily claims, streaks, fan competitions, and bragging rights.</p>
-          </div>
-        </div>
+<section class="section">
+  <div class="container">
+    <div class="grid g2">
+      <div class="card">
+        <h3>What is S-COIN Sports?</h3>
+        <p>S-COIN Sports turns sports picks into a global game of skill. Make predictions, climb leaderboards, and earn recognition. The ecosystem runs on <strong>S-COIN</strong> for governance, staking, rewards, and perks — while <strong>S-COIN-FP</strong> powers free play so everyone can participate.</p>
+      </div>
+      <div class="card">
+        <h3>Prediction Types</h3>
+        <p>Moneyline · Spreads · Over/Under · Totals</p>
+        <p style="opacity:.85">Built on Solana. Phantom wallet support. Supabase backend. Designed for speed & transparency.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- How It Works -->
-  <section class="section">
-    <div class="container">
-      <h2>How It Works</h2>
-      <div class="grid g4">
-        <div class="card">
-          <h3>1. Play Free</h3>
-          <p>Anyone can start with FP-Chips. No KYC. No cash-out. Just picks & leaderboards.</p>
-        </div>
-        <div class="card">
-          <h3>2. Go Pro</h3>
-          <p>In legal states, complete KYC to unlock S-Chips betting credits for real wagers.</p>
-        </div>
-        <div class="card">
-          <h3>3. Earn Perks</h3>
-          <p>Hold S-COIN to access avatars, VIP badges, governance votes, and merch/NFT perks.</p>
-        </div>
-        <div class="card">
-          <h3>4. Built for Trust</h3>
-          <p>Multisig treasury, audits, and clear compliance: everyone can play, not everyone can bet.</p>
-        </div>
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 14px;">Two-Token Ecosystem</h2>
+    <div class="grid g2">
+      <div class="card">
+        <h3>S-COIN <span class="badge">On-chain</span></h3>
+        <p>The flagship Web3 token. Presale-eligible. Utility, governance, staking, perks, NFTs & merch.</p>
+      </div>
+      <div class="card">
+        <h3>S-COIN-FP <span class="badge">Free Play</span></h3>
+        <p>Worldwide, no-money gameplay. Daily claims, streaks, competitions, and bragging rights.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container foot">
-      <div>© <span id="y"></span> S-COIN Sports</div>
-      <div class="links">
-        <a href="assets/whitepaper.pdf" target="_blank" rel="noopener">Whitepaper</a>
-        <a href="https://x.com/" target="_blank" rel="noopener">X (Twitter)</a>
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 14px;">S-COIN Tokenomics</h2>
+    <p style="color:#bfe2ed;opacity:.9;margin-top:-6px">Clear, conservative allocation focused on growth and long-term utility.</p>
+    <div class="tok-wrap" style="margin-top:14px;">
+      <div class="card">
+        <!-- Accessible inline SVG pie chart -->
+        <svg viewBox="0 0 42 42" width="100%" aria-label="Tokenomics Pie Chart">
+          <circle r="15.915" cx="21" cy="21" fill="#0a2330" />
+          <g transform="rotate(-90 21 21)">
+            <!-- Presale 1% -->
+            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#00B5E2" stroke-width="7" stroke-dasharray="1 99" />
+            <!-- Treasury 10% -->
+            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#34d399" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-1" />
+            <!-- Rewards 15% -->
+            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#f59e0b" stroke-width="7" stroke-dasharray="15 85" stroke-dashoffset="-11" />
+            <!-- Team 10% -->
+            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#ef4444" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-26" />
+            <!-- Future 64% -->
+            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#9ca3af" stroke-width="7" stroke-dasharray="64 36" stroke-dashoffset="-36" />
+          </g>
+        </svg>
+      </div>
+      <div class="legend">
+        <div class="row"><span class="dot" style="background:#00B5E2"></span> Presale — <strong>1%</strong> (100M)</div>
+        <div class="row"><span class="dot" style="background:#34d399"></span> Treasury & Liquidity — <strong>10%</strong> (1B)</div>
+        <div class="row"><span class="dot" style="background:#f59e0b"></span> Rewards & Incentives — <strong>15%</strong> (1.5B)</div>
+        <div class="row"><span class="dot" style="background:#ef4444"></span> Team & Advisors — <strong>10%</strong> (1B)</div>
+        <div class="row"><span class="dot" style="background:#9ca3af"></span> Future Ecosystem — <strong>64%</strong> (6.4B)</div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<section class="section">
+  <div class="container">
+    <h2 style="margin:0 0 14px;">How It Works</h2>
+    <div class="grid g3">
+      <div class="card">
+        <h3>1) Play Free</h3>
+        <p>Anyone can start with S-COIN-FP. No KYC. No cash-out. Just picks & leaderboards.</p>
+      </div>
+      <div class="card">
+        <h3>2) Earn Perks</h3>
+        <p>Hold S-COIN to access avatars, VIP badges, governance votes, and merch/NFT perks.</p>
+      </div>
+      <div class="card">
+        <h3>3) Built for Trust</h3>
+        <p>Multisig treasury, audits, and clear compliance: everyone can play, not everyone can bet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="links">
+      <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
+      <a href="https://x.com/" target="_blank" rel="noreferrer">X / Twitter</a>
+      <a href="presale.html">Presale</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
