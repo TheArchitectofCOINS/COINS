@@ -8,9 +8,9 @@
 <link rel="icon" href="assets/s-coin-logo.png" />
 <style>
 :root{
-  --primary:#00B5E2;/* Ocean Blue */
-  --dark:#062534;   /* Deep Navy */
-  --ink:#0b1520;    /* Body text */
+  --primary:#00B5E2; /* Ocean Blue */
+  --dark:#062534;    /* Deep Navy */
+  --ink:#0b1520;     /* Body text */
   --card:#0e2430;
   --muted:#cfe9f1;
   --ring:rgba(0,181,226,0.35);
@@ -21,49 +21,49 @@ html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* Layout helpers */
+/* containers */
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
 .section{padding:48px 0}
 .grid{display:grid;gap:18px}
 .g2{grid-template-columns:1fr}
 .g3{grid-template-columns:1fr}
 @media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius);padding:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
 
-/* Top nav */
-.nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,0.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.06)}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
 .nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
 .brand img{width:34px;height:34px;border-radius:10px}
 .menu{margin-left:auto;display:flex;gap:14px}
 .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
-.menu a.active,.menu a:hover{border-color:rgba(255,255,255,0.08);background:rgba(0,181,226,0.08)}
+.menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
 
-/* Hero */
+/* hero */
 .hero{position:relative;min-height:62vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.3),rgba(4,21,32,0.85)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.15) contrast(1.02)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.15) contrast(1.02)}
 .hero .content{position:relative;padding:80px 18px;max-width:980px}
-.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850;text-shadow:0 10px 28px rgba(0,0,0,0.45)}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850;text-shadow:0 10px 28px rgba(0,0,0,.45)}
 .subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
 .kicker{font-size:12px;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
 .blue{color:var(--primary)}
 .sub{color:#d2e9f1}
 .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,0.12);background:linear-gradient(180deg,rgba(0,181,226,0.2),rgba(0,181,226,0.08));color:#fff;font-weight:650;box-shadow:0 6px 20px rgba(0,181,226,0.18)}
-.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,181,226,0.25)}
+.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650;box-shadow:0 6px 20px rgba(0,181,226,.18)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,181,226,.25)}
 .btn.btn-outline{background:transparent}
 .ribbon{margin-top:14px;font-size:12px;opacity:.85}
 
-/* Tokenomics */
+/* tokenomics */
 .tok-wrap{display:grid;gap:18px;align-items:center}
 @media(min-width:900px){.tok-wrap{grid-template-columns:1fr 1.1fr}}
 .legend{display:grid;gap:10px}
 .legend .row{display:flex;align-items:center;gap:10px}
 .dot{width:12px;height:12px;border-radius:999px;display:inline-block}
 
-/* Footer */
-footer{border-top:1px solid rgba(255,255,255,0.06);background:#061721;margin-top:36px}
+/* footer */
+footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
 .foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
 .links{display:flex;gap:14px}
 </style>
@@ -131,19 +131,14 @@ footer{border-top:1px solid rgba(255,255,255,0.06);background:#061721;margin-top
     <p style="color:#bfe2ed;opacity:.9;margin-top:-6px">Clear, conservative allocation focused on growth and long-term utility.</p>
     <div class="tok-wrap" style="margin-top:14px;">
       <div class="card">
-        <!-- Accessible inline SVG pie chart -->
+        <!-- Pie Chart -->
         <svg viewBox="0 0 42 42" width="100%" aria-label="Tokenomics Pie Chart">
           <circle r="15.915" cx="21" cy="21" fill="#0a2330" />
           <g transform="rotate(-90 21 21)">
-            <!-- Presale 1% -->
             <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#00B5E2" stroke-width="7" stroke-dasharray="1 99" />
-            <!-- Treasury 10% -->
             <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#34d399" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-1" />
-            <!-- Rewards 15% -->
             <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#f59e0b" stroke-width="7" stroke-dasharray="15 85" stroke-dashoffset="-11" />
-            <!-- Team 10% -->
             <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#ef4444" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-26" />
-            <!-- Future 64% -->
             <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#9ca3af" stroke-width="7" stroke-dasharray="64 36" stroke-dashoffset="-36" />
           </g>
         </svg>
@@ -163,18 +158,9 @@ footer{border-top:1px solid rgba(255,255,255,0.06);background:#061721;margin-top
   <div class="container">
     <h2 style="margin:0 0 14px;">How It Works</h2>
     <div class="grid g3">
-      <div class="card">
-        <h3>1) Play Free</h3>
-        <p>Anyone can start with S-COIN-FP. No KYC. No cash-out. Just picks & leaderboards.</p>
-      </div>
-      <div class="card">
-        <h3>2) Earn Perks</h3>
-        <p>Hold S-COIN to access avatars, VIP badges, governance votes, and merch/NFT perks.</p>
-      </div>
-      <div class="card">
-        <h3>3) Built for Trust</h3>
-        <p>Multisig treasury, audits, and clear compliance: everyone can play, not everyone can bet.</p>
-      </div>
+      <div class="card"><h3>1) Play Free</h3><p>Anyone can start with S-COIN-FP. No KYC. No cash-out. Just picks & leaderboards.</p></div>
+      <div class="card"><h3>2) Earn Perks</h3><p>Hold S-COIN to access avatars, VIP badges, governance votes, and merch/NFT perks.</p></div>
+      <div class="card"><h3>3) Built for Trust</h3><p>Multisig treasury, audits, and clear compliance: everyone can play, not everyone can bet.</p></div>
     </div>
   </div>
 </section>
