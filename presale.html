@@ -1,222 +1,197 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>S-COIN Sports — Presale</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Join the S-COIN tiered presale. Buy on Smithii. Live progress and stage updates.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .stages{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
-    .stage{background:linear-gradient(180deg,#101B2F,#0C1525); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:16px}
-    .stage h3{margin:2px 0 6px}
-    .stage .price{font-weight:800; font-size:22px}
-    .stage .cap{font-size:12px; color:var(--muted)}
-    .stage.active{outline:2px solid rgba(0,181,226,.6); box-shadow:0 10px 30px rgba(0,181,226,.18)}
-    .progress-card{padding:18px; background:linear-gradient(180deg,#101B2F,#0C1525); border:1px solid rgba(255,255,255,.08); border-radius:12px}
-    .progress-track{height:10px; background:rgba(255,255,255,.06); border-radius:10px; overflow:hidden}
-    .progress-fill{height:100%; background:linear-gradient(90deg,#12C6EC,#17E2A5); box-shadow:0 6px 20px rgba(0,181,226,.35); width:0%}
-    .grid-2{display:grid; grid-template-columns:2fr 1.2fr; gap:18px}
-    @media (max-width:980px){ .stages{grid-template-columns:1fr} .grid-2{grid-template-columns:1fr} }
-    .note{font-size:13px; color:var(--muted)}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>S-COIN Presale</title>
+<meta name="description" content="Official S-COIN presale. Three tiers, fixed supply caps. 100M S-COIN total presale allocation with vesting." />
+<link rel="icon" href="assets/s-coin-logo.png" />
+<style>
+:root{
+  --primary:#00B5E2; --dark:#062534; --ink:#0b1520;
+  --muted:#cfe9f1; --radius:16px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* layout */
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
+.section{padding:48px 0}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
+.nav .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand img{width:34px;height:34px;border-radius:10px}
+.menu{margin-left:auto;display:flex;gap:14px}
+.menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
+.menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
+
+/* hero */
+.hero{position:relative;min-height:52vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.1) contrast(1.02)}
+.hero .content{position:relative;padding:80px 18px;max-width:820px}
+h1.title{font-size:clamp(32px,6vw,56px);margin:0 0 8px}
+.subtitle{color:#d2e9f1;opacity:.95}
+
+/* status */
+.krow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.kpill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;text-align:center}
+.kpill b{display:block;font-size:18px}
+.progress{height:12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+.progress>span{display:block;height:100%;background:linear-gradient(90deg,#00B5E2,#38c7f0);width:0%}
+
+/* tier cards */
+.tiers{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:900px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier .row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+.tier .row:last-child{border-bottom:none}
+.btn{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
+.note{margin-top:14px;color:#bfe2ed;opacity:.9;font-size:14px}
+
+/* foot */
+footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
+.foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.links{display:flex;gap:14px}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
- <header class="nav">
-  <a class="brand" href="index.html">
-    <img src="assets/s-coin-logo.png" alt="S-COIN logo">
-    <span>S-COIN Sports</span>
-  </a>
-  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="index.html">Homepage</a>
-    <a href="predev.html">Pre-Development</a>
-    <a href="presale.html" class="chip chip-warn">Presale</a>
-  </nav>
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN"/><span>S-COIN Sports</span></div>
+    <div class="menu">
+      <a href="/">Homepage</a>
+      <a href="predev.html">Pre-Development</a>
+      <a class="active" href="presale.html">Presale</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="content">
+    <h1 class="title">S-COIN Presale</h1>
+    <p class="subtitle">Three stages. Fixed supply caps. Prices step up each stage. <br><strong>Only S-COIN is sold in presale.</strong> S-COIN-FP is for free play (not sold).</p>
+    <p style="margin-top:16px">
+      <a id="buyTop" class="btn" href="#" target="_blank" rel="noreferrer">Buy S-COIN</a>
+    </p>
+  </div>
 </header>
 
-
-  <!-- HERO -->
-  <section class="hero" style="min-height:46vh">
-    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
-    <div class="hero-content container" style="padding:56px 0">
-      <h1>Tiered Presale</h1>
-      <p class="lead">Three rounds. Fixed supply caps. Price steps up each stage. Buy safely on Smithii.</p>
-      <div class="cta-row">
-        <a id="buyBtnTop" class="btn btn-primary" href="#" target="_blank" rel="noopener">Buy on Smithii</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN -->
-  <main class="section container" id="details">
-    <div class="grid-2">
-      <!-- Left: Status + Stages -->
-      <div>
-        <div class="progress-card" style="margin-bottom:16px">
-          <h2 style="margin:0 0 8px">Current Status</h2>
-          <div class="kpis" style="margin:8px 0 12px">
-            <div class="kpi">
-              <div class="kpi-top" id="stageLabel">Stage 1</div>
-              <div class="kpi-sub">Current Stage</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-top" id="priceLabel">$0.07</div>
-              <div class="kpi-sub">Current Price</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-top" id="soldLabel">0</div>
-              <div class="kpi-sub">Sold (incl. pending)</div>
-            </div>
-            <div class="kpi">
-              <div class="kpi-top" id="remainLabel">5,000,000</div>
-              <div class="kpi-sub">Remaining</div>
-            </div>
-          </div>
-          <div class="row" style="border-bottom:0; padding:6px 0 10px">
-            <span class="muted">Progress</span>
-            <strong id="pctLabel">0%</strong>
-          </div>
-          <div class="progress-track" aria-hidden="true">
-            <div class="progress-fill" id="pctFill"></div>
-          </div>
-          <div class="note" style="margin-top:10px">
-            Totals combine website + Smithii. Stage advances automatically when caps are reached.
-          </div>
+<section class="section">
+  <div class="container">
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin:0 0 8px">Current Status</h3>
+        <div class="krow">
+          <div class="kpill"><small>Stage</small><b id="k_stage">1</b></div>
+          <div class="kpill"><small>Price</small><b id="k_price">$0.05</b></div>
+          <div class="kpill"><small>Sold</small><b id="k_sold">0</b></div>
+          <div class="kpill"><small>Remaining</small><b id="k_rem">100,000,000</b></div>
         </div>
-
-        <!-- Stage cards -->
-        <div class="stages" aria-label="Presale stages">
-          <article class="stage" id="s1">
-            <h3>Stage 1</h3>
-            <div class="price">$0.07</div>
-            <div class="cap">Cap: 1,000,000 S-COIN</div>
-            <p class="note" style="margin-top:8px">Early supporters get the best price.</p>
-          </article>
-          <article class="stage" id="s2">
-            <h3>Stage 2</h3>
-            <div class="price">TBD</div>
-            <div class="cap">Cap: 2,000,000 S-COIN (cumulative 3,000,000)</div>
-            <p class="note" style="margin-top:8px">Opens after Stage 1 sells out.</p>
-          </article>
-          <article class="stage" id="s3">
-            <h3>Stage 3</h3>
-            <div class="price">TBD</div>
-            <div class="cap">Cap: 2,000,000 S-COIN (cumulative 5,000,000)</div>
-            <p class="note" style="margin-top:8px">Final round before listing/liquidity.</p>
-          </article>
+        <div style="margin-top:12px">
+          <div class="progress"><span id="k_prog" style="width:0%"></span></div>
         </div>
+        <p class="note">Totals reflect website + launchpad sales. Stage advances automatically when its cap is reached.</p>
       </div>
 
-      <!-- Right: FAQ -->
-      <aside>
-        <div class="card">
-          <h3 style="margin-top:0">How to Buy</h3>
-          <ol class="steps" style="counter-reset:step; margin-top:6px">
-            <li>Click <strong>Buy on Smithii</strong> (button links to the current stage listing).</li>
-            <li>Purchase at the displayed stage price.</li>
-            <li>We sync Smithii orders to our database for live totals.</li>
-            <li>After presale, you receive your S-COIN airdrop to the wallet you used to buy.</li>
-          </ol>
-          <p class="note">Already purchased? You’re good—no extra form here. We pull Smithii sales into totals.</p>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <!-- FOOTER -->
- <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand-min">
-        <img src="assets/s-coin-logo.png" alt="">
-        <span>S-COIN Sports</span>
+      <div class="card">
+        <h3 style="margin:0 0 8px">How to Buy</h3>
+        <ol style="margin:0 0 10px 18px;opacity:.95">
+          <li>Click <em>Buy S-COIN</em> — it links to the live stage.</li>
+          <li>Purchase at the displayed stage price.</li>
+          <li>We sync launchpad orders for live totals.</li>
+          <li>Vesting: 25% at launch, then 25% quarterly (fully unlocked in 12 months).</li>
+        </ol>
+        <p class="note">Already purchased? You’re good — we count your launchpad order in totals automatically.</p>
       </div>
     </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="assets/whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
-      <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">X (Twitter)</a>
-      <a href="scoin.html">About</a>
-    </nav>
   </div>
-  <div class="sub">© <span id="y"></span> S-COIN Sports</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="tiers" id="tiers"></div>
+    <p class="note"><strong>Presale Allocation:</strong> 100,000,000 S-COIN (1% of max supply).<br/>
+      <strong>Reminder:</strong> S-COIN-FP is free play credit, not on-chain and not for sale.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="links">
+      <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper (PDF)</a>
+      <a href="https://x.com/" target="_blank" rel="noreferrer">X / Twitter</a>
+      <a href="/">Home</a>
+    </div>
+  </div>
 </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script>
-    // ====== CONFIG (EDIT THESE) ======
-    const SUPABASE_URL  = 'https://YOUR-PROJECT-ref.supabase.co';
-    const SUPABASE_ANON = 'YOUR-ANON-KEY';
-    const SMITHII_STAGE_URL_1 = 'https://smithii.example/your-stage-1';
-    const SMITHII_STAGE_URL_2 = 'https://smithii.example/your-stage-2';
-    const SMITHII_STAGE_URL_3 = 'https://smithii.example/your-stage-3';
+<script>
+  // === Configure your presale here ===
+  const BUY_URL = "#"; // TODO: set to your launchpad URL
+  // Tiers: 30M @ 0.05, 30M @ 0.07, 40M @ 0.10
+  const TIERS = [
+    { name: "Stage 1", price: 0.05, cap: 30_000_000, sold: 0 },
+    { name: "Stage 2", price: 0.07, cap: 30_000_000, sold: 0 },
+    { name: "Stage 3", price: 0.10, cap: 40_000_000, sold: 0 },
+  ];
 
-    const TOTAL_CAP = 5000000;
-    const STAGE1_CUTOFF = 1000000;
-    const STAGE2_CUTOFF = 3000000;
-    const PRICE_STAGE_1 = 0.07;
+  // Hook up top Buy button
+  const buyButtons = [];
+  function fmt(n){ return n.toLocaleString(); }
 
-    document.getElementById('y').textContent = new Date().getFullYear();
+  // Render tier cards
+  const $tiers = document.getElementById('tiers');
+  TIERS.forEach((t, i) => {
+    const remaining = Math.max(0, t.cap - t.sold);
+    const card = document.createElement('div');
+    card.className = 'card tier';
+    card.innerHTML = `
+      <h3 style="margin:6px 0">${t.name}</h3>
+      <div class="row"><span>Price</span><b>$${t.price.toFixed(2)}</b></div>
+      <div class="row"><span>Cap</span><span>${fmt(t.cap)} S-COIN</span></div>
+      <div class="row"><span>Sold</span><span>${fmt(t.sold)}</span></div>
+      <div class="row"><span>Remaining</span><span>${fmt(remaining)}</span></div>
+      <div style="margin-top:10px;display:flex;gap:10px">
+        <a class="btn buy" href="${BUY_URL}" target="_blank" rel="noreferrer">Buy ${t.name}</a>
+      </div>
+    `;
+    $tiers.appendChild(card);
+    buyButtons.push(card.querySelector('.buy'));
+  });
 
-    const toggle = document.querySelector('.nav-toggle');
-    const links  = document.querySelector('.nav-links');
-    toggle?.addEventListener('click', () => {
-      links.style.display = (links.style.display === 'flex') ? 'none' : 'flex';
-    });
+  // Compute current stage/price/sold/remaining/progress
+  const totalCap = TIERS.reduce((s,t)=>s+t.cap,0);
+  const totalSold = TIERS.reduce((s,t)=>s+t.sold,0);
+  let stageIndex = 0;
+  let soldSoFar = 0;
+  for(let i=0;i<TIERS.length;i++){
+    soldSoFar += TIERS[i].sold;
+    if (soldSoFar < TIERS[i].cap) { stageIndex = i; break; }
+    if (soldSoFar >= TIERS[i].cap) { stageIndex = Math.min(i+1, TIERS.length-1); }
+  }
+  const cur = TIERS[stageIndex];
+  document.getElementById('k_stage').textContent = stageIndex+1;
+  document.getElementById('k_price').textContent = `$${cur.price.toFixed(2)}`;
+  document.getElementById('k_sold').textContent = fmt(totalSold);
+  document.getElementById('k_rem').textContent = fmt(Math.max(0,totalCap-totalSold));
+  document.getElementById('k_prog').style.width = Math.min(100, (totalSold/totalCap)*100) + '%';
 
-    const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-    function fmt(n){ return Number(n || 0).toLocaleString(); }
+  // Point Buy buttons to your URL
+  document.getElementById('buyTop').href = BUY_URL;
+  buyButtons.forEach(btn => btn.href = BUY_URL);
 
-    function computeStage(sold) {
-      if (sold < STAGE1_CUTOFF) return { num: 1, url: SMITHII_STAGE_URL_1 };
-      if (sold < STAGE2_CUTOFF) return { num: 2, url: SMITHII_STAGE_URL_2 };
-      if (sold < TOTAL_CAP)     return { num: 3, url: SMITHII_STAGE_URL_3 };
-      return { num: 3, url: SMITHII_STAGE_URL_3 };
-    }
-
-    async function refreshProgress() {
-      try {
-        const { data, error } = await _sb.from('presale_progress').select('*').single();
-        if (error) { console.warn(error); }
-        const sold = data?.coins_sold_including_pending || 0;
-        const remaining = Math.max(0, TOTAL_CAP - sold);
-        const pct = Math.min(100, Math.round((sold / TOTAL_CAP) * 100));
-
-        document.getElementById('soldLabel').textContent   = fmt(sold);
-        document.getElementById('remainLabel').textContent = fmt(remaining);
-        document.getElementById('pctLabel').textContent    = pct + '%';
-        document.getElementById('pctFill').style.width     = pct + '%';
-
-        const st = computeStage(sold);
-        document.getElementById('stageLabel').textContent = `Stage ${st.num}`;
-        document.getElementById('priceLabel').textContent = (st.num === 1) ? `$${PRICE_STAGE_1.toFixed(2)}` : 'TBD';
-
-        document.getElementById('s1').classList.toggle('active', st.num === 1);
-        document.getElementById('s2').classList.toggle('active', st.num === 2);
-        document.getElementById('s3').classList.toggle('active', st.num === 3);
-
-        const buyTop = document.getElementById('buyBtnTop');
-        buyTop.href = st.url;
-
-        if (sold >= TOTAL_CAP) {
-          buyTop.textContent = 'Sold Out';
-          buyTop.classList.remove('btn-primary');
-          buyTop.classList.add('btn');
-          buyTop.href = '#';
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }
-
-    refreshProgress();
-    setInterval(refreshProgress, 60000);
-  </script>
+  // Footer year
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
