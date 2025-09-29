@@ -1,63 +1,94 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>S-COIN Sports — Everyone Can Play</title>
-  <meta name="description" content="S-COIN Sports: Web3 sports predictions. Everyone can play with FP-Chips. Betting with S-Chips where legal. S-COIN powers the ecosystem." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root { --blue:#00B5E2; --dark:#0b1020; --mid:#0f1730; --text:#eaf6ff; --gold:#F5C15C; }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--dark),#081020 60%,#040812);color:var(--text)}
-    a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-    .blue{color:var(--blue)}
-    .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    .nav{position:sticky;top:0;z-index:10;background:rgba(5,10,24,.8);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-    .nav a{color:#d6f3ff}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
-    .brand img{height:34px;width:auto}
-    .links{display:flex;gap:18px;font-weight:600}
-    .btn{display:inline-block;padding:12px 18px;border-radius:12px;background:var(--blue);color:#012332;font-weight:800;letter-spacing:.2px}
-    .btn-outline{background:transparent;border:1px solid var(--blue);color:var(--text)}
-    .hero{position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.08)}
-    .hero::before{content:"";position:absolute;inset:-20%;background:radial-gradient(1200px 500px at 50% -20%, rgba(0,181,226,.35), transparent 60%), url('assets/stadium-lights.jpg') center/cover no-repeat;opacity:.45;filter:contrast(115%)}
-    .wrap{position:relative;padding:80px 0 64px}
-    h1{font-size:48px;line-height:1.05;margin:0 0 10px}
-    .kicker{color:#a7e9ff;text-transform:uppercase;letter-spacing:.28em;font-size:12px}
-    .sub{max-width:760px;font-size:18px;color:#cfefff}
-    .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-    .ribbon{margin-top:18px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:999px;background:rgba(4,16,40,.6);font-size:13px;color:#cfe9ff}
-    .section{padding:44px 0}
-    .grid{display:grid;gap:16px;margin:36px 0}
-    .g3{grid-template-columns:repeat(3,1fr)}
-    .g4{grid-template-columns:repeat(4,1fr)}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px}
-    .card h3{margin:0 0 8px}
-    .badge{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);color:#bfeaff}
-    .token{display:flex;align-items:flex-start;gap:14px}
-    .icon{width:38px;height:38px;border-radius:12px;background:rgba(0,181,226,.18);display:grid;place-items:center;font-weight:800;color:#9fe6ff}
-    .footer{border-top:1px solid rgba(255,255,255,.08);padding:28px 0;color:#9dcbe4;font-size:14px}
-    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    @media (max-width:960px){ .g3{grid-template-columns:1fr} .g4{grid-template-columns:1fr 1fr} h1{font-size:36px} }
-    @media (max-width:600px){ .g4{grid-template-columns:1fr} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>S-COIN Sports — Bragging Rights, Tokenized</title>
+<meta name="description" content="S-COIN Sports is a Web3 sports prediction app where every pick counts. Everyone can play via free mode. Presale for S-COIN now." />
+<link rel="icon" href="assets/s-coin-logo.png" />
+<style>
+:root {
+--primary: #00B5E2; /* Ocean Blue */
+--dark: #062534; /* Deep Navy */
+--ink: #0b1520; /* Body text */
+--card: #0e2430;
+--muted: #cfe9f1;
+--ring: rgba(0,181,226,0.35);
+--radius: 16px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background:#041520; color:#e7f4f9; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/* Top nav */
+.nav { position: sticky; top:0; z-index:50; background: rgba(4,21,32,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.nav > .wrap { max-width: 1100px; margin: 0 auto; padding: 14px 18px; display:flex; align-items:center; gap:18px; }
+.nav .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.2px; }
+.brand img { width:34px; height:34px; border-radius:10px; }
+.menu { margin-left:auto; display:flex; gap:14px; }
+.menu a { padding:10px 12px; border-radius:12px; color:#e7f4f9; border:1px solid transparent; }
+.menu a.active, .menu a:hover { border-color: rgba(255,255,255,0.08); background: rgba(0,181,226,0.08); }
+
+
+/* Hero */
+.hero { position: relative; min-height: 62vh; display:grid; place-items:center; text-align:center; overflow:hidden; }
+.hero::before { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.3), rgba(4,21,32,0.85)), url('assets/stadium-lights.png') center/cover fixed; filter: saturate(1.15) contrast(1.02); }
+.hero .content { position:relative; padding: 80px 18px; max-width: 980px; }
+.badge { display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); padding:6px 10px; border-radius:999px; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; }
+.title { margin: 16px 0 10px; font-size: clamp(34px, 6vw, 56px); line-height:1.05; font-weight: 850; text-shadow: 0 10px 28px rgba(0,0,0,0.45); }
+.subtitle { font-size: clamp(16px, 2.4vw, 20px); color:#d2e9f1; opacity:0.95; }
+.cta { margin-top: 22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.btn { padding:12px 16px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); background: linear-gradient(180deg, rgba(0,181,226,0.2), rgba(0,181,226,0.08)); color:white; font-weight:650; box-shadow: 0 6px 20px rgba(0,181,226,0.18); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,181,226,0.25); }
+.btn.outline { background: transparent; }
+
+
+/* Sections */
+section { max-width: 1100px; margin: 0 auto; padding: 48px 18px; }
+.grid { display:grid; gap:18px; }
+@media (min-width: 900px){ .grid.cols-2 { grid-template-columns: 1.2fr 1fr; } }
+
+
+.card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 18px; }
+.card h3 { margin: 0 0 10px; font-size: 20px; }
+
+
+.kpis { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
+@media (min-width: 760px){ .kpis { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+.kpi { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); padding:16px; border-radius:14px; text-align:center; }
+.kpi .n { font-size: 22px; font-weight:800; }
+.muted { color: #bfe2ed; opacity:0.85; font-size: 14px; }
+
+
+/* Tokenomics */
+.tok-wrap { display:grid; gap:18px; align-items:center; }
+@media (min-width: 900px){ .tok-wrap { grid-template-columns: 1fr 1.1fr; } }
+.legend { display:grid; gap:10px; }
+.legend .row { display:flex; align-items:center; gap:10px; }
+.dot { width:12px; height:12px; border-radius:999px; display:inline-block; }
+
+
+/* Footer */
+footer { border-top:1px solid rgba(255,255,255,0.06); background:#061721; }
+.foot { max-width:1100px; margin:0 auto; padding:24px 18px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; justify-content:space-between; }
+.foot small { color:#bfe2ed; opacity:0.8; }
+.links { display:flex; gap:14px; }
+</style>
 </head>
 <body>
-  <!-- Top Nav -->
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="/"><img src="assets/logo.png" alt="S-COIN logo">S-COIN Sports</a>
-      <nav class="links">
-        <a href="/index.html">Homepage</a>
-        <a href="/predev.html">Pre-Development</a>
-        <a href="/presale.html">Presale</a>
-      </nav>
-    </div>
-  </header>
+<nav class="nav">
+<div class="wrap">
+<div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN" /><span>S-COIN Sports</span></div>
+<div class="menu">
+<a class="active" href="/">Homepage</a>
+<a href="predev.html">Pre-Development</a>
+<a href="presale.html">Presale</a>
+</div>
+</div>
+</nav>
+</html>
 
   <!-- Hero -->
   <section class="hero">
