@@ -1,0 +1,19 @@
+{
+  "name": "S-COIN",
+  "symbol": "SCOIN",
+  "description": "S-COIN — the ecosystem token powering S-COIN Sports.",
+  "image": "https://thearchitectofcoins.github.io/COINS/assets/scoin-logo.png",
+  "extensions": {
+    "website": "https://scoinsports.com",
+    "twitter": "https://twitter.com/scoinsports"
+  },
+  "properties": {
+    "category": "image",
+    "files": [
+      {
+        "uri": "https://thearchitectofcoins.github.io/COINS/assets/scoin-logo.png",
+        "type": "image/png"
+      }
+    ]
+  }
+}
