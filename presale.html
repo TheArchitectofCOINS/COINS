@@ -9,7 +9,7 @@
 <style>
 :root{
   --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
-  --muted:#cfe9f1; --ring:rgba(0,181,226,0.35); --radius:16px;
+  --muted:#cfe9f1; --ring:rgba(0,181,226,.35); --radius:16px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -17,8 +17,6 @@ a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
 .section{padding:48px 0}
-
-/* Cards + grid */
 .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
 .grid{display:grid;gap:18px}
 .g2{grid-template-columns:1fr}
@@ -33,15 +31,6 @@ a:hover{text-decoration:underline}
 .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
 .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
 
-/* Sticky top-right */
-.sticky-presale-btn{
-  position:fixed; top:16px; right:16px; z-index:9999;
-  padding:10px 16px; border-radius:999px; font-weight:700;
-  background:#00B5E2; color:#0b1220; text-decoration:none;
-  box-shadow:0 6px 20px rgba(0,0,0,.18);
-}
-.sticky-presale-btn:hover{transform:translateY(-1px)}
-
 /* Hero */
 .hero{padding:60px 0 22px;text-align:center;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed}
 .hero h1{font-size:clamp(32px,6vw,52px);line-height:1.05;margin:0 0 10px;font-weight:850}
@@ -50,8 +39,6 @@ a:hover{text-decoration:underline}
 .btn{display:inline-block;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
 .btn:hover{transform:translateY(-1px)}
 .btn-ghost{background:transparent}
-
-/* Countdown */
 .countdown{margin:14px auto 0; padding:.7rem 1rem; border:1px dashed rgba(0,181,226,.6); border-radius:12px; display:inline-block; font-variant-numeric:tabular-nums}
 
 /* Tiers */
@@ -75,8 +62,6 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 </head>
 <body>
 
-<a href="presale.html" class="sticky-presale-btn">View Presale</a>
-
 <nav class="nav">
   <div class="wrap">
     <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN"/><span>S-COIN Sports</span></div>
@@ -92,12 +77,12 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
   <div class="container">
     <h1>S-COIN Presale</h1>
     <p class="sub">Goes live <strong>October 4, 12:00 CT</strong>.</p>
-    <div id="countdown" class="countdown" aria-live="polite">Presale starts in —</div>
+    <div id="countdown" class="countdown">Presale starts in —</div>
     <div class="kit">
       <a class="btn" href="#tiers">View Tiers</a>
-      <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
-      <a class="btn btn-ghost" href="https://discord.gg/YourInviteCode" target="_blank" rel="noopener">Join Discord</a>
-      <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank" rel="noopener">Follow on X</a>
+      <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read Whitepaper</a>
+      <a class="btn btn-ghost" href="https://discord.gg/MzkVsQ9CAd" target="_blank" rel="noopener">Join Discord</a>
+      <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank">Follow on X</a>
     </div>
   </div>
 </header>
@@ -105,150 +90,47 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 <main class="section">
   <div class="container grid g2">
 
-    <!-- LEFT: Tiers + Overview -->
+    <!-- LEFT: Tiers -->
     <section id="tiers" class="grid" style="gap:18px">
 
-      <!-- Stage 1 -->
       <div class="tier card">
         <div class="badge">Stage 1 — $0.01</div>
         <h3>30,000,000 tokens @ $0.01</h3>
-        <div class="progress" title="Progress">
-          <span id="p1" style="width:0%"></span>
-        </div>
-        <p style="opacity:.85;margin:.5rem 0 0">
-          Early access for holders. VIP (hold S-COIN) unlocks spreads, totals, exact score, team creation, ribbons.
-        </p>
-        <div class="kit" style="margin-top:.7rem">
-          <a class="btn" href="#" onclick="alert('Presale link coming soon');return false;">Buy Stage 1</a>
-        </div>
+        <div class="progress"><span id="p1" style="width:0%"></span></div>
+        <p style="opacity:.85;margin:.5rem 0 0">Early access for holders. VIP unlocks advanced features.</p>
       </div>
 
-      <!-- Stage 2 -->
       <div class="tier card">
         <div class="badge">Stage 2 — $0.05</div>
         <h3>30,000,000 tokens @ $0.05</h3>
-        <div class="progress" title="Progress">
-          <span id="p2" style="width:0%"></span>
-        </div>
-        <p style="opacity:.85;margin:.5rem 0 0">
-          Opens after Stage 1 milestones.
-        </p>
-        <div class="kit" style="margin-top:.7rem">
-          <a class="btn btn-ghost" href="#" onclick="return false;">Locked until Stage 1 completes</a>
-        </div>
+        <div class="progress"><span id="p2" style="width:0%"></span></div>
+        <p style="opacity:.85;margin:.5rem 0 0">Opens after Stage 1 milestones.</p>
       </div>
 
-      <!-- Stage 3 -->
       <div class="tier card">
         <div class="badge">Stage 3 — $0.10</div>
         <h3>40,000,000 tokens @ $0.10</h3>
-        <div class="progress" title="Progress">
-          <span id="p3" style="width:0%"></span>
-        </div>
-        <p style="opacity:.85;margin:.5rem 0 0">
-          Final presale stage; unlocks broader ecosystem expansion and liquidity.
-        </p>
-        <div class="kit" style="margin-top:.7rem">
-          <a class="btn btn-ghost" href="#" onclick="return false;">Locked until prior stages complete</a>
-        </div>
+        <div class="progress"><span id="p3" style="width:0%"></span></div>
+        <p style="opacity:.85;margin:.5rem 0 0">Final presale stage; supports ecosystem growth and liquidity.</p>
       </div>
 
-      <!-- Overview table -->
       <div class="card">
-        <h3 style="margin-top:0">Presale Overview (100,000,000 tokens)</h3>
-        <table class="table" aria-label="Presale Tiers">
+        <h3 style="margin-top:0">Presale Overview</h3>
+        <table class="table">
           <thead><tr><th>Stage</th><th>Price</th><th>Tokens</th><th>Value</th></tr></thead>
           <tbody>
             <tr><td>Stage 1</td><td>$0.01</td><td>30,000,000</td><td>$300,000</td></tr>
             <tr><td>Stage 2</td><td>$0.05</td><td>30,000,000</td><td>$1,500,000</td></tr>
             <tr><td>Stage 3</td><td>$0.10</td><td>40,000,000</td><td>$4,000,000</td></tr>
           </tbody>
-          <tfoot>
-            <tr><th colspan="3" style="text-align:right">Total</th><th>$5,800,000</th></tr>
-          </tfoot>
+          <tfoot><tr><th colspan="3" style="text-align:right">Total</th><th>$5,800,000</th></tr></tfoot>
         </table>
       </div>
     </section>
 
-    <!-- RIGHT: Why + Trust + Quick links -->
+    <!-- RIGHT: Info -->
     <aside>
       <div class="card">
-        <h3 style="margin-top:0">Why hold S-COIN?</h3>
+        <h3>Why hold S-COIN?</h3>
         <ul>
-          <li>Unlocks VIP: spreads, totals, exact score</li>
-          <li>Create & manage Teams</li>
-          <li>Ribbons & progression</li>
-          <li>Governance, referrals, staking perks</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3 style="margin-top:0">How we protect buyers</h3>
-        <p>• Multisig treasury</p>
-        <p>• Third-party audit after Stage 1</p>
-        <p>• Compliance-first KYC stance; free play available to all</p>
-        <p>• Transparent LP/treasury allocations</p>
-      </div>
-
-      <div class="card">
-        <h3 style="margin-top:0">Quick links</h3>
-        <div class="kit">
-          <a class="btn" href="index.html">Back to Homepage</a>
-          <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank">X / Twitter</a>
-          <a class="btn btn-ghost" href="https://discord.gg/YourInviteCode" target="_blank">Discord</a>
-          <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
-        </div>
-      </div>
-    </aside>
-
-  </div>
-</main>
-
-<footer>
-  <div class="foot">
-    <div>
-      <small>© <span id="y"></span> S-COIN Sports</small>
-      <div class="footer-social">
-        <a href="https://x.com/YourHandle" target="_blank" rel="noopener">X</a>
-        <a href="https://discord.gg/YourInviteCode" target="_blank" rel="noopener">Discord</a>
-        <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-// Year
-document.getElementById('y').textContent = new Date().getFullYear();
-
-// Countdown to Oct 4, 2025 12:00 CT (CDT = UTC-5)
-(function(){
-  const el = document.getElementById('countdown');
-  if(!el) return;
-  const target = new Date('2025-10-04T12:00:00-05:00').getTime();
-  const fmt = n => String(n).padStart(2,'0');
-  function tick(){
-    const diff = Math.max(0, target - Date.now());
-    const d = Math.floor(diff/86400000);
-    const h = Math.floor((diff%86400000)/3600000);
-    const m = Math.floor((diff%3600000)/60000);
-    const s = Math.floor((diff%60000)/1000);
-    el.textContent = diff>0 ? `Presale starts in ${d}d ${fmt(h)}h ${fmt(m)}m ${fmt(s)}s` : 'Presale is LIVE →';
-    if(diff<=0){
-      el.style.borderColor = '#00B5E2';
-      el.style.fontWeight = '700';
-      el.style.cursor = 'pointer';
-      el.onclick = () => location.href = 'presale.html';
-    }
-  }
-  tick(); setInterval(tick, 1000);
-})();
-
-// Progress placeholders (set widths when you have real data)
-document.getElementById('p1').style.width = '0%';
-document.getElementById('p2').style.width = '0%';
-document.getElementById('p3').style.width = '0%';
-</script>
-
-</body>
-</html>
+          <li>VIP features (spreads, totals, exact score)</li>
