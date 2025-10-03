@@ -134,3 +134,68 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
         <h3>Why hold S-COIN?</h3>
         <ul>
           <li>VIP features (spreads, totals, exact score)</li>
+          <li>Create & manage Teams</li>
+          <li>Ribbons & progression</li>
+          <li>Governance, referrals, staking perks</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Trust & Protection</h3>
+        <p>• Multisig treasury</p>
+        <p>• Third-party audit after Stage 1</p>
+        <p>• Compliance-first KYC stance; free play available to all</p>
+        <p>• Transparent LP/treasury allocations</p>
+      </div>
+
+      <div class="card">
+        <h3>Quick Links</h3>
+        <div class="kit">
+          <a class="btn" href="index.html">Homepage</a>
+          <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank">X / Twitter</a>
+          <a class="btn btn-ghost" href="https://discord.gg/MzkVsQ9CAd" target="_blank">Discord</a>
+          <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="footer-social">
+      <a href="https://x.com/YourHandle" target="_blank">X</a>
+      <a href="https://discord.gg/MzkVsQ9CAd" target="_blank">Discord</a>
+      <a href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+(function(){
+  const el = document.getElementById('countdown');
+  const target = new Date('2025-10-04T12:00:00-05:00').getTime();
+  const fmt = n => String(n).padStart(2,'0');
+  function tick(){
+    const diff = target - Date.now();
+    if(diff<=0){
+      el.textContent = 'Presale is LIVE →';
+      el.style.fontWeight='700'; el.style.cursor='pointer';
+      el.onclick=()=>location.href='presale.html';
+      return;
+    }
+    const d=Math.floor(diff/86400000),
+          h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000),
+          s=Math.floor((diff%60000)/1000);
+    el.textContent=`Presale starts in ${d}d ${fmt(h)}h ${fmt(m)}m ${fmt(s)}s`;
+  }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+
+</body>
+</html>
