@@ -8,20 +8,14 @@
 <link rel="icon" href="assets/s-coin-logo.png" />
 <style>
 :root{
-  --primary:#00B5E2; /* Ocean Blue */
-  --dark:#062534;    /* Deep Navy */
-  --ink:#0b1520;     /* Body text */
-  --card:#0e2430;
-  --muted:#cfe9f1;
-  --ring:rgba(0,181,226,0.35);
-  --radius:16px;
+  --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
+  --muted:#cfe9f1; --ring:rgba(0,181,226,0.35); --radius:16px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* containers */
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
 .section{padding:48px 0}
 .grid{display:grid;gap:18px}
@@ -33,7 +27,7 @@ a:hover{text-decoration:underline}
 /* nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
-.nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
 .brand img{width:34px;height:34px;border-radius:10px}
 .menu{margin-left:auto;display:flex;gap:14px}
 .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
@@ -45,36 +39,27 @@ a:hover{text-decoration:underline}
   padding:10px 16px; border-radius:999px; font-weight:700;
   background:#00B5E2; color:#0b1220; text-decoration:none;
   box-shadow:0 6px 20px rgba(0,0,0,.18);
-  transition:transform .08s ease, box-shadow .2s ease;
 }
-.sticky-presale-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.25); }
+.sticky-presale-btn:hover{transform:translateY(-1px)}
 
 /* hero */
 .hero{position:relative;min-height:62vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.15) contrast(1.02)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed}
 .hero .content{position:relative;padding:80px 18px;max-width:980px}
 .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850;text-shadow:0 10px 28px rgba(0,0,0,.45)}
+.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
 .subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
-.kicker{font-size:12px;letter-spacing:.5px;text-transform:uppercase;opacity:.9}
-.blue{color:var(--primary)}
-.sub{color:#d2e9f1}
 .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650;box-shadow:0 6px 20px rgba(0,181,226,.18)}
-.btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,181,226,.25)}
+.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
+.btn:hover{transform:translateY(-1px)}
 .btn.btn-outline{background:transparent}
-
-/* countdown */
-.countdown-wrap{
-  margin:14px auto 0; padding:.75rem 1rem; border:1px dashed rgba(0,181,226,.6);
-  border-radius:12px; display:inline-block; font-variant-numeric:tabular-nums;
-}
+.countdown-wrap{margin:14px auto 0; padding:.75rem 1rem; border:1px dashed rgba(0,181,226,.6); border-radius:12px; display:inline-block}
 
 /* compare */
 .sec-title{font-size:1.6rem; margin:1.5rem 0 .75rem;}
 .compare-grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
-.plan{border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px; background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.0));}
-.plan.vip{outline:2px solid #00B5E2; box-shadow:0 8px 28px rgba(0,181,226,.15);}
+.plan{border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px;}
+.plan.vip{outline:2px solid #00B5E2;}
 .plan-tag{font-weight:800; margin-bottom:.5rem;}
 .plan ul{margin:0; padding-left:18px;}
 .plan-cta{display:inline-block; margin-top:.75rem;}
@@ -85,34 +70,20 @@ a:hover{text-decoration:underline}
 .trust-card h3{margin:.2rem 0 .4rem; font-size:1.05rem;}
 .trust-card p{margin:0; opacity:.9;}
 
-/* tokenomics */
-.tok-wrap{display:grid;gap:18px;align-items:center}
-@media(min-width:900px){.tok-wrap{grid-template-columns:1fr 1.1fr}}
-.legend{display:grid;gap:10px}
-.legend .row{display:flex;align-items:center;gap:10px}
-.dot{width:12px;height:12px;border-radius:999px;display:inline-block}
-
-/* social inline */
-.social-inline{display:flex; gap:.5rem; align-items:center; margin-top:.5rem; opacity:.9; flex-wrap:wrap}
-.social-inline a{color:#00B5E2; text-decoration:none; font-weight:600;}
-.social-inline a:hover{text-decoration:underline;}
-
 /* footer */
 footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
 .foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
-.links{display:flex;gap:14px}
-.footer-social{display:flex; gap:1rem; flex-wrap:wrap; margin-top:.5rem}
+.footer-social{display:flex; gap:1rem; flex-wrap:wrap}
 .footer-social a{color:#00B5E2; text-decoration:none; font-weight:600;}
 </style>
 </head>
 <body>
 
-<!-- Sticky View Presale -->
 <a href="presale.html" class="sticky-presale-btn">View Presale</a>
 
 <nav class="nav">
   <div class="wrap">
-    <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN" /><span>S-COIN Sports</span></div>
+    <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN"/><span>S-COIN Sports</span></div>
     <div class="menu">
       <a class="active" href="/">Homepage</a>
       <a href="predev.html">Pre-Development</a>
@@ -127,26 +98,14 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
     <h1 class="title">Bragging Rights Just Got Tokenized.</h1>
     <p class="subtitle">
       Presale goes live <strong>October 4, 12:00 CT</strong> — Free play for everyone.
-      <br />VIP with <strong>S-COIN</strong> unlocks spreads, totals, exact score, VIP chat, and more.
+      <br>VIP with <strong>S-COIN</strong> unlocks spreads, totals, exact score, and more.
     </p>
     <div class="cta">
       <a class="btn" href="presale.html">View Presale</a>
       <a class="btn btn-outline" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
-      <a class="btn btn-outline" href="https://t.me/YourTelegramHandle" target="_blank" rel="noopener">Join Telegram (Live Updates)</a>
+      <a class="btn btn-outline" href="https://discord.gg/YourInviteCode" target="_blank" rel="noopener">Join Discord (Live Updates)</a>
     </div>
-
-    <!-- Countdown directly under hero -->
-    <div id="presale-countdown" class="countdown-wrap" aria-live="polite">Presale starts in —</div>
-
-    <!-- Hero social quick links -->
-    <div class="social-inline">
-      <a href="https://x.com/YourHandle" target="_blank" rel="noopener">X (Twitter)</a>
-      <span>•</span>
-      <a href="https://t.me/YourTelegramHandle" target="_blank" rel="noopener">Telegram</a>
-      <!-- Optional: Discord
-      <span>•</span>
-      <a href="https://discord.gg/YourInvite" target="_blank" rel="noopener">Discord</a> -->
-    </div>
+    <div id="presale-countdown" class="countdown-wrap">Presale starts in —</div>
   </div>
 </header>
 
@@ -160,13 +119,11 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
       <div class="card">
         <h3>Prediction Types</h3>
         <p>Moneyline · Spreads · Over/Under · Totals</p>
-        <p style="opacity:.85">Built on Solana. Phantom wallet support. Supabase backend. Designed for speed & transparency.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Free vs VIP comparison -->
 <section class="section">
   <div class="container">
     <h2 class="sec-title">Free vs VIP</h2>
@@ -184,7 +141,6 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
         <ul>
           <li>Spreads & Totals</li>
           <li>Exact Score markets</li>
-          <li>VIP Chat access</li>
           <li>Create & manage Teams</li>
           <li>Ribbons & progression</li>
         </ul>
@@ -194,154 +150,44 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
   </div>
 </section>
 
-<!-- Trust signals -->
 <section class="section">
   <div class="container">
     <h2 class="sec-title">How we protect buyers</h2>
     <div class="trust-grid">
-      <div class="trust-card">
-        <h3>Multisig Treasury</h3>
-        <p>Funds controlled by multiple signers to reduce single-point risk.</p>
-      </div>
-      <div class="trust-card">
-        <h3>Audit Plan</h3>
-        <p>Third-party code & wallet review scheduled post-Stage-1.</p>
-      </div>
-      <div class="trust-card">
-        <h3>KYC Stance</h3>
-        <p>Compliance-first approach; clear separation of free play and VIP access.</p>
-      </div>
-      <div class="trust-card">
-        <h3>LP / Treasury Allocations</h3>
-        <p>Transparent ratios and on-chain public addresses at launch.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Simple visuals: VIP pyramid + Ribbon progression -->
-<section class="section">
-  <div class="container">
-    <h2 class="sec-title">VIP Chat Tiers</h2>
-    <ol style="list-style:none; margin:0; padding:0; display:grid; gap:8px;">
-      <li style="text-align:center; padding:.6rem; border:1px solid rgba(255,255,255,.12); border-radius:10px; background:linear-gradient(180deg, rgba(0,181,226,.09), rgba(255,255,255,.02)); max-width:320px; margin:0 auto;">Tier 3 — Pro (highest)</li>
-      <li style="text-align:center; padding:.6rem; border:1px solid rgba(255,255,255,.12); border-radius:10px; background:linear-gradient(180deg, rgba(0,181,226,.09), rgba(255,255,255,.02)); max-width:420px; margin:0 auto;">Tier 2 — Plus</li>
-      <li style="text-align:center; padding:.6rem; border:1px solid rgba(255,255,255,.12); border-radius:10px; background:linear-gradient(180deg, rgba(0,181,226,.09), rgba(255,255,255,.02)); max-width:520px; margin:0 auto;">Tier 1 — Starter</li>
-    </ol>
-
-    <h2 class="sec-title" style="margin-top:22px;">Ribbon Progression</h2>
-    <div style="display:flex; gap:.5rem; flex-wrap:wrap">
-      <span style="padding:.4rem .6rem; border-radius:999px; font-weight:800; font-size:.9rem; background:linear-gradient(90deg, #00B5E2, #39d2ff); color:#061018; box-shadow:0 4px 14px rgba(0,181,226,.25);">Lv1</span>
-      <span style="padding:.4rem .6rem; border-radius:999px; font-weight:800; font-size:.9rem; background:linear-gradient(90deg, #00B5E2, #39d2ff); color:#061018; box-shadow:0 4px 14px rgba(0,181,226,.25);">Lv2</span>
-      <span style="padding:.4rem .6rem; border-radius:999px; font-weight:800; font-size:.9rem; background:linear-gradient(90deg, #00B5E2, #39d2ff); color:#061018; box-shadow:0 4px 14px rgba(0,181,226,.25);">Lv3</span>
-      <span style="padding:.4rem .6rem; border-radius:999px; font-weight:800; font-size:.9rem; background:linear-gradient(90deg, #00B5E2, #39d2ff); color:#061018; box-shadow:0 4px 14px rgba(0,181,226,.25);">Lv4</span>
-      <span style="padding:.4rem .6rem; border-radius:999px; font-weight:800; font-size:.9rem; background:linear-gradient(90deg, #00B5E2, #39d2ff); color:#061018; box-shadow:0 4px 14px rgba(0,181,226,.25);">Lv5</span>
-    </div>
-    <p style="opacity:.85; margin-top:.5rem">Earn higher levels with streaks, accuracy, and team achievements.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 style="margin:0 0 14px;">Two-Token Ecosystem</h2>
-    <div class="grid g2">
-      <div class="card">
-        <h3>S-COIN <span class="badge">On-chain</span></h3>
-        <p>The flagship Web3 token. Presale-eligible. Utility, governance, staking, perks, NFTs & merch.</p>
-      </div>
-      <div class="card">
-        <h3>S-COIN-FP <span class="badge">Free Play</span></h3>
-        <p>Worldwide, no-money gameplay. Daily claims, streaks, competitions, and bragging rights.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 style="margin:0 0 14px;">S-COIN Tokenomics</h2>
-    <p style="color:#bfe2ed;opacity:.9;margin-top:-6px">Clear, conservative allocation focused on growth and long-term utility.</p>
-    <div class="tok-wrap" style="margin-top:14px;">
-      <div class="card">
-        <!-- Pie Chart -->
-        <svg viewBox="0 0 42 42" width="100%" aria-label="Tokenomics Pie Chart">
-          <circle r="15.915" cx="21" cy="21" fill="#0a2330" />
-          <g transform="rotate(-90 21 21)">
-            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#00B5E2" stroke-width="7" stroke-dasharray="1 99" />
-            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#34d399" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-1" />
-            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#f59e0b" stroke-width="7" stroke-dasharray="15 85" stroke-dashoffset="-11" />
-            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#ef4444" stroke-width="7" stroke-dasharray="10 90" stroke-dashoffset="-26" />
-            <circle r="15.915" cx="21" cy="21" fill="transparent" stroke="#9ca3af" stroke-width="7" stroke-dasharray="64 36" stroke-dashoffset="-36" />
-          </g>
-        </svg>
-      </div>
-      <div class="legend">
-        <div class="row"><span class="dot" style="background:#00B5E2"></span> Presale — <strong>1%</strong> (100M)</div>
-        <div class="row"><span class="dot" style="background:#34d399"></span> Treasury & Liquidity — <strong>10%</strong> (1B)</div>
-        <div class="row"><span class="dot" style="background:#f59e0b"></span> Rewards & Incentives — <strong>15%</strong> (1.5B)</div>
-        <div class="row"><span class="dot" style="background:#ef4444"></span> Team & Advisors — <strong>10%</strong> (1B)</div>
-        <div class="row"><span class="dot" style="background:#9ca3af"></span> Future Ecosystem — <strong>64%</strong> (6.4B)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- How It Works -->
-<section class="section">
-  <div class="container">
-    <h2 style="margin:0 0 14px;">How It Works</h2>
-    <div class="grid g3">
-      <div class="card"><h3>1) Play Free</h3><p>Anyone can start with S-COIN-FP. No KYC. No cash-out. Just picks & leaderboards.</p></div>
-      <div class="card"><h3>2) Earn Perks</h3><p>Hold S-COIN to access avatars, VIP badges, governance votes, and merch/NFT perks.</p></div>
-      <div class="card"><h3>3) Built for Trust</h3><p>Multisig treasury, audits, and clear compliance: everyone can play, not everyone can bet.</p></div>
+      <div class="trust-card"><h3>Multisig Treasury</h3><p>Funds controlled by multiple signers to reduce single-point risk.</p></div>
+      <div class="trust-card"><h3>Audit Plan</h3><p>Third-party code & wallet review scheduled post-Stage-1.</p></div>
+      <div class="trust-card"><h3>KYC Stance</h3><p>Compliance-first approach; clear separation of free play and VIP access.</p></div>
+      <div class="trust-card"><h3>LP / Treasury Allocations</h3><p>Transparent ratios and on-chain public addresses at launch.</p></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="foot">
-    <div>
-      <small>© <span id="y"></span> S-COIN Sports</small>
-      <div class="footer-social">
-        <a href="https://x.com/YourHandle" target="_blank" rel="noopener">X</a>
-        <a href="https://t.me/YourTelegramHandle" target="_blank" rel="noopener">Telegram</a>
-        <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
-        <a href="presale.html">Presale</a>
-      </div>
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="footer-social">
+      <a href="https://x.com/YourHandle" target="_blank">X</a>
+      <a href="https://discord.gg/YourInviteCode" target="_blank">Discord</a>
+      <a href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
+      <a href="presale.html">Presale</a>
     </div>
-    <div class="links"></div>
   </div>
 </footer>
 
 <script>
-  // Copyright year
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  // Countdown to Oct 4, 2025 12:00 CT (America/Chicago). CDT is UTC-5 in early Oct.
-  (function(){
-    var el = document.getElementById('presale-countdown');
-    if(!el) return;
-    var target = new Date('2025-10-04T12:00:00-05:00').getTime();
-    function fmt(n){ return String(n).padStart(2,'0'); }
-    function tick(){
-      var now = Date.now();
-      var diff = Math.max(0, target - now);
-      var d = Math.floor(diff/86400000);
-      var h = Math.floor((diff%86400000)/3600000);
-      var m = Math.floor((diff%3600000)/60000);
-      var s = Math.floor((diff%60000)/1000);
-      el.textContent = (diff>0)
-        ? 'Presale starts in ' + d + 'd ' + fmt(h) + 'h ' + fmt(m) + 'm ' + fmt(s) + 's'
-        : 'Presale is LIVE → Click to enter';
-      if(diff<=0){
-        el.style.borderColor = '#00B5E2';
-        el.style.fontWeight = '700';
-        el.style.cursor = 'pointer';
-        el.onclick = function(){ location.href = 'presale.html'; };
-      }
-    }
-    tick(); setInterval(tick, 1000);
-  })();
+document.getElementById('y').textContent = new Date().getFullYear();
+(function(){
+  var el=document.getElementById('presale-countdown');
+  var target=new Date('2025-10-04T12:00:00-05:00').getTime();
+  function fmt(n){return String(n).padStart(2,'0');}
+  function tick(){
+    var diff=target-Date.now();
+    if(diff<=0){el.textContent='Presale is LIVE →';el.style.fontWeight='700';el.style.cursor='pointer';el.onclick=()=>location.href='presale.html';return;}
+    var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    el.textContent=`Presale starts in ${d}d ${fmt(h)}h ${fmt(m)}m ${fmt(s)}s`;
+  }
+  tick();setInterval(tick,1000);
+})();
 </script>
 
 </body>
