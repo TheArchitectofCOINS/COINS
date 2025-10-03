@@ -3,72 +3,85 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>S-COIN Presale</title>
-<meta name="description" content="Official S-COIN presale. Three tiers, fixed supply caps. 100M S-COIN total presale allocation with vesting." />
+<title>S-COIN Presale — Starts Oct 4, 12:00 CT</title>
+<meta name="description" content="S-COIN Presale: Stage 1 at $0.01 (30M), Stage 2 at $0.05 (30M), Stage 3 at $0.10 (40M). Total 100M tokens." />
 <link rel="icon" href="assets/s-coin-logo.png" />
 <style>
 :root{
-  --primary:#00B5E2; --dark:#062534; --ink:#0b1520;
-  --muted:#cfe9f1; --radius:16px;
+  --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
+  --muted:#cfe9f1; --ring:rgba(0,181,226,0.35); --radius:16px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
-
-/* layout */
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
 .section{padding:48px 0}
+
+/* Cards + grid */
+.card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
 .grid{display:grid;gap:18px}
 .g2{grid-template-columns:1fr}
-.g3{grid-template-columns:1fr}
-@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px}
+@media(min-width:900px){.g2{grid-template-columns:1.2fr .8fr}}
 
-/* nav */
+/* Nav */
 .nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
-.nav .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
 .brand img{width:34px;height:34px;border-radius:10px}
 .menu{margin-left:auto;display:flex;gap:14px}
 .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
 .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
 
-/* hero */
-.hero{position:relative;min-height:52vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),url('assets/stadium-lights.png') center/cover fixed;filter:saturate(1.1) contrast(1.02)}
-.hero .content{position:relative;padding:80px 18px;max-width:820px}
-h1.title{font-size:clamp(32px,6vw,56px);margin:0 0 8px}
-.subtitle{color:#d2e9f1;opacity:.95}
+/* Sticky top-right */
+.sticky-presale-btn{
+  position:fixed; top:16px; right:16px; z-index:9999;
+  padding:10px 16px; border-radius:999px; font-weight:700;
+  background:#00B5E2; color:#0b1220; text-decoration:none;
+  box-shadow:0 6px 20px rgba(0,0,0,.18);
+}
+.sticky-presale-btn:hover{transform:translateY(-1px)}
 
-/* status */
-.krow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
-.kpill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;text-align:center}
-.kpill b{display:block;font-size:18px}
-.progress{height:12px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
-.progress>span{display:block;height:100%;background:linear-gradient(90deg,#00B5E2,#38c7f0);width:0%}
+/* Hero */
+.hero{padding:60px 0 22px;text-align:center;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed}
+.hero h1{font-size:clamp(32px,6vw,52px);line-height:1.05;margin:0 0 10px;font-weight:850}
+.sub{opacity:.95}
+.kit{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.btn{display:inline-block;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
+.btn:hover{transform:translateY(-1px)}
+.btn-ghost{background:transparent}
 
-/* tier cards */
-.tiers{display:grid;gap:14px;grid-template-columns:1fr}
-@media(min-width:900px){.tiers{grid-template-columns:repeat(3,1fr)}}
-.tier .row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
-.tier .row:last-child{border-bottom:none}
-.btn{padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
-.note{margin-top:14px;color:#bfe2ed;opacity:.9;font-size:14px}
+/* Countdown */
+.countdown{margin:14px auto 0; padding:.7rem 1rem; border:1px dashed rgba(0,181,226,.6); border-radius:12px; display:inline-block; font-variant-numeric:tabular-nums}
 
-/* foot */
+/* Tiers */
+.tier{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px}
+.tier h3{margin:.2rem 0 .4rem}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.progress{height:10px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden}
+.progress > span{display:block;height:100%;background:linear-gradient(90deg,#00B5E2,#39d2ff)}
+
+/* Table */
+.table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.table th,.table td{border:1px solid rgba(255,255,255,.14);padding:.6rem .7rem;text-align:left}
+.table thead th{background:rgba(0,181,226,.08)}
+
+/* Footer */
 footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
 .foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
-.links{display:flex;gap:14px}
+.footer-social{display:flex; gap:1rem; flex-wrap:wrap}
+.footer-social a{color:#00B5E2; text-decoration:none; font-weight:600;}
 </style>
 </head>
 <body>
+
+<a href="presale.html" class="sticky-presale-btn">View Presale</a>
 
 <nav class="nav">
   <div class="wrap">
     <div class="brand"><img src="assets/s-coin-logo.png" alt="S-COIN"/><span>S-COIN Sports</span></div>
     <div class="menu">
-      <a href="/">Homepage</a>
+      <a href="index.html">Homepage</a>
       <a href="predev.html">Pre-Development</a>
       <a class="active" href="presale.html">Presale</a>
     </div>
@@ -76,122 +89,166 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 </nav>
 
 <header class="hero">
-  <div class="content">
-    <h1 class="title">S-COIN Presale</h1>
-    <p class="subtitle">Three stages. Fixed supply caps. Prices step up each stage. <br><strong>Only S-COIN is sold in presale.</strong> S-COIN-FP is for free play (not sold).</p>
-    <p style="margin-top:16px">
-      <a id="buyTop" class="btn" href="#" target="_blank" rel="noreferrer">Buy S-COIN</a>
-    </p>
+  <div class="container">
+    <h1>S-COIN Presale</h1>
+    <p class="sub">Goes live <strong>October 4, 12:00 CT</strong>.</p>
+    <div id="countdown" class="countdown" aria-live="polite">Presale starts in —</div>
+    <div class="kit">
+      <a class="btn" href="#tiers">View Tiers</a>
+      <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
+      <a class="btn btn-ghost" href="https://discord.gg/YourInviteCode" target="_blank" rel="noopener">Join Discord</a>
+      <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank" rel="noopener">Follow on X</a>
+    </div>
   </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <div class="grid g2">
+<main class="section">
+  <div class="container grid g2">
+
+    <!-- LEFT: Tiers + Overview -->
+    <section id="tiers" class="grid" style="gap:18px">
+
+      <!-- Stage 1 -->
+      <div class="tier card">
+        <div class="badge">Stage 1 — $0.01</div>
+        <h3>30,000,000 tokens @ $0.01</h3>
+        <div class="progress" title="Progress">
+          <span id="p1" style="width:0%"></span>
+        </div>
+        <p style="opacity:.85;margin:.5rem 0 0">
+          Early access for holders. VIP (hold S-COIN) unlocks spreads, totals, exact score, team creation, ribbons.
+        </p>
+        <div class="kit" style="margin-top:.7rem">
+          <a class="btn" href="#" onclick="alert('Presale link coming soon');return false;">Buy Stage 1</a>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="tier card">
+        <div class="badge">Stage 2 — $0.05</div>
+        <h3>30,000,000 tokens @ $0.05</h3>
+        <div class="progress" title="Progress">
+          <span id="p2" style="width:0%"></span>
+        </div>
+        <p style="opacity:.85;margin:.5rem 0 0">
+          Opens after Stage 1 milestones.
+        </p>
+        <div class="kit" style="margin-top:.7rem">
+          <a class="btn btn-ghost" href="#" onclick="return false;">Locked until Stage 1 completes</a>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="tier card">
+        <div class="badge">Stage 3 — $0.10</div>
+        <h3>40,000,000 tokens @ $0.10</h3>
+        <div class="progress" title="Progress">
+          <span id="p3" style="width:0%"></span>
+        </div>
+        <p style="opacity:.85;margin:.5rem 0 0">
+          Final presale stage; unlocks broader ecosystem expansion and liquidity.
+        </p>
+        <div class="kit" style="margin-top:.7rem">
+          <a class="btn btn-ghost" href="#" onclick="return false;">Locked until prior stages complete</a>
+        </div>
+      </div>
+
+      <!-- Overview table -->
       <div class="card">
-        <h3 style="margin:0 0 8px">Current Status</h3>
-        <div class="krow">
-          <div class="kpill"><small>Stage</small><b id="k_stage">1</b></div>
-          <div class="kpill"><small>Price</small><b id="k_price">$0.05</b></div>
-          <div class="kpill"><small>Sold</small><b id="k_sold">0</b></div>
-          <div class="kpill"><small>Remaining</small><b id="k_rem">100,000,000</b></div>
-        </div>
-        <div style="margin-top:12px">
-          <div class="progress"><span id="k_prog" style="width:0%"></span></div>
-        </div>
-        <p class="note">Totals reflect website + launchpad sales. Stage advances automatically when its cap is reached.</p>
+        <h3 style="margin-top:0">Presale Overview (100,000,000 tokens)</h3>
+        <table class="table" aria-label="Presale Tiers">
+          <thead><tr><th>Stage</th><th>Price</th><th>Tokens</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Stage 1</td><td>$0.01</td><td>30,000,000</td><td>$300,000</td></tr>
+            <tr><td>Stage 2</td><td>$0.05</td><td>30,000,000</td><td>$1,500,000</td></tr>
+            <tr><td>Stage 3</td><td>$0.10</td><td>40,000,000</td><td>$4,000,000</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><th colspan="3" style="text-align:right">Total</th><th>$5,800,000</th></tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- RIGHT: Why + Trust + Quick links -->
+    <aside>
+      <div class="card">
+        <h3 style="margin-top:0">Why hold S-COIN?</h3>
+        <ul>
+          <li>Unlocks VIP: spreads, totals, exact score</li>
+          <li>Create & manage Teams</li>
+          <li>Ribbons & progression</li>
+          <li>Governance, referrals, staking perks</li>
+        </ul>
       </div>
 
       <div class="card">
-        <h3 style="margin:0 0 8px">How to Buy</h3>
-        <ol style="margin:0 0 10px 18px;opacity:.95">
-          <li>Click <em>Buy S-COIN</em> — it links to the live stage.</li>
-          <li>Purchase at the displayed stage price.</li>
-          <li>We sync launchpad orders for live totals.</li>
-          <li>Vesting: 25% at launch, then 25% quarterly (fully unlocked in 12 months).</li>
-        </ol>
-        <p class="note">Already purchased? You’re good — we count your launchpad order in totals automatically.</p>
+        <h3 style="margin-top:0">How we protect buyers</h3>
+        <p>• Multisig treasury</p>
+        <p>• Third-party audit after Stage 1</p>
+        <p>• Compliance-first KYC stance; free play available to all</p>
+        <p>• Transparent LP/treasury allocations</p>
       </div>
-    </div>
-  </div>
-</section>
 
-<section class="section">
-  <div class="container">
-    <div class="tiers" id="tiers"></div>
-    <p class="note"><strong>Presale Allocation:</strong> 100,000,000 S-COIN (1% of max supply).<br/>
-      <strong>Reminder:</strong> S-COIN-FP is free play credit, not on-chain and not for sale.</p>
+      <div class="card">
+        <h3 style="margin-top:0">Quick links</h3>
+        <div class="kit">
+          <a class="btn" href="index.html">Back to Homepage</a>
+          <a class="btn btn-ghost" href="https://x.com/YourHandle" target="_blank">X / Twitter</a>
+          <a class="btn btn-ghost" href="https://discord.gg/YourInviteCode" target="_blank">Discord</a>
+          <a class="btn btn-ghost" href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
+        </div>
+      </div>
+    </aside>
+
   </div>
-</section>
+</main>
 
 <footer>
   <div class="foot">
-    <small>© <span id="y"></span> S-COIN Sports</small>
-    <div class="links">
-      <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper (PDF)</a>
-      <a href="https://x.com/" target="_blank" rel="noreferrer">X / Twitter</a>
-      <a href="/">Home</a>
+    <div>
+      <small>© <span id="y"></span> S-COIN Sports</small>
+      <div class="footer-social">
+        <a href="https://x.com/YourHandle" target="_blank" rel="noopener">X</a>
+        <a href="https://discord.gg/YourInviteCode" target="_blank" rel="noopener">Discord</a>
+        <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-  // === Configure your presale here ===
-  const BUY_URL = "#"; // TODO: set to your launchpad URL
-  // Tiers: 30M @ 0.05, 30M @ 0.07, 40M @ 0.10
-  const TIERS = [
-    { name: "Stage 1", price: 0.05, cap: 30_000_000, sold: 0 },
-    { name: "Stage 2", price: 0.07, cap: 30_000_000, sold: 0 },
-    { name: "Stage 3", price: 0.10, cap: 40_000_000, sold: 0 },
-  ];
+// Year
+document.getElementById('y').textContent = new Date().getFullYear();
 
-  // Hook up top Buy button
-  const buyButtons = [];
-  function fmt(n){ return n.toLocaleString(); }
-
-  // Render tier cards
-  const $tiers = document.getElementById('tiers');
-  TIERS.forEach((t, i) => {
-    const remaining = Math.max(0, t.cap - t.sold);
-    const card = document.createElement('div');
-    card.className = 'card tier';
-    card.innerHTML = `
-      <h3 style="margin:6px 0">${t.name}</h3>
-      <div class="row"><span>Price</span><b>$${t.price.toFixed(2)}</b></div>
-      <div class="row"><span>Cap</span><span>${fmt(t.cap)} S-COIN</span></div>
-      <div class="row"><span>Sold</span><span>${fmt(t.sold)}</span></div>
-      <div class="row"><span>Remaining</span><span>${fmt(remaining)}</span></div>
-      <div style="margin-top:10px;display:flex;gap:10px">
-        <a class="btn buy" href="${BUY_URL}" target="_blank" rel="noreferrer">Buy ${t.name}</a>
-      </div>
-    `;
-    $tiers.appendChild(card);
-    buyButtons.push(card.querySelector('.buy'));
-  });
-
-  // Compute current stage/price/sold/remaining/progress
-  const totalCap = TIERS.reduce((s,t)=>s+t.cap,0);
-  const totalSold = TIERS.reduce((s,t)=>s+t.sold,0);
-  let stageIndex = 0;
-  let soldSoFar = 0;
-  for(let i=0;i<TIERS.length;i++){
-    soldSoFar += TIERS[i].sold;
-    if (soldSoFar < TIERS[i].cap) { stageIndex = i; break; }
-    if (soldSoFar >= TIERS[i].cap) { stageIndex = Math.min(i+1, TIERS.length-1); }
+// Countdown to Oct 4, 2025 12:00 CT (CDT = UTC-5)
+(function(){
+  const el = document.getElementById('countdown');
+  if(!el) return;
+  const target = new Date('2025-10-04T12:00:00-05:00').getTime();
+  const fmt = n => String(n).padStart(2,'0');
+  function tick(){
+    const diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    el.textContent = diff>0 ? `Presale starts in ${d}d ${fmt(h)}h ${fmt(m)}m ${fmt(s)}s` : 'Presale is LIVE →';
+    if(diff<=0){
+      el.style.borderColor = '#00B5E2';
+      el.style.fontWeight = '700';
+      el.style.cursor = 'pointer';
+      el.onclick = () => location.href = 'presale.html';
+    }
   }
-  const cur = TIERS[stageIndex];
-  document.getElementById('k_stage').textContent = stageIndex+1;
-  document.getElementById('k_price').textContent = `$${cur.price.toFixed(2)}`;
-  document.getElementById('k_sold').textContent = fmt(totalSold);
-  document.getElementById('k_rem').textContent = fmt(Math.max(0,totalCap-totalSold));
-  document.getElementById('k_prog').style.width = Math.min(100, (totalSold/totalCap)*100) + '%';
+  tick(); setInterval(tick, 1000);
+})();
 
-  // Point Buy buttons to your URL
-  document.getElementById('buyTop').href = BUY_URL;
-  buyButtons.forEach(btn => btn.href = BUY_URL);
-
-  // Footer year
-  document.getElementById('y').textContent = new Date().getFullYear();
+// Progress placeholders (set widths when you have real data)
+document.getElementById('p1').style.width = '0%';
+document.getElementById('p2').style.width = '0%';
+document.getElementById('p3').style.width = '0%';
 </script>
+
 </body>
 </html>
