@@ -109,6 +109,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
       <div class="card">
         <h3>What is S-COIN Sports?</h3>
         <p>S-COIN Sports turns sports picks into a global game of skill. Make predictions, climb leaderboards, and earn recognition. The ecosystem runs on <strong>S-COIN</strong> for governance, staking, rewards, and perks — while <strong>S-COIN-FP</strong> powers free play so everyone can participate.</p>
+        <!-- NEW Future Vision block -->
         <div style="margin-top:14px;padding:14px;border-left:3px solid #00B5E2;background:rgba(255,255,255,.03);border-radius:8px;">
           <h4 style="margin:0 0 8px;color:#00B5E2;">Future Vision</h4>
           <p style="margin:0;opacity:.9">
@@ -127,10 +128,58 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
   </div>
 </section>
 
-<!-- (rest of your file stays unchanged, compare cards, trust, footer, etc.) -->
+<section class="section">
+  <div class="container">
+    <h2 class="sec-title">Free vs VIP</h2>
+    <div class="compare-grid">
+      <div class="plan">
+        <div class="plan-tag">Free</div>
+        <ul>
+          <li>Moneyline picks</li>
+          <li>Basic leaderboard</li>
+          <li>Always-on free play (S-COIN-FP)</li>
+        </ul>
+      </div>
+      <div class="plan vip">
+        <div class="plan-tag">VIP (Hold S-COIN)</div>
+        <ul>
+          <li>Spreads & Totals</li>
+          <li>Exact Score markets</li>
+          <li>Create & manage Teams</li>
+          <li>Ribbons & progression</li>
+        </ul>
+        <a href="presale.html" class="btn plan-cta">Get S-COIN</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="sec-title">How we protect buyers</h2>
+    <div class="trust-grid">
+      <div class="trust-card"><h3>Multisig Treasury</h3><p>Funds controlled by multiple signers to reduce single-point risk.</p></div>
+      <div class="trust-card"><h3>Audit Plan</h3><p>Third-party code & wallet review scheduled post-Stage-1.</p></div>
+      <div class="trust-card"><h3>KYC Stance</h3><p>Compliance-first approach; clear separation of free play and VIP access.</p></div>
+      <div class="trust-card"><h3>LP / Treasury Allocations</h3><p>Transparent ratios and on-chain public addresses at launch.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> S-COIN Sports</small>
+    <div class="footer-social">
+      <a href="https://x.com/YourHandle" target="_blank">X</a>
+      <a href="https://discord.gg/MzkVsQ9CAd" target="_blank">Discord</a>
+      <a href="assets/whitepaper.pdf" target="_blank">Whitepaper</a>
+      <a href="presale.html">Presale</a>
+    </div>
+  </div>
+</footer>
 
 <script>
-document.getElementById('y')?.textContent = new Date().getFullYear();
+document.getElementById('y').textContent = new Date().getFullYear();
 (function(){
   var el=document.getElementById('presale-countdown');
   var target=new Date('2025-10-04T12:00:00-05:00').getTime();
