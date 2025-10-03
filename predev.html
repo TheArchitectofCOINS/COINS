@@ -2,87 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>S-COIN Sports — Pre-Development</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>S-COIN Sports — Pre-Development</title>
   <meta name="description" content="S-COIN Sports pre-development screenshots and previews." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="assets/s-coin-logo.png" />
+  <style>
+    :root{
+      --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
+      --muted:#cfe9f1; --ring:rgba(0,181,226,.35); --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--primary);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .container{max-width:1200px;margin:0 auto;padding:0 18px}
+    .section{padding:48px 0}
+
+    /* NAV (matches homepage) */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav .wrap{max-width:1200px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+    .brand img{width:34px;height:34px;border-radius:10px}
+    .menu{margin-left:auto;display:flex;gap:14px}
+    .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
+    .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
+
+    /* HERO */
+    .hero{position:relative;min-height:34vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),url('assets/stadium-lights.png') center/cover fixed}
+    .hero .content{position:relative;padding:64px 18px;max-width:900px}
+    .hero h1{margin:0 0 10px;font-size:clamp(32px,6vw,52px);line-height:1.05;font-weight:850}
+    .lead{opacity:.95;font-size:clamp(16px,2.2vw,20px)}
+
+    /* CARDS */
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
+
+    /* BIGGER SCREENSHOTS */
+    .grid-ss{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+    @media(min-width:1300px){ .grid-ss{grid-template-columns:repeat(3,1fr)} }
+    .shot{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#061721}
+    .shot img{display:block;width:100%;height:auto}
+
+    .muted{opacity:.8}
+
+    /* FOOTER (matches homepage) */
+    footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
+    .foot{max-width:1200px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+    .footer-social{display:flex; gap:1rem; flex-wrap:wrap}
+    .footer-social a{color:#00B5E2; text-decoration:none; font-weight:600;}
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- NAV (same structure as homepage) -->
   <header class="nav">
-  <a class="brand" href="index.html">
-    <img src="assets/s-coin-logo.png" alt="S-COIN logo">
-    <span>S-COIN Sports</span>
-  </a>
-  <button class="nav-toggle" aria-label="Toggle menu">☰</button>
-  <nav class="nav-links" aria-label="Primary">
-    <a href="index.html">Homepage</a>
-    <a href="predev.html">Pre-Development</a>
-    <a href="presale.html" class="chip chip-warn">Presale</a>
-  </nav>
-</header>
-
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/s-coin-logo.png" alt="S-COIN logo" />
+        <span>S-COIN Sports</span>
+      </a>
+      <nav class="menu" aria-label="Primary">
+        <a href="index.html">Homepage</a>
+        <a class="active" href="predev.html">Pre-Development</a>
+        <a href="presale.html">Presale</a>
+      </nav>
+    </div>
+  </header>
 
   <!-- HERO -->
   <section class="hero" id="hero-predev">
-    <div class="hero-bg" role="img" aria-label="Stadium lights background"></div>
-    <div class="hero-content container">
+    <div class="content">
       <h1>Pre-Development</h1>
-      <p class="lead">Take a sneak peek at our early mockups, designs, and WIP flows while we build the S-COIN Sports app.</p>
+      <p class="lead">A peek at early mockups, flows, and in-progress screens while we build S-COIN Sports.</p>
     </div>
   </section>
 
-  <!-- SCREENSHOTS GRID -->
-  <main class="section container">
-    <h2 class="section-title">Screenshots</h2>
-    <div class="grid-3" style="gap:16px">
-      <article class="card"><img src="assets/1.PNG" alt="Screenshot 1" loading="lazy"></article>
-      <article class="card"><img src="assets/2.PNG" alt="Screenshot 2" loading="lazy"></article>
-      <article class="card"><img src="assets/3.PNG" alt="Screenshot 3" loading="lazy"></article>
-      <article class="card"><img src="assets/4.PNG" alt="Screenshot 4" loading="lazy"></article>
-      <article class="card"><img src="assets/5.PNG" alt="Screenshot 5" loading="lazy"></article>
-      <article class="card"><img src="assets/6.PNG" alt="Screenshot 6" loading="lazy"></article>
-      <article class="card"><img src="assets/7.PNG" alt="Screenshot 7" loading="lazy"></article>
+  <!-- SCREENSHOTS GRID (larger) -->
+  <main class="section">
+    <div class="container">
+      <h2 style="margin:0 0 12px">Screenshots</h2>
+      <div class="grid-ss">
+        <figure class="shot"><img src="assets/1.PNG" alt="Screenshot 1"></figure>
+        <figure class="shot"><img src="assets/2.PNG" alt="Screenshot 2"></figure>
+        <figure class="shot"><img src="assets/3.PNG" alt="Screenshot 3"></figure>
+        <figure class="shot"><img src="assets/4.PNG" alt="Screenshot 4"></figure>
+        <figure class="shot"><img src="assets/5.PNG" alt="Screenshot 5"></figure>
+        <figure class="shot"><img src="assets/6.PNG" alt="Screenshot 6"></figure>
+        <figure class="shot"><img src="assets/7.PNG" alt="Screenshot 7"></figure>
+      </div>
+      <p class="muted" style="margin-top:20px;text-align:center">
+        These are early versions and subject to change as development continues.
+      </p>
     </div>
-    <p class="muted" style="margin-top:20px; text-align:center">
-      These are early versions and subject to change as development continues.
-    </p>
   </main>
 
-  <!-- FOOTER -->
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand-min">
-        <img src="assets/s-coin-logo.png" alt="">
-        <span>S-COIN Sports</span>
+  <!-- FOOTER (same links style as homepage) -->
+  <footer>
+    <div class="foot">
+      <small>© <span id="y"></span> S-COIN Sports</small>
+      <div class="footer-social">
+        <a href="https://x.com/YourHandle" target="_blank" rel="noopener">X</a>
+        <a href="https://discord.gg/MzkVsQ9CAd" target="_blank" rel="noopener">Discord</a>
+        <a href="assets/whitepaper.pdf" target="_blank" rel="noreferrer">Whitepaper</a>
+        <a href="presale.html">Presale</a>
       </div>
     </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="assets/whitepaper.pdf" target="_blank" rel="noopener">Whitepaper (PDF)</a>
-      <a href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">X (Twitter)</a>
-      <a href="scoin.html">About</a>
-    </nav>
-  </div>
-  <div class="sub">© <span id="y"></span> S-COIN Sports</div>
-</footer>
+  </footer>
 
-  <!-- Minimal JS -->
   <script>
     // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Mobile nav toggle
-    const toggle = document.querySelector('.nav-toggle');
-    const links = document.querySelector('.nav-links');
-    toggle?.addEventListener('click', () => {
-      const open = links.style.display === 'flex';
-      links.style.display = open ? 'none' : 'flex';
-    });
   </script>
 </body>
 </html>
