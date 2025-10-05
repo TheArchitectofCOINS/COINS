@@ -15,256 +15,167 @@
   --warn:#FFCC00;
   --radius:14px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
-  --container:560px;       /* phone-first max width for content column */
+  --container:560px;       /* phone-first content width */
   --tapHeight:60px;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+* { box-sizing:border-box; }
+html,body { height:100%; }
 
 body {
-  margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-  background: #070B12;
-  -webkit-tap-highlight-color: transparent;
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:#070B12;
+  -webkit-tap-highlight-color:transparent;
 }
 
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; text-decoration: none; }
+img { max-width:100%; height:auto; display:block; }
+a { color:inherit; text-decoration:none; }
 
 .wrap {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 16px calc(env(safe-area-inset-bottom) + 20px);
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 16px calc(env(safe-area-inset-bottom) + 20px);
 }
 
 /* =========================
-   HERO (top banner)
+   HERO
 ========================= */
 .hero {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 160px;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  position:relative; display:flex; align-items:flex-end; justify-content:center;
+  height:160px; overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.06);
   background:
     radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%),
     linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%),
     url('/assets/stadium-lights.png') center/cover no-repeat;
-  filter: saturate(1.05) contrast(1.02);
+  filter:saturate(1.05) contrast(1.02);
 }
-
 .hero .bar {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 10px 16px;
-  background: linear-gradient(180deg, rgba(10,20,28,.35), rgba(5,10,15,.65));
-  backdrop-filter: blur(8px);
+  position:absolute; inset:auto 0 0 0; padding:10px 16px;
+  background:linear-gradient(180deg, rgba(10,20,28,.35), rgba(5,10,15,.65));
+  backdrop-filter:blur(8px);
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: var(--container);
-  margin: 0 auto;
-}
-
-.title { font-weight: 800; letter-spacing: .2px; }
-
+.brand { display:flex; align-items:center; gap:10px; max-width:var(--container); margin:0 auto; }
+.title { font-weight:800; letter-spacing:.2px; }
 .tag {
-  margin-left: auto;
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,181,226,.18);
-  color: var(--muted);
-  border: 1px solid rgba(0,181,226,.25);
+  margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px;
+  background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25);
 }
 
 /* =========================
    CARDS & TEXT
 ========================= */
 .card {
-  background: linear-gradient(180deg, var(--surface-2), var(--surface));
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin: 14px 0;
-  box-shadow: var(--shadow);
+  background:linear-gradient(180deg, var(--surface-2), var(--surface));
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:var(--radius);
+  padding:16px; margin:14px 0; box-shadow:var(--shadow);
 }
-.h1 { font-size: 22px; font-weight: 800; margin: 0 0 8px; }
-.sub { font-size: 14px; color: var(--muted); margin-top: 6px; }
-.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.bigNum { font-size: 32px; font-weight: 800; line-height: 1; }
+.h1 { font-size:22px; font-weight:800; margin:0 0 8px; }
+.sub { font-size:14px; color:var(--muted); margin-top:6px; }
+.row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.bigNum { font-size:32px; font-weight:800; line-height:1; }
 .pill {
-  font-size: 12px; color: var(--muted);
-  border: 1px dashed rgba(255,255,255,.2);
-  border-radius: 999px;
-  padding: 4px 10px;
-  display: inline-flex; align-items: center; gap: 6px;
+  font-size:12px; color:var(--muted);
+  border:1px dashed rgba(255,255,255,.2); border-radius:999px; padding:4px 10px;
+  display:inline-flex; align-items:center; gap:6px;
 }
 
 /* =========================
    BUTTONS
 ========================= */
 .btn {
-  width: 100%;
-  height: var(--tapHeight);
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.1);
-  cursor: pointer;
-  font-weight: 800;
-  font-size: 18px;
-  color: #08121A;
-  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
-  box-shadow: var(--shadow);
-  transition: transform .02s ease;
-  touch-action: manipulation;
+  width:100%; height:var(--tapHeight); border-radius:14px;
+  border:1px solid rgba(255,255,255,.1); cursor:pointer;
+  font-weight:800; font-size:18px; color:#08121A;
+  background:linear-gradient(180deg, var(--primary), var(--primary-dark));
+  box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation;
 }
-.btn:active { transform: translateY(1px) scale(.998); }
-.btn.secondary {
-  width: auto;
-  background: transparent;
-  color: var(--muted);
-}
+.btn:active { transform:translateY(1px) scale(.998); }
+.btn.secondary { width:auto; background:transparent; color:var(--muted); }
 
 /* =========================
    COUNTDOWN
 ========================= */
-.countdown {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 18px;
-  padding: 10px 0;
-  color: #d2f1ff;
-}
+.countdown { display:flex; gap:10px; justify-content:center; font-weight:800; font-size:18px; padding:10px 0; color:#d2f1ff; }
 
 /* =========================
    WEEKLY PICK UI
 ========================= */
-.teams {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-.team { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; }
+.teams { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-top:10px; }
+.team { display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px; }
 .team .logo {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: #0b1b27; border: 1px solid rgba(255,255,255,.08);
-  display: grid; place-items: center; font-weight: 800;
+  width:64px; height:64px; border-radius:50%;
+  background:#0b1b27; border:1px solid rgba(255,255,255,.08);
+  display:grid; place-items:center; font-weight:800;
 }
-.pickBtns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-
-.progress {
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.08);
-  overflow: hidden;
-}
-.progress > span {
-  display: block; height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-  transition: width .6s ease;
-}
+.pickBtns { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+.progress { height:8px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; }
+.progress>span { display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--primary), var(--primary-dark)); transition:width .6s ease; }
 
 /* =========================
    LEADERBOARD
 ========================= */
-.list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
-.li { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
+.list { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+.li { display:flex; align-items:center; justify-content:space-between; font-size:14px; }
 
 /* =========================
    STICKY BOTTOM NAV
 ========================= */
-.nav {
-  position: sticky;
-  bottom: 0; left: 0; right: 0;
-  background: rgba(2,8,13,.9);
-  border-top: 1px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(8px);
-}
-.nav .wrap { display: flex; gap: 10px; padding: 10px 16px; }
-.nav a { flex: 1; text-align: center; }
+.nav { position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px); }
+.nav .wrap { display:flex; gap:10px; padding:10px 16px; }
+.nav a { flex:1; text-align:center; }
 
 /* =========================
-   SPINNING S + HALO BADGE
+   SPINNING COIN (two-sided S) + HALO
 ========================= */
-.spin-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 6px 0 10px;
-}
-.spinBadge {
-  position: relative;
-  width: 64px;
-  height: 64px;
-  display: inline-grid;
-  place-items: center;
-  perspective: 800px; /* 3D context for rotateY */
+.spin-wrap { display:flex; align-items:center; gap:12px; margin:6px 0 10px; }
+.spinBadge { position:relative; width:64px; height:64px; display:inline-grid; place-items:center; perspective:800px; }
+
+/* Halo */
+.spinBadge .halo{
+  position:absolute; inset:-8px; border-radius:16px;
+  background:radial-gradient(60% 60% at 50% 50%, rgba(0,181,226,.35) 0%, rgba(0,181,226,.18) 40%, rgba(0,181,226,0) 70%);
+  filter:blur(4px); animation:haloPulse 2.6s ease-in-out infinite; z-index:0;
 }
 
-/* Halo behind the ring */
-.spinBadge .halo {
-  position: absolute;
-  inset: -8px;
-  border-radius: 16px;
-  background: radial-gradient(60% 60% at 50% 50%,
-              rgba(0,181,226,0.35) 0%,
-              rgba(0,181,226,0.18) 40%,
-              rgba(0,181,226,0.00) 70%);
-  filter: blur(4px);
-  animation: haloPulse 2.6s ease-in-out infinite;
-  z-index: 0;
+/* Static ring */
+.spinBadge .ring{ position:relative; z-index:1; width:100%; height:100%; object-fit:contain; display:block; }
+
+/* Two-sided S */
+.sCoin{
+  position:absolute; inset:0; z-index:2;
+  transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+  animation:spinY 4s linear infinite; will-change:transform;
 }
-
-/* Static ring image */
-.spinBadge .ring {
-  position: relative; z-index: 1;
-  width: 100%; height: 100%; object-fit: contain; display: block;
+.sCoin .face{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
 }
+.sCoin .back{ transform:rotateY(180deg); } /* backside copy */
 
-/* Spinning S */
-.spinBadge .letterS {
- .spinBadge .letterS {
-  position: absolute; inset: 0; z-index: 2;
-  width: 100%; height: 100%; object-fit: contain; display: block;
-  transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
-  backface-visibility: visible;       /* ✅ show backside */
-  -webkit-backface-visibility: visible; /* ✅ Safari/iOS fix */
-  animation: spinY 4s linear infinite;
-  will-change: transform;
-}
- 
+/* Keyframes */
+@keyframes spinY { from { transform:rotateY(0deg); } to { transform:rotateY(360deg); } }
+@-webkit-keyframes spinY { from { -webkit-transform:rotateY(0deg); } to { -webkit-transform:rotateY(360deg); } }
 
-/* Horizontal spin (with Safari prefix) */
-@keyframes spinY { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-@-webkit-keyframes spinY { from { -webkit-transform: rotateY(0deg); } to { -webkit-transform: rotateY(360deg); } }
-
-/* Halo pulse */
 @keyframes haloPulse {
-  0%   { opacity: .55; transform: scale(.96); filter: blur(4px); }
-  50%  { opacity: .90; transform: scale(1.03); filter: blur(6px); }
-  100% { opacity: .55; transform: scale(.96); filter: blur(4px); }
+  0% { opacity:.55; transform:scale(.96); filter:blur(4px); }
+  50%{ opacity:.90; transform:scale(1.03); filter:blur(6px); }
+  100%{ opacity:.55; transform:scale(.96); filter:blur(4px); }
 }
 
-/* Reduce Motion */
-@media (prefers-reduced-motion: reduce) {
-  .spinBadge .letterS { animation: none; }
-  .spinBadge .halo { animation: none; }
+/* Accessibility */
+@media (prefers-reduced-motion:reduce){
+  .sCoin{ animation:none; }
+  .spinBadge .halo{ animation:none; }
 }
 
 /* =========================
    RESPONSIVE
 ========================= */
-@media (max-width: 380px) {
-  .spinBadge { width: 56px; height: 56px; }
+@media (max-width:380px){
+  .spinBadge{ width:56px; height:56px; }
 }
