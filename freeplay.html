@@ -72,10 +72,17 @@
     footer{text-align:center; margin:18px 0 8px; color:var(--muted); font-size:12px}
 
     /* Spinning logo in Daily Activate */
-    .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
-    .spin{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.12); background:#0b1b27; overflow:hidden}
-    .spin img{width:100%; height:100%; object-fit:cover; animation:spin 6s linear infinite}
-    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+  <div class="spin-wrap">
+  <div class="spinBadge" aria-hidden="true">
+    <img class="ring" src="/assets/scoin-ring.png" alt="S-COIN Ring">
+    <img class="letterS" src="/assets/scoin-s.png" alt="S-COIN Letter">
+  </div>
+  <div>
+    <div class="sub">Rate</div>
+    <div class="bigNum" id="rateDisp">0.25/day</div>
+  </div>
+</div>
+
 
     /* sticky bottom nav */
     .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
