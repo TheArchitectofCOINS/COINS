@@ -20,6 +20,7 @@
       color:var(--text); background:#050a0f; -webkit-tap-highlight-color:transparent;
     }
     .wrap{max-width:var(--maxW); margin:0 auto; padding:0 16px calc(env(safe-area-inset-bottom) + 20px)}
+
     /* HERO */
     .hero{
       position:relative; display:flex; align-items:flex-end; justify-content:center;
@@ -33,17 +34,12 @@
       position:absolute; inset:auto 0 0 0; padding:10px 16px; backdrop-filter:blur(6px);
       background:linear-gradient(180deg, rgba(10,20,28,.35), rgba(5,10,15,.65));
     }
-    .brand{
-      display:flex; align-items:center; gap:10px; max-width:var(--maxW); margin:0 auto;
-    }
-    .logo{
-      width:36px; height:36px; border-radius:10px; background:#0b1b27; border:1px solid rgba(255,255,255,.12);
-      display:flex; align-items:center; justify-content:center; overflow:hidden;
-    }
+    .brand{display:flex; align-items:center; gap:10px; max-width:var(--maxW); margin:0 auto;}
+    .logo{width:36px; height:36px; border-radius:10px; background:#0b1b27; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; overflow:hidden;}
     .logo img{width:100%; height:100%; object-fit:cover; display:block}
     .title{font-weight:800; letter-spacing:.2px}
-    .tag{margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px;
-      background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25)}
+    .tag{margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25)}
+
     /* Cards */
     .card{
       background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
@@ -54,15 +50,13 @@
     .sub{font-size:14px; color:var(--muted); margin-top:6px}
     .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
     .bigNum{font-size:32px; font-weight:800; line-height:1}
-    .pill{font-size:12px; color:var(--muted); border:1px dashed rgba(255,255,255,.2);
-      border-radius:999px; padding:4px 10px; display:inline-flex; align-items:center; gap:6px}
+    .pill{font-size:12px; color:var(--muted); border:1px dashed rgba(255,255,255,.2); border-radius:999px; padding:4px 10px; display:inline-flex; align-items:center; gap:6px}
     .streak{font-weight:700; color:var(--success)}
     .btn{
       width:100%; height:var(--tapHeight); border-radius:14px; border:none; cursor:pointer;
       font-weight:800; font-size:18px; letter-spacing:.2px; color:#fff;
       background:linear-gradient(90deg,var(--blue),var(--blue-dark));
-      box-shadow:0 6px 18px rgba(0,181,226,.35); transition:transform .02s ease;
-      touch-action:manipulation
+      box-shadow:0 6px 18px rgba(0,181,226,.35); transition:transform .02s ease; touch-action:manipulation
     }
     .btn:active{transform:translateY(1px) scale(.998)}
     .btn.secondary{background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,.12); box-shadow:none}
@@ -76,17 +70,21 @@
     .list{display:flex; flex-direction:column; gap:10px; margin-top:8px}
     .li{display:flex; align-items:center; justify-content:space-between; font-size:14px}
     footer{text-align:center; margin:18px 0 8px; color:var(--muted); font-size:12px}
-    /* sticky bottom nav (optional link back home) */
-    .nav{
-      position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9);
-      border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)
-    }
-    .nav .wrap{display:flex; gap:10px; padding:10px 16px  max(10px, env(safe-area-inset-bottom))}
+
+    /* Spinning logo in Daily Activate */
+    .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
+    .spin{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,.12); background:#0b1b27; overflow:hidden}
+    .spin img{width:100%; height:100%; object-fit:cover; animation:spin 6s linear infinite}
+    @keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+    /* sticky bottom nav */
+    .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
+    .nav .wrap{display:flex; gap:10px; padding:10px 16px max(10px, env(safe-area-inset-bottom))}
     .nav a{flex:1; text-align:center; text-decoration:none}
   </style>
 </head>
 <body>
-  <!-- HERO with logo + “Free Play Beta” tag -->
+  <!-- HERO -->
   <section class="hero" role="banner">
     <div class="bar">
       <div class="brand">
@@ -100,7 +98,7 @@
   </section>
 
   <div class="wrap" role="main" aria-live="polite">
-    <!-- DAILY TAP -->
+    <!-- DAILY ACTIVATE -->
     <section class="card" id="dailyCard" aria-labelledby="dailyTitle">
       <div class="row">
         <div>
@@ -110,18 +108,22 @@
         <div class="pill"><span id="streak">Streak 0</span></div>
       </div>
 
-      <div class="row" style="margin:12px 0 6px">
+      <div class="spin-wrap">
+        <div class="spin" aria-hidden="true">
+          <img src="/assets/scoin-logo.png" alt="">
+        </div>
+        <div class="sub">Rate</div>
+        <div class="bigNum" id="rateDisp">0.25/day</div>
+      </div>
+
+      <div class="row" style="margin:6px 0 6px">
         <div>
           <div class="sub">Balance</div>
           <div class="bigNum"><span id="balance">0.00</span> FP</div>
         </div>
-        <div>
-          <div class="sub">Rate</div>
-          <div class="bigNum">0.25/hr</div>
-        </div>
       </div>
 
-      <button id="activateBtn" class="btn">Activate FP X1</button>
+      <button id="activateBtn" class="btn">Activate S-COIN-FP X1</button>
       <div id="countdownWrap" class="countdown" style="display:none;"></div>
       <div class="sub" id="nextReady" style="text-align:center; margin-top:6px"></div>
     </section>
@@ -134,20 +136,20 @@
       <div class="teams">
         <div class="team" id="teamA">
           <div class="logo">A</div>
-          <strong id="teamAName">Team A</strong>
-          <span class="sub" id="teamARec">3-2</span>
+          <strong id="teamAName">Mississippi State</strong>
+          <span class="sub" id="teamARec">2-3</span>
         </div>
         <div class="sub">vs</div>
         <div class="team" id="teamB">
           <div class="logo">B</div>
-          <strong id="teamBName">Team B</strong>
+          <strong id="teamBName">Texas A&amp;M</strong>
           <span class="sub" id="teamBRec">4-1</span>
         </div>
       </div>
 
       <div class="pickBtns" id="pickBtns">
-        <button class="btn" id="pickA" aria-label="Pick Team A">Pick A</button>
-        <button class="btn" id="pickB" aria-label="Pick Team B">Pick B</button>
+        <button class="btn" id="pickA" aria-label="Pick Mississippi State">Pick Mississippi State</button>
+        <button class="btn" id="pickB" aria-label="Pick Texas A&amp;M">Pick Texas A&amp;M</button>
       </div>
 
       <div id="pickedMsg" class="sub" style="display:none; text-align:center; margin-top:8px"></div>
@@ -161,69 +163,113 @@
     <section class="card" aria-labelledby="leadTitle">
       <div class="h1" id="leadTitle">Leaderboard (Today)</div>
       <div class="list" id="lb"></div>
-      <a class="btn secondary" href="/" style="margin-top:10px; display:block; text-decoration:none">← Back to Home</a>
     </section>
   </div>
 
-  <!-- optional sticky nav -->
+  <!-- sticky nav -->
   <div class="nav">
     <div class="wrap">
-      <a class="btn secondary" href="/">Home</a>
+      <a class="btn secondary" href="https://www.scoinsports.com">Website</a>
       <a class="btn secondary" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Discord</a>
       <a class="btn secondary" href="https://x.com/scoinsports" target="_blank" rel="noopener">X (Twitter)</a>
     </div>
   </div>
 
   <script>
-    // LocalStorage MVP (swap to Supabase later)
+    // LocalStorage MVP
     const LS={BAL:"fp_balance",STREAK:"fp_streak",START:"fp_started_at",ENDS:"fp_ends_at",PICK:"weekly_pick_v1",VOTESA:"votes_a",VOTESB:"votes_b"};
-    const game={aName:"Mississippi State",aRec:"2-3",bName:"Texas A&M",bRec:"4-1",kickoff:"Sat 7:00 PM CT"};
+    // 0.25 FP / day  => per hour:
+    const RATE = 0.25/24; // ≈ 0.0104167 FP/hr
+    document.getElementById("rateDisp").textContent = "0.25/day";
+
     const balanceEl=document.getElementById("balance"), streakEl=document.getElementById("streak"),
       activateBtn=document.getElementById("activateBtn"), countdownWrap=document.getElementById("countdownWrap"),
-      nextReady=document.getElementById("nextReady"), teamAName=document.getElementById("teamAName"),
-      teamBName=document.getElementById("teamBName"), teamARec=document.getElementById("teamARec"),
-      teamBRec=document.getElementById("teamBRec"), gameInfo=document.getElementById("gameInfo"),
-      pickBtns=document.getElementById("pickBtns"), pickA=document.getElementById("pickA"),
-      pickB=document.getElementById("pickB"), pickedMsg=document.getElementById("pickedMsg"),
-      barA=document.getElementById("barA"), pcA=document.getElementById("pcA"), pcB=document.getElementById("pcB"),
-      lb=document.getElementById("lb");
-    teamAName.textContent=game.aName; teamBName.textContent=game.bName; teamARec.textContent=game.aRec; teamBRec.textContent=game.bRec;
-    gameInfo.textContent=`${game.kickoff} • One pick per week`;
-    const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR, RATE=.25;
+      nextReady=document.getElementById("nextReady"), pickBtns=document.getElementById("pickBtns"),
+      pickA=document.getElementById("pickA"), pickB=document.getElementById("pickB"),
+      pickedMsg=document.getElementById("pickedMsg"), barA=document.getElementById("barA"),
+      pcA=document.getElementById("pcA"), pcB=document.getElementById("pcB"), lb=document.getElementById("lb");
+
+    const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR;
     const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
     const fmt=n=>(Math.round(n*100)/100).toFixed(2);
+
     function load(){return{bal:num(LS.BAL),streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
       startedAt:parseInt(str(LS.START)??"0",10),endsAt:parseInt(str(LS.ENDS)??"0",10),
       pick:str(LS.PICK),votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
       votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)}}
     function save(s){set(LS.BAL,s.bal);set(LS.STREAK,s.streak);set(LS.START,s.startedAt);set(LS.ENDS,s.endsAt);
       if(s.pick!==undefined)set(LS.PICK,s.pick);set(LS.VOTESA,s.votesA);set(LS.VOTESB,s.votesB)}
-    function accrue(s){if(!s.startedAt||!s.endsAt)return s; const t0=Math.min(now(),s.endsAt);
-      const hours=Math.max(0,(t0-s.startedAt)/HOUR); s.bal=num(LS.BAL)+hours*RATE; s.startedAt=t0; save(s); return s;}
-    function ui(s){
-      balanceEl.textContent=fmt(s.bal); streakEl.textContent="Streak "+(s.streak||0);
-      const active=s.endsAt&&now()<s.endsAt; activateBtn.style.display=active?"none":"block";
-      countdownWrap.style.display=active?"flex":"none";
-      if(active){const left=Math.max(0,s.endsAt-now()); const hh=String(Math.floor(left/HOUR)).padStart(2,"0"),
-        mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0"), ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
-        countdownWrap.textContent=`Next session in ${hh}:${mm}:${ss}`; nextReady.textContent="Ready again at "+new Date(s.endsAt).toLocaleString();
-      }else nextReady.textContent="";
-      const total=Math.max(1,s.votesA+s.votesB), pct=Math.round((s.votesA/total)*100);
-      pcA.textContent=pct+"%"; pcB.textContent=(100-pct)+"%"; barA.style.width=pct+"%";
-      if(s.pick){pickBtns.style.display="none"; pickedMsg.style.display="block"; pickedMsg.textContent=`You picked ${s.pick==='A'?game.aName:game.bName}.`}
-      else{pickBtns.style.display="grid"; pickedMsg.style.display="none"}
+
+    function accrue(s){
+      if(!s.startedAt||!s.endsAt) return s;
+      const t0 = Math.min(now(), s.endsAt);
+      const hours = Math.max(0, (t0 - s.startedAt)/HOUR);
+      s.bal = num(LS.BAL) + hours*RATE;
+      s.startedAt = t0; // settle
+      save(s);
+      return s;
     }
-    function vibrate(ms){if(navigator.vibrate)navigator.vibrate(ms)}
-    function activate(){let s=load(); if(s.endsAt&&now()<s.endsAt)return;
-      const prevEnd=s.endsAt||0, within=prevEnd&&now()-prevEnd<(24+12)*HOUR; s.streak=within?(s.streak+1):1;
-      s.startedAt=now(); s.endsAt=s.startedAt+DAY; s.bal=num(LS.BAL)+0.05; save(s); ui(s); vibrate(30)}
-    function pick(side){let s=load(); if(s.pick)return; s.pick=side; if(side==='A')s.votesA++; else s.votesB++; save(s); ui(s); vibrate(12)}
-    function renderLB(){const data=[{name:"You",fp:num(LS.BAL)},{name:"BulldogBen",fp:32.4},{name:"12thMan",fp:29.2},{name:"DeltaDawg",fp:25.7}];
-      lb.innerHTML=data.map(p=>`<div class="li"><strong>${p.name}</strong><span>${p.fp.toFixed(2)} FP</span></div>`).join("")}
+
+    function ui(s){
+      balanceEl.textContent = fmt(s.bal);
+      streakEl.textContent = "Streak " + (s.streak||0);
+
+      const active = s.endsAt && now() < s.endsAt;
+      activateBtn.style.display = active ? "none" : "block";
+      countdownWrap.style.display = active ? "flex" : "none";
+
+      if(active){
+        const left=Math.max(0, s.endsAt - now());
+        const hh=String(Math.floor(left/HOUR)).padStart(2,"0");
+        const mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0");
+        const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
+        countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
+        nextReady.textContent = "Ready again at " + new Date(s.endsAt).toLocaleString();
+      } else {
+        nextReady.textContent = "";
+      }
+
+      const total=Math.max(1, s.votesA + s.votesB), pct=Math.round((s.votesA/total)*100);
+      pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
+
+      if(s.pick){ pickBtns.style.display="none"; pickedMsg.style.display="block"; pickedMsg.textContent="You locked your pick."; }
+      else { pickBtns.style.display="grid"; pickedMsg.style.display="none"; }
+    }
+
+    function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+    function activate(){
+      let s = load();
+      if(s.endsAt && now() < s.endsAt) return; // already active
+      const prevEnd = s.endsAt || 0;
+      const within = prevEnd && now() - prevEnd < (24+12)*HOUR; // 12h grace
+      s.streak = within ? (s.streak + 1) : 1;
+      s.startedAt = now();
+      s.endsAt = s.startedAt + DAY;
+      // tiny gratification bump
+      s.bal = num(LS.BAL) + 0.01;
+      save(s); ui(s); vibrate(30);
+    }
+
+    function pick(side){
+      let s = load();
+      if(s.pick) return;
+      s.pick = side;
+      if(side==='A') s.votesA++; else s.votesB++;
+      save(s); ui(s); vibrate(12);
+    }
+
+    function renderLB(){
+      const data=[{name:"You",fp:num(LS.BAL)},{name:"BulldogBen",fp:32.4},{name:"12thMan",fp:29.2},{name:"DeltaDawg",fp:25.7}];
+      lb.innerHTML = data.map(p=>`<div class="li"><strong>${p.name}</strong><span>${p.fp.toFixed(2)} FP</span></div>`).join("");
+    }
+
     document.getElementById("pickA").addEventListener("click",()=>pick('A'));
     document.getElementById("pickB").addEventListener("click",()=>pick('B'));
-    document.getElementById("activateBtn").addEventListener("click",activate);
-    function tick(){let s=load(); s=accrue(s); ui(s); requestAnimationFrame(()=>setTimeout(tick,1000))}
+    activateBtn.addEventListener("click", activate);
+
+    function tick(){ let s=load(); s=accrue(s); ui(s); requestAnimationFrame(()=>setTimeout(tick,1000)); }
+
     renderLB(); tick();
   </script>
 </body>
