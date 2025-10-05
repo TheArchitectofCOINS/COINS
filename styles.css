@@ -234,13 +234,16 @@ a { color: inherit; text-decoration: none; }
 
 /* Spinning S */
 .spinBadge .letterS {
+ .spinBadge .letterS {
   position: absolute; inset: 0; z-index: 2;
   width: 100%; height: 100%; object-fit: contain; display: block;
   transform-style: preserve-3d; -webkit-transform-style: preserve-3d;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  backface-visibility: visible;       /* ✅ show backside */
+  -webkit-backface-visibility: visible; /* ✅ Safari/iOS fix */
   animation: spinY 4s linear infinite;
   will-change: transform;
 }
+ 
 
 /* Horizontal spin (with Safari prefix) */
 @keyframes spinY { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
