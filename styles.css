@@ -168,3 +168,48 @@ img { max-width:100%; height:auto; display:block; }
   .grid-3 { grid-template-columns:1fr; }
   .cta-row { flex-direction:column; }
 }
+/* -------------------------
+   S-COIN Spinning Logo
+-------------------------- */
+.spin-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 10px;
+}
+
+.spinBadge {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: inline-grid;
+  place-items: center;
+  perspective: 800px;
+}
+
+.spinBadge .ring {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.spinBadge .letterS {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-style: preserve-3d;
+  animation: spinY 4s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spinY {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+
+
+
