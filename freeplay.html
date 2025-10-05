@@ -36,7 +36,6 @@
     }
     .brand{display:flex; align-items:center; gap:10px; max-width:var(--maxW); margin:0 auto;}
     .logo{width:36px; height:36px; border-radius:10px; background:#0b1b27; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; overflow:hidden;}
-    .logo img{width:100%; height:100%; object-fit:cover; display:block}
     .title{font-weight:800; letter-spacing:.2px}
     .tag{margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25)}
 
@@ -51,7 +50,6 @@
     .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
     .bigNum{font-size:32px; font-weight:800; line-height:1}
     .pill{font-size:12px; color:var(--muted); border:1px dashed rgba(255,255,255,.2); border-radius:999px; padding:4px 10px; display:inline-flex; align-items:center; gap:6px}
-    .streak{font-weight:700; color:var(--success)}
     .btn{
       width:100%; height:var(--tapHeight); border-radius:14px; border:none; cursor:pointer;
       font-weight:800; font-size:18px; letter-spacing:.2px; color:#fff;
@@ -71,26 +69,49 @@
     .li{display:flex; align-items:center; justify-content:space-between; font-size:14px}
     footer{text-align:center; margin:18px 0 8px; color:var(--muted); font-size:12px}
 
-    /* Spinning logo in Daily Activate */
-
-<!-- Spinning S inside static ring -->
-<div class="spin-wrap">
-  <div class="spinBadge" aria-hidden="true">
-    <span class="halo" aria-hidden="true"></span>
-    <img class="ring" src="/assets/scoin-ring.png" alt="S-COIN Ring">
-    <img class="letterS" src="/assets/scoin-s.png" alt="S-COIN Letter">
-  </div>
-  <div>
-    <div class="sub">Rate</div>
-    <div class="bigNum" id="rateDisp">0.25/day</div>
-  </div>
-</div>
-
-
+    /* --- S-COIN spinning S + halo --- */
+    .spin-wrap{ display:flex; align-items:center; gap:12px; margin:6px 0 10px; }
+    .spinBadge{
+      position:relative; width:64px; height:64px;
+      display:inline-grid; place-items:center; perspective:800px;
+    }
+    .spinBadge .halo{
+      position:absolute; inset:-8px; border-radius:16px;
+      background: radial-gradient(60% 60% at 50% 50%,
+                  rgba(0,181,226,0.35) 0%,
+                  rgba(0,181,226,0.18) 40%,
+                  rgba(0,181,226,0.00) 70%);
+      filter: blur(4px);
+      animation: haloPulse 2.6s ease-in-out infinite;
+      z-index:0;
+    }
+    .spinBadge .ring{
+      position:relative; z-index:1;
+      width:100%; height:100%; object-fit:contain; display:block;
+    }
+    .spinBadge .letterS{
+      position:absolute; inset:0; z-index:2;
+      width:100%; height:100%; object-fit:contain; display:block;
+      transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+      backface-visibility:hidden; -webkit-backface-visibility:hidden;
+      animation: spinY 4s linear infinite;
+      will-change: transform;
+    }
+    @keyframes spinY { from{transform:rotateY(0)} to{transform:rotateY(360deg)} }
+    @-webkit-keyframes spinY { from{-webkit-transform:rotateY(0)} to{-webkit-transform:rotateY(360deg)} }
+    @keyframes haloPulse {
+      0%{opacity:.55; transform:scale(.96); filter:blur(4px)}
+      50%{opacity:.90; transform:scale(1.03); filter:blur(6px)}
+      100%{opacity:.55; transform:scale(.96); filter:blur(4px)}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .spinBadge .letterS{animation:none}
+      .spinBadge .halo{animation:none}
+    }
 
     /* sticky bottom nav */
     .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
-    .nav .wrap{display:flex; gap:10px; padding:10px 16px max(10px, env(safe-area-inset-bottom))}
+    .nav .wrap{display:flex; gap:10px; padding:10px 16px}
     .nav a{flex:1; text-align:center; text-decoration:none}
   </style>
 </head>
@@ -99,9 +120,7 @@
   <section class="hero" role="banner">
     <div class="bar">
       <div class="brand">
-        <div class="logo" aria-label="S-COIN Logo">
-          
-        </div>
+        <div class="logo" aria-label="S-COIN Logo"></div>
         <div class="title">S-COIN Sports</div>
         <div class="tag">Free Play Beta</div>
       </div>
@@ -119,12 +138,17 @@
         <div class="pill"><span id="streak">Streak 0</span></div>
       </div>
 
+      <!-- Spinning S inside static ring -->
       <div class="spin-wrap">
-        <div class="spin" aria-hidden="true">
-         
+        <div class="spinBadge" aria-hidden="true">
+          <span class="halo" aria-hidden="true"></span>
+          <img class="ring" src="/assets/scoin-ring.png" alt="S-COIN Ring">
+          <img class="letterS" src="/assets/scoin-s.png" alt="S-COIN Letter">
         </div>
-        <div class="sub">Rate</div>
-        <div class="bigNum" id="rateDisp">0.25/day</div>
+        <div>
+          <div class="sub">Rate</div>
+          <div class="bigNum" id="rateDisp">0.25/day</div>
+        </div>
       </div>
 
       <div class="row" style="margin:6px 0 6px">
@@ -142,7 +166,7 @@
     <!-- WEEKLY GAME PICK -->
     <section class="card" aria-labelledby="weeklyTitle">
       <div class="h1" id="weeklyTitle">This Week’s Game</div>
-      <div class="sub" id="gameInfo">Sat • 7:00 PM CT • Week 6</div>
+      <div class="sub" id="gameInfo">Sat • 7:00 PM CT • One pick per week</div>
 
       <div class="teams">
         <div class="team" id="teamA">
@@ -204,12 +228,20 @@
     const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
     const fmt=n=>(Math.round(n*100)/100).toFixed(2);
 
-    function load(){return{bal:num(LS.BAL),streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
-      startedAt:parseInt(str(LS.START)??"0",10),endsAt:parseInt(str(LS.ENDS)??"0",10),
-      pick:str(LS.PICK),votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
-      votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)}}
-    function save(s){set(LS.BAL,s.bal);set(LS.STREAK,s.streak);set(LS.START,s.startedAt);set(LS.ENDS,s.endsAt);
-      if(s.pick!==undefined)set(LS.PICK,s.pick);set(LS.VOTESA,s.votesA);set(LS.VOTESB,s.votesB)}
+    function load(){return{
+      bal:num(LS.BAL),
+      streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
+      startedAt:parseInt(str(LS.START)??"0",10),
+      endsAt:parseInt(str(LS.ENDS)??"0",10),
+      pick:str(LS.PICK),
+      votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
+      votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)
+    }}
+    function save(s){
+      set(LS.BAL,s.bal); set(LS.STREAK,s.streak); set(LS.START,s.startedAt); set(LS.ENDS,s.endsAt);
+      if(s.pick!==undefined) set(LS.PICK,s.pick);
+      set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB);
+    }
 
     function accrue(s){
       if(!s.startedAt||!s.endsAt) return s;
