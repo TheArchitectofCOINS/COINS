@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>S-COIN Sports — Free Play</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#00B5E2" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #00B5E2;     /* ocean blue */
+      --blue-dark: #006ea1;/* darker blue */
+      --bg: #0a0f14;       /* dark sportsy bg */
+      --card: #121820;     /* card bg */
+      --text: #e6f6ff;     /* high-contrast text */
+      --muted: #9ac7db;
+      --success: #00d18a;
+      --danger: #ff5a7a;
+      --radius: 16px;
+      --tapHeight: 60px;   /* big thumbs */
+      --maxW: 560px;       /* phone-first, but nice on tablets */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 50% -20%, #062231 0%, #041018 45%, #02080d 100%), var(--bg);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .wrap {
+      max-width: var(--maxW);
+      margin: 0 auto;
+      padding: env(safe-area-inset-top) 16px calc(env(safe-area-inset-bottom) + 20px);
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 6px 6px;
+    }
+    .brand { font-weight: 800; letter-spacing: 0.3px; }
+    .badge {
+      font-size: 12px; padding: 6px 10px; border-radius: 999px;
+      background: rgba(0,181,226,0.15); color: var(--muted); border: 1px solid rgba(0,181,226,0.25);
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+      margin: 14px 0;
+    }
+    .h1 { font-size: 22px; font-weight: 800; margin: 0 0 8px; }
+    .sub { font-size: 14px; color: var(--muted); margin-top: 6px; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+    .bigNum { font-size: 32px; font-weight: 800; line-height: 1; }
+    .streak { font-weight: 700; color: var(--success); }
+    .btn {
+      width: 100%; height: var(--tapHeight);
+      border-radius: 14px; border: none; cursor: pointer;
+      font-weight: 800; font-size: 18px; letter-spacing: 0.2px;
+      color: white;
+      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
+      box-shadow: 0 6px 18px rgba(0,181,226,0.35);
+      transition: transform .02s ease;
+      touch-action: manipulation;
+    }
+    .btn:active { transform: translateY(1px) scale(0.998); }
+    .btn.secondary {
+      background: transparent; color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    .countdown {
+      display:flex; gap:10px; justify-content:center; font-weight:800; font-size:18px;
+      padding: 10px 0; color: #d2f1ff;
+    }
+    .teams {
+      display:grid; grid-template-columns: 1fr auto 1fr; align-items:center; gap:10px; margin-top: 10px;
+    }
+    .team { display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px; }
+    .team .logo {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: #0b1b27; border: 1px solid rgba(255,255,255,0.08);
+      display:flex; align-items:center; justify-content:center; font-weight:800;
+    }
+    .pickBtns { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+    .pill {
+      font-size: 12px; color: var(--muted);
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 999px; padding: 4px 10px; display:inline-flex; align-items:center; gap:6px;
+    }
+    .progress {
+      height: 8px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow:hidden;
+    }
+    .progress>span {
+      display:block; height:100%; width: 0%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-dark));
+      transition: width .6s ease;
+    }
+    .list { display:flex; flex-direction:column; gap:10px; margin-top:8px; }
+    .li { display:flex; align-items:center; justify-content:space-between; font-size:14px; }
+    .li strong { font-weight:800; }
+    footer { text-align:center; margin-top: 18px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">S-COIN Sports</div>
+      <div class="badge">Free Play Beta</div>
+    </header>
+
+    <!-- DAILY TAP -->
+    <section class="card" id="dailyCard" aria-labelledby="dailyTitle">
+      <div class="row">
+        <div>
+          <div id="dailyTitle" class="h1">Daily Activate</div>
+          <div class="sub">Earn S-COIN-FP while active. Keep your streak alive.</div>
+        </div>
+        <div class="pill"><span id="streak">Streak 0</span></div>
+      </div>
+
+      <div class="row" style="margin:12px 0 6px;">
+        <div>
+          <div class="sub">Balance</div>
+          <div class="bigNum"><span id="balance">0.00</span> FP</div>
+        </div>
+        <div>
+          <div class="sub">Rate</div>
+          <div class="bigNum">0.25/hr</div>
+        </div>
+      </div>
+
+      <button id="activateBtn" class="btn" aria-live="polite">Activate FP X1</button>
+      <div id="countdownWrap" class="countdown" style="display:none;"></div>
+      <div class="sub" id="nextReady" style="text-align:center; margin-top:6px;"></div>
+    </section>
+
+    <!-- WEEKLY GAME PICK -->
+    <section class="card" aria-labelledby="weeklyTitle">
+      <div class="h1" id="weeklyTitle">This Week’s Game</div>
+      <div class="sub" id="gameInfo">Sat • 7:00 PM CT • Week 6</div>
+
+      <div class="teams">
+        <div class="team" id="teamA">
+          <div class="logo">A</div>
+          <strong id="teamAName">Team A</strong>
+          <span class="sub" id="teamARec">3-2</span>
+        </div>
+        <div class="sub">vs</div>
+        <div class="team" id="teamB">
+          <div class="logo">B</div>
+          <strong id="teamBName">Team B</strong>
+          <span class="sub" id="teamBRec">4-1</span>
+        </div>
+      </div>
+
+      <div class="pickBtns" id="pickBtns">
+        <button class="btn" id="pickA" aria-label="Pick Team A">Pick A</button>
+        <button class="btn" id="pickB" aria-label="Pick Team B">Pick B</button>
+      </div>
+
+      <div id="pickedMsg" class="sub" style="display:none; text-align:center; margin-top:8px;"></div>
+
+      <div class="sub" style="margin-top:12px;">Community Picks</div>
+      <div class="progress" aria-hidden="true"><span id="barA"></span></div>
+      <div class="row"><span class="sub">A: <strong id="pcA">50%</strong></span><span class="sub">B: <strong id="pcB">50%</strong></span></div>
+    </section>
+
+    <!-- LEADERBOARD PREVIEW -->
+    <section class="card" aria-labelledby="leadTitle">
+      <div class="h1" id="leadTitle">Leaderboard (Today)</div>
+      <div class="list" id="lb">
+        <!-- filled by JS -->
+      </div>
+      <button class="btn secondary" style="margin-top:10px;">View All</button>
+    </section>
+
+    <footer>
+      <div>All balances here are demo FP. No purchase necessary.</div>
+    </footer>
+  </div>
+
+  <script>
+    // --- simple localStorage state (swap later for Supabase) ---
+    const LS = {
+      BAL: "fp_balance",
+      STREAK: "fp_streak",
+      START: "fp_started_at",
+      ENDS: "fp_ends_at",
+      PICK: "weekly_pick_v1",
+      VOTESA: "votes_a",
+      VOTESB: "votes_b"
+    };
+
+    // Demo game data (replace from API later)
+    const game = {
+      aName: "Mississippi State",
+      aRec: "2-3",
+      bName: "Texas A&M",
+      bRec: "4-1",
+      kickoff: "Sat 7:00 PM CT",
+    };
+
+    // Elements
+    const balanceEl = document.getElementById("balance");
+    const streakEl  = document.getElementById("streak");
+    const activateBtn = document.getElementById("activateBtn");
+    const countdownWrap = document.getElementById("countdownWrap");
+    const nextReady = document.getElementById("nextReady");
+
+    const teamAName = document.getElementById("teamAName");
+    const teamBName = document.getElementById("teamBName");
+    const teamARec  = document.getElementById("teamARec");
+    const teamBRec  = document.getElementById("teamBRec");
+    const gameInfo  = document.getElementById("gameInfo");
+    const pickBtns  = document.getElementById("pickBtns");
+    const pickA     = document.getElementById("pickA");
+    const pickB     = document.getElementById("pickB");
+    const pickedMsg = document.getElementById("pickedMsg");
+    const barA      = document.getElementById("barA");
+    const pcA       = document.getElementById("pcA");
+    const pcB       = document.getElementById("pcB");
+    const lb        = document.getElementById("lb");
+
+    // Seed demo game
+    teamAName.textContent = game.aName;
+    teamBName.textContent = game.bName;
+    teamARec.textContent  = game.aRec;
+    teamBRec.textContent  = game.bRec;
+    gameInfo.textContent  = `${game.kickoff} • One pick per week`;
+
+    // Helpers
+    const now = () => Date.now();
+    const HOUR = 3600_000;
+    const DAY  = 24 * HOUR;
+    const RATE = 0.25; // FP per hour
+
+    function getNum(key, def=0){ return parseFloat(localStorage.getItem(key) ?? def) || 0; }
+    function getStr(key){ return localStorage.getItem(key); }
+    function set(key, val){ localStorage.setItem(key, String(val)); }
+
+    function fmt(n){ return (Math.round(n*100)/100).toFixed(2); }
+
+    function loadState(){
+      return {
+        bal: getNum(LS.BAL, 0),
+        streak: parseInt(localStorage.getItem(LS.STREAK) ?? '0', 10),
+        startedAt: parseInt(getStr(LS.START) ?? '0', 10),
+        endsAt: parseInt(getStr(LS.ENDS) ?? '0', 10),
+        pick: getStr(LS.PICK),
+        votesA: parseInt(localStorage.getItem(LS.VOTESA) ?? '123', 10), // demo seed
+        votesB: parseInt(localStorage.getItem(LS.VOTESB) ?? '117', 10),
+      };
+    }
+
+    function saveState(s){
+      set(LS.BAL, s.bal);
+      set(LS.STREAK, s.streak);
+      set(LS.START, s.startedAt);
+      set(LS.ENDS, s.endsAt);
+      if (s.pick !== undefined) set(LS.PICK, s.pick);
+      set(LS.VOTESA, s.votesA);
+      set(LS.VOTESB, s.votesB);
+    }
+
+    function accrue(s){
+      if (!s.startedAt || !s.endsAt) return s;
+      const t0 = Math.min(now(), s.endsAt);
+      const hours = Math.max(0, (t0 - s.startedAt)/HOUR);
+      const gain = hours * RATE;
+      s.bal = Math.max(0, getNum(LS.BAL, 0)) + gain;
+      s.startedAt = t0; // settle to current (or end)
+      saveState(s);
+      return s;
+    }
+
+    function updateUI(s){
+      balanceEl.textContent = fmt(s.bal);
+      streakEl.textContent = "Streak " + (s.streak || 0);
+
+      const active = s.endsAt && now() < s.endsAt;
+      activateBtn.style.display = active ? "none" : "block";
+      countdownWrap.style.display = active ? "flex" : "none";
+
+      if (active){
+        const left = Math.max(0, s.endsAt - now());
+        const hh = String(Math.floor(left / HOUR)).padStart(2,'0');
+        const mm = String(Math.floor((left % HOUR)/60000)).padStart(2,'0');
+        const ss = String(Math.floor((left % 60000)/1000)).padStart(2,'0');
+        countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
+        const readyAt = new Date(s.endsAt).toLocaleString();
+        nextReady.textContent = `Ready again at ${readyAt}`;
+      } else {
+        nextReady.textContent = '';
+      }
+
+      // picks bar
+      const total = Math.max(1, s.votesA + s.votesB);
+      const pctA = Math.round((s.votesA/total)*100);
+      pcA.textContent = pctA + "%";
+      pcB.textContent = (100 - pctA) + "%";
+      barA.style.width = pctA + "%";
+
+      // picked state
+      if (s.pick){
+        pickBtns.style.display = "none";
+        pickedMsg.style.display = "block";
+        pickedMsg.textContent = `You picked ${s.pick === 'A' ? game.aName : game.bName}.`;
+      } else {
+        pickBtns.style.display = "grid";
+        pickedMsg.style.display = "none";
+      }
+    }
+
+    function activate(){
+      let s = loadState();
+      // If already active, ignore
+      if (s.endsAt && now() < s.endsAt) return;
+      // Determine streak: if activated in the last 48h (grace window), keep it
+      const prevEnd = s.endsAt || 0;
+      const withinGrace = prevEnd && now() - prevEnd < (24 + 12) * HOUR;
+      s.streak = withinGrace ? (s.streak + 1) : (s.streak ? 1 : 1);
+
+      // Set session window
+      s.startedAt = now();
+      s.endsAt = s.startedAt + DAY;
+
+      // Tiny instant reward feel
+      s.bal = getNum(LS.BAL, 0) + 0.05;
+      saveState(s);
+      updateUI(s);
+      vibrate(30);
+    }
+
+    function pick(side){
+      let s = loadState();
+      if (s.pick) return; // lock after pick
+      s.pick = side;
+      if (side === 'A') s.votesA += 1; else s.votesB += 1;
+      saveState(s);
+      updateUI(s);
+      vibrate(12);
+    }
+
+    function vibrate(ms){
+      if (navigator.vibrate) navigator.vibrate(ms);
+    }
+
+    // Fake leaderboard for demo
+    function renderLB(){
+      const data = [
+        { name: "BulldogBen", fp: 32.4 },
+        { name: "12thMan", fp: 29.2 },
+        { name: "DeltaDawg", fp: 25.7 },
+        { name: "GulfCoastQB", fp: 22.0 },
+      ];
+      // push “You” at top if any balance
+      const me = parseFloat(localStorage.getItem(LS.BAL) || "0");
+      data.unshift({ name: "You", fp: Math.max(me, 0) });
+
+      lb.innerHTML = data.map(p => `
+        <div class="li">
+          <strong>${p.name}</strong>
+          <span>${p.fp.toFixed(2)} FP</span>
+        </div>`).join("");
+    }
+
+    // Bind
+    activateBtn.addEventListener("click", activate);
+    pickA.addEventListener("click", () => pick('A'));
+    pickB.addEventListener("click", () => pick('B'));
+
+    // Tick
+    function tick(){
+      let s = loadState();
+      s = accrue(s);
+      updateUI(s);
+      requestAnimationFrame(() => setTimeout(tick, 1000));
+    }
+
+    // Init
+    renderLB();
+    tick();
+  </script>
+</body>
+</html>
