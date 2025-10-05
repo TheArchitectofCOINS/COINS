@@ -210,6 +210,65 @@ img { max-width:100%; height:auto; display:block; }
   to   { transform: rotateY(360deg); }
 }
 
+/* --- S-COIN spinning S + halo --- */
+.spin-wrap{
+  display:flex; align-items:center; gap:12px; margin:6px 0 10px;
+}
+
+/* Container with 3D context */
+.spinBadge{
+  position:relative;
+  width:64px; height:64px;
+  display:inline-grid; place-items:center;
+  perspective:800px;
+}
+
+/* Halo behind the ring */
+.spinBadge .halo{
+  position:absolute; inset:-8px;               /* slightly larger than ring */
+  border-radius:16px;
+  background: radial-gradient(60% 60% at 50% 50%,
+              rgba(0,181,226,0.35) 0%,
+              rgba(0,181,226,0.18) 40%,
+              rgba(0,181,226,0.00) 70%);
+  filter: blur(4px);
+  animation: haloPulse 2.6s ease-in-out infinite;
+  z-index: 0;                                  /* sits behind ring */
+}
+
+/* Static ring image */
+.spinBadge .ring{
+  position:relative; z-index:1;
+  width:100%; height:100%; object-fit:contain; display:block;
+}
+
+/* Spinning S on top of ring */
+.spinBadge .letterS{
+  position:absolute; inset:0; z-index:2;
+  width:100%; height:100%; object-fit:contain;
+  transform-style:preserve-3d;
+  animation: spinY 4s linear infinite;
+  will-change: transform;
+}
+
+/* Horizontal spin */
+@keyframes spinY {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+/* Halo breathing/pulsing */
+@keyframes haloPulse {
+  0%   { opacity: .55; transform: scale(0.96); filter: blur(4px); }
+  50%  { opacity: .90; transform: scale(1.03); filter: blur(6px); }
+  100% { opacity: .55; transform: scale(0.96); filter: blur(4px); }
+}
+
+/* Accessibility: reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce){
+  .spinBadge .letterS { animation: none; }
+  .spinBadge .halo    { animation: none; }
+}
 
 
 
