@@ -177,9 +177,29 @@ a{text-decoration:none;color:inherit}
 /* =========================
    STICKY BOTTOM NAV
 ========================= */
-.nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
-.nav .wrap{display:flex; gap:10px; padding:10px 16px}
-.nav a{flex:1; text-align:center}
+/* sticky bottom nav */
+.nav {
+  position: sticky;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(2,8,13,.9);
+  border-top: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+}
+.nav .wrap {
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px;
+}
+.nav a {
+  flex: 1;
+  text-align: center;
+
+  /* ✅ ensures button text is centered */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 /* =========================
    RESPONSIVE
