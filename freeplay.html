@@ -277,7 +277,84 @@
   setInterval(renderLB, 60000); // refresh every 60s
 </script>
  
-    
+    <div id="username-box" style="margin-top:16px; border:1px solid #0aa; padding:12px; border-radius:8px;">
+  <div style="font-weight:600; margin-bottom:6px;">Your Handle</div>
+  <div style="display:flex; gap:8px; align-items:center;">
+    <input id="username-input" type="text" maxlength="24" placeholder="Choose a handle"
+           style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;">
+    <button id="username-save" style="padding:8px 12px; border:0; border-radius:6px; cursor:pointer;">
+      Save
+    </button>
+  </div>
+  <div id="username-msg" style="margin-top:8px; font-size:0.9rem;"></div>
+</div>
+
+<script>
+  // basic constraints to keep names clean
+  const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
+
+  async function loadMyHandle() {
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+      document.getElementById('username-box').style.display = 'none';
+      return;
+    }
+    const { data, error } = await sb
+      .from('profiles')
+      .select('username')
+      .eq('id', user.id)
+      .single();
+
+    if (!error && data) {
+      document.getElementById('username-input').value = data.username || '';
+    }
+  }
+
+  async function saveMyHandle() {
+    const msg = document.getElementById('username-msg');
+    msg.textContent = '';
+    const input = document.getElementById('username-input');
+    const raw = input.value.trim();
+
+    if (!USERNAME_REGEX.test(raw)) {
+      msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.';
+      msg.style.color = 'crimson';
+      return;
+    }
+
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+      msg.textContent = 'Please sign in first.';
+      msg.style.color = 'crimson';
+      return;
+    }
+
+    // try update; if row missing, upsert into your profiles trigger/flow as needed
+    const { error } = await sb
+      .from('profiles')
+      .update({ username: raw })
+      .eq('id', user.id);
+
+    if (error) {
+      if (error.code === '23505') { // unique_violation
+        msg.textContent = 'That handle is taken. Try another.';
+      } else {
+        msg.textContent = 'Could not save handle. Try again.';
+        console.error(error);
+      }
+      msg.style.color = 'crimson';
+    } else {
+      msg.textContent = 'Saved!';
+      msg.style.color = 'seagreen';
+      // optional: refresh leaderboard to reflect change instantly
+      if (typeof renderLB === 'function') renderLB();
+    }
+  }
+
+  document.getElementById('username-save').addEventListener('click', saveMyHandle);
+  loadMyHandle();
+</script>
+
     /* =========================
        CONFIG (OK to leave blank to use LocalStorage only)
     ========================== */
