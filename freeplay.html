@@ -248,6 +248,36 @@
   <!-- Supabase + App Logic -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
+  <script>
+  async function renderLB() {
+    const { data, error } = await sb
+      .from('public_leaderboard')
+      .select('handle, balance_fp, streak')
+      .order('balance_fp', { ascending: false })
+      .limit(10);
+
+    if (error) {
+      console.error('LB error:', error);
+      document.getElementById('lb').innerHTML =
+        '<div class="li"><span>Leaderboard unavailable</span></div>';
+      return;
+    }
+
+    const html = (data || []).map((row, i) => `
+      <div class="li">
+        <strong>${i + 1}. ${row.handle}</strong>
+        <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
+      </div>
+    `).join('');
+
+    document.getElementById('lb').innerHTML = html || '<div class="li">No data yet</div>';
+  }
+
+  renderLB();
+  setInterval(renderLB, 60000); // refresh every 60s
+</script>
+ 
+    
     /* =========================
        CONFIG (OK to leave blank to use LocalStorage only)
     ========================== */
