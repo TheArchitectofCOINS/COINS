@@ -126,7 +126,7 @@
     </div>
   </section>
 
-  <!-- SIMPLE AUTH BOX (email + password) -->
+  <!-- SIMPLE AUTH BOX -->
   <div id="authBox" class="wrap" style="display:none; padding-top:12px">
     <div class="card" style="display:grid; gap:8px">
       <strong>Sign in to play & save your S-COIN-FP</strong>
@@ -198,7 +198,7 @@
       </div>
     </section>
 
-    <!-- WEEKLY GAME PICK (manual text update each week) -->
+    <!-- WEEKLY GAME PICK (update these texts weekly) -->
     <section class="card" aria-labelledby="weeklyTitle">
       <div class="h1" id="weeklyTitle">This Week’s Game</div>
       <div class="sub" id="gameInfo">Sat • 7:00 PM CT • One pick per week</div>
@@ -258,10 +258,9 @@
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
     /* ========= CONFIG ========= */
-    const SUPABASE_URL = 'https://mqnsemhuurdqywizoitl.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs'
-    const sb = (SUPABASE_URL.includes('YOUR-PROJECT')) ? null
-             : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);    
+    const SUPABASE_URL = 'https://mqnsemhuurdqywizoitl.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs';
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     /* ========= Helpers / LS ========= */
     const LS={BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at", PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b", MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"};
@@ -287,7 +286,6 @@
 
     /* ========= Server state ========= */
     async function loadServer(){
-      if(!sb) return null;
       const { data:{ user } } = await sb.auth.getUser();
       if(!user) return null;
       const { data, error } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single();
@@ -295,21 +293,14 @@
       return { bal:Number(data.balance_fp||0), streak:Number(data.streak||0), startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0, pick:str(LS.PICK), votesA:num(LS.VOTESA)||123, votesB:num(LS.VOTESB)||117 };
     }
     async function saveServer(s){
-      if(!sb) return;
       const { data:{ user } } = await sb.auth.getUser();
       if(!user) return;
       await sb.from('wallets').update({ balance_fp:s.bal, streak:s.streak, session_ends_at: s.endsAt ? new Date(s.endsAt).toISOString() : null }).eq('user_id', user.id);
     }
 
     /* ========= Auth gating ========= */
-    function setPlayEnabled(enabled){
-      [activateBtn, pickA, pickB].forEach(b=>{ b.disabled=!enabled; });
-    }
-    async function isSignedIn(){
-      if(!sb) return false;
-      const { data:{ session } } = await sb.auth.getSession();
-      return !!session;
-    }
+    function setPlayEnabled(enabled){ [activateBtn, pickA, pickB].forEach(b=>{ b.disabled=!enabled; }); }
+    async function isSignedIn(){ const { data:{ session } } = await sb.auth.getSession(); return !!session; }
     async function requireSignIn() {
       const signed = await isSignedIn();
       if (!signed) {
@@ -390,25 +381,20 @@
       } catch(e) {}
     }
 
-    /* ========= Leaderboard (view) ========= */
+    /* ========= Leaderboard (safe view) ========= */
     async function renderLB(){
-      if (sb) {
-        const { data, error } = await sb
-          .from('public_leaderboard')
-          .select('handle, balance_fp, streak')
-          .order('balance_fp', { ascending: false })
-          .limit(10);
-        if (error) { lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
-        lb.innerHTML = (data||[]).map((row,i)=>`
-          <div class="li">
-            <strong>${i+1}. ${row.handle}</strong>
-            <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
-          </div>
-        `).join('') || '<div class="li">No data yet</div>';
-        return;
-      }
-      // if no SB config, show nothing
-      lb.innerHTML = '<div class="li">Configure Supabase to load leaderboard.</div>';
+      const { data, error } = await sb
+        .from('public_leaderboard')
+        .select('handle, balance_fp, streak')
+        .order('balance_fp', { ascending: false })
+        .limit(10);
+      if (error) { lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
+      lb.innerHTML = (data||[]).map((row,i)=>`
+        <div class="li">
+          <strong>${i+1}. ${row.handle}</strong>
+          <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
+        </div>
+      `).join('') || '<div class="li">No data yet</div>';
     }
 
     /* ========= Referrals (client only) ========= */
@@ -450,9 +436,9 @@
     /* ========= Username widget ========= */
     const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
     async function loadMyHandle() {
-      if(!sb){ document.getElementById('username-box').style.display='none'; return; }
       const { data: { user } } = await sb.auth.getUser();
       if (!user) { document.getElementById('username-box').style.display='none'; return; }
+      document.getElementById('username-box').style.display='block';
       const { data, error } = await sb.from('profiles').select('username').eq('id', user.id).single();
       if (!error && data) document.getElementById('username-input').value = data.username || '';
     }
@@ -475,27 +461,40 @@
     activateBtn.addEventListener("click", activate);
     document.getElementById('username-save').addEventListener('click', saveMyHandle);
 
+    const emailEl = document.getElementById('email');
+    const passEl  = document.getElementById('password');
+    function show(msg, ok=false){ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; }
+
     document.getElementById('signupBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const pass =document.getElementById('password').value;
-      const { error } = await sb.auth.signUp({ email, password:pass });
-      authMsgEl.textContent = error ? error.message : 'Check your email to verify, then sign in.';
+      if(!sb){ show('Supabase not configured'); return; }
+      const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
+      if(!email||!pass){ show('Enter email and password'); return; }
+      try{
+        const { data, error } = await sb.auth.signUp({ email, password:pass });
+        if(error){ show(error.message); return; }
+        show('Check your email to verify, then sign in.', true);
+      }catch(e){ show(e?.message||'Sign up failed'); }
       await showAuthIfNeeded(); await loadMyHandle();
     };
     document.getElementById('signinBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const pass =document.getElementById('password').value;
-      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
-      authMsgEl.textContent = error ? error.message : 'Signed in!';
-      await showAuthIfNeeded(); await loadMyHandle(); await boot(true);
+      if(!sb){ show('Supabase not configured'); return; }
+      const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
+      if(!email||!pass){ show('Enter email and password'); return; }
+      try{
+        const { data, error } = await sb.auth.signInWithPassword({ email, password:pass });
+        if(error){ show(error.message); return; }
+        show('Signed in!', true);
+        await showAuthIfNeeded(); await loadMyHandle(); await boot(true);
+      }catch(e){ show(e?.message||'Sign in failed'); }
     };
     document.getElementById('resetBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/freeplay.html' });
-      authMsgEl.textContent = error ? error.message : 'Check your email for a reset link.';
+      if(!sb){ show('Supabase not configured'); return; }
+      const email=(emailEl.value||'').trim(); if(!email){ show('Enter your email'); return; }
+      try{
+        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/freeplay.html' });
+        if(error){ show(error.message); return; }
+        show('Check your email for a reset link.', true);
+      }catch(e){ show(e?.message||'Reset failed'); }
     };
 
     let state = loadLocal();
