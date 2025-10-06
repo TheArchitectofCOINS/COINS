@@ -65,7 +65,7 @@
       font-weight:800; font-size:18px; color:#08121A;
       background:linear-gradient(180deg,var(--blue),var(--blue-dark));
       box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation;
-      display:flex; align-items:center; justify-content:center;   /* center text always */
+      display:flex; align-items:center; justify-content:center;
     }
     .btn:active{transform:translateY(1px) scale(.998)}
     .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
@@ -80,7 +80,7 @@
     .list{display:flex; flex-direction:column; gap:10px; margin-top:8px}
     .li{display:flex; align-items:center; justify-content:space-between; font-size:14px}
 
-    /* ----- Spinning coin (two-sided S) + halo ----- */
+    /* spinning coin */
     .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
     .spinBadge{position:relative; width:64px; height:64px; display:inline-grid; place-items:center; perspective:800px}
     .spinBadge .halo{
@@ -90,14 +90,10 @@
     }
     .spinBadge .ring{position:relative; z-index:1; width:100%; height:100%; object-fit:contain; display:block}
     .sCoin{
-      position:absolute; inset:0; z-index:2;
-      transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+      position:absolute; inset:0; z-index:2; transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
       animation:spinY 4s linear infinite; will-change:transform;
     }
-    .sCoin .face{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block;
-      backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    }
+    .sCoin .face{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; backface-visibility:hidden; -webkit-backface-visibility:hidden;}
     .sCoin .back{transform:rotateY(180deg)}
     @keyframes spinY{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
     @-webkit-keyframes spinY{from{-webkit-transform:rotateY(0)}to{-webkit-transform:rotateY(360deg)}}
@@ -109,6 +105,11 @@
     .nav .wrap{display:flex; gap:10px; padding:10px 16px}
     .nav a{flex:1; text-align:center}
     @media (max-width:380px){ .spinBadge{width:56px; height:56px} }
+
+    /* username box */
+    #username-box{margin-top:12px; border:1px solid #0aa; padding:12px; border-radius:8px;}
+    #username-box input{padding:8px; border:1px solid #ccc; border-radius:6px; background:#0F1A2B; color:#F5F7FB}
+    #username-save{padding:8px 12px; border:0; border-radius:6px; cursor:pointer}
   </style>
 </head>
 <body>
@@ -129,8 +130,8 @@
   <div id="authBox" class="wrap" style="display:none; padding-top:12px">
     <div class="card" style="display:grid; gap:8px">
       <strong>Sign in to save your S-COIN-FP</strong>
-      <input id="email" type="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#0F1A2B;color:#F5F7FB">
-      <input id="password" type="password" placeholder="Password (min 6)" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#0F1A2B;color:#F5F7FB">
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password (min 6)">
       <div style="display:flex; gap:8px; flex-wrap:wrap">
         <button id="signupBtn" class="btn secondary">Create Account</button>
         <button id="signinBtn" class="btn secondary">Sign In</button>
@@ -151,7 +152,6 @@
         <div class="pill"><span id="streak">Streak 0</span></div>
       </div>
 
-      <!-- Spinning coin -->
       <div class="spin-wrap">
         <div class="spinBadge" aria-hidden="true">
           <span class="halo" aria-hidden="true"></span>
@@ -233,6 +233,16 @@
     <section class="card" aria-labelledby="leadTitle">
       <div class="h1" id="leadTitle">Leaderboard (Today)</div>
       <div class="list" id="lb"></div>
+
+      <!-- Username widget -->
+      <div id="username-box">
+        <div style="font-weight:600; margin-bottom:6px;">Your Handle</div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <input id="username-input" type="text" maxlength="24" placeholder="Choose a handle">
+          <button id="username-save">Save</button>
+        </div>
+        <div id="username-msg" style="margin-top:8px; font-size:0.9rem;"></div>
+      </div>
     </section>
   </div>
 
@@ -248,122 +258,13 @@
   <!-- Supabase + App Logic -->
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
-  <script>
-  async function renderLB() {
-    const { data, error } = await sb
-      .from('public_leaderboard')
-      .select('handle, balance_fp, streak')
-      .order('balance_fp', { ascending: false })
-      .limit(10);
-
-    if (error) {
-      console.error('LB error:', error);
-      document.getElementById('lb').innerHTML =
-        '<div class="li"><span>Leaderboard unavailable</span></div>';
-      return;
-    }
-
-    const html = (data || []).map((row, i) => `
-      <div class="li">
-        <strong>${i + 1}. ${row.handle}</strong>
-        <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
-      </div>
-    `).join('');
-
-    document.getElementById('lb').innerHTML = html || '<div class="li">No data yet</div>';
-  }
-
-  renderLB();
-  setInterval(renderLB, 60000); // refresh every 60s
-</script>
- 
-    <div id="username-box" style="margin-top:16px; border:1px solid #0aa; padding:12px; border-radius:8px;">
-  <div style="font-weight:600; margin-bottom:6px;">Your Handle</div>
-  <div style="display:flex; gap:8px; align-items:center;">
-    <input id="username-input" type="text" maxlength="24" placeholder="Choose a handle"
-           style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;">
-    <button id="username-save" style="padding:8px 12px; border:0; border-radius:6px; cursor:pointer;">
-      Save
-    </button>
-  </div>
-  <div id="username-msg" style="margin-top:8px; font-size:0.9rem;"></div>
-</div>
-
-<script>
-  // basic constraints to keep names clean
-  const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
-
-  async function loadMyHandle() {
-    const { data: { user } } = await sb.auth.getUser();
-    if (!user) {
-      document.getElementById('username-box').style.display = 'none';
-      return;
-    }
-    const { data, error } = await sb
-      .from('profiles')
-      .select('username')
-      .eq('id', user.id)
-      .single();
-
-    if (!error && data) {
-      document.getElementById('username-input').value = data.username || '';
-    }
-  }
-
-  async function saveMyHandle() {
-    const msg = document.getElementById('username-msg');
-    msg.textContent = '';
-    const input = document.getElementById('username-input');
-    const raw = input.value.trim();
-
-    if (!USERNAME_REGEX.test(raw)) {
-      msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.';
-      msg.style.color = 'crimson';
-      return;
-    }
-
-    const { data: { user } } = await sb.auth.getUser();
-    if (!user) {
-      msg.textContent = 'Please sign in first.';
-      msg.style.color = 'crimson';
-      return;
-    }
-
-    // try update; if row missing, upsert into your profiles trigger/flow as needed
-    const { error } = await sb
-      .from('profiles')
-      .update({ username: raw })
-      .eq('id', user.id);
-
-    if (error) {
-      if (error.code === '23505') { // unique_violation
-        msg.textContent = 'That handle is taken. Try another.';
-      } else {
-        msg.textContent = 'Could not save handle. Try again.';
-        console.error(error);
-      }
-      msg.style.color = 'crimson';
-    } else {
-      msg.textContent = 'Saved!';
-      msg.style.color = 'seagreen';
-      // optional: refresh leaderboard to reflect change instantly
-      if (typeof renderLB === 'function') renderLB();
-    }
-  }
-
-  document.getElementById('username-save').addEventListener('click', saveMyHandle);
-  loadMyHandle();
-</script>
-
-    /* =========================
-       CONFIG (OK to leave blank to use LocalStorage only)
-    ========================== */
+    /* ========= CONFIG ========= */
     const SUPABASE_URL = 'https://YOUR-PROJECT.ref.supabase.co'; // <-- replace
     const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';                   // <-- replace
     const sb = (SUPABASE_URL.includes('YOUR-PROJECT')) ? null
              : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // ---------------- LocalStorage Keys ----------------
+    /* ========= LocalStorage Keys ========= */
     const LS={
       BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
       PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b",
@@ -371,11 +272,12 @@
       REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"
     };
 
-    // 0.25 FP / day  => per hour:
-    const RATE = 0.25/24; // ≈ 0.0104167 FP/hr
-    document.getElementById("rateDisp").textContent = "0.25/day";
+    const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR;
+    const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
+    const fmt=n=>(Math.round(n*100)/100).toFixed(2);
+    const qp=name=>new URLSearchParams(location.search).get(name);
 
-    // Elements
+    // UI els
     const balanceEl=document.getElementById("balance"), streakEl=document.getElementById("streak"),
       activateBtn=document.getElementById("activateBtn"), countdownWrap=document.getElementById("countdownWrap"),
       nextReady=document.getElementById("nextReady"), pickBtns=document.getElementById("pickBtns"),
@@ -387,14 +289,11 @@
       claimRow=document.getElementById("claimRow"),
       authBox=document.getElementById("authBox"), authMsgEl=document.getElementById("authMsg");
 
-    const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR;
-    const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
-    const fmt=n=>(Math.round(n*100)/100).toFixed(2);
-    const qp=name=>new URLSearchParams(location.search).get(name);
+    // rate
+    const RATE = 0.25/24; // per hour
+    document.getElementById("rateDisp").textContent = "0.25/day";
 
-    /* =========================
-       LOCAL STORAGE STATE (fallback)
-    ========================== */
+    /* ========= Local fallback state ========= */
     function loadLocal(){return{
       bal:num(LS.BAL),
       streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
@@ -410,10 +309,7 @@
       set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB);
     }
 
-    /* =========================
-       SERVER STATE (Supabase) — optional
-       Requires tables: profiles(id), wallets(user_id,balance_fp,streak,session_ends_at)
-    ========================== */
+    /* ========= Server state (optional) ========= */
     async function loadServer(){
       if(!sb) return null;
       const { data:{ user } } = await sb.auth.getUser();
@@ -442,9 +338,7 @@
       }).eq('user_id', user.id);
     }
 
-    /* =========================
-       ACCRUAL & UI
-    ========================== */
+    /* ========= Accrual & UI ========= */
     function accrue(s){
       if(!s.startedAt||!s.endsAt) return s;
       const t0 = Math.min(now(), s.endsAt);
@@ -483,12 +377,10 @@
 
     function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
 
-    /* =========================
-       ACTIONS
-    ========================== */
+    /* ========= Actions ========= */
     async function activate(){
       let s = state;
-      if(s.endsAt && now() < s.endsAt) return; // already active
+      if(s.endsAt && now() < s.endsAt) return;
       const prevEnd = s.endsAt || 0;
       const within = prevEnd && now() - prevEnd < (24+12)*HOUR; // 12h grace
       s.streak = within ? (s.streak + 1) : 1;
@@ -507,56 +399,58 @@
       saveLocal(s); ui(s); vibrate(12);
     }
 
-    function renderLB(){
+    /* ========= Leaderboard ========= */
+    async function renderLB(){
+      // Option 1: use the safe view when Supabase is configured
+      if (sb) {
+        const { data, error } = await sb
+          .from('public_leaderboard')
+          .select('handle, balance_fp, streak')
+          .order('balance_fp', { ascending: false })
+          .limit(10);
+
+        if (error) {
+          console.error('LB error:', error);
+          lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>';
+          return;
+        }
+
+        lb.innerHTML = (data||[]).map((row,i)=>`
+          <div class="li">
+            <strong>${i+1}. ${row.handle}</strong>
+            <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
+          </div>
+        `).join('') || '<div class="li">No data yet</div>';
+        return;
+      }
+
+      // Fallback (no Supabase): simple local demo list
       const data=[{name:"You",fp:num(LS.BAL)},{name:"BulldogBen",fp:32.4},{name:"12thMan",fp:29.2},{name:"DeltaDawg",fp:25.7}];
       lb.innerHTML = data.map(p=>`<div class="li"><strong>${p.name}</strong><span>${p.fp.toFixed(2)} FP</span></div>`).join("");
     }
 
-    /* =========================
-       REFERRALS (client-only)
-    ========================== */
-    function randCode(n=6){
-      const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)];
-      return s;
-    }
-    function getMyCode(){
-      let c = localStorage.getItem(LS.MYCODE);
-      if(!c){ c = randCode(6); localStorage.setItem(LS.MYCODE, c); }
-      return c;
-    }
-    function award(amount, noteEl){
-      state.bal = (state.bal||0) + amount;
-      saveLocal(state); ui(state);
-      if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`;
-    }
+    /* ========= Referrals (client only) ========= */
+    function randCode(n=6){ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
+    function getMyCode(){ let c = localStorage.getItem(LS.MYCODE); if(!c){ c = randCode(6); localStorage.setItem(LS.MYCODE, c); } return c; }
+    function award(amount, noteEl){ state.bal = (state.bal||0) + amount; saveLocal(state); ui(state); if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`; }
     function setupReferrals(){
       const myCode = getMyCode();
       myCodeEl.textContent = myCode;
-
-      const refParam   = qp("ref");   // inviter's code
-      const claimParam = qp("claim"); // my code embedded in a claim link
+      const refParam   = qp("ref");
+      const claimParam = qp("claim");
 
       if(refParam && refParam !== myCode){
-        if(!localStorage.getItem(LS.REF_FROM)){
-          localStorage.setItem(LS.REF_FROM, refParam);
-        }
+        if(!localStorage.getItem(LS.REF_FROM)){ localStorage.setItem(LS.REF_FROM, refParam); }
         if(!localStorage.getItem(LS.REF_BONUS)){
-          localStorage.setItem(LS.REF_BONUS,"1");
-          award(1.00, refStatus);
-          refStatus.innerHTML += " • Welcome bonus for using an invite 🎉";
+          localStorage.setItem(LS.REF_BONUS,"1"); award(1.00, refStatus); refStatus.innerHTML += " • Welcome bonus for using an invite 🎉";
         }
         claimRow.style.display = "flex";
       }
 
       if(claimParam && claimParam === myCode){
         if(!localStorage.getItem(LS.CLAIM_BONUS)){
-          localStorage.setItem(LS.CLAIM_BONUS,"1");
-          award(1.00, refStatus);
-          refStatus.innerHTML += " • Referral claim received 🙌";
-        } else {
-          refStatus.textContent = "Referral claim already applied on this device.";
-        }
+          localStorage.setItem(LS.CLAIM_BONUS,"1"); award(1.00, refStatus); refStatus.innerHTML += " • Referral claim received 🙌";
+        } else { refStatus.textContent = "Referral claim already applied on this device."; }
       }
 
       copyInviteBtn.addEventListener("click", ()=>{
@@ -573,9 +467,7 @@
       });
     }
 
-    /* =========================
-       AUTH (Supabase) — optional
-    ========================== */
+    /* ========= Auth (optional) ========= */
     function setAuthMsg(t){ authMsgEl.textContent = t || ""; }
     async function showAuthIfNeeded(){
       if(!sb){ authBox.style.display='none'; return false; }
@@ -607,9 +499,40 @@
       setAuthMsg(error ? error.message : 'Check your email for a reset link.');
     };
 
-    /* =========================
-       WIRE UP + TICK
-    ========================== */
+    /* ========= Username widget ========= */
+    const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
+    async function loadMyHandle() {
+      if(!sb){ document.getElementById('username-box').style.display='none'; return; }
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { document.getElementById('username-box').style.display='none'; return; }
+      const { data, error } = await sb.from('profiles').select('username').eq('id', user.id).single();
+      if (!error && data) document.getElementById('username-input').value = data.username || '';
+    }
+    async function saveMyHandle() {
+      const msg = document.getElementById('username-msg');
+      msg.textContent = '';
+      const input = document.getElementById('username-input');
+      const raw = input.value.trim();
+
+      if (!USERNAME_REGEX.test(raw)) {
+        msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.';
+        msg.style.color = 'crimson'; return;
+      }
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) { msg.textContent = 'Please sign in first.'; msg.style.color = 'crimson'; return; }
+
+      const { error } = await sb.from('profiles').update({ username: raw }).eq('id', user.id);
+      if (error) {
+        msg.textContent = (error.code === '23505') ? 'That handle is taken. Try another.' : 'Could not save handle.';
+        msg.style.color = 'crimson';
+      } else {
+        msg.textContent = 'Saved!'; msg.style.color = 'seagreen';
+        renderLB();
+      }
+    }
+    document.getElementById('username-save').addEventListener('click', saveMyHandle);
+
+    /* ========= Wire up & tick ========= */
     document.getElementById("pickA").addEventListener("click",()=>pick('A'));
     document.getElementById("pickB").addEventListener("click",()=>pick('B'));
     activateBtn.addEventListener("click", activate);
@@ -620,14 +543,14 @@
       renderLB();
       setupReferrals();
 
-      // If logged in, try to pull from server
       const signed = await showAuthIfNeeded();
       if (signed || forceReloadServer){
         const s = await loadServer();
         if(s){ state = { ...state, ...s }; saveLocal(state); }
       }
 
-      // Start UI + ticker
+      await loadMyHandle();
+
       ui(state);
       (function tick(){
         state = accrue(state);
@@ -635,10 +558,7 @@
         setTimeout(tick, 1000);
       })();
 
-      // Background save to server if signed in
-      if(signed){
-        setInterval(()=>saveServer(state).catch(()=>{}), 30_000);
-      }
+      if(signed){ setInterval(()=>saveServer(state).catch(()=>{}), 30_000); }
     }
 
     boot();
