@@ -21,14 +21,17 @@
     .brand .logo{ width:32px; height:32px; border-radius:8px; overflow:hidden; background:#0b1b27; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; }
     .title{font-weight:800; letter-spacing:.2px}
     .tag{margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25)}
+
     .card{ background:linear-gradient(180deg, var(--card1), var(--card2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); margin:14px 0; }
     .h1{font-size:22px; font-weight:800; margin:0 0 8px} .sub{font-size:14px; color:var(--muted); margin-top:6px}
     .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
     .bigNum{font-size:32px; font-weight:800; line-height:1}
     .pill{font-size:12px; color:var(--muted); border:1px dashed rgba(255,255,255,.2); border-radius:999px; padding:4px 10px; display:inline-flex; align-items:center; gap:6px}
+
     .btn{ width:100%; height:var(--tapHeight); border-radius:14px; border:1px solid rgba(255,255,255,.1); cursor:pointer; font-weight:800; font-size:18px; color:#08121A;
       background:linear-gradient(180deg,var(--blue),var(--blue-dark)); box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation; display:flex; align-items:center; justify-content:center; }
     .btn:disabled{opacity:.6; cursor:not-allowed} .btn:active{transform:translateY(1px) scale(.998)} .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
+
     .countdown{display:flex; gap:10px; justify-content:center; font-weight:800; font-size:18px; padding:10px 0; color:#d2f1ff}
     .teams{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-top:10px}
     .team{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px}
@@ -38,14 +41,17 @@
     .progress>span{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--blue),var(--blue-dark)); transition:width .6s ease}
     .list{display:flex; flex-direction:column; gap:10px; margin-top:8px}
     .li{display:flex; align-items:center; justify-content:space-between; font-size:14px}
+
     .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
     .spinBadge{position:relative; width:64px; height:64px; display:inline-grid; place-items:center; perspective:800px}
     .spinBadge .halo{ position:absolute; inset:-8px; border-radius:16px; background:radial-gradient(60% 60% at 50% 50%, rgba(0,181,226,.35) 0%, rgba(0,181,226,.18) 40%, rgba(0,181,226,0) 70%); filter:blur(4px); animation:haloPulse 2.6s ease-in-out infinite; z-index:0;}
+    .spinBadge .ring{position:relative; z-index:1; width:100%; height:100%}
     .sCoin{ position:absolute; inset:0; z-index:2; transform-style:preserve-3d; animation:spinY 4s linear infinite; }
     .sCoin .face{position:absolute; inset:0; width:100%; height:100%; backface-visibility:hidden;}
     .sCoin .back{transform:rotateY(180deg)}
     @keyframes spinY{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
     @keyframes haloPulse{0%{opacity:.55; transform:scale(.96)} 50%{opacity:.9; transform:scale(1.03)} 100%{opacity:.55; transform:scale(.96)}}
+
     .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
     .nav .wrap{display:flex; gap:10px; padding:10px 16px}
     .nav a, .nav button{flex:1; text-align:center}
@@ -230,48 +236,22 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // --- First-sign-in migration: copy local FP to server if server is empty or lower
-    async function migrateLocalToServerIfNew() {
-      const localBal = parseFloat(localStorage.getItem('fp_balance') || '0') || 0;
-      const localStreak = parseInt(localStorage.getItem('fp_streak') || '0', 10) || 0;
-      const { data: { user } } = await sb.auth.getUser();
-      if (!user) return;
-
-      const { data, error } = await sb
-        .from('wallets')
-        .select('balance_fp, streak')
-        .eq('user_id', user.id)
-        .single();
-
-      if (error) return;
-
-      const serverBal = Number(data?.balance_fp || 0);
-      const serverStreak = Number(data?.streak || 0);
-
-      if ((serverBal === 0 && localBal > 0) || localBal > serverBal) {
-        await sb.from('wallets')
-          .update({ balance_fp: localBal, streak: Math.max(serverStreak, localStreak) })
-          .eq('user_id', user.id);
-      }
-    }
-
     /* ======= GAME (edit weekly) ======= */
     const GAME = {
-      id: '2025-W40',
+      id: '2025-W40',               // change weekly (any unique string)
       teamA: { name: 'Florida Gators', rec: '2-3' },
       teamB: { name: 'Texas A&M',    rec: '5-0' },
-      lockAtISO: '2025-10-11T18:00:00-05:00'
+      lockAtISO: '2025-10-11T18:00:00-05:00' // kickoff/lock time in CT
     };
-    const ADMIN_EMAILS = ['you@example.com']; // change to yours
 
-    /* ========= Helpers / LS ========= */
-    const LS = { BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
-      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done" };
-    let DRIFT_MS = 0;
-    async function syncServerTime(){ try{ const { data, error } = await sb.rpc('now_ts_ms'); if(!error && typeof data === 'number'){ DRIFT_MS = Number(data) - Date.now(); } }catch(_){} }
-    const now = ()=> Date.now() + DRIFT_MS;
-    const HOUR = 3600_000, DAY = 24*HOUR, RATE = 0.25/24;
+    // Admins who can settle via URL ?settle=A or ?settle=B
+    const ADMIN_EMAILS = ['you@example.com']; // change to your email
 
+    /* ========= Helpers / LS / time ========= */
+    const LS = {
+      BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
+      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"
+    };
     const E = id => document.getElementById(id);
     const balanceEl=E("balance"), streakEl=E("streak"), activateBtn=E("activateBtn"), countdownWrap=E("countdownWrap"),
       nextReady=E("nextReady"), barA=E("barA"), pcA=E("pcA"), pcB=E("pcB"), lb=E("lb"),
@@ -281,17 +261,26 @@
       betA=E("betA"), betB=E("betB"), betAmount=E("betAmount"), betHint=E("betHint"), betMsg=E("betMsg"),
       statPlayers=E("statPlayers"), statTotalFP=E("statTotalFP"), statBetCount=E("statBetCount"), statBetFP=E("statBetFP"),
       gameIdDisp=E("gameIdDisp");
-
     document.getElementById("rateDisp").textContent = "0.25/day";
 
-    const num=k=>parseFloat(localStorage.getItem(k)??"0")||0;
-    const str=k=>localStorage.getItem(k);
-    const setLS=(k,v)=>localStorage.setItem(k,String(v));
-    const fmt=n=>(Math.round(n*100)/100).toFixed(2);
-    const qp=name=>new URLSearchParams(location.search).get(name);
-    const vibrate=ms=>{ if(navigator.vibrate) navigator.vibrate(ms) };
+    function num(k){ return parseFloat(localStorage.getItem(k)??"0")||0 }
+    function str(k){ return localStorage.getItem(k) }
+    function setLS(k,v){ localStorage.setItem(k,String(v)) }
+    function fmt(n){ return (Math.round(n*100)/100).toFixed(2) }
+    function qp(name){ return new URLSearchParams(location.search).get(name) }
+    function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms) }
 
-    /* ========= Local fallback ========= */
+    let DRIFT_MS = 0; // serverNow - clientNow
+    async function syncServerTime(){
+      try{
+        const { data, error } = await sb.rpc('now_ts_ms');
+        if(!error && typeof data === 'number'){ DRIFT_MS = Number(data) - Date.now(); }
+      }catch(_){}
+    }
+    const now  = ()=> Date.now() + DRIFT_MS;
+    const HOUR = 3600_000, DAY = 24*HOUR, RATE = 0.25/24;
+
+    /* ========= Local state ========= */
     function loadLocal(){return{
       bal:num(LS.BAL), streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
       startedAt:parseInt(str(LS.START)??"0",10), endsAt:parseInt(str(LS.ENDS)??"0",10)
@@ -307,7 +296,10 @@
         ({ data } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single());
       }
       if (!data) return null;
-      return { bal:Number(data.balance_fp||0), streak:Number(data.streak||0), startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0 };
+      return {
+        bal:Number(data.balance_fp||0), streak:Number(data.streak||0),
+        startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0
+      };
     }
     async function saveServer(s){
       const { data:{ user } } = await sb.auth.getUser(); if(!user) return;
@@ -317,11 +309,45 @@
       }, { onConflict: 'user_id' });
     }
 
+    // First-sign-in migration: copy local FP to server if server is empty or lower
+    async function migrateLocalToServerIfNew() {
+      const localBal = parseFloat(localStorage.getItem('fp_balance') || '0') || 0;
+      const localStreak = parseInt(localStorage.getItem('fp_streak') || '0', 10) || 0;
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) return;
+      const { data, error } = await sb.from('wallets').select('balance_fp, streak').eq('user_id', user.id).single();
+      if (error) return;
+      const serverBal = Number(data?.balance_fp || 0), serverStreak = Number(data?.streak || 0);
+      if ((serverBal === 0 && localBal > 0) || localBal > serverBal) {
+        await sb.from('wallets').update({ balance_fp: localBal, streak: Math.max(serverStreak, localStreak) }).eq('user_id', user.id);
+      }
+    }
+
     /* ========= Auth gating ========= */
+    let SIGNED = false; // <— key flag for UI/logic
     function setPlayEnabled(enabled){ [activateBtn, betA, betB, betAmount].forEach(b=>{ if(b) b.disabled=!enabled; }); }
-    async function isSignedIn(){ const { data:{ session } } = await sb.auth.getSession(); return !!session; }
-    async function requireSignIn(){ const signed = await isSignedIn(); if (!signed) { authBox.style.display='block'; authMsgEl.textContent='Please sign in to play.'; setPlayEnabled(false); logoutBtn.style.display='none'; } return signed; }
-    async function showAuthIfNeeded(){ const signed = await isSignedIn(); authBox.style.display = signed ? 'none' : 'block'; setPlayEnabled(signed); logoutBtn.style.display = signed ? 'block' : 'none'; return signed; }
+
+    async function showAuthIfNeeded(){
+      const { data:{ session } } = await sb.auth.getSession();
+      SIGNED = !!session;
+
+      authBox.style.display = SIGNED ? 'none' : 'block';
+      setPlayEnabled(SIGNED);
+      logoutBtn.style.display = SIGNED ? 'block' : 'none';
+
+      // Logged out: hide any countdown from local leftovers
+      if (!SIGNED) {
+        countdownWrap.style.display = 'none';
+        nextReady.textContent = '';
+        activateBtn.style.display = 'block';
+      }
+      return SIGNED;
+    }
+    async function requireSignIn(){
+      const ok = await showAuthIfNeeded();
+      if(!ok){ authMsgEl.textContent='Please sign in to play.'; }
+      return ok;
+    }
     logoutBtn.addEventListener('click', async ()=>{ try{ await sb.auth.signOut(); } finally{ location.reload(); } });
 
     /* ========= Accrual & UI ========= */
@@ -332,8 +358,19 @@
       s.bal = num(LS.BAL) + hours*RATE;
       s.startedAt = t0; saveLocal(s); return s;
     }
+
     function ui(s){
-      balanceEl.textContent = fmt(s.bal); streakEl.textContent = "Streak " + (s.streak||0);
+      balanceEl.textContent = fmt(s.bal);
+      streakEl.textContent  = "Streak " + (s.streak||0);
+
+      // Not signed in → no live session visuals
+      if (!SIGNED) {
+        activateBtn.style.display = "block";
+        countdownWrap.style.display = "none";
+        nextReady.textContent = "";
+        return;
+      }
+
       const active = s.endsAt && now() < s.endsAt;
       activateBtn.style.display = active ? "none" : "block";
       countdownWrap.style.display = active ? "flex" : "none";
@@ -344,7 +381,9 @@
         const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
         countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
         nextReady.textContent = "Ready again at " + new Date(s.endsAt).toLocaleString();
-      } else nextReady.textContent = "";
+      } else {
+        nextReady.textContent = "";
+      }
     }
 
     /* ========= Activate ========= */
@@ -353,7 +392,7 @@
       let s = state;
       if(s.endsAt && now() < s.endsAt) return;
       const prevEnd = s.endsAt || 0;
-      const within = prevEnd && now() - prevEnd < (24+12)*HOUR;
+      const within = prevEnd && now() - prevEnd < (24+12)*HOUR; // 12h grace
       s.streak = within ? (s.streak + 1) : 1;
       s.startedAt = now();
       s.endsAt = s.startedAt + DAY;
@@ -365,37 +404,48 @@
 
     /* ========= Leaderboard ========= */
     async function renderLB(){
-      const { data, error } = await sb.rpc('get_public_leaderboard');
-      if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
-      lb.innerHTML = (data||[]).map((row,i)=>`
-        <div class="li"><strong>${i+1}. ${row.handle}</strong>
-        <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
-      `).join('') || '<div class="li">No data yet</div>';
+      // Try RPC first, fall back to view
+      try{
+        const { data, error } = await sb.rpc('get_public_leaderboard');
+        if (!error && Array.isArray(data)){
+          lb.innerHTML = data.map((row,i)=>`
+            <div class="li"><strong>${i+1}. ${row.handle}</strong><span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
+          `).join('') || '<div class="li">No data yet</div>';
+          return;
+        }
+      }catch(_){}
+      const { data, error } = await sb.from('public_leaderboard').select('handle, balance_fp').order('balance_fp', { ascending:false }).limit(10);
+      lb.innerHTML = error ? '<div class="li"><span>Leaderboard unavailable</span></div>' :
+        (data||[]).map((row,i)=>`<div class="li"><strong>${i+1}. ${row.handle}</strong><span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>`).join('') || '<div class="li">No data yet</div>';
     }
 
     /* ========= Community % & Stats ========= */
     async function renderCommunity(){
-      const { data: a } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','A');
-      const { data: b } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','B');
-      const sum = (rows)=> (rows||[]).reduce((t,r)=> t + Number(r.amount_fp||0), 0);
-      const aFP = sum(a), bFP = sum(b), total = Math.max(1, aFP+bFP), pct = Math.round((aFP/total)*100);
-      pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
+      try{
+        const { data: a } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','A');
+        const { data: b } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','B');
+        const sum = (rows)=> (rows||[]).reduce((t,r)=> t + Number(r.amount_fp||0), 0);
+        const aFP = sum(a), bFP = sum(b), total = Math.max(1, aFP+bFP), pct = Math.round((aFP/total)*100);
+        pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
+      }catch(_){}
     }
     async function renderStats(){
-      const { data, error } = await sb.rpc('game_stats', { p_game_id: GAME.id });
-      if (!error && data && data.length){
-        const s = data[0];
-        statPlayers.textContent = String(s.total_players ?? '—');
-        statTotalFP.textContent = Number(s.total_fp ?? 0).toFixed(2);
-        statBetCount.textContent = String(s.bet_count ?? '—');
-        statBetFP.textContent = Number(s.bet_fp ?? 0).toFixed(2);
-      }
+      try{
+        const { data, error } = await sb.rpc('game_stats', { p_game_id: GAME.id });
+        if (!error && data && data.length){
+          const s = data[0];
+          statPlayers.textContent = String(s.total_players ?? '—');
+          statTotalFP.textContent = Number(s.total_fp ?? 0).toFixed(2);
+          statBetCount.textContent = String(s.bet_count ?? '—');
+          statBetFP.textContent = Number(s.bet_fp ?? 0).toFixed(2);
+        }
+      }catch(_){}
       gameIdDisp.textContent = `Game ID: ${GAME.id}`;
     }
 
     /* ========= Bets ========= */
-    const lockTimeMs = ()=> new Date(GAME.lockAtISO).getTime();
-    const bettingOpen = ()=> now() < lockTimeMs();
+    function lockTimeMs(){ return new Date(GAME.lockAtISO).getTime(); }
+    function bettingOpen(){ return now() < lockTimeMs(); }
     function setBetUIHints(balance){
       betHint.textContent = `Max: ${Number(balance||0).toFixed(2)} FP • Locks at ${new Date(lockTimeMs()).toLocaleString()}`;
       betAmount.max = Math.max(0, Number(balance||0)).toFixed(2);
@@ -429,23 +479,25 @@
 
       const s2 = await loadServer(); if (s2){ state.bal = s2.bal; saveLocal(state); ui(state); }
       betAmount.value = '';
-      await showMyBet();
-      await renderCommunity();
-      await renderStats();
+      await showMyBet(); await renderCommunity(); await renderStats();
       alert('Bet placed!');
     }
-    E('betA').addEventListener('click', ()=>place('A'));
-    E('betB').addEventListener('click', ()=>place('B'));
+    betA.addEventListener('click', ()=>place('A'));
+    betB.addEventListener('click', ()=>place('B'));
 
-    /* ========= Invite Codes (server-backed) ========= */
+    /* ========= Invite Codes (server-backed with fallback) ========= */
     function niceCode(n=6){ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
     async function getMyInviteCode(){
       const { data:{ user } } = await sb.auth.getUser(); if(!user) return null;
-      let { data, error } = await sb.from('profiles').select('invite_code').eq('id', user.id).single();
-      if (!error && data?.invite_code) return data.invite_code;
-      const code = niceCode(6);
-      const { error: upErr } = await sb.from('profiles').update({ invite_code: code }).eq('id', user.id);
-      return upErr ? null : code;
+      try{
+        let { data, error } = await sb.from('profiles').select('invite_code').eq('id', user.id).single();
+        if (!error && data?.invite_code) return data.invite_code;
+        const code = niceCode(6);
+        const { error: upErr } = await sb.from('profiles').update({ invite_code: code }).eq('id', user.id);
+        return upErr ? code : code; // fallback = generated code anyway
+      }catch(_){
+        return niceCode(6);
+      }
     }
     function award(amount, noteEl){ state.bal = (state.bal||0) + amount; saveLocal(state); ui(state); if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`; }
     async function setupReferrals(){
@@ -489,8 +541,7 @@
 
     /* ========= Auth handlers ========= */
     const emailEl = E('email'), passEl = E('password');
-    const show = (msg, ok=false)=>{ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; };
-
+    function show(msg, ok=false){ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; }
     E('signupBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
@@ -499,25 +550,19 @@
       show('Check your email to verify, then sign in.', true);
       await showAuthIfNeeded(); await loadMyHandle(); await setupReferrals();
     };
-
     E('signinBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
       const { error } = await sb.auth.signInWithPassword({ email, password:pass });
       if(error){ show(error.message); return; }
       show('Signed in!', true);
-
       await syncServerTime();
       await showAuthIfNeeded();
       await loadMyHandle();
       await setupReferrals();
-
-      // 🔁 MIGRATION: push larger local balance to server if server is empty/lower
-      await migrateLocalToServerIfNew();
-
+      await migrateLocalToServerIfNew();   // <-- migrate local progress up
       await boot(true);
     };
-
     E('resetBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(); if(!email){ show('Enter your email'); return; }
       const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + location.pathname });
@@ -525,11 +570,10 @@
       show('Check your email for a reset link.', true);
     };
 
-    /* ========= Admin settle (optional via ?settle=A or ?settle=B) ========= */
+    /* ========= Admin settle (optional): visit ?settle=A or ?settle=B ========= */
     async function maybeAdminSettle(){
       const side = qp('settle'); if(side!=='A' && side!=='B') return;
-      const { data:{ session } } = await sb.auth.getSession();
-      const email = session?.user?.email || '';
+      const { data:{ session } } = await sb.auth.getSession(); const email = session?.user?.email || '';
       if(!ADMIN_EMAILS.includes(email)){ alert('Not authorized to settle.'); return; }
       const { error } = await sb.rpc('settle_game', { p_game_id: GAME.id, p_winning_side: side });
       if(error){ alert(error.message || 'Settle failed'); return; }
@@ -540,10 +584,11 @@
     let state = loadLocal();
 
     async function boot(forceReloadServer=false){
-      // Write static game UI
+      // static game UI
       teamAName.textContent = GAME.teamA.name; teamARec.textContent = GAME.teamA.rec;
       teamBName.textContent = GAME.teamB.name; teamBRec.textContent = GAME.teamB.rec;
       document.getElementById('weeklyTitle').textContent = `This Week’s Game: ${GAME.teamA.name} vs ${GAME.teamB.name}`;
+      gameIdDisp.textContent = `Game ID: ${GAME.id}`;
 
       renderLB(); renderCommunity(); renderStats();
 
@@ -552,20 +597,27 @@
         await syncServerTime();
         const s = await loadServer();
         if(s){ state = { ...state, ...s }; saveLocal(state); }
-
-        // 🔁 MIGRATION also here (covers the case user was already signed in)
-        await migrateLocalToServerIfNew();
+        await migrateLocalToServerIfNew(); // also run here for safety
       }
 
       setBetUIHints(state.bal);
       await loadMyHandle(); await setupReferrals(); await showMyBet(); await maybeAdminSettle();
 
       ui(state);
-      (function tick(){ state = accrue(state); ui(state); setTimeout(tick, 1000); })();
+      (function tick(){
+        if (SIGNED) state = accrue(state);   // <— accrue only when signed in
+        ui(state);
+        setTimeout(tick, 1000);
+      })();
 
+      // periodic refreshes
       setInterval(renderLB, 30000);
       setInterval(renderCommunity, 15000);
-      setInterval(async ()=>{ const s=await loadServer(); if(s){ state={...state, ...s}; saveLocal(state); ui(state); setBetUIHints(state.bal);} }, 15000);
+      setInterval(async ()=>{
+        if (!SIGNED) return;
+        const s=await loadServer();
+        if(s){ state.endsAt=s.endsAt||0; state.bal=s.bal; state.streak=s.streak; saveLocal(state); ui(state); setBetUIHints(state.bal); }
+      }, 15000);
 
       if(signed){ setInterval(()=>saveServer(state).catch(()=>{}), 30000); }
     }
