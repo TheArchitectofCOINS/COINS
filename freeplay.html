@@ -67,6 +67,7 @@
       box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation;
       display:flex; align-items:center; justify-content:center;
     }
+    .btn:disabled{opacity:.6; cursor:not-allowed}
     .btn:active{transform:translateY(1px) scale(.998)}
     .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
 
@@ -104,7 +105,6 @@
     .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
     .nav .wrap{display:flex; gap:10px; padding:10px 16px}
     .nav a{flex:1; text-align:center}
-    @media (max-width:380px){ .spinBadge{width:56px; height:56px} }
 
     /* username box */
     #username-box{margin-top:12px; border:1px solid #0aa; padding:12px; border-radius:8px;}
@@ -129,7 +129,7 @@
   <!-- SIMPLE AUTH BOX (email + password) -->
   <div id="authBox" class="wrap" style="display:none; padding-top:12px">
     <div class="card" style="display:grid; gap:8px">
-      <strong>Sign in to save your S-COIN-FP</strong>
+      <strong>Sign in to play & save your S-COIN-FP</strong>
       <input id="email" type="email" placeholder="Email">
       <input id="password" type="password" placeholder="Password (min 6)">
       <div style="display:flex; gap:8px; flex-wrap:wrap">
@@ -198,7 +198,7 @@
       </div>
     </section>
 
-    <!-- WEEKLY GAME PICK -->
+    <!-- WEEKLY GAME PICK (manual text update each week) -->
     <section class="card" aria-labelledby="weeklyTitle">
       <div class="h1" id="weeklyTitle">This Week’s Game</div>
       <div class="sub" id="gameInfo">Sat • 7:00 PM CT • One pick per week</div>
@@ -229,12 +229,11 @@
       <div class="row"><span class="sub">A: <strong id="pcA">50%</strong></span><span class="sub">B: <strong id="pcB">50%</strong></span></div>
     </section>
 
-    <!-- LEADERBOARD PREVIEW -->
+    <!-- LEADERBOARD + USERNAME -->
     <section class="card" aria-labelledby="leadTitle">
       <div class="h1" id="leadTitle">Leaderboard (Today)</div>
       <div class="list" id="lb"></div>
 
-      <!-- Username widget -->
       <div id="username-box">
         <div style="font-weight:600; margin-bottom:6px;">Your Handle</div>
         <div style="display:flex; gap:8px; align-items:center;">
@@ -264,20 +263,12 @@
     const sb = (SUPABASE_URL.includes('YOUR-PROJECT')) ? null
              : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    /* ========= LocalStorage Keys ========= */
-    const LS={
-      BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
-      PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b",
-      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by",
-      REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"
-    };
-
+    /* ========= Helpers / LS ========= */
+    const LS={BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at", PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b", MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"};
     const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR;
     const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
     const fmt=n=>(Math.round(n*100)/100).toFixed(2);
     const qp=name=>new URLSearchParams(location.search).get(name);
-
-    // UI els
     const balanceEl=document.getElementById("balance"), streakEl=document.getElementById("streak"),
       activateBtn=document.getElementById("activateBtn"), countdownWrap=document.getElementById("countdownWrap"),
       nextReady=document.getElementById("nextReady"), pickBtns=document.getElementById("pickBtns"),
@@ -288,54 +279,51 @@
       copyInviteBtn=document.getElementById("copyInviteBtn"), copyClaimBtn=document.getElementById("copyClaimBtn"),
       claimRow=document.getElementById("claimRow"),
       authBox=document.getElementById("authBox"), authMsgEl=document.getElementById("authMsg");
+    const RATE = 0.25/24; document.getElementById("rateDisp").textContent = "0.25/day";
 
-    // rate
-    const RATE = 0.25/24; // per hour
-    document.getElementById("rateDisp").textContent = "0.25/day";
+    /* ========= Local fallback ========= */
+    function loadLocal(){return{bal:num(LS.BAL), streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10), startedAt:parseInt(str(LS.START)??"0",10), endsAt:parseInt(str(LS.ENDS)??"0",10), pick:str(LS.PICK), votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10), votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)}}
+    function saveLocal(s){ set(LS.BAL,s.bal); set(LS.STREAK,s.streak); set(LS.START,s.startedAt); set(LS.ENDS,s.endsAt); if(s.pick!==undefined) set(LS.PICK,s.pick); set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB); }
 
-    /* ========= Local fallback state ========= */
-    function loadLocal(){return{
-      bal:num(LS.BAL),
-      streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
-      startedAt:parseInt(str(LS.START)??"0",10),
-      endsAt:parseInt(str(LS.ENDS)??"0",10),
-      pick:str(LS.PICK),
-      votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
-      votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)
-    }}
-    function saveLocal(s){
-      set(LS.BAL,s.bal); set(LS.STREAK,s.streak); set(LS.START,s.startedAt); set(LS.ENDS,s.endsAt);
-      if(s.pick!==undefined) set(LS.PICK,s.pick);
-      set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB);
-    }
-
-    /* ========= Server state (optional) ========= */
+    /* ========= Server state ========= */
     async function loadServer(){
       if(!sb) return null;
       const { data:{ user } } = await sb.auth.getUser();
       if(!user) return null;
-      const { data, error } = await sb.from('wallets')
-        .select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single();
+      const { data, error } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single();
       if(error) return null;
-      return {
-        bal:Number(data.balance_fp||0),
-        streak:Number(data.streak||0),
-        startedAt:0,
-        endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0,
-        pick:str(LS.PICK),
-        votesA:num(LS.VOTESA)||123,
-        votesB:num(LS.VOTESB)||117
-      };
+      return { bal:Number(data.balance_fp||0), streak:Number(data.streak||0), startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0, pick:str(LS.PICK), votesA:num(LS.VOTESA)||123, votesB:num(LS.VOTESB)||117 };
     }
     async function saveServer(s){
       if(!sb) return;
       const { data:{ user } } = await sb.auth.getUser();
       if(!user) return;
-      await sb.from('wallets').update({
-        balance_fp:s.bal,
-        streak:s.streak,
-        session_ends_at: s.endsAt ? new Date(s.endsAt).toISOString() : null
-      }).eq('user_id', user.id);
+      await sb.from('wallets').update({ balance_fp:s.bal, streak:s.streak, session_ends_at: s.endsAt ? new Date(s.endsAt).toISOString() : null }).eq('user_id', user.id);
+    }
+
+    /* ========= Auth gating ========= */
+    function setPlayEnabled(enabled){
+      [activateBtn, pickA, pickB].forEach(b=>{ b.disabled=!enabled; });
+    }
+    async function isSignedIn(){
+      if(!sb) return false;
+      const { data:{ session } } = await sb.auth.getSession();
+      return !!session;
+    }
+    async function requireSignIn() {
+      const signed = await isSignedIn();
+      if (!signed) {
+        authBox.style.display = 'block';
+        authMsgEl.textContent = 'Please create an account or sign in to play.';
+        setPlayEnabled(false);
+      }
+      return signed;
+    }
+    async function showAuthIfNeeded(){
+      const signed = await isSignedIn();
+      authBox.style.display = signed ? 'none' : 'block';
+      setPlayEnabled(signed);
+      return signed;
     }
 
     /* ========= Accrual & UI ========= */
@@ -344,19 +332,14 @@
       const t0 = Math.min(now(), s.endsAt);
       const hours = Math.max(0, (t0 - s.startedAt)/HOUR);
       s.bal = num(LS.BAL) + hours*RATE;
-      s.startedAt = t0; // settle
-      saveLocal(s);
-      return s;
+      s.startedAt = t0; saveLocal(s); return s;
     }
-
     function ui(s){
       balanceEl.textContent = fmt(s.bal);
       streakEl.textContent = "Streak " + (s.streak||0);
-
       const active = s.endsAt && now() < s.endsAt;
       activateBtn.style.display = active ? "none" : "block";
       countdownWrap.style.display = active ? "flex" : "none";
-
       if(active){
         const left=Math.max(0, s.endsAt - now());
         const hh=String(Math.floor(left/HOUR)).padStart(2,"0");
@@ -364,21 +347,18 @@
         const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
         countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
         nextReady.textContent = "Ready again at " + new Date(s.endsAt).toLocaleString();
-      } else {
-        nextReady.textContent = "";
-      }
-
+      } else { nextReady.textContent = ""; }
       const total=Math.max(1, s.votesA + s.votesB), pct=Math.round((s.votesA/total)*100);
       pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
-
       if(s.pick){ pickBtns.style.display="none"; pickedMsg.style.display="block"; pickedMsg.textContent="You locked your pick."; }
       else { pickBtns.style.display="grid"; pickedMsg.style.display="none"; }
     }
-
     function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
 
-    /* ========= Actions ========= */
+    /* ========= Actions (with logging) ========= */
     async function activate(){
+      if(!(await requireSignIn())) return;
+
       let s = state;
       if(s.endsAt && now() < s.endsAt) return;
       const prevEnd = s.endsAt || 0;
@@ -386,35 +366,39 @@
       s.streak = within ? (s.streak + 1) : 1;
       s.startedAt = now();
       s.endsAt = s.startedAt + DAY;
-      s.bal = (s.bal||0) + 0.01; // tiny gratification bump
+      s.bal = (s.bal||0) + 0.01;
       saveLocal(s); ui(s); vibrate(30);
       await saveServer(s).catch(()=>{});
-    }
 
-    function pick(side){
+      try {
+        const { data:{ user } } = await sb.auth.getUser();
+        await sb.from('activity_log').insert({ user_id: user.id, action: 'activate' });
+      } catch(e) {}
+    }
+    async function pick(side){
+      if(!(await requireSignIn())) return;
+
       let s = state;
       if(s.pick) return;
       s.pick = side;
       if(side==='A') s.votesA++; else s.votesB++;
       saveLocal(s); ui(s); vibrate(12);
+
+      try {
+        const { data:{ user } } = await sb.auth.getUser();
+        await sb.from('activity_log').insert({ user_id: user.id, action: 'pick' });
+      } catch(e) {}
     }
 
-    /* ========= Leaderboard ========= */
+    /* ========= Leaderboard (view) ========= */
     async function renderLB(){
-      // Option 1: use the safe view when Supabase is configured
       if (sb) {
         const { data, error } = await sb
           .from('public_leaderboard')
           .select('handle, balance_fp, streak')
           .order('balance_fp', { ascending: false })
           .limit(10);
-
-        if (error) {
-          console.error('LB error:', error);
-          lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>';
-          return;
-        }
-
+        if (error) { lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
         lb.innerHTML = (data||[]).map((row,i)=>`
           <div class="li">
             <strong>${i+1}. ${row.handle}</strong>
@@ -423,10 +407,8 @@
         `).join('') || '<div class="li">No data yet</div>';
         return;
       }
-
-      // Fallback (no Supabase): simple local demo list
-      const data=[{name:"You",fp:num(LS.BAL)},{name:"BulldogBen",fp:32.4},{name:"12thMan",fp:29.2},{name:"DeltaDawg",fp:25.7}];
-      lb.innerHTML = data.map(p=>`<div class="li"><strong>${p.name}</strong><span>${p.fp.toFixed(2)} FP</span></div>`).join("");
+      // if no SB config, show nothing
+      lb.innerHTML = '<div class="li">Configure Supabase to load leaderboard.</div>';
     }
 
     /* ========= Referrals (client only) ========= */
@@ -446,13 +428,11 @@
         }
         claimRow.style.display = "flex";
       }
-
       if(claimParam && claimParam === myCode){
         if(!localStorage.getItem(LS.CLAIM_BONUS)){
           localStorage.setItem(LS.CLAIM_BONUS,"1"); award(1.00, refStatus); refStatus.innerHTML += " • Referral claim received 🙌";
         } else { refStatus.textContent = "Referral claim already applied on this device."; }
       }
-
       copyInviteBtn.addEventListener("click", ()=>{
         const url = `${location.origin}${location.pathname}?ref=${myCode}`;
         navigator.clipboard.writeText(url);
@@ -466,38 +446,6 @@
         refStatus.textContent = "Claim link copied—send this back to your inviter.";
       });
     }
-
-    /* ========= Auth (optional) ========= */
-    function setAuthMsg(t){ authMsgEl.textContent = t || ""; }
-    async function showAuthIfNeeded(){
-      if(!sb){ authBox.style.display='none'; return false; }
-      const { data:{ session } } = await sb.auth.getSession();
-      authBox.style.display = session ? 'none' : 'block';
-      return !!session;
-    }
-    document.getElementById('signupBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const pass =document.getElementById('password').value;
-      const { error } = await sb.auth.signUp({ email, password:pass });
-      setAuthMsg(error ? error.message : 'Check your email to verify, then sign in.');
-    };
-    document.getElementById('signinBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const pass =document.getElementById('password').value;
-      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
-      setAuthMsg(error ? error.message : 'Signed in!');
-      if(!error) await boot(true);
-    };
-    document.getElementById('resetBtn').onclick = async ()=>{
-      if(!sb) return;
-      const email=document.getElementById('email').value.trim();
-      const { error } = await sb.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + '/freeplay.html'
-      });
-      setAuthMsg(error ? error.message : 'Check your email for a reset link.');
-    };
 
     /* ========= Username widget ========= */
     const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
@@ -513,29 +461,42 @@
       msg.textContent = '';
       const input = document.getElementById('username-input');
       const raw = input.value.trim();
-
-      if (!USERNAME_REGEX.test(raw)) {
-        msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.';
-        msg.style.color = 'crimson'; return;
-      }
+      if (!USERNAME_REGEX.test(raw)) { msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.'; msg.style.color = 'crimson'; return; }
       const { data: { user } } = await sb.auth.getUser();
       if (!user) { msg.textContent = 'Please sign in first.'; msg.style.color = 'crimson'; return; }
-
       const { error } = await sb.from('profiles').update({ username: raw }).eq('id', user.id);
-      if (error) {
-        msg.textContent = (error.code === '23505') ? 'That handle is taken. Try another.' : 'Could not save handle.';
-        msg.style.color = 'crimson';
-      } else {
-        msg.textContent = 'Saved!'; msg.style.color = 'seagreen';
-        renderLB();
-      }
+      if (error) { msg.textContent = (error.code === '23505') ? 'That handle is taken. Try another.' : 'Could not save handle.'; msg.style.color = 'crimson'; }
+      else { msg.textContent = 'Saved!'; msg.style.color = 'seagreen'; renderLB(); }
     }
-    document.getElementById('username-save').addEventListener('click', saveMyHandle);
 
-    /* ========= Wire up & tick ========= */
+    /* ========= Wire up & boot ========= */
     document.getElementById("pickA").addEventListener("click",()=>pick('A'));
     document.getElementById("pickB").addEventListener("click",()=>pick('B'));
     activateBtn.addEventListener("click", activate);
+    document.getElementById('username-save').addEventListener('click', saveMyHandle);
+
+    document.getElementById('signupBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const pass =document.getElementById('password').value;
+      const { error } = await sb.auth.signUp({ email, password:pass });
+      authMsgEl.textContent = error ? error.message : 'Check your email to verify, then sign in.';
+      await showAuthIfNeeded(); await loadMyHandle();
+    };
+    document.getElementById('signinBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const pass =document.getElementById('password').value;
+      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
+      authMsgEl.textContent = error ? error.message : 'Signed in!';
+      await showAuthIfNeeded(); await loadMyHandle(); await boot(true);
+    };
+    document.getElementById('resetBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/freeplay.html' });
+      authMsgEl.textContent = error ? error.message : 'Check your email for a reset link.';
+    };
 
     let state = loadLocal();
 
@@ -544,6 +505,7 @@
       setupReferrals();
 
       const signed = await showAuthIfNeeded();
+
       if (signed || forceReloadServer){
         const s = await loadServer();
         if(s){ state = { ...state, ...s }; saveLocal(state); }
@@ -552,11 +514,7 @@
       await loadMyHandle();
 
       ui(state);
-      (function tick(){
-        state = accrue(state);
-        ui(state);
-        setTimeout(tick, 1000);
-      })();
+      (function tick(){ state = accrue(state); ui(state); setTimeout(tick, 1000); })();
 
       if(signed){ setInterval(()=>saveServer(state).catch(()=>{}), 30_000); }
     }
