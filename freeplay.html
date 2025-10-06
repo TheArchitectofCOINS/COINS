@@ -41,7 +41,6 @@
     .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
     .spinBadge{position:relative; width:64px; height:64px; display:inline-grid; place-items:center; perspective:800px}
     .spinBadge .halo{ position:absolute; inset:-8px; border-radius:16px; background:radial-gradient(60% 60% at 50% 50%, rgba(0,181,226,.35) 0%, rgba(0,181,226,.18) 40%, rgba(0,181,226,0) 70%); filter:blur(4px); animation:haloPulse 2.6s ease-in-out infinite; z-index:0;}
-    .spinBadge .ring{position:relative; z-index:1; width:100%; height:100%}
     .sCoin{ position:absolute; inset:0; z-index:2; transform-style:preserve-3d; animation:spinY 4s linear infinite; }
     .sCoin .face{position:absolute; inset:0; width:100%; height:100%; backface-visibility:hidden;}
     .sCoin .back{transform:rotateY(180deg)}
@@ -231,22 +230,43 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // --- First-sign-in migration: copy local FP to server if server is empty or lower
+    async function migrateLocalToServerIfNew() {
+      const localBal = parseFloat(localStorage.getItem('fp_balance') || '0') || 0;
+      const localStreak = parseInt(localStorage.getItem('fp_streak') || '0', 10) || 0;
+      const { data: { user } } = await sb.auth.getUser();
+      if (!user) return;
+
+      const { data, error } = await sb
+        .from('wallets')
+        .select('balance_fp, streak')
+        .eq('user_id', user.id)
+        .single();
+
+      if (error) return;
+
+      const serverBal = Number(data?.balance_fp || 0);
+      const serverStreak = Number(data?.streak || 0);
+
+      if ((serverBal === 0 && localBal > 0) || localBal > serverBal) {
+        await sb.from('wallets')
+          .update({ balance_fp: localBal, streak: Math.max(serverStreak, localStreak) })
+          .eq('user_id', user.id);
+      }
+    }
+
     /* ======= GAME (edit weekly) ======= */
     const GAME = {
-      id: '2025-W40',               // change weekly (any unique string)
+      id: '2025-W40',
       teamA: { name: 'Florida Gators', rec: '2-3' },
       teamB: { name: 'Texas A&M',    rec: '5-0' },
-      lockAtISO: '2025-10-11T19:00:00-05:00' // kickoff/lock time in CT
+      lockAtISO: '2025-10-11T18:00:00-05:00'
     };
-
-    // ADMIN: only these emails can settle the game from the browser
-    const ADMIN_EMAILS = ['you@example.com']; // <-- change to your email
+    const ADMIN_EMAILS = ['you@example.com']; // change to yours
 
     /* ========= Helpers / LS ========= */
-    const LS = {
-      BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
-      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"
-    };
+    const LS = { BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
+      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done" };
     let DRIFT_MS = 0;
     async function syncServerTime(){ try{ const { data, error } = await sb.rpc('now_ts_ms'); if(!error && typeof data === 'number'){ DRIFT_MS = Number(data) - Date.now(); } }catch(_){} }
     const now = ()=> Date.now() + DRIFT_MS;
@@ -264,21 +284,19 @@
 
     document.getElementById("rateDisp").textContent = "0.25/day";
 
-    function num(k){ return parseFloat(localStorage.getItem(k)??"0")||0 }
-    function str(k){ return localStorage.getItem(k) }
-    function setLS(k,v){ localStorage.setItem(k,String(v)) }
-    function fmt(n){ return (Math.round(n*100)/100).toFixed(2) }
-    function qp(name){ return new URLSearchParams(location.search).get(name) }
-    function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms) }
+    const num=k=>parseFloat(localStorage.getItem(k)??"0")||0;
+    const str=k=>localStorage.getItem(k);
+    const setLS=(k,v)=>localStorage.setItem(k,String(v));
+    const fmt=n=>(Math.round(n*100)/100).toFixed(2);
+    const qp=name=>new URLSearchParams(location.search).get(name);
+    const vibrate=ms=>{ if(navigator.vibrate) navigator.vibrate(ms) };
 
     /* ========= Local fallback ========= */
     function loadLocal(){return{
       bal:num(LS.BAL), streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
       startedAt:parseInt(str(LS.START)??"0",10), endsAt:parseInt(str(LS.ENDS)??"0",10)
     }}
-    function saveLocal(s){
-      setLS(LS.BAL,s.bal); setLS(LS.STREAK,s.streak); setLS(LS.START,s.startedAt); setLS(LS.ENDS,s.endsAt);
-    }
+    function saveLocal(s){ setLS(LS.BAL,s.bal); setLS(LS.STREAK,s.streak); setLS(LS.START,s.startedAt); setLS(LS.ENDS,s.endsAt); }
 
     /* ========= Server state ========= */
     async function loadServer(){
@@ -289,10 +307,7 @@
         ({ data } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single());
       }
       if (!data) return null;
-      return {
-        bal:Number(data.balance_fp||0), streak:Number(data.streak||0),
-        startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0
-      };
+      return { bal:Number(data.balance_fp||0), streak:Number(data.streak||0), startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0 };
     }
     async function saveServer(s){
       const { data:{ user } } = await sb.auth.getUser(); if(!user) return;
@@ -305,18 +320,8 @@
     /* ========= Auth gating ========= */
     function setPlayEnabled(enabled){ [activateBtn, betA, betB, betAmount].forEach(b=>{ if(b) b.disabled=!enabled; }); }
     async function isSignedIn(){ const { data:{ session } } = await sb.auth.getSession(); return !!session; }
-    async function requireSignIn(){
-      const signed = await isSignedIn();
-      if (!signed) { authBox.style.display='block'; authMsgEl.textContent='Please sign in to play.'; setPlayEnabled(false); logoutBtn.style.display='none'; }
-      return signed;
-    }
-    async function showAuthIfNeeded(){
-      const signed = await isSignedIn();
-      authBox.style.display = signed ? 'none' : 'block';
-      setPlayEnabled(signed);
-      logoutBtn.style.display = signed ? 'block' : 'none';
-      return signed;
-    }
+    async function requireSignIn(){ const signed = await isSignedIn(); if (!signed) { authBox.style.display='block'; authMsgEl.textContent='Please sign in to play.'; setPlayEnabled(false); logoutBtn.style.display='none'; } return signed; }
+    async function showAuthIfNeeded(){ const signed = await isSignedIn(); authBox.style.display = signed ? 'none' : 'block'; setPlayEnabled(signed); logoutBtn.style.display = signed ? 'block' : 'none'; return signed; }
     logoutBtn.addEventListener('click', async ()=>{ try{ await sb.auth.signOut(); } finally{ location.reload(); } });
 
     /* ========= Accrual & UI ========= */
@@ -334,7 +339,9 @@
       countdownWrap.style.display = active ? "flex" : "none";
       if(active){
         const left=Math.max(0, s.endsAt - now());
-        const hh=String(Math.floor(left/HOUR)).padStart(2,"0"); const mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0"); const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
+        const hh=String(Math.floor(left/HOUR)).padStart(2,"0");
+        const mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0");
+        const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
         countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
         nextReady.textContent = "Ready again at " + new Date(s.endsAt).toLocaleString();
       } else nextReady.textContent = "";
@@ -346,7 +353,7 @@
       let s = state;
       if(s.endsAt && now() < s.endsAt) return;
       const prevEnd = s.endsAt || 0;
-      const within = prevEnd && now() - prevEnd < (24+12)*HOUR; // 12h grace
+      const within = prevEnd && now() - prevEnd < (24+12)*HOUR;
       s.streak = within ? (s.streak + 1) : 1;
       s.startedAt = now();
       s.endsAt = s.startedAt + DAY;
@@ -357,19 +364,17 @@
     activateBtn.addEventListener("click", activate);
 
     /* ========= Leaderboard ========= */
-   async function renderLB(){
-  const { data, error } = await sb.rpc('get_public_leaderboard');
-  if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
-  lb.innerHTML = (data||[]).map((row,i)=>`
-    <div class="li"><strong>${i+1}. ${row.handle}</strong>
-    <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
-  `).join('') || '<div class="li">No data yet</div>';
-}
-
+    async function renderLB(){
+      const { data, error } = await sb.rpc('get_public_leaderboard');
+      if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
+      lb.innerHTML = (data||[]).map((row,i)=>`
+        <div class="li"><strong>${i+1}. ${row.handle}</strong>
+        <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
+      `).join('') || '<div class="li">No data yet</div>';
+    }
 
     /* ========= Community % & Stats ========= */
     async function renderCommunity(){
-      // count FP on each side for this game
       const { data: a } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','A');
       const { data: b } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','B');
       const sum = (rows)=> (rows||[]).reduce((t,r)=> t + Number(r.amount_fp||0), 0);
@@ -389,8 +394,8 @@
     }
 
     /* ========= Bets ========= */
-    function lockTimeMs(){ return new Date(GAME.lockAtISO).getTime(); }
-    function bettingOpen(){ return now() < lockTimeMs(); }
+    const lockTimeMs = ()=> new Date(GAME.lockAtISO).getTime();
+    const bettingOpen = ()=> now() < lockTimeMs();
     function setBetUIHints(balance){
       betHint.textContent = `Max: ${Number(balance||0).toFixed(2)} FP • Locks at ${new Date(lockTimeMs()).toLocaleString()}`;
       betAmount.max = Math.max(0, Number(balance||0)).toFixed(2);
@@ -415,16 +420,13 @@
       const amt = parseFloat(betAmount.value||'0');
       if (!isFinite(amt) || amt <= 0){ alert('Enter a positive FP amount.'); return; }
 
-      // server balance check via wallet
       const s = await loadServer(); if(!s){ alert('Could not read wallet.'); return; }
       if (amt > s.bal + 1e-9){ alert('Insufficient balance.'); return; }
 
-      // call atomic RPC
       const { data:{ user } } = await sb.auth.getUser();
       const { error } = await sb.rpc('place_bet', { uid: user.id, p_game_id: GAME.id, p_side: side, p_amount: amt });
       if (error){ alert(error.message || 'Bet failed'); return; }
 
-      // refresh wallet + UI
       const s2 = await loadServer(); if (s2){ state.bal = s2.bal; saveLocal(state); ui(state); }
       betAmount.value = '';
       await showMyBet();
@@ -432,8 +434,8 @@
       await renderStats();
       alert('Bet placed!');
     }
-    betA.addEventListener('click', ()=>place('A'));
-    betB.addEventListener('click', ()=>place('B'));
+    E('betA').addEventListener('click', ()=>place('A'));
+    E('betB').addEventListener('click', ()=>place('B'));
 
     /* ========= Invite Codes (server-backed) ========= */
     function niceCode(n=6){ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
@@ -487,7 +489,8 @@
 
     /* ========= Auth handlers ========= */
     const emailEl = E('email'), passEl = E('password');
-    function show(msg, ok=false){ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; }
+    const show = (msg, ok=false)=>{ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; };
+
     E('signupBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
@@ -496,18 +499,25 @@
       show('Check your email to verify, then sign in.', true);
       await showAuthIfNeeded(); await loadMyHandle(); await setupReferrals();
     };
+
     E('signinBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
       const { error } = await sb.auth.signInWithPassword({ email, password:pass });
       if(error){ show(error.message); return; }
       show('Signed in!', true);
+
       await syncServerTime();
       await showAuthIfNeeded();
       await loadMyHandle();
       await setupReferrals();
+
+      // 🔁 MIGRATION: push larger local balance to server if server is empty/lower
+      await migrateLocalToServerIfNew();
+
       await boot(true);
     };
+
     E('resetBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(); if(!email){ show('Enter your email'); return; }
       const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + location.pathname });
@@ -515,17 +525,11 @@
       show('Check your email for a reset link.', true);
     };
 
-    /* ========= Admin settle (optional): visit ?settle=A or ?settle=B ========= */
+    /* ========= Admin settle (optional via ?settle=A or ?settle=B) ========= */
     async function maybeAdminSettle(){
       const side = qp('settle'); if(side!=='A' && side!=='B') return;
-      const { data:{ user } } = await sb.auth.getUser(); if(!user) return;
-      const { data: prof } = await sb.from('profiles').select('username').eq('id', user.id).single(); // touch DB
-      const { data: sess } = await sb.auth.getUser();
-      const { data: userInfo } = await sb.auth.getUser();
-      const { data: userMeta } = userInfo || {};
-      // need email from session:
-      const { data: sessionData } = await sb.auth.getSession();
-      const email = sessionData?.session?.user?.email || '';
+      const { data:{ session } } = await sb.auth.getSession();
+      const email = session?.user?.email || '';
       if(!ADMIN_EMAILS.includes(email)){ alert('Not authorized to settle.'); return; }
       const { error } = await sb.rpc('settle_game', { p_game_id: GAME.id, p_winning_side: side });
       if(error){ alert(error.message || 'Settle failed'); return; }
@@ -536,7 +540,7 @@
     let state = loadLocal();
 
     async function boot(forceReloadServer=false){
-      // write static game ui
+      // Write static game UI
       teamAName.textContent = GAME.teamA.name; teamARec.textContent = GAME.teamA.rec;
       teamBName.textContent = GAME.teamB.name; teamBRec.textContent = GAME.teamB.rec;
       document.getElementById('weeklyTitle').textContent = `This Week’s Game: ${GAME.teamA.name} vs ${GAME.teamB.name}`;
@@ -547,18 +551,21 @@
       if (signed || forceReloadServer){
         await syncServerTime();
         const s = await loadServer();
-        if(s){ state.bal=s.bal; state.streak=s.streak; state.startedAt=0; state.endsAt=s.endsAt||0; saveLocal(state); }
+        if(s){ state = { ...state, ...s }; saveLocal(state); }
+
+        // 🔁 MIGRATION also here (covers the case user was already signed in)
+        await migrateLocalToServerIfNew();
       }
+
       setBetUIHints(state.bal);
       await loadMyHandle(); await setupReferrals(); await showMyBet(); await maybeAdminSettle();
 
       ui(state);
       (function tick(){ state = accrue(state); ui(state); setTimeout(tick, 1000); })();
 
-      // periodic refreshes
       setInterval(renderLB, 30000);
       setInterval(renderCommunity, 15000);
-      setInterval(async ()=>{ const s=await loadServer(); if(s){ state.endsAt=s.endsAt||0; state.bal=s.bal; state.streak=s.streak; saveLocal(state); ui(state); setBetUIHints(state.bal);} }, 15000);
+      setInterval(async ()=>{ const s=await loadServer(); if(s){ state={...state, ...s}; saveLocal(state); ui(state); setBetUIHints(state.bal);} }, 15000);
 
       if(signed){ setInterval(()=>saveServer(state).catch(()=>{}), 30000); }
     }
