@@ -258,10 +258,10 @@
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
     /* ========= CONFIG ========= */
-    const SUPABASE_URL = 'https://YOUR-PROJECT.ref.supabase.co'; // <-- replace
-    const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';                   // <-- replace
+    const SUPABASE_URL = 'https://mqnsemhuurdqywizoitl.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs'
     const sb = (SUPABASE_URL.includes('YOUR-PROJECT')) ? null
-             : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+             : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);    
 
     /* ========= Helpers / LS ========= */
     const LS={BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at", PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b", MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"};
