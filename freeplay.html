@@ -64,7 +64,8 @@
       width:100%; height:var(--tapHeight); border-radius:14px; border:1px solid rgba(255,255,255,.1); cursor:pointer;
       font-weight:800; font-size:18px; color:#08121A;
       background:linear-gradient(180deg,var(--blue),var(--blue-dark));
-      box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation
+      box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation;
+      display:flex; align-items:center; justify-content:center;   /* center text always */
     }
     .btn:active{transform:translateY(1px) scale(.998)}
     .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
@@ -123,6 +124,21 @@
       </div>
     </div>
   </section>
+
+  <!-- SIMPLE AUTH BOX (email + password) -->
+  <div id="authBox" class="wrap" style="display:none; padding-top:12px">
+    <div class="card" style="display:grid; gap:8px">
+      <strong>Sign in to save your S-COIN-FP</strong>
+      <input id="email" type="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#0F1A2B;color:#F5F7FB">
+      <input id="password" type="password" placeholder="Password (min 6)" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#0F1A2B;color:#F5F7FB">
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button id="signupBtn" class="btn secondary">Create Account</button>
+        <button id="signinBtn" class="btn secondary">Sign In</button>
+        <button id="resetBtn" class="btn secondary" style="width:auto">Forgot password?</button>
+      </div>
+      <div id="authMsg" class="sub"></div>
+    </div>
+  </div>
 
   <div class="wrap" role="main" aria-live="polite">
     <!-- DAILY ACTIVATE -->
@@ -229,7 +245,17 @@
     </div>
   </div>
 
+  <!-- Supabase + App Logic -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
   <script>
+    /* =========================
+       CONFIG (OK to leave blank to use LocalStorage only)
+    ========================== */
+    const SUPABASE_URL = 'https://YOUR-PROJECT.ref.supabase.co'; // <-- replace
+    const SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';                   // <-- replace
+    const sb = (SUPABASE_URL.includes('YOUR-PROJECT')) ? null
+             : supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     // ---------------- LocalStorage Keys ----------------
     const LS={
       BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
@@ -251,15 +277,18 @@
       pcA=document.getElementById("pcA"), pcB=document.getElementById("pcB"), lb=document.getElementById("lb"),
       myCodeEl=document.getElementById("myCode"), refStatus=document.getElementById("refStatus"),
       copyInviteBtn=document.getElementById("copyInviteBtn"), copyClaimBtn=document.getElementById("copyClaimBtn"),
-      claimRow=document.getElementById("claimRow");
+      claimRow=document.getElementById("claimRow"),
+      authBox=document.getElementById("authBox"), authMsgEl=document.getElementById("authMsg");
 
     const now=()=>Date.now(), HOUR=3600_000, DAY=24*HOUR;
     const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
     const fmt=n=>(Math.round(n*100)/100).toFixed(2);
     const qp=name=>new URLSearchParams(location.search).get(name);
 
-    // ----------- State helpers -----------
-    function load(){return{
+    /* =========================
+       LOCAL STORAGE STATE (fallback)
+    ========================== */
+    function loadLocal(){return{
       bal:num(LS.BAL),
       streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
       startedAt:parseInt(str(LS.START)??"0",10),
@@ -268,30 +297,57 @@
       votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
       votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)
     }}
-    function save(s){
+    function saveLocal(s){
       set(LS.BAL,s.bal); set(LS.STREAK,s.streak); set(LS.START,s.startedAt); set(LS.ENDS,s.endsAt);
       if(s.pick!==undefined) set(LS.PICK,s.pick);
       set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB);
     }
-    function award(amount, noteEl){
-      let s = load();
-      s.bal = (s.bal||0) + amount;
-      save(s); ui(s);
-      if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`;
+
+    /* =========================
+       SERVER STATE (Supabase) — optional
+       Requires tables: profiles(id), wallets(user_id,balance_fp,streak,session_ends_at)
+    ========================== */
+    async function loadServer(){
+      if(!sb) return null;
+      const { data:{ user } } = await sb.auth.getUser();
+      if(!user) return null;
+      const { data, error } = await sb.from('wallets')
+        .select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single();
+      if(error) return null;
+      return {
+        bal:Number(data.balance_fp||0),
+        streak:Number(data.streak||0),
+        startedAt:0,
+        endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0,
+        pick:str(LS.PICK),
+        votesA:num(LS.VOTESA)||123,
+        votesB:num(LS.VOTESB)||117
+      };
+    }
+    async function saveServer(s){
+      if(!sb) return;
+      const { data:{ user } } = await sb.auth.getUser();
+      if(!user) return;
+      await sb.from('wallets').update({
+        balance_fp:s.bal,
+        streak:s.streak,
+        session_ends_at: s.endsAt ? new Date(s.endsAt).toISOString() : null
+      }).eq('user_id', user.id);
     }
 
-    // ----------- Accrual -----------
+    /* =========================
+       ACCRUAL & UI
+    ========================== */
     function accrue(s){
       if(!s.startedAt||!s.endsAt) return s;
       const t0 = Math.min(now(), s.endsAt);
       const hours = Math.max(0, (t0 - s.startedAt)/HOUR);
       s.bal = num(LS.BAL) + hours*RATE;
       s.startedAt = t0; // settle
-      save(s);
+      saveLocal(s);
       return s;
     }
 
-    // ----------- UI -----------
     function ui(s){
       balanceEl.textContent = fmt(s.bal);
       streakEl.textContent = "Streak " + (s.streak||0);
@@ -320,25 +376,28 @@
 
     function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
 
-    // ----------- Actions -----------
-    function activate(){
-      let s = load();
+    /* =========================
+       ACTIONS
+    ========================== */
+    async function activate(){
+      let s = state;
       if(s.endsAt && now() < s.endsAt) return; // already active
       const prevEnd = s.endsAt || 0;
       const within = prevEnd && now() - prevEnd < (24+12)*HOUR; // 12h grace
       s.streak = within ? (s.streak + 1) : 1;
       s.startedAt = now();
       s.endsAt = s.startedAt + DAY;
-      s.bal = num(LS.BAL) + 0.01; // tiny gratification bump
-      save(s); ui(s); vibrate(30);
+      s.bal = (s.bal||0) + 0.01; // tiny gratification bump
+      saveLocal(s); ui(s); vibrate(30);
+      await saveServer(s).catch(()=>{});
     }
 
     function pick(side){
-      let s = load();
+      let s = state;
       if(s.pick) return;
       s.pick = side;
       if(side==='A') s.votesA++; else s.votesB++;
-      save(s); ui(s); vibrate(12);
+      saveLocal(s); ui(s); vibrate(12);
     }
 
     function renderLB(){
@@ -346,7 +405,9 @@
       lb.innerHTML = data.map(p=>`<div class="li"><strong>${p.name}</strong><span>${p.fp.toFixed(2)} FP</span></div>`).join("");
     }
 
-    // ----------- Referrals (client-only) -----------
+    /* =========================
+       REFERRALS (client-only)
+    ========================== */
     function randCode(n=6){
       const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
       let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)];
@@ -357,6 +418,11 @@
       if(!c){ c = randCode(6); localStorage.setItem(LS.MYCODE, c); }
       return c;
     }
+    function award(amount, noteEl){
+      state.bal = (state.bal||0) + amount;
+      saveLocal(state); ui(state);
+      if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`;
+    }
     function setupReferrals(){
       const myCode = getMyCode();
       myCodeEl.textContent = myCode;
@@ -364,22 +430,18 @@
       const refParam   = qp("ref");   // inviter's code
       const claimParam = qp("claim"); // my code embedded in a claim link
 
-      // If I came via someone's invite (?ref=XXXX)
       if(refParam && refParam !== myCode){
         if(!localStorage.getItem(LS.REF_FROM)){
           localStorage.setItem(LS.REF_FROM, refParam);
         }
-        // Award +1 to me once
         if(!localStorage.getItem(LS.REF_BONUS)){
           localStorage.setItem(LS.REF_BONUS,"1");
           award(1.00, refStatus);
           refStatus.innerHTML += " • Welcome bonus for using an invite 🎉";
         }
-        // Show claim copy row
         claimRow.style.display = "flex";
       }
 
-      // If I opened a claim link that matches MY code → give me +1 once
       if(claimParam && claimParam === myCode){
         if(!localStorage.getItem(LS.CLAIM_BONUS)){
           localStorage.setItem(LS.CLAIM_BONUS,"1");
@@ -390,7 +452,6 @@
         }
       }
 
-      // Copy buttons
       copyInviteBtn.addEventListener("click", ()=>{
         const url = `${location.origin}${location.pathname}?ref=${myCode}`;
         navigator.clipboard.writeText(url);
@@ -405,16 +466,75 @@
       });
     }
 
-    // ----------- Wire up -----------
+    /* =========================
+       AUTH (Supabase) — optional
+    ========================== */
+    function setAuthMsg(t){ authMsgEl.textContent = t || ""; }
+    async function showAuthIfNeeded(){
+      if(!sb){ authBox.style.display='none'; return false; }
+      const { data:{ session } } = await sb.auth.getSession();
+      authBox.style.display = session ? 'none' : 'block';
+      return !!session;
+    }
+    document.getElementById('signupBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const pass =document.getElementById('password').value;
+      const { error } = await sb.auth.signUp({ email, password:pass });
+      setAuthMsg(error ? error.message : 'Check your email to verify, then sign in.');
+    };
+    document.getElementById('signinBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const pass =document.getElementById('password').value;
+      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
+      setAuthMsg(error ? error.message : 'Signed in!');
+      if(!error) await boot(true);
+    };
+    document.getElementById('resetBtn').onclick = async ()=>{
+      if(!sb) return;
+      const email=document.getElementById('email').value.trim();
+      const { error } = await sb.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/freeplay.html'
+      });
+      setAuthMsg(error ? error.message : 'Check your email for a reset link.');
+    };
+
+    /* =========================
+       WIRE UP + TICK
+    ========================== */
     document.getElementById("pickA").addEventListener("click",()=>pick('A'));
     document.getElementById("pickB").addEventListener("click",()=>pick('B'));
     activateBtn.addEventListener("click", activate);
 
-    function tick(){ let s=load(); s=accrue(s); ui(s); requestAnimationFrame(()=>setTimeout(tick,1000)); }
+    let state = loadLocal();
 
-    renderLB();
-    setupReferrals();
-    tick();
+    async function boot(forceReloadServer=false){
+      renderLB();
+      setupReferrals();
+
+      // If logged in, try to pull from server
+      const signed = await showAuthIfNeeded();
+      if (signed || forceReloadServer){
+        const s = await loadServer();
+        if(s){ state = { ...state, ...s }; saveLocal(state); }
+      }
+
+      // Start UI + ticker
+      ui(state);
+      (function tick(){
+        state = accrue(state);
+        ui(state);
+        setTimeout(tick, 1000);
+      })();
+
+      // Background save to server if signed in
+      if(signed){
+        setInterval(()=>saveServer(state).catch(()=>{}), 30_000);
+      }
+    }
+
+    boot();
   </script>
 </body>
 </html>
