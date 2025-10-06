@@ -9,68 +9,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --blue:#00B5E2; --blue-dark:#0aa0c2;
-      --bg:#070B12; --card1:#101B2F; --card2:#0F1A2B; --text:#F5F7FB; --muted:#A9B1C6;
-      --success:#17E2A5; --radius:14px; --tapHeight:60px; --maxW:560px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background:var(--bg); -webkit-tap-highlight-color:transparent;
-    }
-    img{max-width:100%; display:block}
-    a{text-decoration:none; color:inherit}
+    :root{ --blue:#00B5E2; --blue-dark:#0aa0c2; --bg:#070B12; --card1:#101B2F; --card2:#0F1A2B; --text:#F5F7FB; --muted:#A9B1C6; --success:#17E2A5; --radius:14px; --tapHeight:60px; --maxW:560px; --shadow:0 10px 30px rgba(0,0,0,.35); }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{ margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:var(--bg); -webkit-tap-highlight-color:transparent; }
+    img{max-width:100%; display:block} a{text-decoration:none; color:inherit}
     .wrap{max-width:var(--maxW); margin:0 auto; padding:0 16px calc(env(safe-area-inset-bottom) + 20px)}
-
-    /* HERO */
-    .hero{
-      position:relative; display:flex; align-items:flex-end; justify-content:center;
-      height:160px; border-bottom:1px solid rgba(255,255,255,.08); overflow:hidden;
-      background:
-        radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%),
-        linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%),
-        url('/assets/stadium-lights.png') center/cover no-repeat;
-      filter:saturate(1.05) contrast(1.02);
-    }
-    .hero .bar{
-      position:absolute; inset:auto 0 0 0; padding:10px 16px; backdrop-filter:blur(8px);
-      background:linear-gradient(180deg, rgba(10,20,28,.35), rgba(5,10,15,.65));
-    }
+    .hero{ position:relative; display:flex; align-items:flex-end; justify-content:center; height:160px; border-bottom:1px solid rgba(255,255,255,.08); overflow:hidden;
+      background: radial-gradient(60% 40% at 50% 0%, rgba(0,181,226,.35), transparent 70%), linear-gradient(180deg, rgba(0,0,0,.15), #070B12 70%), url('/assets/stadium-lights.png') center/cover no-repeat; filter:saturate(1.05) contrast(1.02);}
+    .hero .bar{ position:absolute; inset:auto 0 0 0; padding:10px 16px; backdrop-filter:blur(8px); background:linear-gradient(180deg, rgba(10,20,28,.35), rgba(5,10,15,.65)); }
     .brand{display:flex; align-items:center; gap:10px; max-width:var(--maxW); margin:0 auto;}
-    .brand .logo{
-      width:32px; height:32px; border-radius:8px; overflow:hidden;
-      background:#0b1b27; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center;
-    }
-    .brand .logo img{width:100%; height:100%; object-fit:cover; display:block}
+    .brand .logo{ width:32px; height:32px; border-radius:8px; overflow:hidden; background:#0b1b27; border:1px solid rgba(255,255,255,.12); display:flex; align-items:center; justify-content:center; }
     .title{font-weight:800; letter-spacing:.2px}
     .tag{margin-left:auto; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(0,181,226,.18); color:var(--muted); border:1px solid rgba(0,181,226,.25)}
-
-    /* Cards */
-    .card{
-      background:linear-gradient(180deg, var(--card1), var(--card2));
-      border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px;
-      box-shadow:var(--shadow); margin:14px 0;
-    }
-    .h1{font-size:22px; font-weight:800; margin:0 0 8px}
-    .sub{font-size:14px; color:var(--muted); margin-top:6px}
+    .card{ background:linear-gradient(180deg, var(--card1), var(--card2)); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); margin:14px 0; }
+    .h1{font-size:22px; font-weight:800; margin:0 0 8px} .sub{font-size:14px; color:var(--muted); margin-top:6px}
     .row{display:flex; align-items:center; justify-content:space-between; gap:12px}
     .bigNum{font-size:32px; font-weight:800; line-height:1}
     .pill{font-size:12px; color:var(--muted); border:1px dashed rgba(255,255,255,.2); border-radius:999px; padding:4px 10px; display:inline-flex; align-items:center; gap:6px}
-
-    .btn{
-      width:100%; height:var(--tapHeight); border-radius:14px; border:1px solid rgba(255,255,255,.1); cursor:pointer;
-      font-weight:800; font-size:18px; color:#08121A;
-      background:linear-gradient(180deg,var(--blue),var(--blue-dark));
-      box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .btn:disabled{opacity:.6; cursor:not-allowed}
-    .btn:active{transform:translateY(1px) scale(.998)}
-    .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
-
+    .btn{ width:100%; height:var(--tapHeight); border-radius:14px; border:1px solid rgba(255,255,255,.1); cursor:pointer; font-weight:800; font-size:18px; color:#08121A;
+      background:linear-gradient(180deg,var(--blue),var(--blue-dark)); box-shadow:var(--shadow); transition:transform .02s ease; touch-action:manipulation; display:flex; align-items:center; justify-content:center; }
+    .btn:disabled{opacity:.6; cursor:not-allowed} .btn:active{transform:translateY(1px) scale(.998)} .btn.secondary{width:auto; background:transparent; color:var(--muted); box-shadow:none}
     .countdown{display:flex; gap:10px; justify-content:center; font-weight:800; font-size:18px; padding:10px 0; color:#d2f1ff}
     .teams{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-top:10px}
     .team{display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px}
@@ -80,36 +38,28 @@
     .progress>span{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--blue),var(--blue-dark)); transition:width .6s ease}
     .list{display:flex; flex-direction:column; gap:10px; margin-top:8px}
     .li{display:flex; align-items:center; justify-content:space-between; font-size:14px}
-
-    /* spinning coin */
     .spin-wrap{display:flex; align-items:center; gap:12px; margin:6px 0 10px}
     .spinBadge{position:relative; width:64px; height:64px; display:inline-grid; place-items:center; perspective:800px}
-    .spinBadge .halo{
-      position:absolute; inset:-8px; border-radius:16px;
-      background:radial-gradient(60% 60% at 50% 50%, rgba(0,181,226,.35) 0%, rgba(0,181,226,.18) 40%, rgba(0,181,226,0) 70%);
-      filter:blur(4px); animation:haloPulse 2.6s ease-in-out infinite; z-index:0;
-    }
-    .spinBadge .ring{position:relative; z-index:1; width:100%; height:100%; object-fit:contain; display:block}
-    .sCoin{
-      position:absolute; inset:0; z-index:2; transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
-      animation:spinY 4s linear infinite; will-change:transform;
-    }
-    .sCoin .face{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; backface-visibility:hidden; -webkit-backface-visibility:hidden;}
+    .spinBadge .halo{ position:absolute; inset:-8px; border-radius:16px; background:radial-gradient(60% 60% at 50% 50%, rgba(0,181,226,.35) 0%, rgba(0,181,226,.18) 40%, rgba(0,181,226,0) 70%); filter:blur(4px); animation:haloPulse 2.6s ease-in-out infinite; z-index:0;}
+    .spinBadge .ring{position:relative; z-index:1; width:100%; height:100%}
+    .sCoin{ position:absolute; inset:0; z-index:2; transform-style:preserve-3d; animation:spinY 4s linear infinite; }
+    .sCoin .face{position:absolute; inset:0; width:100%; height:100%; backface-visibility:hidden;}
     .sCoin .back{transform:rotateY(180deg)}
     @keyframes spinY{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
-    @-webkit-keyframes spinY{from{-webkit-transform:rotateY(0)}to{transform:rotateY(360deg)}}
-    @keyframes haloPulse{0%{opacity:.55; transform:scale(.96); filter:blur(4px)} 50%{opacity:.9; transform:scale(1.03); filter:blur(6px)} 100%{opacity:.55; transform:scale(.96); filter:blur(4px)}}
-    @media (prefers-reduced-motion:reduce){ .sCoin{animation:none} .spinBadge .halo{animation:none} }
-
-    /* sticky bottom nav */
+    @keyframes haloPulse{0%{opacity:.55; transform:scale(.96)} 50%{opacity:.9; transform:scale(1.03)} 100%{opacity:.55; transform:scale(.96)}}
     .nav{position:sticky; bottom:0; left:0; right:0; background:rgba(2,8,13,.9); border-top:1px solid rgba(255,255,255,.08); backdrop-filter:blur(8px)}
     .nav .wrap{display:flex; gap:10px; padding:10px 16px}
-    .nav a{flex:1; text-align:center}
+    .nav a, .nav button{flex:1; text-align:center}
 
-    /* username box */
     #username-box{margin-top:12px; border:1px solid #0aa; padding:12px; border-radius:8px;}
     #username-box input{padding:8px; border:1px solid #ccc; border-radius:6px; background:#0F1A2B; color:#F5F7FB}
     #username-save{padding:8px 12px; border:0; border-radius:6px; cursor:pointer}
+    .mini{font-size:12px;color:var(--muted)}
+    .statGrid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+    .stat{background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:10px}
+    .stat .k{font-size:12px; color:var(--muted)}
+    .stat .v{font-weight:800; font-size:18px}
+    input[type="number"]{width:100%; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,.12); background:#0F1A2B; color:#F5F7FB}
   </style>
 </head>
 <body>
@@ -126,12 +76,12 @@
     </div>
   </section>
 
-  <!-- SIMPLE AUTH BOX -->
+  <!-- AUTH -->
   <div id="authBox" class="wrap" style="display:none; padding-top:12px">
     <div class="card" style="display:grid; gap:8px">
       <strong>Sign in to play & save your S-COIN-FP</strong>
-      <input id="email" type="email" placeholder="Email">
-      <input id="password" type="password" placeholder="Password (min 6)">
+      <input id="email" type="email" placeholder="Email" autocomplete="email">
+      <input id="password" type="password" placeholder="Password (min 6)" autocomplete="current-password">
       <div style="display:flex; gap:8px; flex-wrap:wrap">
         <button id="signupBtn" class="btn secondary">Create Account</button>
         <button id="signinBtn" class="btn secondary">Sign In</button>
@@ -142,6 +92,18 @@
   </div>
 
   <div class="wrap" role="main" aria-live="polite">
+    <!-- STATS -->
+    <section class="card" aria-labelledby="statsTitle">
+      <div class="h1" id="statsTitle">Game Stats</div>
+      <div class="statGrid">
+        <div class="stat"><div class="k">Players</div><div class="v" id="statPlayers">—</div></div>
+        <div class="stat"><div class="k">Total FP</div><div class="v" id="statTotalFP">—</div></div>
+        <div class="stat"><div class="k">Bets (count)</div><div class="v" id="statBetCount">—</div></div>
+        <div class="stat"><div class="k">Bets (FP)</div><div class="v" id="statBetFP">—</div></div>
+      </div>
+      <div class="mini" id="gameIdDisp" style="margin-top:8px"></div>
+    </section>
+
     <!-- DAILY ACTIVATE -->
     <section class="card" id="dailyCard" aria-labelledby="dailyTitle">
       <div class="row">
@@ -179,11 +141,49 @@
       <div class="sub" id="nextReady" style="text-align:center; margin-top:6px"></div>
     </section>
 
+    <!-- WEEKLY GAME + BETTING -->
+    <section class="card" aria-labelledby="weeklyTitle">
+      <div class="h1" id="weeklyTitle">This Week’s Game</div>
+      <div class="sub" id="gameInfo">Sat • 7:00 PM CT • One bet per user</div>
+
+      <div class="teams">
+        <div class="team" id="teamA">
+          <div class="logo">A</div>
+          <strong id="teamAName">Team A</strong>
+          <span class="sub" id="teamARec">—</span>
+        </div>
+        <div class="sub">vs</div>
+        <div class="team" id="teamB">
+          <div class="logo">B</div>
+          <strong id="teamBName">Team B</strong>
+          <span class="sub" id="teamBRec">—</span>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <input id="betAmount" type="number" step="0.01" min="0" placeholder="Enter FP to bet (max shown below)">
+        <div class="mini" id="betHint">Max: — FP • Locks at —</div>
+      </div>
+
+      <div class="pickBtns" id="betBtns">
+        <button class="btn" id="betA">Bet Team A</button>
+        <button class="btn" id="betB">Bet Team B</button>
+      </div>
+
+      <div id="betMsg" class="sub" style="text-align:center; margin-top:8px"></div>
+
+      <div class="sub" style="margin-top:12px">Community Picks</div>
+      <div class="progress" aria-hidden="true"><span id="barA"></span></div>
+      <div class="row">
+        <span class="sub">A: <strong id="pcA">50%</strong></span>
+        <span class="sub">B: <strong id="pcB">50%</strong></span>
+      </div>
+    </section>
+
     <!-- REFERRALS -->
     <section class="card" aria-labelledby="refTitle">
       <div class="h1" id="refTitle">Invite &amp; Earn</div>
-      <div class="sub">Share your link. New friends get +1 FP and you get +1 FP when you open their claim link.</div>
-
+      <div class="sub">Share your link. New users get +1 FP and you get +1 FP when they send back the claim link.</div>
       <div class="row" style="margin-top:10px">
         <div>
           <div class="sub">Your Code</div>
@@ -191,47 +191,15 @@
         </div>
         <button id="copyInviteBtn" class="btn" style="width:auto">Copy Invite Link</button>
       </div>
-
       <div class="sub" id="refStatus" style="margin-top:10px"></div>
       <div class="row" id="claimRow" style="display:none; margin-top:10px">
         <button id="copyClaimBtn" class="btn" style="width:100%">Copy Claim Link for Inviter</button>
       </div>
     </section>
 
-    <!-- WEEKLY GAME PICK (update these texts weekly) -->
-    <section class="card" aria-labelledby="weeklyTitle">
-      <div class="h1" id="weeklyTitle">This Week’s Game</div>
-      <div class="sub" id="gameInfo">Sat • 7:00 PM CT • One pick per week</div>
-
-      <div class="teams">
-        <div class="team" id="teamA">
-          <div class="logo">A</div>
-          <strong id="teamAName">Florida Gators</strong>
-          <span class="sub" id="teamARec">2-3</span>
-        </div>
-        <div class="sub">vs</div>
-        <div class="team" id="teamB">
-          <div class="logo">B</div>
-          <strong id="teamBName">Texas A&amp;M</strong>
-          <span class="sub" id="teamBRec">5-0</span>
-        </div>
-      </div>
-
-      <div class="pickBtns" id="pickBtns">
-        <button class="btn" id="pickA" aria-label="Pick Florida Gators">Pick Florida Gators</button>
-        <button class="btn" id="pickB" aria-label="Pick Texas A&amp;M">Pick Texas A&amp;M</button>
-      </div>
-
-      <div id="pickedMsg" class="sub" style="display:none; text-align:center; margin-top:8px"></div>
-
-      <div class="sub" style="margin-top:12px">Community Picks</div>
-      <div class="progress" aria-hidden="true"><span id="barA"></span></div>
-      <div class="row"><span class="sub">A: <strong id="pcA">50%</strong></span><span class="sub">B: <strong id="pcB">50%</strong></span></div>
-    </section>
-
     <!-- LEADERBOARD + USERNAME -->
     <section class="card" aria-labelledby="leadTitle">
-      <div class="h1" id="leadTitle">Leaderboard (Today)</div>
+      <div class="h1" id="leadTitle">Leaderboard (Top 10)</div>
       <div class="list" id="lb"></div>
 
       <div id="username-box">
@@ -251,6 +219,7 @@
       <a class="btn secondary" href="https://www.scoinsports.com">Website</a>
       <a class="btn secondary" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Discord</a>
       <a class="btn secondary" href="https://x.com/scoinsports" target="_blank" rel="noopener">X (Twitter)</a>
+      <button id="logoutBtn" class="btn secondary" style="display:none">Log Out</button>
     </div>
   </div>
 
@@ -262,113 +231,93 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1xbnNlbWh1dXJkcXl3aXpvaXRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk3MDU1MDIsImV4cCI6MjA3NTI4MTUwMn0.isbFi1AWEYukKE97aNozHX2C-dHPyePsp8m-0kqGuzs';
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    /* ======= GAME (edit weekly) ======= */
+    const GAME = {
+      id: '2025-W40',               // change weekly (any unique string)
+      teamA: { name: 'Florida Gators', rec: '2-3' },
+      teamB: { name: 'Texas A&M',    rec: '5-0' },
+      lockAtISO: '2025-10-11T19:00:00-05:00' // kickoff/lock time in CT
+    };
+
+    // ADMIN: only these emails can settle the game from the browser
+    const ADMIN_EMAILS = ['you@example.com']; // <-- change to your email
+
     /* ========= Helpers / LS ========= */
-    const LS={BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at", PICK:"weekly_pick_v1", VOTESA:"votes_a", VOTESB:"votes_b", MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"};
-
-    // server time drift
+    const LS = {
+      BAL:"fp_balance", STREAK:"fp_streak", START:"fp_started_at", ENDS:"fp_ends_at",
+      MYCODE:"fp_my_ref_code", REF_FROM:"fp_referred_by", REF_BONUS:"fp_ref_bonus_done", CLAIM_BONUS:"fp_claim_bonus_done"
+    };
     let DRIFT_MS = 0;
-    async function syncServerTime(){
-      try{
-        const { data, error } = await sb.rpc('now_ts_ms');
-        if(!error && typeof data === 'number'){ DRIFT_MS = Number(data) - Date.now(); }
-      }catch(_){}
-    }
-    const now = () => Date.now() + DRIFT_MS;
-    const HOUR = 3600_000, DAY = 24 * HOUR;
+    async function syncServerTime(){ try{ const { data, error } = await sb.rpc('now_ts_ms'); if(!error && typeof data === 'number'){ DRIFT_MS = Number(data) - Date.now(); } }catch(_){} }
+    const now = ()=> Date.now() + DRIFT_MS;
+    const HOUR = 3600_000, DAY = 24*HOUR, RATE = 0.25/24;
 
-    const num=k=>parseFloat(localStorage.getItem(k)??"0")||0, str=k=>localStorage.getItem(k), set=(k,v)=>localStorage.setItem(k,String(v));
-    const fmt=n=>(Math.round(n*100)/100).toFixed(2);
-    const qp=name=>new URLSearchParams(location.search).get(name);
+    const E = id => document.getElementById(id);
+    const balanceEl=E("balance"), streakEl=E("streak"), activateBtn=E("activateBtn"), countdownWrap=E("countdownWrap"),
+      nextReady=E("nextReady"), barA=E("barA"), pcA=E("pcA"), pcB=E("pcB"), lb=E("lb"),
+      myCodeEl=E("myCode"), refStatus=E("refStatus"), copyInviteBtn=E("copyInviteBtn"), copyClaimBtn=E("copyClaimBtn"),
+      claimRow=E("claimRow"), authBox=E("authBox"), authMsgEl=E("authMsg"), logoutBtn=E("logoutBtn"),
+      teamAName=E("teamAName"), teamBName=E("teamBName"), teamARec=E("teamARec"), teamBRec=E("teamBRec"),
+      betA=E("betA"), betB=E("betB"), betAmount=E("betAmount"), betHint=E("betHint"), betMsg=E("betMsg"),
+      statPlayers=E("statPlayers"), statTotalFP=E("statTotalFP"), statBetCount=E("statBetCount"), statBetFP=E("statBetFP"),
+      gameIdDisp=E("gameIdDisp");
 
-    const balanceEl=document.getElementById("balance"), streakEl=document.getElementById("streak"),
-      activateBtn=document.getElementById("activateBtn"), countdownWrap=document.getElementById("countdownWrap"),
-      nextReady=document.getElementById("nextReady"), pickBtns=document.getElementById("pickBtns"),
-      pickA=document.getElementById("pickA"), pickB=document.getElementById("pickB"),
-      pickedMsg=document.getElementById("pickedMsg"), barA=document.getElementById("barA"),
-      pcA=document.getElementById("pcA"), pcB=document.getElementById("pcB"), lb=document.getElementById("lb"),
-      myCodeEl=document.getElementById("myCode"), refStatus=document.getElementById("refStatus"),
-      copyInviteBtn=document.getElementById("copyInviteBtn"), copyClaimBtn=document.getElementById("copyClaimBtn"),
-      claimRow=document.getElementById("claimRow"),
-      authBox=document.getElementById("authBox"), authMsgEl=document.getElementById("authMsg");
-    const RATE = 0.25/24; document.getElementById("rateDisp").textContent = "0.25/day";
+    document.getElementById("rateDisp").textContent = "0.25/day";
+
+    function num(k){ return parseFloat(localStorage.getItem(k)??"0")||0 }
+    function str(k){ return localStorage.getItem(k) }
+    function setLS(k,v){ localStorage.setItem(k,String(v)) }
+    function fmt(n){ return (Math.round(n*100)/100).toFixed(2) }
+    function qp(name){ return new URLSearchParams(location.search).get(name) }
+    function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms) }
 
     /* ========= Local fallback ========= */
     function loadLocal(){return{
-      bal:num(LS.BAL),
-      streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
-      startedAt:parseInt(str(LS.START)??"0",10),
-      endsAt:parseInt(str(LS.ENDS)??"0",10),
-      pick:str(LS.PICK),
-      votesA:parseInt(localStorage.getItem(LS.VOTESA)??"123",10),
-      votesB:parseInt(localStorage.getItem(LS.VOTESB)??"117",10)
+      bal:num(LS.BAL), streak:parseInt(localStorage.getItem(LS.STREAK)??"0",10),
+      startedAt:parseInt(str(LS.START)??"0",10), endsAt:parseInt(str(LS.ENDS)??"0",10)
     }}
     function saveLocal(s){
-      set(LS.BAL,s.bal); set(LS.STREAK,s.streak); set(LS.START,s.startedAt); set(LS.ENDS,s.endsAt);
-      if(s.pick!==undefined) set(LS.PICK,s.pick);
-      set(LS.VOTESA,s.votesA); set(LS.VOTESB,s.votesB);
+      setLS(LS.BAL,s.bal); setLS(LS.STREAK,s.streak); setLS(LS.START,s.startedAt); setLS(LS.ENDS,s.endsAt);
     }
 
     /* ========= Server state ========= */
     async function loadServer(){
-      const { data:{ user } } = await sb.auth.getUser();
-      if(!user) return null;
-
-      let { data, error } = await sb
-        .from('wallets')
-        .select('balance_fp,streak,session_ends_at')
-        .eq('user_id', user.id)
-        .single();
-
-      if (error && (error.code === 'PGRST116' || error.details?.includes('Results contain 0 rows'))) {
+      const { data:{ user } } = await sb.auth.getUser(); if(!user) return null;
+      let { data, error } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single();
+      if (error && (error.code === 'PGRST116' || error.details?.includes('0 rows'))) {
         await sb.from('wallets').insert({ user_id: user.id, balance_fp: 0, streak: 0, session_ends_at: null });
-        ({ data } = await sb
-          .from('wallets')
-          .select('balance_fp,streak,session_ends_at')
-          .eq('user_id', user.id)
-          .single());
+        ({ data } = await sb.from('wallets').select('balance_fp,streak,session_ends_at').eq('user_id', user.id).single());
       }
-
       if (!data) return null;
       return {
-        bal:Number(data.balance_fp||0),
-        streak:Number(data.streak||0),
-        startedAt:0,
-        endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0,
-        pick:str(LS.PICK),
-        votesA:num(LS.VOTESA)||123,
-        votesB:num(LS.VOTESB)||117
+        bal:Number(data.balance_fp||0), streak:Number(data.streak||0),
+        startedAt:0, endsAt:data.session_ends_at ? new Date(data.session_ends_at).getTime() : 0
       };
     }
-
     async function saveServer(s){
-      const { data:{ user } } = await sb.auth.getUser();
-      if(!user) return;
+      const { data:{ user } } = await sb.auth.getUser(); if(!user) return;
       await sb.from('wallets').upsert({
-        user_id: user.id,
-        balance_fp: s.bal,
-        streak: s.streak,
+        user_id: user.id, balance_fp: s.bal, streak: s.streak,
         session_ends_at: s.endsAt ? new Date(s.endsAt).toISOString() : null
       }, { onConflict: 'user_id' });
     }
 
     /* ========= Auth gating ========= */
-    function setPlayEnabled(enabled){ [activateBtn, pickA, pickB].forEach(b=>{ b.disabled=!enabled; }); }
+    function setPlayEnabled(enabled){ [activateBtn, betA, betB, betAmount].forEach(b=>{ if(b) b.disabled=!enabled; }); }
     async function isSignedIn(){ const { data:{ session } } = await sb.auth.getSession(); return !!session; }
     async function requireSignIn(){
       const signed = await isSignedIn();
-      if (!signed) {
-        authBox.style.display = 'block';
-        authMsgEl.textContent = 'Please create an account or sign in to play.';
-        setPlayEnabled(false);
-      }
+      if (!signed) { authBox.style.display='block'; authMsgEl.textContent='Please sign in to play.'; setPlayEnabled(false); logoutBtn.style.display='none'; }
       return signed;
     }
     async function showAuthIfNeeded(){
       const signed = await isSignedIn();
       authBox.style.display = signed ? 'none' : 'block';
       setPlayEnabled(signed);
+      logoutBtn.style.display = signed ? 'block' : 'none';
       return signed;
     }
+    logoutBtn.addEventListener('click', async ()=>{ try{ await sb.auth.signOut(); } finally{ location.reload(); } });
 
     /* ========= Accrual & UI ========= */
     function accrue(s){
@@ -379,30 +328,21 @@
       s.startedAt = t0; saveLocal(s); return s;
     }
     function ui(s){
-      balanceEl.textContent = fmt(s.bal);
-      streakEl.textContent = "Streak " + (s.streak||0);
+      balanceEl.textContent = fmt(s.bal); streakEl.textContent = "Streak " + (s.streak||0);
       const active = s.endsAt && now() < s.endsAt;
       activateBtn.style.display = active ? "none" : "block";
       countdownWrap.style.display = active ? "flex" : "none";
       if(active){
         const left=Math.max(0, s.endsAt - now());
-        const hh=String(Math.floor(left/HOUR)).padStart(2,"0");
-        const mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0");
-        const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
+        const hh=String(Math.floor(left/HOUR)).padStart(2,"0"); const mm=String(Math.floor((left%HOUR)/60000)).padStart(2,"0"); const ss=String(Math.floor((left%60000)/1000)).padStart(2,"0");
         countdownWrap.textContent = `Next session in ${hh}:${mm}:${ss}`;
         nextReady.textContent = "Ready again at " + new Date(s.endsAt).toLocaleString();
-      } else { nextReady.textContent = ""; }
-      const total=Math.max(1, s.votesA + s.votesB), pct=Math.round((s.votesA/total)*100);
-      pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
-      if(s.pick){ pickBtns.style.display="none"; pickedMsg.style.display="block"; pickedMsg.textContent="You locked your pick."; }
-      else { pickBtns.style.display="grid"; pickedMsg.style.display="none"; }
+      } else nextReady.textContent = "";
     }
-    function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
 
-    /* ========= Actions ========= */
+    /* ========= Activate ========= */
     async function activate(){
       if(!(await requireSignIn())) return;
-
       let s = state;
       if(s.endsAt && now() < s.endsAt) return;
       const prevEnd = s.endsAt || 0;
@@ -413,245 +353,212 @@
       s.bal = (s.bal||0) + 0.01;
       saveLocal(s); ui(s); vibrate(30);
       await saveServer(s).catch(()=>{});
-
-      try {
-        const { data:{ user } } = await sb.auth.getUser();
-        await sb.from('activity_log').insert({ user_id: user.id, action: 'activate' });
-      } catch(e) {}
     }
+    activateBtn.addEventListener("click", activate);
 
-    async function pick(side){
-      if(!(await requireSignIn())) return;
-
-      let s = state;
-      if(s.pick) return;
-      s.pick = side;
-      if(side==='A') s.votesA++; else s.votesB++;
-      saveLocal(s); ui(s); vibrate(12);
-
-      try {
-        const { data:{ user } } = await sb.auth.getUser();
-        await sb.from('activity_log').insert({ user_id: user.id, action: 'pick' });
-      } catch(e) {}
-    }
-
-    /* ========= Leaderboard (safe view) ========= */
+    /* ========= Leaderboard ========= */
     async function renderLB(){
-      const { data, error } = await sb
-        .from('public_leaderboard')
-        .select('handle, balance_fp, streak')
-        .order('balance_fp', { ascending: false })
-        .limit(10);
-      if (error) { lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
+      const { data, error } = await sb.from('public_leaderboard').select('handle, balance_fp, streak').order('balance_fp', { ascending:false }).limit(10);
+      if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
       lb.innerHTML = (data||[]).map((row,i)=>`
-        <div class="li">
-          <strong>${i+1}. ${row.handle}</strong>
-          <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span>
-        </div>
+        <div class="li"><strong>${i+1}. ${row.handle}</strong><span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
       `).join('') || '<div class="li">No data yet</div>';
     }
 
-    /* ========= Server-backed Invite Codes ========= */
-    function niceCode(n=6){
-      const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)];
-      return s;
+    /* ========= Community % & Stats ========= */
+    async function renderCommunity(){
+      // count FP on each side for this game
+      const { data: a } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','A');
+      const { data: b } = await sb.from('bets').select('amount_fp').eq('game_id', GAME.id).eq('side','B');
+      const sum = (rows)=> (rows||[]).reduce((t,r)=> t + Number(r.amount_fp||0), 0);
+      const aFP = sum(a), bFP = sum(b), total = Math.max(1, aFP+bFP), pct = Math.round((aFP/total)*100);
+      pcA.textContent = pct + "%"; pcB.textContent = (100-pct) + "%"; barA.style.width = pct + "%";
+    }
+    async function renderStats(){
+      const { data, error } = await sb.rpc('game_stats', { p_game_id: GAME.id });
+      if (!error && data && data.length){
+        const s = data[0];
+        statPlayers.textContent = String(s.total_players ?? '—');
+        statTotalFP.textContent = Number(s.total_fp ?? 0).toFixed(2);
+        statBetCount.textContent = String(s.bet_count ?? '—');
+        statBetFP.textContent = Number(s.bet_fp ?? 0).toFixed(2);
+      }
+      gameIdDisp.textContent = `Game ID: ${GAME.id}`;
     }
 
-    async function getMyInviteCode(){
+    /* ========= Bets ========= */
+    function lockTimeMs(){ return new Date(GAME.lockAtISO).getTime(); }
+    function bettingOpen(){ return now() < lockTimeMs(); }
+    function setBetUIHints(balance){
+      betHint.textContent = `Max: ${Number(balance||0).toFixed(2)} FP • Locks at ${new Date(lockTimeMs()).toLocaleString()}`;
+      betAmount.max = Math.max(0, Number(balance||0)).toFixed(2);
+    }
+    async function myBet(){
+      const { data:{ user } } = await sb.auth.getUser(); if(!user) return null;
+      const { data } = await sb.from('bets').select('side, amount_fp, settled, payout_fp').eq('user_id', user.id).eq('game_id', GAME.id).maybeSingle();
+      return data||null;
+    }
+    async function showMyBet(){
+      const bet = await myBet();
+      if (!bet){ betMsg.textContent = bettingOpen() ? 'No bet placed yet.' : 'No bet placed.'; return; }
+      const s = bet.side === 'A' ? 'Team A' : 'Team B';
+      betMsg.textContent = bet.settled
+        ? `Your bet: ${s} • ${Number(bet.amount_fp).toFixed(2)} FP • Payout: ${Number(bet.payout_fp||0).toFixed(2)} FP`
+        : `Your bet: ${s} • ${Number(bet.amount_fp).toFixed(2)} FP`;
+    }
+    async function place(side){
+      if(!(await requireSignIn())) return;
+      if(!bettingOpen()){ alert('Betting is locked for this game.'); return; }
+
+      const amt = parseFloat(betAmount.value||'0');
+      if (!isFinite(amt) || amt <= 0){ alert('Enter a positive FP amount.'); return; }
+
+      // server balance check via wallet
+      const s = await loadServer(); if(!s){ alert('Could not read wallet.'); return; }
+      if (amt > s.bal + 1e-9){ alert('Insufficient balance.'); return; }
+
+      // call atomic RPC
       const { data:{ user } } = await sb.auth.getUser();
-      if(!user) return null;
+      const { error } = await sb.rpc('place_bet', { uid: user.id, p_game_id: GAME.id, p_side: side, p_amount: amt });
+      if (error){ alert(error.message || 'Bet failed'); return; }
 
-      let { data, error } = await sb
-        .from('profiles')
-        .select('invite_code')
-        .eq('id', user.id)
-        .single();
+      // refresh wallet + UI
+      const s2 = await loadServer(); if (s2){ state.bal = s2.bal; saveLocal(state); ui(state); }
+      betAmount.value = '';
+      await showMyBet();
+      await renderCommunity();
+      await renderStats();
+      alert('Bet placed!');
+    }
+    betA.addEventListener('click', ()=>place('A'));
+    betB.addEventListener('click', ()=>place('B'));
 
+    /* ========= Invite Codes (server-backed) ========= */
+    function niceCode(n=6){ const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<n;i++) s+=chars[Math.floor(Math.random()*chars.length)]; return s; }
+    async function getMyInviteCode(){
+      const { data:{ user } } = await sb.auth.getUser(); if(!user) return null;
+      let { data, error } = await sb.from('profiles').select('invite_code').eq('id', user.id).single();
       if (!error && data?.invite_code) return data.invite_code;
-
       const code = niceCode(6);
-      const { error: upErr } = await sb
-        .from('profiles')
-        .update({ invite_code: code })
-        .eq('id', user.id);
-
+      const { error: upErr } = await sb.from('profiles').update({ invite_code: code }).eq('id', user.id);
       return upErr ? null : code;
     }
-
+    function award(amount, noteEl){ state.bal = (state.bal||0) + amount; saveLocal(state); ui(state); if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`; }
     async function setupReferrals(){
       const code = await getMyInviteCode();
-
-      if (!code) {
-        myCodeEl.textContent = '— — —';
-        refStatus.textContent = 'Sign in to get your invite code.';
-        claimRow.style.display = "none";
-        return;
-      }
-
+      if (!code){ myCodeEl.textContent='— — —'; refStatus.textContent='Sign in to get your invite code.'; claimRow.style.display='none'; return; }
       myCodeEl.textContent = code;
-
-      const refParam   = qp("ref");
-      const claimParam = qp("claim");
-
+      const refParam = qp("ref"), claimParam = qp("claim");
       if(refParam && refParam !== code){
-        if(!localStorage.getItem(LS.REF_FROM)){
-          localStorage.setItem(LS.REF_FROM, refParam);
-        }
-        if(!localStorage.getItem(LS.REF_BONUS)){
-          localStorage.setItem(LS.REF_BONUS,"1");
-          award(1.00, refStatus);
-          refStatus.innerHTML += " • Welcome bonus for using an invite 🎉";
-        }
+        if(!localStorage.getItem(LS.REF_FROM)){ localStorage.setItem(LS.REF_FROM, refParam); }
+        if(!localStorage.getItem(LS.REF_BONUS)){ localStorage.setItem(LS.REF_BONUS,"1"); award(1.00, refStatus); refStatus.innerHTML += " • Welcome bonus 🎉"; }
         claimRow.style.display = "flex";
       }
-
       if(claimParam && claimParam === code){
-        if(!localStorage.getItem(LS.CLAIM_BONUS)){
-          localStorage.setItem(LS.CLAIM_BONUS,"1");
-          award(1.00, refStatus);
-          refStatus.innerHTML += " • Referral claim received 🙌";
-        } else {
-          refStatus.textContent = "Referral claim already applied on this device.";
-        }
+        if(!localStorage.getItem(LS.CLAIM_BONUS)){ localStorage.setItem(LS.CLAIM_BONUS,"1"); award(1.00, refStatus); refStatus.innerHTML += " • Referral claim received 🙌"; }
+        else { refStatus.textContent = "Referral claim already applied on this device."; }
       }
-
-      copyInviteBtn.addEventListener("click", ()=>{
-        const url = `${location.origin}${location.pathname}?ref=${code}`;
-        navigator.clipboard.writeText(url);
-        refStatus.textContent = "Invite link copied. Share it with friends!";
-      });
-
-      copyClaimBtn.addEventListener("click", ()=>{
-        const inviter = localStorage.getItem(LS.REF_FROM) || "";
-        if(!inviter){ refStatus.textContent = "No inviter found."; return; }
-        const url = `${location.origin}${location.pathname}?claim=${inviter}`;
-        navigator.clipboard.writeText(url);
-        refStatus.textContent = "Claim link copied—send this back to your inviter.";
-      });
+      copyInviteBtn.addEventListener("click", ()=>{ const url = `${location.origin}${location.pathname}?ref=${code}`; navigator.clipboard.writeText(url); refStatus.textContent = "Invite link copied."; });
+      copyClaimBtn.addEventListener("click", ()=>{ const inviter = localStorage.getItem(LS.REF_FROM) || ""; if(!inviter){ refStatus.textContent = "No inviter found."; return; } const url = `${location.origin}${location.pathname}?claim=${inviter}`; navigator.clipboard.writeText(url); refStatus.textContent = "Claim link copied—send to inviter."; });
     }
 
-    /* ========= Username widget ========= */
+    /* ========= Username ========= */
     const USERNAME_REGEX = /^[a-zA-Z0-9_\.]{3,24}$/;
-    async function loadMyHandle() {
-      const { data: { user } } = await sb.auth.getUser();
-      if (!user) { document.getElementById('username-box').style.display='none'; return; }
-      document.getElementById('username-box').style.display='block';
+    async function loadMyHandle(){
+      const { data:{ user } } = await sb.auth.getUser();
+      const box = document.getElementById('username-box');
+      if(!user){ box.style.display='none'; return; }
+      box.style.display='block';
       const { data, error } = await sb.from('profiles').select('username').eq('id', user.id).single();
-      if (!error && data) document.getElementById('username-input').value = data.username || '';
+      if(!error && data) document.getElementById('username-input').value = data.username || '';
     }
-    async function saveMyHandle() {
-      const msg = document.getElementById('username-msg');
-      msg.textContent = '';
-      const input = document.getElementById('username-input');
-      const raw = input.value.trim();
-      if (!USERNAME_REGEX.test(raw)) { msg.textContent = 'Use 3–24 characters: letters, numbers, underscore, or dot.'; msg.style.color = 'crimson'; return; }
-      const { data: { user } } = await sb.auth.getUser();
-      if (!user) { msg.textContent = 'Please sign in first.'; msg.style.color = 'crimson'; return; }
+    async function saveMyHandle(){
+      const msg = document.getElementById('username-msg'); msg.textContent='';
+      const raw = (document.getElementById('username-input').value || '').trim();
+      if(!USERNAME_REGEX.test(raw)){ msg.textContent='Use 3–24 characters: letters, numbers, _ or .'; msg.style.color='crimson'; return; }
+      const { data:{ user } } = await sb.auth.getUser(); if(!user){ msg.textContent='Please sign in first.'; msg.style.color='crimson'; return; }
       const { error } = await sb.from('profiles').update({ username: raw }).eq('id', user.id);
-      if (error) { msg.textContent = (error.code === '23505') ? 'That handle is taken. Try another.' : 'Could not save handle.'; msg.style.color = 'crimson'; }
-      else { msg.textContent = 'Saved!'; msg.style.color = 'seagreen'; renderLB(); }
+      if(error){ msg.textContent=(error.code==='23505')?'That handle is taken.':'Could not save handle.'; msg.style.color='crimson'; }
+      else { msg.textContent='Saved!'; msg.style.color='seagreen'; renderLB(); }
     }
-
-    /* ========= Wire up & boot ========= */
-    document.getElementById("pickA").addEventListener("click",()=>pick('A'));
-    document.getElementById("pickB").addEventListener("click",()=>pick('B'));
-    activateBtn.addEventListener("click", activate);
     document.getElementById('username-save').addEventListener('click', saveMyHandle);
 
-    const emailEl = document.getElementById('email');
-    const passEl  = document.getElementById('password');
+    /* ========= Auth handlers ========= */
+    const emailEl = E('email'), passEl = E('password');
     function show(msg, ok=false){ authMsgEl.textContent = msg; authMsgEl.style.color = ok ? 'seagreen' : 'crimson'; }
-
-    document.getElementById('signupBtn').onclick = async ()=>{
+    E('signupBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
-      try{
-        const { error } = await sb.auth.signUp({ email, password:pass });
-        if(error){ show(error.message); return; }
-        show('Check your email to verify, then sign in.', true);
-      }catch(e){ show(e?.message||'Sign up failed'); }
+      const { error } = await sb.auth.signUp({ email, password:pass });
+      if(error){ show(error.message); return; }
+      show('Check your email to verify, then sign in.', true);
       await showAuthIfNeeded(); await loadMyHandle(); await setupReferrals();
     };
-
-    document.getElementById('signinBtn').onclick = async ()=>{
+    E('signinBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(), pass=(passEl.value||'');
       if(!email||!pass){ show('Enter email and password'); return; }
-      try{
-        const { error } = await sb.auth.signInWithPassword({ email, password:pass });
-        if(error){ show(error.message); return; }
-        show('Signed in!', true);
-        await syncServerTime();
-        await showAuthIfNeeded();
-        await loadMyHandle();
-        await setupReferrals();     // show server-backed code immediately
-        await boot(true);           // refresh state from server
-      }catch(e){ show(e?.message||'Sign in failed'); }
+      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
+      if(error){ show(error.message); return; }
+      show('Signed in!', true);
+      await syncServerTime();
+      await showAuthIfNeeded();
+      await loadMyHandle();
+      await setupReferrals();
+      await boot(true);
     };
-
-    document.getElementById('resetBtn').onclick = async ()=>{
+    E('resetBtn').onclick = async ()=>{
       const email=(emailEl.value||'').trim(); if(!email){ show('Enter your email'); return; }
-      try{
-        const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + '/freeplay.html' });
-        if(error){ show(error.message); return; }
-        show('Check your email for a reset link.', true);
-      }catch(e){ show(e?.message||'Reset failed'); }
+      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin + location.pathname });
+      if(error){ show(error.message); return; }
+      show('Check your email for a reset link.', true);
     };
 
+    /* ========= Admin settle (optional): visit ?settle=A or ?settle=B ========= */
+    async function maybeAdminSettle(){
+      const side = qp('settle'); if(side!=='A' && side!=='B') return;
+      const { data:{ user } } = await sb.auth.getUser(); if(!user) return;
+      const { data: prof } = await sb.from('profiles').select('username').eq('id', user.id).single(); // touch DB
+      const { data: sess } = await sb.auth.getUser();
+      const { data: userInfo } = await sb.auth.getUser();
+      const { data: userMeta } = userInfo || {};
+      // need email from session:
+      const { data: sessionData } = await sb.auth.getSession();
+      const email = sessionData?.session?.user?.email || '';
+      if(!ADMIN_EMAILS.includes(email)){ alert('Not authorized to settle.'); return; }
+      const { error } = await sb.rpc('settle_game', { p_game_id: GAME.id, p_winning_side: side });
+      if(error){ alert(error.message || 'Settle failed'); return; }
+      alert('Game settled: winners paid.');
+    }
+
+    /* ========= Boot ========= */
     let state = loadLocal();
 
-    function award(amount, noteEl){ state.bal = (state.bal||0) + amount; saveLocal(state); ui(state); if(noteEl) noteEl.textContent = `+${amount.toFixed(2)} FP awarded`; }
-
     async function boot(forceReloadServer=false){
-      renderLB();
+      // write static game ui
+      teamAName.textContent = GAME.teamA.name; teamARec.textContent = GAME.teamA.rec;
+      teamBName.textContent = GAME.teamB.name; teamBRec.textContent = GAME.teamB.rec;
+      document.getElementById('weeklyTitle').textContent = `This Week’s Game: ${GAME.teamA.name} vs ${GAME.teamB.name}`;
+
+      renderLB(); renderCommunity(); renderStats();
 
       const signed = await showAuthIfNeeded();
-
       if (signed || forceReloadServer){
         await syncServerTime();
         const s = await loadServer();
-        if(s){
-          state.bal     = s.bal;
-          state.streak  = s.streak;
-          state.startedAt = 0;
-          state.endsAt    = s.endsAt || 0;
-          saveLocal(state);
-        }
+        if(s){ state.bal=s.bal; state.streak=s.streak; state.startedAt=0; state.endsAt=s.endsAt||0; saveLocal(state); }
       }
-
-      await loadMyHandle();
-      await setupReferrals();
+      setBetUIHints(state.bal);
+      await loadMyHandle(); await setupReferrals(); await showMyBet(); await maybeAdminSettle();
 
       ui(state);
       (function tick(){ state = accrue(state); ui(state); setTimeout(tick, 1000); })();
 
-      if(signed){
-        setInterval(()=>saveServer(state).catch(()=>{}), 30_000);
+      // periodic refreshes
+      setInterval(renderLB, 30000);
+      setInterval(renderCommunity, 15000);
+      setInterval(async ()=>{ const s=await loadServer(); if(s){ state.endsAt=s.endsAt||0; state.bal=s.bal; state.streak=s.streak; saveLocal(state); ui(state); setBetUIHints(state.bal);} }, 15000);
 
-        // keep devices in sync
-        setInterval(async ()=>{
-          const s = await loadServer();
-          if (s) {
-            const changed = (state.endsAt !== s.endsAt) ||
-                            (Math.abs(state.bal - s.bal) > 0.001) ||
-                            (state.streak !== s.streak);
-            if (changed) {
-              state.endsAt = s.endsAt || 0;
-              state.bal    = s.bal;
-              state.streak = s.streak;
-              saveLocal(state); ui(state);
-            }
-          }
-        }, 15000);
-
-        document.addEventListener('visibilitychange', async ()=>{
-          if (document.visibilityState === 'visible') {
-            await syncServerTime();
-            const s = await loadServer();
-            if (s){ state.endsAt = s.endsAt||0; state.bal=s.bal; state.streak=s.streak; saveLocal(state); ui(state); }
-          }
-        });
-      }
+      if(signed){ setInterval(()=>saveServer(state).catch(()=>{}), 30000); }
     }
 
     boot();
