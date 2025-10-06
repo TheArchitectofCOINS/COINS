@@ -200,6 +200,23 @@ a{text-decoration:none;color:inherit}
   justify-content: center;
 }
 
+/* Force-center footer buttons */
+.nav a.btn {
+  display: flex !important;      /* override any inline/other display */
+  align-items: center;           /* vertical center */
+  justify-content: center;       /* horizontal center */
+  line-height: 1;                /* prevents text sitting high */
+  padding: 0;                    /* remove stray padding */
+  height: var(--tapHeight);      /* consistent height */
+  border-radius: 14px;           /* keep the pill look */
+}
+
+/* ensure the row aligns correctly */
+.nav .wrap {
+  align-items: stretch;          /* anchors fill the row height */
+}
+
+
 
 /* =========================
    RESPONSIVE
