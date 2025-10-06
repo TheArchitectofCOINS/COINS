@@ -357,13 +357,15 @@
     activateBtn.addEventListener("click", activate);
 
     /* ========= Leaderboard ========= */
-    async function renderLB(){
-      const { data, error } = await sb.from('public_leaderboard').select('handle, balance_fp, streak').order('balance_fp', { ascending:false }).limit(10);
-      if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
-      lb.innerHTML = (data||[]).map((row,i)=>`
-        <div class="li"><strong>${i+1}. ${row.handle}</strong><span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
-      `).join('') || '<div class="li">No data yet</div>';
-    }
+   async function renderLB(){
+  const { data, error } = await sb.rpc('get_public_leaderboard');
+  if (error){ lb.innerHTML = '<div class="li"><span>Leaderboard unavailable</span></div>'; return; }
+  lb.innerHTML = (data||[]).map((row,i)=>`
+    <div class="li"><strong>${i+1}. ${row.handle}</strong>
+    <span>${Number(row.balance_fp ?? 0).toFixed(2)} FP</span></div>
+  `).join('') || '<div class="li">No data yet</div>';
+}
+
 
     /* ========= Community % & Stats ========= */
     async function renderCommunity(){
