@@ -33,49 +33,53 @@ a:hover{text-decoration:underline}
 .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
 
 /* hero */
-.hero{position:relative;min-height:70vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.hero{position:relative;min-height:64vh;display:grid;place-items:center;text-align:center;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:
   linear-gradient(180deg,rgba(0,0,0,.32),rgba(4,21,32,.88)),
   url('assets/stadium-lights.png') center/cover fixed}
-.hero .content{position:relative;padding:80px 18px;max-width:980px}
+.hero .content{position:relative;padding:72px 18px;max-width:980px}
 
-/* layered logo (ring + GDS letters) */
+/* LOGO COMPONENT: ring + GDS letters + wordmark inside one block */
 .logo-stack{
   position:relative;
   width:clamp(320px,50vw,640px);
-  aspect-ratio:1/1;
-  margin:0 auto 0;
+  /* extra vertical room to fit wordmark under the ring */
+  aspect-ratio:1 / 1.28;
+  margin:0 auto 28px;
   filter: drop-shadow(0 10px 26px rgba(0,0,0,.45));
 }
 .logo-stack img{
-  position:absolute; left:0; top:0;
-  width:100%; height:100%;
+  position:absolute; left:50%; top:34%;
+  transform:translate(-50%,-50%);
+  width:100%; height:auto;
+  max-height:72%;
   object-fit:contain;
 }
 .logo-stack .logo-gds{
-  left:50%; top:47.5%; /* nudge upward */
-  width:72%; height:72%;
+  position:absolute; left:50%; top:34%;
   transform:translate(-50%,-50%);
+  width:72%;
+  height:auto;
 }
-
-/* silver text under logo */
-.logo-text{
-  font-size:clamp(52px,8vw,96px);
-  font-weight:900;
-  margin-top:20px;   /* closer to logo */
-  margin-bottom:50px; /* more separation from slogan */
-  letter-spacing:2px;
-  line-height:1.1;
+/* metallic wordmark, perfectly centered under the ring */
+.logo-wordmark{
+  position:absolute; left:50%; top:79%;
+  transform:translate(-50%,0);
   text-align:center;
+  line-height:1.06;
+  letter-spacing:2px;
+  font-weight:900;
+  font-size:clamp(38px,6.4vw,86px);
   background:linear-gradient(180deg,#e7e7e7 0%, #bdbdbd 52%, #7a7a7a 100%);
-  -webkit-background-clip:text;
+  -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent;
-  background-clip:text;
-  display:block;
+  white-space:nowrap;
+  pointer-events:none;
 }
+.logo-wordmark .wm-line{display:block}
 
 /* text + buttons */
-.title{margin:0 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
+.title{margin:18px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
 .subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
 .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
@@ -112,24 +116,29 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 
 <header class="hero">
   <div class="content">
-    <!-- Layered transparent logos -->
+
+    <!-- Single logo component -->
     <div class="logo-stack" aria-label="Game Day Sports Logo">
       <img src="assets/ring.png" alt="" class="logo-ring" />
       <img src="assets/GDS.png" alt="G D S letters" class="logo-gds" />
-    </div>
 
-    <!-- Big silver text under logo -->
-    <span class="logo-text">GAME DAY<br>SPORTS</span>
+      <span class="logo-wordmark">
+        <span class="wm-line">GAME DAY</span>
+        <span class="wm-line">SPORTS</span>
+      </span>
+    </div>
 
     <h1 class="title">Your Picks. Your Glory.</h1>
     <p class="subtitle">
       Game Day Sports is the free-to-play app where fans make predictions, climb leaderboards, and show off their sports knowledge.
     </p>
+
     <div class="cta">
       <a class="btn" href="freeplay.html">Try the Free Play Demo</a>
       <a class="btn btn-outline" href="https://discord.gg/MzkVsQ9CAd" target="_blank" rel="noopener">Join Discord (Live Updates)</a>
     </div>
     <div class="notice">Always free. Always fun. Compete for bragging rights.</div>
+
   </div>
 </header>
 
