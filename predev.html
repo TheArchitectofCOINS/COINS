@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>S-COIN Sports — Pre-Development</title>
-  <meta name="description" content="S-COIN Sports pre-development screenshots and previews." />
-  <link rel="icon" href="assets/s-coin-logo.png" />
+  <title>Game Day Sports — Pre-Development</title>
+  <meta name="description" content="Game Day Sports pre-development notes and upcoming previews." />
+  <link rel="icon" href="assets/final logo.png" />
   <style>
     :root{
       --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
@@ -30,23 +30,26 @@
 
     /* HERO */
     .hero{position:relative;min-height:34vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),url('assets/stadium-lights.png') center/cover fixed}
+    .hero::before{content:"";position:absolute;inset:0;background:
+      linear-gradient(180deg,rgba(0,0,0,.35),rgba(4,21,32,.9)),
+      url('assets/stadium-lights.png') center/cover fixed}
     .hero .content{position:relative;padding:64px 18px;max-width:900px}
     .hero h1{margin:0 0 10px;font-size:clamp(32px,6vw,52px);line-height:1.05;font-weight:850}
     .lead{opacity:.95;font-size:clamp(16px,2.2vw,20px)}
 
-    /* CARDS */
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
+    /* CARD */
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:22px}
 
-    /* BIGGER SCREENSHOTS */
-    .grid-ss{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
-    @media(min-width:1300px){ .grid-ss{grid-template-columns:repeat(3,1fr)} }
-    .shot{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#061721}
-    .shot img{display:block;width:100%;height:auto}
+    .placeholder{
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;padding:28px;text-align:center;
+      background:rgba(255,255,255,.02);
+      color:#cfe3ec
+    }
+    .placeholder small{opacity:.8;display:block;margin-top:6px}
 
-    .muted{opacity:.8}
-
-    /* FOOTER (matches homepage) */
+    /* FOOTER */
     footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
     .foot{max-width:1200px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
     .footer-social{display:flex; gap:1rem; flex-wrap:wrap}
@@ -55,18 +58,17 @@
 </head>
 <body>
 
-  <!-- NAV (same structure as homepage) -->
+  <!-- NAV -->
   <header class="nav">
     <div class="wrap">
       <a class="brand" href="index.html">
-        <img src="assets/s-coin-logo.png" alt="S-COIN logo" />
-        <span>S-COIN Sports</span>
+        <img src="assets/final logo.png" alt="Game Day Sports logo" />
+        <span>Game Day Sports</span>
       </a>
       <nav class="menu" aria-label="Primary">
         <a href="index.html">Homepage</a>
         <a href="freeplay.html">Demo</a>
         <a class="active" href="predev.html">Pre-Development</a>
-        <a href="presale.html">Presale</a>
       </nav>
     </div>
   </header>
@@ -75,45 +77,35 @@
   <section class="hero" id="hero-predev">
     <div class="content">
       <h1>Pre-Development</h1>
-      <p class="lead">A peek at early mockups, flows, and in-progress screens while we build S-COIN Sports.</p>
+      <p class="lead">We’re actively building Game Day Sports. New previews and images will be added here soon.</p>
     </div>
   </section>
 
-  <!-- SCREENSHOTS GRID (larger) -->
+  <!-- CONTENT -->
   <main class="section">
     <div class="container">
-      <h2 style="margin:0 0 12px">Screenshots</h2>
-      <div class="grid-ss">
-        <figure class="shot"><img src="assets/1.PNG" alt="Screenshot 1"></figure>
-        <figure class="shot"><img src="assets/2.PNG" alt="Screenshot 2"></figure>
-        <figure class="shot"><img src="assets/3.PNG" alt="Screenshot 3"></figure>
-        <figure class="shot"><img src="assets/4.PNG" alt="Screenshot 4"></figure>
-        <figure class="shot"><img src="assets/5.PNG" alt="Screenshot 5"></figure>
-        <figure class="shot"><img src="assets/6.PNG" alt="Screenshot 6"></figure>
-        <figure class="shot"><img src="assets/7.PNG" alt="Screenshot 7"></figure>
+      <div class="card">
+        <div class="placeholder">
+          <strong>Screenshots removed</strong>
+          <small>Legacy images have been cleared. This section will showcase updated Game Day Sports designs when ready.</small>
+        </div>
       </div>
-      <p class="muted" style="margin-top:20px;text-align:center">
-        These are early versions and subject to change as development continues.
-      </p>
     </div>
   </main>
 
-  <!-- FOOTER (same links style as homepage) -->
+  <!-- FOOTER -->
   <footer>
     <div class="foot">
-      <small>© <span id="y"></span> S-COIN Sports</small>
+      <small>© <span id="y"></span> Game Day Sports</small>
       <div class="footer-social">
         <a href="freeplay.html">Demo</a>
-        <a href="https://x.com/@scoinsports" target="_blank" rel="noopener">X</a>
+        <a href="https://x.com/scoinsports" target="_blank" rel="noopener">X</a>
         <a href="https://discord.gg/MzkVsQ9CAd" target="_blank" rel="noopener">Discord</a>
-        <a href="assets/whitepaper.pdf?v=2" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
-        <a href="presale.html">Presale</a>
       </div>
     </div>
   </footer>
 
   <script>
-    // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
