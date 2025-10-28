@@ -40,9 +40,9 @@ a:hover{text-decoration:underline}
 /* layered logo (ring + GDS letters) */
 .logo-stack{
   position:relative;
-  width:clamp(320px,50vw,640px); /* doubled size */
+  width:clamp(320px,50vw,640px); /* large logo size */
   aspect-ratio:1/1;
-  margin:0 auto 20px;
+  margin:0 auto 10px;
   filter: drop-shadow(0 8px 22px rgba(0,0,0,.35));
 }
 .logo-stack img{
@@ -51,9 +51,20 @@ a:hover{text-decoration:underline}
   object-fit:contain;
 }
 .logo-stack .logo-gds{
-  left:50%; top:48%;   /* moved up slightly (was 50%) */
+  left:50%; top:48%;   /* nudged upward */
   width:72%; height:72%;
   transform:translate(-50%,-50%);
+}
+
+/* silver text under logo */
+.logo-text{
+  font-size:clamp(24px,4vw,42px);
+  font-weight:800;
+  margin-bottom:30px;
+  background:linear-gradient(180deg,#d9d9d9 0%, #9a9a9a 50%, #6f6f6f 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  display:block;
 }
 
 /* text + buttons */
@@ -100,6 +111,9 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
       <img src="assets/ring.png" alt="" class="logo-ring" />
       <img src="assets/GDS.png" alt="G D S letters" class="logo-gds" />
     </div>
+
+    <!-- Silver text under logo -->
+    <span class="logo-text">GAME DAY SPORTS</span>
 
     <span class="badge">Everyone Can Play • Free to Play</span>
     <h1 class="title">Your Picks. Your Glory.</h1>
