@@ -34,37 +34,43 @@ a:hover{text-decoration:underline}
 
 /* hero */
 .hero{position:relative;min-height:70vh;display:grid;place-items:center;text-align:center;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(0,0,0,.32),rgba(4,21,32,.88)),
+  url('assets/stadium-lights.png') center/cover fixed}
 .hero .content{position:relative;padding:80px 18px;max-width:980px}
 
 /* layered logo (ring + GDS letters) */
 .logo-stack{
   position:relative;
-  width:clamp(320px,50vw,640px); /* large logo size */
+  width:clamp(320px,50vw,640px); /* big logo */
   aspect-ratio:1/1;
-  margin:0 auto 10px;
-  filter: drop-shadow(0 8px 22px rgba(0,0,0,.35));
+  margin:0 auto 6px;
+  filter: drop-shadow(0 10px 26px rgba(0,0,0,.45));
 }
 .logo-stack img{
   position:absolute; left:0; top:0;
   width:100%; height:100%;
   object-fit:contain;
 }
+/* nudge letters slightly upward inside ring */
 .logo-stack .logo-gds{
-  left:50%; top:48%;   /* nudged upward */
+  left:50%; top:47.5%;
   width:72%; height:72%;
   transform:translate(-50%,-50%);
 }
 
 /* silver text under logo */
 .logo-text{
-  font-size:clamp(24px,4vw,42px);
-  font-weight:800;
-  margin-bottom:30px;
-  background:linear-gradient(180deg,#d9d9d9 0%, #9a9a9a 50%, #6f6f6f 100%);
+  font-size:clamp(48px,8vw,96px); /* doubled */
+  font-weight:900;
+  margin-top:-6px;  /* pull it closer to the ring */
+  margin-bottom:40px;
+  letter-spacing:2px;
+  line-height:1.05;
+  background:linear-gradient(180deg,#e7e7e7 0%, #bdbdbd 52%, #7a7a7a 100%);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  display:block;
+  background-clip:text;
 }
 
 /* text + buttons */
@@ -112,7 +118,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
       <img src="assets/GDS.png" alt="G D S letters" class="logo-gds" />
     </div>
 
-    <!-- Silver text under logo -->
+    <!-- Big silver text under logo -->
     <span class="logo-text">GAME DAY SPORTS</span>
 
     <span class="badge">Everyone Can Play • Free to Play</span>
