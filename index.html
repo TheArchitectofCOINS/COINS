@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Game Day Sports — Presale TBD</title>
-<meta name="description" content="Game Day Sports is a free-to-play sports prediction app where every pick counts. Everyone can play for free. Presale date: TBD." />
+<title>Game Day Sports</title>
+<meta name="description" content="Game Day Sports is a free-to-play sports prediction app where every pick counts. Everyone can play for free." />
 <link rel="icon" href="assets/final logo.png" />
 
 <style>
@@ -20,8 +20,7 @@ a:hover{text-decoration:underline}
 .section{padding:48px 0}
 .grid{display:grid;gap:18px}
 .g2{grid-template-columns:1fr}
-.g3{grid-template-columns:1fr}
-@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.g2{grid-template-columns:1fr 1fr}}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
 
 /* nav */
@@ -34,149 +33,8 @@ a:hover{text-decoration:underline}
 .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
 
 /* hero */
-.hero{position:relative;min-height:62vh;display:grid;place-items:center;text-align:center;overflow:hidden}
+.hero{position:relative;min-height:70vh;display:grid;place-items:center;text-align:center;overflow:hidden}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(4,21,32,.85)),url('assets/stadium-lights.png') center/cover fixed}
 .hero .content{position:relative;padding:80px 18px;max-width:980px}
-.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);padding:6px 10px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-.title{margin:16px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
-.subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
-.cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
-.btn:hover{transform:translateY(-1px)}
-.btn.btn-outline{background:transparent}
-.notice{margin:14px auto 0;padding:.75rem 1rem;border:1px dashed rgba(0,181,226,.6);border-radius:12px;display:inline-block}
-
-/* compare */
-.sec-title{font-size:1.6rem; margin:1.5rem 0 .75rem;}
-.compare-grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr));}
-.plan{border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:16px;}
-.plan.vip{outline:2px solid #00B5E2;}
-.plan-tag{font-weight:800; margin-bottom:.5rem;}
-.plan ul{margin:0; padding-left:18px;}
-.plan-cta{display:inline-block; margin-top:.75rem;}
-
-/* trust */
-.trust-grid{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
-.trust-card{border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:14px;}
-.trust-card h3{margin:.2rem 0 .4rem; font-size:1.05rem;}
-.trust-card p{margin:0; opacity:.9;}
-
-/* footer */
-footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:36px}
-.foot{max-width:1100px;margin:0 auto;padding:24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
-.footer-social{display:flex; gap:1rem; flex-wrap:wrap}
-.footer-social a{color:#00B5E2; text-decoration:none; font-weight:600;}
-</style>
-</head>
-<body>
-
-<nav class="nav">
-  <div class="wrap">
-    <div class="brand"><img src="assets/final logo.png" alt="Game Day Sports Logo"/><span>Game Day Sports</span></div>
-    <div class="menu">
-      <a class="active" href="/">Homepage</a>
-      <a href="freeplay.html">Demo</a>
-      <a href="predev.html">Pre-Development</a>
-      <a href="presale.html">Presale</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="content">
-    <span class="badge">Everyone Can Play • Free to Play</span>
-    <h1 class="title">Bragging Rights Just Got Tokenized.</h1>
-    <p class="subtitle">
-      <strong>Presale date: TBD</strong> — Free play for everyone.
-      <br>VIP with <strong>S-COIN</strong> unlocks spreads, totals, exact score, and more.
-    </p>
-    <div class="cta">
-      <a class="btn" href="freeplay.html">Try the Free Play Demo</a>
-      <a class="btn" href="presale.html">View Presale</a>
-      <a class="btn btn-outline" href="assets/whitepaper.pdf?v=2" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
-      <a class="btn btn-outline" href="https://discord.gg/MzkVsQ9CAd" target="_blank" rel="noopener">Join Discord (Live Updates)</a>
-    </div>
-    <div class="notice">Presale timing is being finalized. Follow Discord for updates.</div>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <div class="grid g2">
-      <div class="card">
-        <h3>What is Game Day Sports?</h3>
-        <p>Game Day Sports is a free-to-play sports prediction app. Make predictions, climb leaderboards, and earn recognition. The ecosystem runs on <strong>S-COIN</strong> for governance, staking, rewards, and perks — while <strong>S-COIN-FP</strong> powers free play so everyone can participate.</p>
-        <div style="margin-top:14px;padding:14px;border-left:3px solid #00B5E2;background:rgba(255,255,255,.03);border-radius:8px;">
-          <h4 style="margin:0 0 8px;color:#00B5E2;">Future Vision</h4>
-          <p style="margin:0;opacity:.9">
-            Today, Game Day Sports is free-play only — anyone can join and enjoy the game without restrictions.
-            Once legal requirements and licensing are in place, our roadmap includes the launch of <strong>real-money betting</strong>.
-            Free play today. Real stakes tomorrow.
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Prediction Types</h3>
-        <p>Moneyline · Spreads · Over/Under · Totals</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 class="sec-title">Free vs VIP</h2>
-    <div class="compare-grid">
-      <div class="plan">
-        <div class="plan-tag">Free</div>
-        <ul>
-          <li>Moneyline picks</li>
-          <li>Basic leaderboard</li>
-          <li>Always-on free play (S-COIN-FP)</li>
-        </ul>
-      </div>
-      <div class="plan vip">
-        <div class="plan-tag">VIP (Hold S-COIN)</div>
-        <ul>
-          <li>Spreads & Totals</li>
-          <li>Exact Score markets</li>
-          <li>Create & manage Teams</li>
-          <li>Ribbons & progression</li>
-        </ul>
-        <a href="presale.html" class="btn plan-cta">Get S-COIN</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 class="sec-title">How we protect players</h2>
-    <div class="trust-grid">
-      <div class="trust-card"><h3>Multisig Treasury</h3><p>Funds controlled by multiple signers to reduce single-point risk.</p></div>
-      <div class="trust-card"><h3>Audit Plan</h3><p>Third-party code & wallet review planned post-Stage-1.</p></div>
-      <div class="trust-card"><h3>KYC Stance</h3><p>Compliance-first approach; clear separation of free play and VIP access.</p></div>
-      <div class="trust-card"><h3>LP / Treasury Allocations</h3><p>Transparent ratios and on-chain public addresses at launch.</p></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="foot">
-    <small>© <span id="y"></span> Game Day Sports</small>
-    <div class="footer-social">
-      <a href="freeplay.html">Demo</a>
-      <a href="https://x.com/scoinsports" target="_blank">X</a>
-      <a href="https://discord.gg/MzkVsQ9CAd" target="_blank">Discord</a>
-      <a href="assets/whitepaper.pdf?v=2" target="_blank" rel="noreferrer">Read Whitepaper (PDF)</a>
-      <a href="presale.html">Presale</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-document.getElementById('y').textContent = new Date().getFullYear();
-</script>
-
-</body>
-</html>
+.hero img{max-width:320px;margin-bottom:20px}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);background
