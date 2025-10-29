@@ -5,22 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Game Day Sports</title>
 <meta name="description" content="Game Day Sports is a free-to-play sports prediction app where every pick counts. Everyone can play for free." />
-<link rel="icon" href="assets/final logo.png" />
+<link rel="icon" href="assets/logo for website.png" />
 
 <style>
 :root{
   --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
   --muted:#cfe9f1; --ring:rgba(0,181,226,.35); --radius:16px;
-
-  /* easy tuning knobs */
-  --emblem-max: 660px;       /* overall emblem width cap */
-  --gds-size: 100%;           /* GDS size relative to ring */
-  --gds-top: 52%;            /* vertical center of GDS inside the ring */
-  --wordmark-gap: 14px;      /* gap between emblem and wordmark */
-  --game-day-size: 88px;     /* max size for GAME DAY */
-  --sports-size: 42px;       /* max size for SPORTS */
 }
-
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 a{color:var(--primary);text-decoration:none}
@@ -36,7 +27,7 @@ a:hover{text-decoration:underline}
 .nav{position:sticky;top:0;z-index:50;background:rgba(4,21,32,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
 .nav>.wrap{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:18px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-.brand img{width:34px;height:34px;border-radius:10px}
+.brand img{width:34px;height:34px;border-radius:6px}
 .menu{margin-left:auto;display:flex;gap:14px}
 .menu a{padding:10px 12px;border-radius:12px;color:#e7f4f9;border:1px solid transparent}
 .menu a.active,.menu a:hover{border-color:rgba(255,255,255,.08);background:rgba(0,181,226,.08)}
@@ -48,47 +39,20 @@ a:hover{text-decoration:underline}
   url('assets/stadium-lights.png') center/cover fixed}
 .hero .content{position:relative;padding:72px 18px;max-width:980px}
 
-/* === EMBLEM (ring + centered GDS) === */
-.emblem{
-  width:clamp(300px,50vw,var(--emblem-max));
-  margin:0 auto;
-}
-.emblem-inner{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;      /* perfect circle area for the ring */
-}
-.emblem-inner img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);object-fit:contain}
-.emblem-inner .ring{width:100%;height:100%;}
-.emblem-inner .gds{width:var(--gds-size);height:auto;top:var(--gds-top);} /* bigger GDS, true centered */
-
-/* === WORDMARK under the emblem === */
-.wordmark{
-  margin-top:var(--wordmark-gap);
-  text-align:center;
-  line-height:1.06;
-  pointer-events:none;
-}
-.silver{
-  background:linear-gradient(180deg,#e7e7e7 0%, #bdbdbd 52%, #7a7a7a 100%);
-  -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.wordmark .game-day{
-  font-weight:900;
-  letter-spacing:2px;
-  white-space:nowrap;                        /* never wrap to two lines */
-  font-size:clamp(36px,6.4vw,var(--game-day-size));
-}
-.wordmark .sports{
+/* logo image */
+.hero-logo{
+  max-width:480px;
+  width:80%;
+  height:auto;
+  margin:0 auto 28px;
   display:block;
-  margin-top:4px;
-  font-weight:900;
-  letter-spacing:.35em;                      /* spaced look like your ref */
-  font-size:clamp(18px,3.2vw,var(--sports-size));
+  filter: drop-shadow(0 10px 26px rgba(0,0,0,.45));
+}
+@media(min-width:1000px){
+  .hero-logo{max-width:600px;}
 }
 
-/* content */
+/* text + buttons */
 .title{margin:28px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
 .subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
 .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -115,7 +79,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 
 <nav class="nav">
   <div class="wrap">
-    <div class="brand"><img src="assets/final logo.png" alt="Game Day Sports Logo"/><span>Game Day Sports</span></div>
+    <div class="brand"><img src="assets/logo for website.png" alt="Game Day Sports Logo"/><span>Game Day Sports</span></div>
     <div class="menu">
       <a class="active" href="/">Homepage</a>
       <a href="freeplay.html">Demo</a>
@@ -127,18 +91,8 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 <header class="hero">
   <div class="content">
 
-    <!-- Emblem (ring + big centered GDS) -->
-    <div class="emblem">
-      <div class="emblem-inner">
-        <img class="ring" src="assets/ring.png" alt="">
-        <img class="gds"  src="assets/GDS.png"  alt="G D S">
-      </div>
-      <!-- Metallic wordmark -->
-      <div class="wordmark">
-        <div class="game-day silver">GAME DAY</div>
-        <span class="sports silver">SPORTS</span>
-      </div>
-    </div>
+    <!-- new single image logo -->
+    <img src="assets/logo for website.png" alt="Game Day Sports Logo" class="hero-logo" />
 
     <h1 class="title">Your Picks. Your Glory.</h1>
     <p class="subtitle">
@@ -163,4 +117,26 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
       </div>
       <div class="card">
         <h3>Prediction Types</h3>
-        <p>Moneyline · Spreads · Over/Under · Totals</
+        <p>Moneyline · Spreads · Over/Under · Totals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <small>© <span id="y"></span> Game Day Sports</small>
+    <div class="footer-social">
+      <a href="freeplay.html">Demo</a>
+      <a href="https://x.com/scoinsports" target="_blank">X</a>
+      <a href="https://discord.gg/MzkVsQ9CAd" target="_blank">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
