@@ -11,6 +11,11 @@
 :root{
   --primary:#00B5E2; --dark:#062534; --ink:#0b1520; --card:#0e2430;
   --muted:#cfe9f1; --ring:rgba(0,181,226,.35); --radius:16px;
+  /* easy tweak knobs */
+  --logo-max: 640px;     /* overall logo block width max */
+  --logo-gds-size: 78%;  /* size of GDS letters relative to ring */
+  --logo-gds-top: 47%;   /* vertical nudge of GDS inside ring */
+  --wm-gap: 18px;        /* gap between ring and wordmark */
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#041520;color:#e7f4f9;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -39,47 +44,53 @@ a:hover{text-decoration:underline}
   url('assets/stadium-lights.png') center/cover fixed}
 .hero .content{position:relative;padding:72px 18px;max-width:980px}
 
-/* LOGO COMPONENT: ring + GDS letters + wordmark inside one block */
+/* LOGO COMPONENT (ring + big GDS + wordmark) */
 .logo-stack{
   position:relative;
-  width:clamp(320px,50vw,640px);
-  /* extra vertical room to fit wordmark under the ring */
-  aspect-ratio:1 / 1.28;
+  width:clamp(320px,50vw,var(--logo-max));
+  /* extra vertical space to include wordmark */
+  aspect-ratio:1 / 1.24;
   margin:0 auto 28px;
   filter: drop-shadow(0 10px 26px rgba(0,0,0,.45));
 }
-.logo-stack img{
+.logo-ring{
   position:absolute; left:50%; top:34%;
   transform:translate(-50%,-50%);
-  width:100%; height:auto;
-  max-height:72%;
+  width:100%; height:auto; max-height:72%;
   object-fit:contain;
 }
-.logo-stack .logo-gds{
-  position:absolute; left:50%; top:34%;
+.logo-gds{
+  position:absolute; left:50%; top:var(--logo-gds-top);
   transform:translate(-50%,-50%);
-  width:72%;
-  height:auto;
+  width:var(--logo-gds-size); height:auto; object-fit:contain;
 }
-/* metallic wordmark, perfectly centered under the ring */
+/* metallic wordmark under the ring */
 .logo-wordmark{
-  position:absolute; left:50%; top:79%;
+  position:absolute; left:50%; top:calc(72% + var(--wm-gap));
   transform:translate(-50%,0);
-  text-align:center;
-  line-height:1.06;
-  letter-spacing:2px;
+  text-align:center; line-height:1.04; pointer-events:none;
+}
+.wm-game-day{
   font-weight:900;
-  font-size:clamp(38px,6.4vw,86px);
-  background:linear-gradient(180deg,#e7e7e7 0%, #bdbdbd 52%, #7a7a7a 100%);
+  font-size:clamp(34px,6.8vw,88px);
+  letter-spacing:2px;
+  background:linear-gradient(180deg,#e6e6e6 0%, #bababa 52%, #7c7c7c 100%);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent;
-  white-space:nowrap;
-  pointer-events:none;
 }
-.logo-wordmark .wm-line{display:block}
+.wm-sports{
+  display:block;
+  margin-top:4px;
+  font-weight:900;
+  font-size:clamp(22px,4.2vw,46px);    /* smaller than GAME DAY */
+  letter-spacing:.35em;                 /* spaced out like your image */
+  background:linear-gradient(180deg,#e6e6e6 0%, #bababa 52%, #7c7c7c 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
 /* text + buttons */
-.title{margin:18px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
+.title{margin:22px 0 10px;font-size:clamp(34px,6vw,56px);line-height:1.05;font-weight:850}
 .subtitle{font-size:clamp(16px,2.4vw,20px);color:#d2e9f1;opacity:.95}
 .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(0,181,226,.2),rgba(0,181,226,.08));color:#fff;font-weight:650}
@@ -109,7 +120,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
     <div class="menu">
       <a class="active" href="/">Homepage</a>
       <a href="freeplay.html">Demo</a>
-      <a href="predev.html">Pre-Development</a>
+      <!-- Pre-Development link intentionally hidden -->
     </div>
   </div>
 </nav>
@@ -117,15 +128,14 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
 <header class="hero">
   <div class="content">
 
-    <!-- Single logo component -->
+    <!-- Logo: ring + bigger GDS + metallic wordmark -->
     <div class="logo-stack" aria-label="Game Day Sports Logo">
       <img src="assets/ring.png" alt="" class="logo-ring" />
       <img src="assets/GDS.png" alt="G D S letters" class="logo-gds" />
-
-      <span class="logo-wordmark">
-        <span class="wm-line">GAME DAY</span>
-        <span class="wm-line">SPORTS</span>
-      </span>
+      <div class="logo-wordmark" aria-hidden="true">
+        <div class="wm-game-day">GAME DAY</div>
+        <span class="wm-sports">SPORTS</span>
+      </div>
     </div>
 
     <h1 class="title">Your Picks. Your Glory.</h1>
@@ -153,18 +163,6 @@ footer{border-top:1px solid rgba(255,255,255,.06);background:#061721;margin-top:
         <h3>Prediction Types</h3>
         <p>Moneyline · Spreads · Over/Under · Totals</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <h2 class="sec-title">Why You'll Love It</h2>
-    <div class="trust-grid">
-      <div class="trust-card"><h3>Free to Play</h3><p>No cost to join. Just sign in and start making picks.</p></div>
-      <div class="trust-card"><h3>Leaderboard Glory</h3><p>See how you stack up against friends and fans across the country.</p></div>
-      <div class="trust-card"><h3>Weekly Action</h3><p>Fresh matchups every week so there’s always something to play for.</p></div>
-      <div class="trust-card"><h3>Community</h3><p>Join the conversation with other sports fans on Discord.</p></div>
     </div>
   </div>
 </section>
