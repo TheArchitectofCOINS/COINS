@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Game Day Sports — Your Picks. Your Glory. Your Crown.</title>
-  <meta name="description" content="Game Day Sports is a free‑to‑play picks platform. Make weekly predictions, earn Fantasy Points, and flex your bragging rights. Demo available now while the full app is in development." />
+  <meta name="description" content="Game Day Sports is a free-to-play picks platform. Make weekly predictions, earn Game Day Tokens (GDT), and flex your bragging rights. Demo available now while the full app is in development." />
   <link rel="icon" href="assets/favicon.png" />
   <style>
     :root{
@@ -63,14 +63,16 @@
     .pill{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; background:rgba(0,181,226,.12); color:#a8e9fb; border:1px solid rgba(0,181,226,.25)}
     .footer{padding:24px 20px 56px; color:#94a8b3; text-align:center; font-size:14px}
     a{color:inherit; text-decoration:none}
+    .tooltip {
+      margin-top:16px; text-align:center; font-size:13px; color:#9fc6d4; opacity:.9; max-width:620px; margin-inline:auto;
+    }
   </style>
 </head>
 <body>
   <header class="hero lights">
     <div class="wrap">
       <div class="logo" aria-label="Game Day Sports logo">
-        <!-- Swap this source with your final logo asset -->
-        <img src="assets/logo for website.png" alt="Game Day Sports (GDS) logo" />
+        <img src="assets/Game Day Logo With no background.png" alt="Game Day Sports (GDS) logo" />
       </div>
       <h1>Game Day Sports</h1>
       <p class="tag">Your Picks. Your Glory. Your Crown.</p>
@@ -79,10 +81,11 @@
         <a class="btn ghost" href="https://x.com/SCOINSPORTS" target="_blank" rel="noopener">Follow on X</a>
       </div>
       <div class="badges">
-        <span class="pill">Free to play with Fantasy Points</span>
+        <span class="pill">Free to play with Game Day Tokens (GDT)</span>
         <span class="pill">College football to start</span>
         <span class="pill">Full app in active development</span>
       </div>
+      <p class="tooltip"><strong>What are GDT?</strong> Game Day Tokens (GDT) are free, in‑app tokens you earn by making correct picks, joining leaderboards, and engaging with the community. They represent bragging rights and future in‑app rewards — no purchase required.</p>
     </div>
   </header>
 
@@ -91,13 +94,13 @@
       <article class="card">
         <span class="pill">About</span>
         <h3>What is Game Day Sports?</h3>
-        <p>GDS is a sports picks experience built for fans. Make weekly predictions and earn <strong>Fantasy Points</strong> for bragging rights, leaderboards, and cosmetic rewards. The public demo is live while we finish the full multi‑team build.</p>
+        <p>GDS is a sports picks experience built for fans. Make weekly predictions and earn <strong>Game Day Tokens (GDT)</strong> for bragging rights, leaderboards, and cosmetic rewards. The public demo is live while we finish the full multi-team build.</p>
       </article>
 
       <article class="card">
-        <span class="pill">Fantasy Points</span>
+        <span class="pill">Game Day Tokens (GDT)</span>
         <h3>How free play works</h3>
-        <p>There’s no purchase required for Fantasy Points. You activate daily, make your picks, and climb the leaderboard. It’s designed to be fun and accessible while we expand features and data coverage.</p>
+        <p>There’s no purchase required for Game Day Tokens (GDT). You activate daily, make your picks, and climb the leaderboard. It’s designed to be fun and accessible while we expand features and data coverage.</p>
       </article>
 
       <article class="card">
@@ -119,7 +122,6 @@
   </footer>
 
   <script>
-    // set current year
     document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
