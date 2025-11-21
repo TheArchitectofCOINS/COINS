@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Game Day Sports — Your Picks. Your Glory. Your Crown.</title>
-  <meta name="description" content="Game Day Sports is a free-to-play picks platform. Make weekly predictions, earn Game Day Tokens (GDT), and flex your bragging rights. Demo available now while the full app is in development." />
+  <meta name="description" content="Game Day Sports is a free-to-play picks platform. Make weekly predictions, earn Game Day Tokens (GDT), and flex your bragging rights. Download the full app now." />
   <link rel="icon" href="assets/favicon.png" />
   <style>
     :root{
@@ -19,52 +19,185 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:white; background:#07121a;
+      margin:0; 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:white; 
+      background:#07121a;
     }
+    a{color:inherit; text-decoration:none}
+
     .hero{
-      min-height:100dvh; display:flex; align-items:center; justify-content:center; text-align:center; padding:64px 20px; position:relative; overflow:hidden;
-      background: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.08), transparent 60%),
-                  radial-gradient(800px 400px at 10% 20%, rgba(0,181,226,.15), transparent 60%),
-                  radial-gradient(800px 400px at 90% 20%, rgba(0,181,226,.12), transparent 60%),
-                  linear-gradient(180deg, #07121a 0%, #0a1b26 60%, #061018 100%);
+      min-height:100dvh; 
+      display:flex; 
+      align-items:center; 
+      justify-content:center; 
+      text-align:center; 
+      padding:64px 20px; 
+      position:relative; 
+      overflow:hidden;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(800px 400px at 10% 20%, rgba(0,181,226,.15), transparent 60%),
+        radial-gradient(800px 400px at 90% 20%, rgba(0,181,226,.12), transparent 60%),
+        linear-gradient(180deg, #07121a 0%, #0a1b26 60%, #061018 100%);
     }
-    .lights:before, .lights:after{ /* subtle stadium lights vibe */
-      content:""; position:absolute; inset:-20% -10% auto -10%; height:45%; pointer-events:none; mix-blend:screen;
+    .lights:before, 
+    .lights:after{
+      content:""; 
+      position:absolute; 
+      inset:-20% -10% auto -10%; 
+      height:45%; 
+      pointer-events:none; 
+      mix-blend-mode:screen;
       background: radial-gradient(closest-side, rgba(255,255,255,.25), rgba(255,255,255,0) 70%);
-      filter: blur(12px); opacity:.25;
+      filter: blur(12px); 
+      opacity:.25;
       transform: translateY(-10%);
     }
-    .lights:after{ inset:auto -10% -20% -10%; height:35%; opacity:.15; transform:none;}
-    .wrap{width:min(1100px, 100%);} 
+    .lights:after{ 
+      inset:auto -10% -20% -10%; 
+      height:35%; 
+      opacity:.15; 
+      transform:none;
+    }
+
+    .wrap{
+      width:min(1100px, 100%);
+      margin:0 auto;
+    }
+
     .logo{
-      width:min(420px, 70vw); aspect-ratio:1.2/1; margin:0 auto 20px; display:grid; place-items:center; 
-      background: rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); border-radius:20px; 
-      box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 8px rgba(0,181,226,.08);
+      width:min(420px, 70vw); 
+      aspect-ratio:1.2/1; 
+      margin:0 auto 20px; 
+      display:grid; 
+      place-items:center; 
+      background: rgba(255,255,255,.02); 
+      border:1px solid rgba(255,255,255,.06); 
+      border-radius:20px; 
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,.35), 
+        0 0 0 8px rgba(0,181,226,.08);
       padding:20px;
     }
-    .logo img{width:100%; height:auto; display:block;}
-    h1{font-size: clamp(28px, 4.2vw, 52px); line-height:1.08; margin:10px 0 12px; letter-spacing:.2px}
-    .tag{font-size: clamp(14px, 2.2vw, 18px); color:var(--muted); opacity:.95}
-    .cta{margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap}
-    .btn{
-      appearance:none; border:none; padding:14px 20px; border-radius:999px; font-weight:700; 
-      letter-spacing:.25px; cursor:pointer; transition:.2s ease transform, .2s ease background, .2s ease box-shadow; 
-      background:linear-gradient(180deg, #17c7ee, var(--primary)); color:#05141c; box-shadow: 0 6px 18px rgba(0,181,226,.35);
+    .logo img{
+      width:100%; 
+      height:auto; 
+      display:block;
     }
-    .btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,181,226,.45); }
-    .btn.ghost{ background:transparent; color:white; border:1px solid rgba(255,255,255,.25)}
-    .badges{margin-top:22px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap; color:#a9c2ce; font-size:14px}
-    .grid{padding:48px 20px 72px; background:linear-gradient(180deg,#0a1b26,#07131b)}
-    .cards{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:18px; width:min(1100px,100%); margin:0 auto}
-    .card{background:#0b1e2a; border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.25)}
-    .card h3{margin:6px 0 8px; font-size:18px}
-    .card p{margin:0; color:#c2d8e2; font-size:14px; line-height:1.5}
-    .pill{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; background:rgba(0,181,226,.12); color:#a8e9fb; border:1px solid rgba(0,181,226,.25)}
-    .footer{padding:24px 20px 56px; color:#94a8b3; text-align:center; font-size:14px}
-    a{color:inherit; text-decoration:none}
+
+    h1{
+      font-size: clamp(28px, 4.2vw, 52px); 
+      line-height:1.08; 
+      margin:10px 0 12px; 
+      letter-spacing:.2px
+    }
+    .tag{
+      font-size: clamp(14px, 2.2vw, 18px); 
+      color:var(--muted); 
+      opacity:.95
+    }
+
+    .cta{
+      margin-top:28px; 
+      display:flex; 
+      gap:14px; 
+      justify-content:center; 
+      flex-wrap:wrap
+    }
+    .btn{
+      appearance:none; 
+      border:none; 
+      padding:14px 20px; 
+      border-radius:999px; 
+      font-weight:700; 
+      letter-spacing:.25px; 
+      cursor:pointer; 
+      transition:.2s ease transform, .2s ease background, .2s ease box-shadow; 
+      background:linear-gradient(180deg, #17c7ee, var(--primary)); 
+      color:#05141c; 
+      box-shadow: 0 6px 18px rgba(0,181,226,.35);
+    }
+    .btn:hover{
+      transform: translateY(-2px); 
+      box-shadow: 0 10px 24px rgba(0,181,226,.45);
+    }
+    .btn.ghost{ 
+      background:transparent; 
+      color:white; 
+      border:1px solid rgba(255,255,255,.25)
+    }
+
+    .badges{
+      margin-top:22px; 
+      display:flex; 
+      gap:10px; 
+      justify-content:center; 
+      flex-wrap:wrap; 
+      color:#a9c2ce; 
+      font-size:14px
+    }
+    .pill{
+      display:inline-block; 
+      padding:6px 10px; 
+      border-radius:999px; 
+      font-size:12px; 
+      background:rgba(0,181,226,.12); 
+      color:#a8e9fb; 
+      border:1px solid rgba(0,181,226,.25)
+    }
+
     .tooltip {
-      margin-top:16px; text-align:center; font-size:13px; color:#9fc6d4; opacity:.9; max-width:620px; margin-inline:auto;
+      margin-top:16px; 
+      text-align:center; 
+      font-size:13px; 
+      color:#9fc6d4; 
+      opacity:.9; 
+      max-width:620px; 
+      margin-inline:auto;
+    }
+
+    .grid{
+      padding:48px 20px 72px; 
+      background:linear-gradient(180deg,#0a1b26,#07131b)
+    }
+    .cards{
+      display:grid; 
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+      gap:18px; 
+      width:min(1100px,100%); 
+      margin:0 auto
+    }
+    .card{
+      background:#0b1e2a; 
+      border:1px solid rgba(255,255,255,.06); 
+      border-radius:var(--radius); 
+      padding:18px; 
+      box-shadow:0 8px 24px rgba(0,0,0,.25)
+    }
+    .card h3{
+      margin:6px 0 8px; 
+      font-size:18px
+    }
+    .card p{
+      margin:0; 
+      color:#c2d8e2; 
+      font-size:14px; 
+      line-height:1.5
+    }
+
+    .footer{
+      padding:24px 20px 56px; 
+      color:#94a8b3; 
+      text-align:center; 
+      font-size:13px; 
+      background:#050b11;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .footer small{
+      display:block; 
+      margin-top:6px; 
+      opacity:.85;
     }
   </style>
 </head>
@@ -72,49 +205,99 @@
   <header class="hero lights">
     <div class="wrap">
       <div class="logo" aria-label="Game Day Sports logo">
-        <img src="assets/game day invert white.png" alt="Game Day Sports (GDS) logo" />
+        <img src="assets/game day invert white.png" alt="Game Day Sports logo" />
       </div>
+
       <h1>Game Day Sports</h1>
       <p class="tag">Your Picks. Your Glory. Your Crown.</p>
+
       <div class="cta">
-        <a class="btn" href="https://gamedaysportsdemo.com" target="_blank" rel="noopener">Open Demo App</a>
+        <a class="btn" href="https://gamedaysportspredictions.com" target="_blank" rel="noopener">Download the App</a>
         <a class="btn ghost" href="https://x.com/GDSportsPre" target="_blank" rel="noopener">Follow on X</a>
       </div>
+
       <div class="badges">
         <span class="pill">Free to play with Game Day Tokens (GDT)</span>
         <span class="pill">College football to start</span>
         <span class="pill">Full app in active development</span>
       </div>
-      <p class="tooltip"><strong>What are GDT?</strong> Game Day Tokens (GDT) are free, in-app tokens you earn by making correct picks, joining leaderboards, and engaging with the community. They represent bragging rights and future in-app rewards — no purchase required.</p>
+
+      <p class="tooltip">
+        <strong>What are GDT?</strong>
+        Game Day Tokens (GDT) are free, in-app tokens you earn by making correct picks, climbing leaderboards, and engaging with the community. 
+        They represent bragging rights and future in-app rewards — no purchase required.
+      </p>
     </div>
   </header>
 
   <main class="grid">
     <section class="cards">
+
       <article class="card">
         <span class="pill">About</span>
         <h3>What is Game Day Sports?</h3>
-        <p>GDS is a sports picks experience built for fans. Make weekly predictions and earn <strong>Game Day Tokens (GDT)</strong> for bragging rights, leaderboards, and cosmetic rewards. The public demo is live while we finish the full multi-team build.</p>
+        <p>
+          Game Day Sports is a sports picks experience built for fans. 
+          Make weekly predictions and earn <strong>Game Day Tokens (GDT)</strong> for bragging rights, leaderboards, and cosmetic rewards. 
+          The public version is now live.
+        </p>
       </article>
 
       <article class="card">
         <span class="pill">Game Day Tokens (GDT)</span>
         <h3>How free play works</h3>
-        <p>There’s no purchase required for Game Day Tokens (GDT). You activate daily, make your picks, and climb the leaderboard. It’s designed to be fun and accessible while we expand features and data coverage.</p>
+        <p>
+          There’s no purchase required for Game Day Tokens (GDT). 
+          You activate daily, make your picks, and climb the leaderboard. 
+          It’s designed to be fun and accessible while we expand features and data coverage.
+        </p>
       </article>
 
       <article class="card">
         <span class="pill">Roadmap</span>
         <h3>What’s coming</h3>
-        <p>All college football teams, baseball next, richer stats, private leagues, flairs/banners/avatars, and membership tiers for power users. We’ll share updates on X as we ship.</p>
+        <p>
+          All college football teams, baseball next, richer stats, private leagues, 
+          flairs/banners/avatars, and membership tiers for power users. 
+          We’ll share updates on X as we ship.
+        </p>
       </article>
 
       <article class="card">
         <span class="pill">Community</span>
         <h3>Built with fans</h3>
-        <p>Hold GDS in the future to vote on features and help shape the app. For now, join the conversation on X and tell us what you want to see next.</p>
+        <p>
+          Game Day Sports is being built in public with feedback from real fans. 
+          Follow on X, reply with your feature ideas, and help shape what comes next.
+        </p>
       </article>
+
+      <article class="card">
+        <span class="pill">Partners & Ads</span>
+        <h3>Ad space for local bars & brands</h3>
+        <p>
+          We’re planning limited in-app ad spots for bars, restaurants, and local businesses that support the community. 
+          If you’d like to feature your logo or weekly special inside the app in exchange for helping share Game Day Sports with your customers, 
+          reach out via X DM.
+        </p>
+      </article>
+
     </section>
   </main>
 
-  <f
+  <footer class="footer">
+    <div class="wrap" style="max-width:900px;">
+      <div>© <span id="year"></span> Game Day Sports. All rights reserved.</div>
+      <small>
+        Game Day Sports is a <strong>free-play</strong> sports prediction experience. 
+        No real-money wagering, no cash prizes, and no gambling features. 
+        GDT are in-app tokens for fun, bragging rights, and future cosmetic rewards only.
+      </small>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+
+</body>
+</html>
